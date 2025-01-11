@@ -47,6 +47,7 @@ import {
  * ✔ - fix a bug where timer controls dont work when toast is added to the queue
  *  - add function as body argument in notify
  * ✔ - added visibility change event listener
+ * - add option to not render toasts if the tab is blurred
  */
 
 /***
@@ -69,6 +70,7 @@ class Toast {
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
   progressManager!: ReturnType<typeof createProgressManager>;
+  isStatic = false; // True if the timer was paused by the user or on window blur
   offset = 0;
 
   constructor(args: ToastConstructor) {
@@ -171,13 +173,11 @@ class Toast {
           this.state,
         )}`.trim()}
         onMouseEnter={() => {
-          if (!this.toastConfig.pauseOnHover || this.progressManager.isStatic)
-            return;
+          if (!this.toastConfig.pauseOnHover || this.isStatic) return;
           this.progressManager.pause();
         }}
         onMouseLeave={() => {
-          if (!this.toastConfig.pauseOnHover || this.progressManager.isStatic)
-            return;
+          if (!this.toastConfig.pauseOnHover || this.isStatic) return;
           this.progressManager.play();
         }}
         style={{

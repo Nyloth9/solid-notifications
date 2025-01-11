@@ -97,7 +97,7 @@ export interface Config {
   limit: number;
   reverseToastOrder: boolean;
   pauseOnHover: boolean;
-  pauseOnTabSwitch: boolean;
+  pauseOnWindowBlur: boolean;
   enterCallback: (() => void) | null;
   updateCallback: (() => void) | null;
   exitCallback: ((reason?: boolean | string) => void) | null;

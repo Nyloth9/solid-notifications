@@ -77,7 +77,7 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
     "limit",
     "toasterStyle",
     "reverseToastOrder",
-    "pauseOnTabSwitch",
+    "pauseOnWindowBlur",
   ];
 
   const filteredOptions = Object.fromEntries(
@@ -106,7 +106,6 @@ function applyState(
 function createProgressManager(duration: number | false, callback: () => void) {
   const [progress, setProgress] = createSignal(0);
 
-  let isStatic = false;
   let start = performance.now();
   let elapsed = 0;
   let paused = false;
@@ -154,7 +153,6 @@ function createProgressManager(duration: number | false, callback: () => void) {
 
   return {
     progress,
-    isStatic,
     play,
     pause,
     update,
@@ -175,15 +173,15 @@ function setProgressControls(toast: Toast): ProgressControls {
   return {
     pause: () => {
       toast.progressManager.pause();
-      toast.progressManager.isStatic = true;
+      toast.isStatic = true;
     },
     play: () => {
       toast.progressManager.play();
-      toast.progressManager.isStatic = false;
+      toast.isStatic = false;
     },
     reset: () => {
       toast.progressManager.reset();
-      toast.progressManager.isStatic = false;
+      toast.isStatic = true;
     },
   };
 }
