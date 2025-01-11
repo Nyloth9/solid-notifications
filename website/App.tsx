@@ -66,7 +66,7 @@ const App: Component = () => {
                 },
               );
 
-              /*       setTimeout(() => {
+              /*      setTimeout(() => {
                 update({
                   body: (
                     <>
@@ -74,19 +74,19 @@ const App: Component = () => {
                       <div class="flex gap-1">
                         <button
                           class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                          onClick={() => timer.pause()}
+                          onClick={() => progressControls.pause()}
                         >
                           Pause timer
                         </button>
                         <button
                           class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                          onClick={() => timer.play()}
+                          onClick={() => progressControls.play()}
                         >
                           Play timer
                         </button>
                         <button
                           class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                          onClick={() => timer.reset()}
+                          onClick={() => progressControls.reset()}
                         >
                           Reset timer
                         </button>

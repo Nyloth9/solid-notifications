@@ -6,7 +6,7 @@ import {
   onMount,
   Show,
 } from "solid-js";
-import { createMutable } from "solid-js/store";
+import { createMutable, produce } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
   applyState,
@@ -48,6 +48,7 @@ import {
  *  - add function as body argument in notify
  * ✔ - added visibility change event listener
  * - add option to not render toasts if the tab is blurred
+ * - add clear rendered toasts
  */
 
 /***
@@ -90,7 +91,16 @@ class Toast {
       () => this.dismiss("__expired"),
     );
 
-    this.setToasts((prev) => [this, ...prev]);
+    if (
+      this.toasterConfig.limit &&
+      this.toasts.rendered.length >= this.toasterConfig.limit
+    ) {
+      this.setToasts("queued", [this, ...this.toasts.queued]);
+
+      return;
+    }
+
+    this.setToasts("rendered", [this, ...this.toasts.rendered]);
   }
 
   private lifecycle() {
@@ -141,16 +151,30 @@ class Toast {
     this.state = "exiting";
 
     setTimeout(() => {
-      this.setToasts((prev) =>
-        prev.filter((toast) => toast.toastConfig.id !== this.toastConfig.id),
+      this.setToasts(
+        produce((state) => {
+          state.queued = state.queued.filter(
+            (toast) => toast.toastConfig.id !== this.toastConfig.id,
+          );
+          state.rendered = state.rendered.filter(
+            (toast) => toast.toastConfig.id !== this.toastConfig.id,
+          );
+        }),
       );
     }, this.toastConfig.exitDuration);
   }
 
   remove() {
     // This will remove the toast without calling the exitCallback and without the exit animation
-    this.setToasts((prev) =>
-      prev.filter((toast) => toast.toastConfig.id !== this.toastConfig.id),
+    this.setToasts(
+      produce((state) => {
+        state.queued = state.queued.filter(
+          (toast) => toast.toastConfig.id !== this.toastConfig.id,
+        );
+        state.rendered = state.rendered.filter(
+          (toast) => toast.toastConfig.id !== this.toastConfig.id,
+        );
+      }),
     );
   }
 

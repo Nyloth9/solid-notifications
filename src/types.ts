@@ -1,10 +1,16 @@
 import { Accessor, JSX, Setter } from "solid-js";
 import Toast from "./core/Toast";
+import { SetStoreFunction } from "solid-js/store";
+
+export interface ToastStore {
+  rendered: Toast[];
+  queued: Toast[];
+}
 
 export interface Toaster {
   id?: string;
-  toasts: Accessor<Toast[]>;
-  setToasts: Setter<Toast[]>;
+  toasts: ToastStore;
+  setToasts: SetStoreFunction<ToastStore>;
   toasterConfig: Config;
   counter: number;
 }
@@ -68,8 +74,8 @@ export interface ToastActions {
 }
 
 export interface ToastConstructor {
-  toasts: Accessor<Toast[]>;
-  setToasts: Setter<Toast[]>;
+  toasts: ToastStore;
+  setToasts: SetStoreFunction<ToastStore>;
   toastConfig?: Partial<Config>;
   toasterConfig: Config;
 }

@@ -2,11 +2,15 @@ import { createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
 import Toast from "./Toast";
 import { useService } from "./Context";
 import { customMerge, getToasterStyle } from "../utils/helpers";
-import { Config } from "../types";
+import { Config, ToastStore } from "../types";
 import { defaultConfig } from "../config/defaultConfig";
+import { createStore } from "solid-js/store";
 
 export default function Toaster(props: Partial<Config>) {
-  const [toasts, setToasts] = createSignal<Toast[]>([]);
+  const [toasts, setToasts] = createStore<ToastStore>({
+    queued: [],
+    rendered: [],
+  });
   const { registerToaster, unregisterToaster } = useService();
   const toasterConfig: Config = customMerge(defaultConfig, props);
 
@@ -19,14 +23,14 @@ export default function Toaster(props: Partial<Config>) {
   });
 
   createEffect(() => {
-    /*** Here we implement the reversing of the toast order and the queue mechanic (by not showing the toasts that exceed the toast limit) ***/
+    /*** Here we implement the reversing of the toast order if that options is enabled ***/
     const resolvedToasts = toasterConfig.reverseToastOrder
-      ? toasts().slice(-toasterConfig.limit).reverse()
-      : toasts().slice(-toasterConfig.limit);
-
-    let accumulatedOffset = toasterConfig.offsetY; // <-- We want to render the first toast at the same height as positionY offset
+      ? [...toasts.rendered].reverse()
+      : toasts.rendered;
 
     /*** Here we reorder toasts when there are changes like toast created or toast updated ***/
+    let accumulatedOffset = toasterConfig.offsetY; // <-- We want to render the first toast at the same height as positionY offset
+
     resolvedToasts.forEach((toast) => {
       if (toast.ref) {
         const _body = toast.toastConfig.body; // This ensures toast is being tracked for reactivity
@@ -36,7 +40,7 @@ export default function Toaster(props: Partial<Config>) {
       }
     });
   });
-
+  /* 
   const handleWindowBlur = () =>
     toasts().forEach((toast) => {
       toast.progressManager.pause();
@@ -47,13 +51,13 @@ export default function Toaster(props: Partial<Config>) {
     toasts().forEach((toast) => {
       toast.progressManager.play();
       toast.isStatic = false;
-    });
+    }); */
 
   onMount(() => {
     /*** Here we handle stopping the timer when the tab is not active ***/
     if (toasterConfig.pauseOnWindowInactive) {
-      window.addEventListener("blur", handleWindowBlur);
-      window.addEventListener("focus", handleWindowFocus);
+      /*       window.addEventListener("blur", handleWindowBlur);
+      window.addEventListener("focus", handleWindowFocus); */
     }
   });
 
@@ -72,9 +76,7 @@ export default function Toaster(props: Partial<Config>) {
       }}
       class="pointer-events-none fixed left-0 top-0 flex h-screen w-screen overflow-hidden"
     >
-      <For each={toasts().slice(-toasterConfig.limit)}>
-        {(toast) => toast.render()}
-      </For>
+      <For each={toasts.rendered}>{(toast) => toast.render()}</For>
     </div>
   );
 }

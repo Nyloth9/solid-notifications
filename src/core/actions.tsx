@@ -2,6 +2,7 @@ import { Config, ToastActions, ToasterContextType } from "../types";
 import {
   createToastId,
   filterOptions,
+  findToast,
   setProgressControls,
 } from "../utils/helpers";
 import Toast from "./Toast";
@@ -36,7 +37,10 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     );
 
     // Warn if multiple toasts with the same ID are detected
-    if (toasts().some((toast) => toast.toastConfig.id === toastId)) {
+    if (
+      toasts.rendered.some((toast) => toast.toastConfig.id === toastId) ||
+      toasts.queued.some((toast) => toast.toastConfig.id === toastId)
+    ) {
       console.warn(
         `Multiple toasts with the ID "${toastId}" detected. This may cause unexpected behavior, such as issues with the dismiss timer.`,
       );
@@ -81,9 +85,10 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     // If no id and toasterId provided, update all toasts
     if (!id && !toasterId) {
-      context.toasters.forEach((toaster) =>
-        toaster.toasts().forEach((toast) => toast.update(rest)),
-      );
+      context.toasters.forEach((toaster) => {
+        toaster.toasts.rendered.forEach((toast) => toast.update(rest));
+        toaster.toasts.queued.forEach((toast) => toast.update(rest));
+      });
 
       return;
     }
@@ -93,13 +98,14 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const { toasts } = toaster;
 
     if (toasterId && !id) {
-      toasts().forEach((toast) => toast.update(rest));
+      toasts.rendered.forEach((toast) => toast.update(rest));
+      toasts.queued.forEach((toast) => toast.update(rest));
 
       return;
     }
 
     // Finally, update the specified toast
-    const toast = toasts().find((toast) => toast.toastConfig.id === id);
+    const toast = findToast(id, toasts);
 
     if (!toast)
       throw new Error(
@@ -130,9 +136,10 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     // If no argument, dismiss toasts from all toasters
     if (!options) {
-      context.toasters.forEach((toaster) =>
-        toaster.toasts().forEach((toast) => toast.dismiss()),
-      );
+      context.toasters.forEach((toaster) => {
+        toaster.toasts.rendered.forEach((toast) => toast.dismiss());
+        toaster.toasts.queued.forEach((toast) => toast.dismiss());
+      });
 
       return;
     }
@@ -148,16 +155,17 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     // If only the toasterId is provided, dismiss all toasts in the specified toaster
     if (options?.toasterId && !options?.id) {
-      toaster.toasts().forEach((toast) => toast.dismiss(options?.reason));
+      toaster.toasts.rendered.forEach((toast) =>
+        toast.dismiss(options?.reason),
+      );
+      toaster.toasts.queued.forEach((toast) => toast.dismiss(options?.reason));
 
       return;
     }
 
     // Finally, dismiss the specified toast
     const { toasts } = toaster;
-    const toast = toasts().find(
-      (toast) => toast.toastConfig.id === options?.id,
-    );
+    const toast = findToast(options?.id, toasts);
 
     if (!toast)
       throw new Error(
@@ -180,9 +188,10 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     // If no argument, remove toasts from all toasters
     if (!options) {
-      context.toasters.forEach((toaster) =>
-        toaster.toasts().forEach((toast) => toast.remove()),
-      );
+      context.toasters.forEach((toaster) => {
+        toaster.toasts.rendered.forEach((toast) => toast.remove());
+        toaster.toasts.queued.forEach((toast) => toast.remove());
+      });
 
       return;
     }
@@ -191,16 +200,15 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const toaster = context.getToaster(options?.toasterId);
 
     if (options.toasterId && !options.id) {
-      toaster.toasts().forEach((toast) => toast.remove());
+      toaster.toasts.rendered.forEach((toast) => toast.remove());
+      toaster.toasts.queued.forEach((toast) => toast.remove());
 
       return;
     }
 
     // Finally, remove the specified toast
     const { toasts } = toaster;
-    const toast = toasts().find(
-      (toast) => toast.toastConfig.id === options?.id,
-    );
+    const toast = findToast(options?.id, toasts);
 
     if (!toast)
       throw new Error(
@@ -217,10 +225,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
      * 2. getQueue() - Get the queue of a single toast (when there is only one toaster or useToast has specified a toasterId)
      */
 
-    const { toasts, toasterConfig } = context.getToaster(toasterId);
-    const { limit } = toasterConfig;
-
-    return toasts().slice(0, Math.max(0, toasts().length - limit));
+    const { toasts } = context.getToaster(toasterId);
+    return toasts.queued;
   };
 
   const clearQueue: ToastActions["clearQueue"] = (
@@ -235,8 +241,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     // If no argument, clear all toasters' queues
     if (!toasterId) {
       context.toasters.forEach((toaster) => {
-        const queue = getQueue(toaster.id);
-        queue.forEach((toast) => toast.remove());
+        toaster.toasts.queued.forEach((toast) => toast.remove());
 
         return;
       });
@@ -244,7 +249,6 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     // If toasterId is provided, clear the specified toaster queue
     const queue = getQueue(toasterId);
-
     queue.forEach((toast) => toast.remove());
   };
 

@@ -1,6 +1,14 @@
-import { Accessor, createSignal } from "solid-js";
-import { Config, ProgressControls } from "../types";
+import { createSignal } from "solid-js";
+import { Config, ProgressControls, ToastStore } from "../types";
 import Toast from "../core/Toast";
+
+function findToast(
+  id: string | undefined,
+  toasts: ToastStore,
+): Toast | undefined {
+  const allToasts = [...toasts.rendered, ...toasts.queued];
+  return allToasts.find((toast) => toast.toastConfig.id === id);
+}
 
 export function createToastId(
   toastCounter: number,
@@ -29,12 +37,12 @@ function getToasterStyle(positionX: "left" | "right" | "center") {
 
 function setStartingOffset(
   /*** We need to set starting offset because otherwise newly created toast will always appear at positionY of the toaster and then fly to the updated offset (when reversed order is true this is a problem) ***/
-  toasts: Accessor<Toast[]>,
+  toasts: ToastStore,
   { offsetY, gutter, reverseToastOrder }: Config,
 ) {
   if (!reverseToastOrder) return offsetY;
 
-  const precedingToast = toasts()[0];
+  const precedingToast = toasts.rendered[0];
   if (!precedingToast) return offsetY; // Means there is only one toast so we can safely return offsetY
 
   // To get the new offset, we only need info about the preceding toast
@@ -187,6 +195,7 @@ function setProgressControls(toast: Toast): ProgressControls {
 }
 
 export {
+  findToast,
   getToasterStyle,
   setStartingOffset,
   customMerge,
