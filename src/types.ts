@@ -98,7 +98,7 @@ export interface Config {
   reverseToastOrder: boolean;
   pauseOnHover: boolean;
   pauseOnWindowInactive: boolean;
- // renderOnWindowInactive: boolean;
+  // renderOnWindowInactive: boolean;
   enterCallback: (() => void) | null;
   updateCallback: (() => void) | null;
   exitCallback: ((reason?: boolean | string) => void) | null;
