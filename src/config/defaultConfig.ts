@@ -15,7 +15,7 @@ export const defaultConfig: Config = {
   limit: 3,
   reverseToastOrder: false,
   pauseOnHover: true,
-  pauseOnWindowInactive: false,
+  pauseOnWindowInactive: true,
   renderOnWindowInactive: false,
   enterCallback: null,
   updateCallback: null,

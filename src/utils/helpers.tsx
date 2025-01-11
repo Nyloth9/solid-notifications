@@ -110,7 +110,7 @@ function createProgressManager(duration: number | false, callback: () => void) {
   let elapsed = 0;
   let paused = false;
 
-  const calculate = () => {
+  const getFrame = () => {
     if (!duration) return;
     if (paused) return;
 
@@ -126,13 +126,13 @@ function createProgressManager(duration: number | false, callback: () => void) {
 
     if (newProgress >= 100) return callback();
 
-    requestAnimationFrame(calculate);
+    requestAnimationFrame(getFrame);
   };
 
   const play = () => {
     paused = false;
     start = performance.now() - elapsed;
-    requestAnimationFrame(calculate);
+    requestAnimationFrame(getFrame);
   };
 
   const pause = () => {
