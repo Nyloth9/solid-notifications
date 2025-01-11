@@ -47,28 +47,50 @@ export default function Toaster(props: Partial<Config>) {
       }
     });
   });
-  /* 
-  const handleWindowBlur = () =>
-    toasts().forEach((toast) => {
-      toast.progressManager.pause();
-      toast.isStatic = true; // If you hover over the toast while the window is blurred , it will start the progress again (to avoid that we set isStatic to true and check against that on mouse enter)
-    });
 
-  const handleWindowFocus = () =>
-    toasts().forEach((toast) => {
+  ///// WE NEED TO HANDLE ISWINDOWEDBLURRED OUTSIDE OF THE TOAST
+
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === "hidden") {
+      toasts.rendered.forEach((toast) => {
+        toast.isWindowBlurred = true; // If you hover over the toast while the window is blurred , it will start the progress again (to avoid that we check against isWindowBlurred on mouse enter)
+      });
+    } else {
+      toasts.rendered.forEach((toast) => {
+        toast.isWindowBlurred = false;
+      });
+    }
+  };
+
+  const handleWindowBlur = () => {
+    toasts.rendered.forEach((toast) => {
+      toast.isWindowBlurred = true; // If you hover over the toast while the window is blurred , it will start the progress again (to avoid that we check against isWindowBlurred on mouse enter)
+      toast.progressManager.pause();
+    });
+  };
+
+  const handleWindowFocus = () => {
+    toasts.rendered.forEach((toast) => {
+      toast.isWindowBlurred = false;
+
+      if (toast.isStatic) return; // If the user paused the timer, we dont want to start it again
       toast.progressManager.play();
-      toast.isStatic = false;
-    }); */
+    });
+  };
 
   onMount(() => {
     /*** Here we handle stopping the timer when the tab is not active ***/
     if (toasterConfig.pauseOnWindowInactive) {
-      /*       window.addEventListener("blur", handleWindowBlur);
-      window.addEventListener("focus", handleWindowFocus); */
+      window.addEventListener("blur", handleWindowBlur);
+      window.addEventListener("focus", handleWindowFocus);
     }
   });
 
-  onCleanup(() => unregisterToaster(toasterId));
+  onCleanup(() => {
+    window.removeEventListener("blur", handleWindowBlur);
+    window.removeEventListener("focus", handleWindowFocus);
+    unregisterToaster(toasterId);
+  });
 
   return (
     <div

@@ -49,6 +49,7 @@ import {
  * ✔ - added visibility change event listener
  * - add option to not render toasts if the tab is blurred
  * - add clear rendered toasts
+ * - handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
  */
 
 /***
@@ -71,7 +72,7 @@ class Toast {
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
   progressManager!: ReturnType<typeof createProgressManager>;
-  isStatic = false; // True if the timer was paused by the user or on window blur
+  isStatic = false; // True if the timer was paused by the user
   offset = 0;
 
   constructor(args: ToastConstructor) {
@@ -110,10 +111,12 @@ class Toast {
     /*** This is solved by checking if the toast was rendered, and if not, don't run the lifecycle. ***/
 
     if (!this.renderedAt) return;
+    if (!this.isStatic) return; // If the timer was paused by the user, we dont want to start it again (important when the toast is updated)
+    if (this.isWindowBlurred) return; // If the toast appears while the window is blurred, we dont want to start the timer
 
     this.progressManager.play(); // This is the only place where we will start the dismiss timer programmatically (so basically when the toast is rendered)
 
-    // if (this.state === "idle") return; // If a rendered toast is updated, we don't want to re-run the entrance animation again. There is also no need to re-set the state to idle
+    if (this.state === "idle") return; // If a rendered toast is updated, we don't want to re-run the entrance animation again. There is also no need to re-set the state to idle
 
     setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
   }
@@ -127,7 +130,7 @@ class Toast {
 
     this.progressManager.update(this.toastConfig.duration); // Update the timer with the new duration
 
-    this.lifecycle();
+    this.lifecycle(); // Should fix the situation when the toast is updated while the timer is paused (it should not start the timer again). We dont want to run the timer of the updated toast if window is blurred etc
   }
 
   dismiss(reason?: string | boolean) {
@@ -197,11 +200,17 @@ class Toast {
           this.state,
         )}`.trim()}
         onMouseEnter={() => {
-          if (!this.toastConfig.pauseOnHover || this.isStatic) return;
+          if (!this.toastConfig.pauseOnHover) return;
+          if (this.isStatic) return;
+          if (this.isWindowBlurred) return;
+
           this.progressManager.pause();
         }}
         onMouseLeave={() => {
-          if (!this.toastConfig.pauseOnHover || this.isStatic) return;
+          if (!this.toastConfig.pauseOnHover) return;
+          if (this.isStatic) return;
+          if (this.isWindowBlurred) return;
+
           this.progressManager.play();
         }}
         style={{
