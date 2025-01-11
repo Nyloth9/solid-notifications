@@ -32,7 +32,7 @@ const App: Component = () => {
               const { id, progressControls } = notify(
                 createRoot(() => (
                   <>
-                    <div>🍞 Moon Toast, Toast Notification! 🌟</div>
+                    <div>{`🍞 Moon Toast, Toast Notification! 🌟`}</div>
                     <div class="block italic text-purple-600">
                       {randomText()}
                     </div>
@@ -66,7 +66,7 @@ const App: Component = () => {
                 },
               );
 
-              /*      setTimeout(() => {
+              setTimeout(() => {
                 update({
                   body: (
                     <>
@@ -93,10 +93,10 @@ const App: Component = () => {
                       </div>
                     </>
                   ),
-                  duration: 2000,
+                  duration: 5000,
                   id,
                 });
-              }, 2000); */
+              }, 2000);
             }}
           >
             Create Toast Top Right

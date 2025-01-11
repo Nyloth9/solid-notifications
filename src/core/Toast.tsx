@@ -95,7 +95,7 @@ class Toast {
       this.toasterConfig.limit &&
       this.toasts.rendered.length >= this.toasterConfig.limit
     ) {
-      this.setToasts("queued", [this, ...this.toasts.queued]);
+      this.setToasts("queued", [...this.toasts.queued, this]);
 
       return;
     }

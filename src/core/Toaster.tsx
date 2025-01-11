@@ -23,6 +23,13 @@ export default function Toaster(props: Partial<Config>) {
   });
 
   createEffect(() => {
+    /** Here we manage the queue */
+    if (toasts.queued.length && toasts.rendered.length < toasterConfig.limit) {
+      const [nextToast, ...rest] = toasts.queued;
+      setToasts("queued", rest);
+      setToasts("rendered", [nextToast, ...toasts.rendered]);
+    }
+
     /*** Here we implement the reversing of the toast order if that options is enabled ***/
     const resolvedToasts = toasterConfig.reverseToastOrder
       ? [...toasts.rendered].reverse()
