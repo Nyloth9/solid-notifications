@@ -22,7 +22,7 @@ const App: Component = () => {
       <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold">SolidJS Toast Notification</h1>
         <h2 class="mt-2 text-lg font-medium">
-          {/*   <span class="mr-2 font-bold text-red-600">{getQueue().length}</span> */}
+          <span class="mr-2 font-bold text-red-600">{getQueue().length}</span>
           Toasts in the queue
         </h2>
         <div class="flex gap-4">
