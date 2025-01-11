@@ -37,8 +37,22 @@ export default function Toaster(props: Partial<Config>) {
     });
   });
 
+  const handleWindowBlur = () =>
+    toasts().forEach((toast) => {
+      toast.progressManager.pause();
+      toast.progressManager.isStatic = true; // If you hover over the toast while the window is blurred , it will start the progress again (to avoid that we set isStatic to true and check against that on mouse enter)
+    });
+
+  const handleWindowFocus = () =>
+    toasts().forEach((toast) => {
+      toast.progressManager.play();
+      toast.progressManager.isStatic = false;
+    });
+
   onMount(() => {
     /*** Here we handle stopping the timer when the tab is not active ***/
+    window.addEventListener("blur", handleWindowBlur);
+    window.addEventListener("focus", handleWindowFocus);
   });
 
   onCleanup(() => unregisterToaster(toasterId));

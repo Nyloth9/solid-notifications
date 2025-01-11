@@ -12,7 +12,7 @@ import {
   applyState,
   customMerge,
   setStartingOffset,
-  useProgress,
+  createProgressManager,
 } from "../utils/helpers";
 
 /***
@@ -57,6 +57,7 @@ import {
  * - If a toast is not rendered and stays in the queue, it will not run the dismiss timer
  * - If a toast update happens while the toast is in the queue, it will update the toast without running the dismiss timer, and render it when there is enough space
  * - Now supports multiple toasters at the same time (if only one toaster is used, no arg for useToast is required)
+ * - Now exposes a progress() method to get the progress of the timer, which is reactive and can be used in the UI
  */
 
 class Toast {
@@ -67,7 +68,7 @@ class Toast {
   ref: HTMLElement | null = null;
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
-  progressManager!: ReturnType<typeof useProgress>;
+  progressManager!: ReturnType<typeof createProgressManager>;
   offset = 0;
 
   constructor(args: ToastConstructor) {
@@ -82,8 +83,9 @@ class Toast {
 
   init() {
     /*** By assigning the timer in the constructor we lose reactivity of "state", so we assign it here */
-    this.progressManager = useProgress(this.toastConfig.duration, () =>
-      this.dismiss("__expired"),
+    this.progressManager = createProgressManager(
+      this.toastConfig.duration,
+      () => this.dismiss("__expired"),
     );
 
     this.setToasts((prev) => [this, ...prev]);
@@ -169,11 +171,13 @@ class Toast {
           this.state,
         )}`.trim()}
         onMouseEnter={() => {
-          if (!this.toastConfig.pauseOnHover /* || this.timer.static */) return;
+          if (!this.toastConfig.pauseOnHover || this.progressManager.isStatic)
+            return;
           this.progressManager.pause();
         }}
         onMouseLeave={() => {
-          if (!this.toastConfig.pauseOnHover /* || this.timer.static */) return;
+          if (!this.toastConfig.pauseOnHover || this.progressManager.isStatic)
+            return;
           this.progressManager.play();
         }}
         style={{

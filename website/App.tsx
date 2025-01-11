@@ -60,7 +60,10 @@ const App: Component = () => {
                     </div>
                   </>
                 )),
-                { duration: 5000 },
+                {
+                  duration: 5000,
+                  exitCallback: (reason) => console.log(reason),
+                },
               );
 
               /*       setTimeout(() => {
