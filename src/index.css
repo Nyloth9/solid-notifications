@@ -26,8 +26,8 @@
 }
 
 .moon-toast--slide-out-right {
-  animation: mt_slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  -webkit-animation: mt_slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: mt_slideOutRight 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: mt_slideOutRight 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes mt_slideInRight {

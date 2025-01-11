@@ -7,5 +7,6 @@ export type {
   UpdateToastOptions,
   ToasterContextType,
   ToastActions,
+  ProgressControls,
   Config,
 } from "./types";

@@ -1,11 +1,7 @@
 import { createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
 import Toast from "./Toast";
 import { useService } from "./Context";
-import {
-  customMerge,
-  getToasterStyle,
-  handleVisibilityChange,
-} from "../utils/helpers";
+import { customMerge, getToasterStyle } from "../utils/helpers";
 import { Config } from "../types";
 import { defaultConfig } from "../config/defaultConfig";
 
@@ -43,21 +39,9 @@ export default function Toaster(props: Partial<Config>) {
 
   onMount(() => {
     /*** Here we handle stopping the timer when the tab is not active ***/
-
-    if (typeof document === "undefined") return;
-    if (!toasterConfig.pauseOnTabSwitch) return;
-
-    document.addEventListener("visibilitychange", () =>
-      handleVisibilityChange(toasts),
-    );
-
-    onCleanup(() => {
-      document.removeEventListener("visibilitychange", () =>
-        handleVisibilityChange(toasts),
-      );
-      unregisterToaster(toasterId);
-    });
   });
+
+  onCleanup(() => unregisterToaster(toasterId));
 
   return (
     <div

@@ -12,7 +12,7 @@ import {
   applyState,
   customMerge,
   setStartingOffset,
-  Timer,
+  useProgress,
 } from "../utils/helpers";
 
 /***
@@ -62,18 +62,13 @@ import {
 class Toast {
   private toasts; // <-- Should be removed
   private setToasts;
-  timer!: Timer;
   toasterConfig: Config;
   toastConfig: Config;
   ref: HTMLElement | null = null;
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
+  progressManager!: ReturnType<typeof useProgress>;
   offset = 0;
-  paused = false;
-  private elapsed = 0;
-  _p = createSignal(0);
-  progress = this._p[0];
-  setProgress = this._p[1];
 
   constructor(args: ToastConstructor) {
     this.toasts = args.toasts;
@@ -81,14 +76,14 @@ class Toast {
     this.toasterConfig = args.toasterConfig;
     this.toastConfig = customMerge(args.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.toasts, args.toasterConfig); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
+
     return createMutable(this); // This is how we make the class reactive
   }
 
   init() {
-    /*** By assigning the timer in the constructor we lose reactivity, so we assign it here */
-    this.timer = new Timer(
-      () => this.dismiss("__expired"),
-      this.toastConfig.duration,
+    /*** By assigning the timer in the constructor we lose reactivity of "state", so we assign it here */
+    this.progressManager = useProgress(this.toastConfig.duration, () =>
+      this.dismiss("__expired"),
     );
 
     this.setToasts((prev) => [this, ...prev]);
@@ -102,13 +97,9 @@ class Toast {
 
     if (!this.renderedAt) return;
 
-    this.updateProgress();
+    this.progressManager.play(); // This is the only place where we will start the dismiss timer programmatically (so basically when the toast is rendered)
 
-    // this.animateProgress(); // Have to be called before timer.play() so we dont call animate on empty Animations[] array
-
-    this.timer.play(); // This is the only place where we will start the dismiss timer programmatically (so basically when the toast is rendered)
-
-    if (this.state === "idle") return; // If a rendered toast is updated, we don't want to re-run the entrance animation again. There is also no need to re-set the state to idle
+    // if (this.state === "idle") return; // If a rendered toast is updated, we don't want to re-run the entrance animation again. There is also no need to re-set the state to idle
 
     setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
   }
@@ -120,29 +111,10 @@ class Toast {
 
     this.toastConfig.updateCallback?.();
 
-    this.timer.update(this.toastConfig.duration); // Update the timer with the new duration
+    this.progressManager.update(this.toastConfig.duration); // Update the timer with the new duration
 
     this.lifecycle();
   }
-
-  updateProgress = () => {
-    if (!this.toastConfig.duration) return;
-    // if (!this.paused) return;
-
-    const now = performance.now();
-    const elapsedTime = this.elapsed + (now - this.renderedAt);
-
-    const progress = Math.min(
-      (elapsedTime / this.toastConfig.duration) * 100,
-      100,
-    );
-
-    this.setProgress(progress);
-
-    if (elapsedTime < this.toastConfig.duration) {
-      requestAnimationFrame(this.updateProgress);
-    }
-  };
 
   dismiss(reason?: string | boolean) {
     // The reason can be used as the argument of the exitCallback
@@ -178,39 +150,12 @@ class Toast {
     );
   }
 
-  private animateProgress() {
-    /*** Here we animate the progress bars */
-    if (!this.toastConfig.duration) return;
-
-    const progressBars = this.ref?.querySelectorAll('[data-role="progress"]');
-    const animations: Animation[] = [];
-
-    if (!progressBars?.length) return;
-
-    const keyframes = this.toastConfig.progressBar.animate?.keyframes;
-    if (!keyframes) return;
-
-    progressBars.forEach((progressBar) => {
-      const animation = progressBar.animate(keyframes, {
-        ...this.toastConfig.progressBar.animate?.options,
-        duration: this.toastConfig.duration as number,
-        id: `progress-${this.toastConfig.id}`,
-      });
-
-      animations.push(animation);
-    });
-
-    this.timer.animations = animations; // We save the animations in the timer so it's easier to pause, play and reset them when the timer controls are used
-  }
-
   render(): JSX.Element {
     onMount(() => {
-      this.renderedAt = performance.now();
+      this.renderedAt = Date.now(); // We dont want to run this in the lifecycle because lifecycle can also run on update (which can happen before the toast is rendered)
       this.toastConfig.enterCallback?.();
       this.lifecycle(); // Will start the dismiss timer
     });
-
-    onCleanup(() => this.timer.pause()); // Will clear window.setTimeout
 
     return (
       <div
@@ -224,12 +169,12 @@ class Toast {
           this.state,
         )}`.trim()}
         onMouseEnter={() => {
-          if (!this.toastConfig.pauseOnHover || this.timer.static) return;
-          this.timer.pause();
+          if (!this.toastConfig.pauseOnHover /* || this.timer.static */) return;
+          this.progressManager.pause();
         }}
         onMouseLeave={() => {
-          if (!this.toastConfig.pauseOnHover || this.timer.static) return;
-          this.timer.play();
+          if (!this.toastConfig.pauseOnHover /* || this.timer.static */) return;
+          this.progressManager.play();
         }}
         style={{
           [this.toasterConfig.positionX]: `${this.toasterConfig.offsetX}px`,
@@ -245,8 +190,12 @@ class Toast {
           }
         >
           <div
+            data-role="progress"
             class={this.toastConfig.progressBar?.className!}
-            style={{ width: `${this.progress()}%` }}
+            style={{
+              transform: `scaleX(${(100 - this.progressManager?.progress()) / 100})`,
+              "transform-origin": "left",
+            }}
           />
         </Show>
       </div>

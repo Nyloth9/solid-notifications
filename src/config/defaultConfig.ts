@@ -5,7 +5,7 @@ export const defaultConfig: Config = {
   onEnter: "moon-toast--slide-in-right", //solidnotif__slide-in-right
   enterDuration: 300,
   onExit: "moon-toast--slide-out-right",
-  exitDuration: 100,
+  exitDuration: 150,
   onIdle: "",
   positionY: "top",
   positionX: "right",

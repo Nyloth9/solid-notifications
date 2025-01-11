@@ -48,13 +48,13 @@ export interface ToastActions {
   ) => {
     id: string;
     ref: HTMLElement | null;
-    timer: TimerControls;
+    progressControls: ProgressControls;
   };
   update: (options: UpdateToastOptions) =>
     | {
         id: string | undefined;
         ref: HTMLElement | null;
-        timer: TimerControls;
+        progressControls: ProgressControls;
       }
     | undefined;
   dismiss: (options?: {
@@ -74,7 +74,7 @@ export interface ToastConstructor {
   toasterConfig: Config;
 }
 
-export interface TimerControls {
+export interface ProgressControls {
   play: () => void;
   pause: () => void;
   reset: () => void;

@@ -1,5 +1,5 @@
-import { Accessor } from "solid-js";
-import { Config, TimerControls } from "../types";
+import { Accessor, createSignal } from "solid-js";
+import { Config, ProgressControls } from "../types";
 import Toast from "../core/Toast";
 
 export function createToastId(
@@ -103,13 +103,7 @@ function applyState(
   }
 }
 
-export function handleVisibilityChange(toasts: Accessor<Toast[]>) {
-  if (document.hidden)
-    toasts().forEach((toast) => !toast.timer.static && toast.timer.pause());
-  else toasts().forEach((toast) => !toast.timer.static && toast.timer.play());
-}
-
-function setTimerControls(toast: Toast): TimerControls {
+function setProgressControls(toast: Toast): ProgressControls {
   /** Why static flag?
    * It's basically a flag to check if the timer was paused by the user and not by the visibility change event listener.
    * We need this flag for the case when the timer is paused by the user, and the browser tab is switched.
@@ -121,67 +115,75 @@ function setTimerControls(toast: Toast): TimerControls {
 
   return {
     pause: () => {
-      toast.timer.pause();
-      toast.timer.static = true;
+      toast.progressManager.pause();
+      //   toast.timer.static = true;
     },
     play: () => {
-      toast.timer.play();
-      toast.timer.static = false;
+      toast.progressManager.play();
+      //    toast.timer.static = false;
     },
     reset: () => {
-      toast.timer.reset();
-      toast.timer.static = true;
+      toast.progressManager.reset();
+      //  toast.timer.static = true;
     },
   };
 }
 
-class Timer {
-  /*** We never start (play) the timer in the class itself, this should always be done externally, depending on toast events ***/
-  private id: number | undefined;
-  initialDuration;
-  remaining;
-  private start: number | undefined;
-  private callback: () => void;
-  animations: Animation[] = []; // We save the animations in the timer so it's easier to pause, play and reset them when the timer controls are used
-  static = false;
+function useProgress(duration: number | false, callback: () => void) {
+  const [progress, setProgress] = createSignal(0);
 
-  constructor(callback: () => void, initialDuration: number | false) {
-    this.initialDuration = initialDuration;
-    this.remaining = initialDuration;
-    this.start = Date.now();
-    this.callback = callback;
-  }
+  let start = performance.now();
+  let elapsed = 0;
+  let paused = false;
 
-  play() {
-    if (!this.remaining) return;
-    this.animations.forEach((animation) => animation.play());
+  const calculate = () => {
+    if (!duration) return;
+    if (paused) return;
 
-    this.start = Date.now();
-    this.id = window.setTimeout(this.callback, this.remaining);
-  }
+    const now = performance.now();
+    elapsed = now - start;
 
-  pause() {
-    if (!this.id) return; // Fixes a scenario when mouseEnter stops the timer, and then the user click pause() on the timer controls inside the toast. The bug is that the timer will be paused twice (and thus reducing the remaining time twice)
-    if (!this.remaining) return;
+    const newProgress = Math.min(
+      Math.round((elapsed / duration) * 10000) / 100,
+      100,
+    );
 
-    this.animations.forEach((animation) => animation.pause());
-    window.clearTimeout(this.id);
-    this.id = undefined;
-    this.remaining -= Date.now() - this.start!;
-  }
+    setProgress(newProgress);
 
-  reset() {
-    this.pause();
-    this.remaining = this.initialDuration;
-    this.animations.forEach((animation) => animation.cancel());
-  }
+    if (newProgress >= 100) return callback();
 
-  update(newDuration: number | false) {
-    this.pause();
-    this.initialDuration = newDuration;
-    this.remaining = newDuration;
-    this.animations = [];
-  }
+    requestAnimationFrame(calculate);
+  };
+
+  const play = () => {
+    paused = false;
+    start = performance.now() - elapsed;
+    requestAnimationFrame(calculate);
+  };
+
+  const pause = () => {
+    paused = true;
+  };
+
+  const update = (newDuration: number | false) => {
+    reset();
+    duration = newDuration;
+    start = performance.now();
+  };
+
+  const reset = () => {
+    paused = true;
+    setProgress(0);
+    elapsed = 0;
+  };
+
+  return {
+    progress,
+    play,
+    pause,
+    update,
+    reset,
+  };
 }
 
 export {
@@ -190,6 +192,6 @@ export {
   customMerge,
   filterOptions,
   applyState,
-  setTimerControls,
-  Timer,
+  useProgress,
+  setProgressControls,
 };

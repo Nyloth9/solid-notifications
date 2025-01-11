@@ -2,7 +2,7 @@ import { Config, ToastActions, ToasterContextType } from "../types";
 import {
   createToastId,
   filterOptions,
-  setTimerControls,
+  setProgressControls,
 } from "../utils/helpers";
 import Toast from "./Toast";
 
@@ -62,7 +62,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     return {
       id: toastId,
       ref: newToast.ref,
-      timer: setTimerControls(newToast),
+      progressControls: setProgressControls(newToast),
     };
   };
 
@@ -113,7 +113,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     return {
       id: id,
       ref: toast.ref,
-      timer: setTimerControls(toast),
+      progressControls: setProgressControls(toast),
     };
   };
 
