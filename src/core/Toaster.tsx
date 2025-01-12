@@ -6,14 +6,14 @@ import { defaultConfig } from "../config/defaultConfig";
 import { createStore } from "solid-js/store";
 
 export default function Toaster(props: Partial<Config>) {
+  const toasterConfig: Config = customMerge(defaultConfig, props);
+  const { registerToaster, unregisterToaster } = useService();
   const [store, setStore] = createStore<TStore>({
     queued: [],
     rendered: [],
     isWindowBlurred:
       typeof document !== "undefined" && document.visibilityState === "hidden",
   });
-  const { registerToaster, unregisterToaster } = useService();
-  const toasterConfig: Config = customMerge(defaultConfig, props);
 
   const { id: toasterId } = registerToaster({
     id: props.id,
@@ -25,7 +25,7 @@ export default function Toaster(props: Partial<Config>) {
 
   createEffect(() => {
     if (store.isWindowBlurred && !toasterConfig.renderOnWindowInactive) return;
-    
+
     /** Here we manage putting toasts from queue to render */
     if (store.queued.length && store.rendered.length < toasterConfig.limit) {
       const [nextToast, ...rest] = store.queued;
