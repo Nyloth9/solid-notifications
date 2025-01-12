@@ -57,7 +57,6 @@ export default function Toaster(props: Partial<Config>) {
     setStore("isWindowBlurred", true);
 
     if (!toasterConfig.pauseOnWindowInactive) return;
-
     store.rendered.forEach((toast) => toast.progressManager.pause()); // If you hover over the toast while the window is blurred , it will start the progress again (to avoid that we check against isWindowBlurred on mouse enter)
   };
 
@@ -65,7 +64,6 @@ export default function Toaster(props: Partial<Config>) {
     setStore("isWindowBlurred", false);
 
     if (!toasterConfig.pauseOnWindowInactive) return;
-
     store.rendered.forEach((toast) => {
       if (toast.isPausedByUser) return; // If the user paused the timer, we dont want to start it again
       toast.progressManager.play();
