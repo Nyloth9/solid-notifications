@@ -14,9 +14,9 @@ import {
  * ✔ - will remove animation options
  * ✔ - will fix positionX = center
  * ✔ - add queue for toasts? (if there is not enough space for the toast, it will be added to the queue)
- * - will remove unstyled?
+ * ✔ will remove unstyled?
  * - will remove the inline dismiss button
- * - max toast duration. If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is isPausedByUser, it will be dismissed)
+ * - max toast duration? If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is isPausedByUser, it will be dismissed) - maybe
  * ✔ - remove overflow-control
  * ✔ - existing toast id should be checked and error should be thrown if the id already exists
  * ✔ - we are merging defaultConfig with the toast instead of config passed to the toaster <- this should be fixed
@@ -34,7 +34,7 @@ import {
  * ✔ - add toast timer controls
  * ✔ - change dismiss, update and remove signatures
  * ✔ - enable false as duration
- * - add custom ordering support?
+ * - add custom ordering support? nope
  * - change library name to "solid-notifications"
  * ✔ - update all toasts in a toaster, update all toasts in all toasters
  * ✔ - fix a bug where timer controls dont work when toast is added to the queue
@@ -60,7 +60,7 @@ import {
  * - Now exposes a progress() method to get the progress of the timer, which is reactive and can be used in the UI
  * - per toaster window blur event listener
  * - option to not render toasts if the tab is blurred
- * - custom toast (function as body argument)
+ * - custom toast (function as body argument), will be unstyled
  */
 
 class Toast {
