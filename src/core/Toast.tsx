@@ -41,9 +41,11 @@ import {
  *  - add function as body argument in notify
  * ✔ - added visibility change event listener
  * - add option to not render toasts if the tab is blurred
- * - add clear rendered toasts
+ * - add clear rendered toasts (keepQueued)
  * - handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
  * - add styling
+ * - add tests
+ * - add swipe to dismiss
  */
 
 /***

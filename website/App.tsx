@@ -141,7 +141,7 @@ const App: Component = () => {
             );
           }}
         >
-          Create Toast Top Right
+          Create Toast Bottom Right
         </button>
       </div>
     </div>
