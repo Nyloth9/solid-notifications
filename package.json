@@ -1,7 +1,11 @@
 {
   "name": "solid-notifications-monorepo",
   "version": "0.0.0",
-  "description": "",
+  "description": "A Solidjs toast notifications library",
+  "author": {
+    "name": "Nyloth9",
+    "url": "https://github.com/Nyloth9"
+  },
   "type": "module",
   "scripts": {
     "start": "vite",

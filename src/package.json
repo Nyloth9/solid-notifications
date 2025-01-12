@@ -1,6 +1,11 @@
 {
   "name": "solid-notifications",
   "version": "1.0.0",
+  "description": "A Solidjs toast notifications library",
+  "author": {
+    "name": "Nyloth9",
+    "url": "https://github.com/Nyloth9"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -20,5 +25,17 @@
   },
   "peerDependencies": {
     "solid-js": "^1.9.3"
-  }
+  },
+  "keywords": [
+    "toast",
+    "solidjs",
+    "solid",
+    "notification",
+    "alert",
+    "message",
+    "ui",
+    "component",
+    "moon-toast"
+  ],
+  "license": "MIT"
 }
