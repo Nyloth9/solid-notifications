@@ -73,8 +73,6 @@ export default function Toaster(props: Partial<Config>) {
   };
 
   onMount(() => {
-    /*** Here we handle stopping the timer when the tab is not active ***/
-
     window.addEventListener("blur", handleWindowBlur);
     window.addEventListener("focus", handleWindowFocus);
   });
