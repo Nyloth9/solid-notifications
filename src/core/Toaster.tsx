@@ -24,9 +24,9 @@ export default function Toaster(props: Partial<Config>) {
   });
 
   createEffect(() => {
-    /** Here we manage the queue */
     if (store.isWindowBlurred && !toasterConfig.renderOnWindowInactive) return;
-
+    
+    /** Here we manage putting toasts from queue to render */
     if (store.queued.length && store.rendered.length < toasterConfig.limit) {
       const [nextToast, ...rest] = store.queued;
       batch(() => {

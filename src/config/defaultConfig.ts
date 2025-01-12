@@ -16,7 +16,7 @@ export const defaultConfig: Config = {
   reverseToastOrder: false,
   pauseOnHover: true,
   pauseOnWindowInactive: true, // Will not run timer when window is inactive
-  renderOnWindowInactive: false, // Will not render toasts when window is inactive
+  renderOnWindowInactive: false, // Will not render toasts when window is inactive and will put them in the queue
   enterCallback: null,
   updateCallback: null,
   exitCallback: null,
