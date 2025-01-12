@@ -70,8 +70,8 @@ class Toast {
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
   progressManager!: ReturnType<typeof createProgressManager>;
-  isPaused = true; // A flag that's exposed for custom toasts. No internal use
-  isPausedByUser = false; // True if the timer was paused by the user
+  isPaused = true; // A flag that's exposed for custom toasts. Has no internal use
+  isPausedByUser = false; // True if the timer was paused by the user (checked on window blur and mouse hover)
   offset = 0;
 
   constructor(args: ToastConstructor) {
