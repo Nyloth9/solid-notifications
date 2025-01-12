@@ -229,11 +229,12 @@ class Toast {
         }}
       >
         {/* If the toastConfig.body is a function (it's type will be "custom") we want to leave it unstyled */}
-        <Switch fallback={this.toastConfig.body}>
-          <Match when={this.toastConfig.type !== "custom"}>
-            <div class="p-2.5">{this.toastConfig.body}</div>
-          </Match>
-        </Switch>
+        <Show
+          when={this.toastConfig.type !== "custom"}
+          fallback={this.toastConfig.body}
+        >
+          <div class="p-2.5">{this.toastConfig.body}</div>
+        </Show>
 
         <Show
           when={
