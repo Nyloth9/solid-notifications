@@ -1,4 +1,11 @@
-import { createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
+import {
+  batch,
+  createEffect,
+  createSignal,
+  For,
+  onCleanup,
+  onMount,
+} from "solid-js";
 import Toast from "./Toast";
 import { useService } from "./Context";
 import { customMerge, getToasterStyle } from "../utils/helpers";
@@ -26,8 +33,10 @@ export default function Toaster(props: Partial<Config>) {
     /** Here we manage the queue */
     if (toasts.queued.length && toasts.rendered.length < toasterConfig.limit) {
       const [nextToast, ...rest] = toasts.queued;
-      setToasts("queued", rest);
-      setToasts("rendered", [nextToast, ...toasts.rendered]);
+      batch(() => {
+        setToasts("queued", rest);
+        setToasts("rendered", [nextToast, ...toasts.rendered]);
+      });
     }
 
     /*** Here we implement the reversing of the toast order if that options is enabled ***/

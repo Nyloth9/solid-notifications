@@ -1,4 +1,5 @@
 import {
+  batch,
   createMemo,
   createSignal,
   JSX,
@@ -92,14 +93,12 @@ class Toast {
       () => this.dismiss("__expired"),
     );
 
-    if (
+    const isLimitReached =
       this.toasterConfig.limit &&
-      this.toasts.rendered.length >= this.toasterConfig.limit
-    ) {
-      this.setToasts("queued", [...this.toasts.queued, this]);
+      this.toasts.rendered.length >= this.toasterConfig.limit;
 
-      return;
-    }
+    if (isLimitReached)
+      return this.setToasts("queued", [...this.toasts.queued, this]);
 
     this.setToasts("rendered", [this, ...this.toasts.rendered]);
   }
@@ -109,10 +108,10 @@ class Toast {
     /*** Special attention is required to the situation if toast update happens while the toast is staying in the queue and still wasn't rendered. ***/
     /*** In that case, we want to update the toast in the queue, but not run its dismiss timer. ***/
     /*** This is solved by checking if the toast was rendered, and if not, don't run the lifecycle. ***/
+    console.log("isStatic", this.isStatic);
 
     if (!this.renderedAt) return;
-    if (!this.isStatic) return; // If the timer was paused by the user, we dont want to start it again (important when the toast is updated)
-    if (this.isWindowBlurred) return; // If the toast appears while the window is blurred, we dont want to start the timer
+    // if (this.isWindowBlurred) return; // If the toast appears while the window is blurred, we dont want to start the timer
 
     this.progressManager.play(); // This is the only place where we will start the dismiss timer programmatically (so basically when the toast is rendered)
 
@@ -130,6 +129,7 @@ class Toast {
 
     this.progressManager.update(this.toastConfig.duration); // Update the timer with the new duration
 
+    if (this.isStatic) return; // If the timer was paused by the user, we dont want to start it again
     this.lifecycle(); // Should fix the situation when the toast is updated while the timer is paused (it should not start the timer again). We dont want to run the timer of the updated toast if window is blurred etc
   }
 
@@ -154,31 +154,27 @@ class Toast {
     this.state = "exiting";
 
     setTimeout(() => {
-      this.setToasts(
-        produce((state) => {
-          state.queued = state.queued.filter(
-            (toast) => toast.toastConfig.id !== this.toastConfig.id,
-          );
-          state.rendered = state.rendered.filter(
-            (toast) => toast.toastConfig.id !== this.toastConfig.id,
-          );
-        }),
-      );
+      batch(() => {
+        this.setToasts("rendered", (state) =>
+          state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
+        );
+        this.setToasts("queued", (state) =>
+          state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
+        );
+      });
     }, this.toastConfig.exitDuration);
   }
 
   remove() {
     // This will remove the toast without calling the exitCallback and without the exit animation
-    this.setToasts(
-      produce((state) => {
-        state.queued = state.queued.filter(
-          (toast) => toast.toastConfig.id !== this.toastConfig.id,
-        );
-        state.rendered = state.rendered.filter(
-          (toast) => toast.toastConfig.id !== this.toastConfig.id,
-        );
-      }),
-    );
+    batch(() => {
+      this.setToasts("rendered", (state) =>
+        state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
+      );
+      this.setToasts("queued", (state) =>
+        state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
+      );
+    });
   }
 
   render(): JSX.Element {
@@ -202,14 +198,14 @@ class Toast {
         onMouseEnter={() => {
           if (!this.toastConfig.pauseOnHover) return;
           if (this.isStatic) return;
-          if (this.isWindowBlurred) return;
+          // if (this.isWindowBlurred) return;
 
           this.progressManager.pause();
         }}
         onMouseLeave={() => {
           if (!this.toastConfig.pauseOnHover) return;
           if (this.isStatic) return;
-          if (this.isWindowBlurred) return;
+          //  if (this.isWindowBlurred) return;
 
           this.progressManager.play();
         }}

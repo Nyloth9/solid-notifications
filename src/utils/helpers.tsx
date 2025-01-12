@@ -6,6 +6,8 @@ function findToast(
   id: string | undefined,
   toasts: ToastStore,
 ): Toast | undefined {
+  if (!id) return;
+
   const allToasts = [...toasts.rendered, ...toasts.queued];
   return allToasts.find((toast) => toast.toastConfig.id === id);
 }

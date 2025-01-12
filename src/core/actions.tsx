@@ -1,3 +1,4 @@
+import { batch } from "solid-js";
 import { Config, ToastActions, ToasterContextType } from "../types";
 import {
   createToastId,
@@ -189,8 +190,10 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     // If no argument, remove toasts from all toasters
     if (!options) {
       context.toasters.forEach((toaster) => {
-        toaster.toasts.rendered.forEach((toast) => toast.remove());
-        toaster.toasts.queued.forEach((toast) => toast.remove());
+        batch(() => {
+          toaster.setToasts("rendered", []);
+          toaster.setToasts("queued", []);
+        });
       });
 
       return;
@@ -200,8 +203,10 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const toaster = context.getToaster(options?.toasterId);
 
     if (options.toasterId && !options.id) {
-      toaster.toasts.rendered.forEach((toast) => toast.remove());
-      toaster.toasts.queued.forEach((toast) => toast.remove());
+      batch(() => {
+        toaster.setToasts("rendered", []);
+        toaster.setToasts("queued", []);
+      });
 
       return;
     }
@@ -241,7 +246,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     // If no argument, clear all toasters' queues
     if (!toasterId) {
       context.toasters.forEach((toaster) => {
-        toaster.toasts.queued.forEach((toast) => toast.remove());
+        toaster.setToasts("queued", []);
 
         return;
       });
