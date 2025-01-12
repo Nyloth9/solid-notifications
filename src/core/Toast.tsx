@@ -46,6 +46,7 @@ import {
  * - add styling
  * - add tests
  * - add swipe to dismiss
+ * - clean up comments
  */
 
 /***
@@ -115,8 +116,8 @@ class Toast {
 
     if (!this.renderedAt) return;
 
+    /** If we check for isPausedByUser and blurred before applying state; toast would run entrance animation and never apply idle state (if isPausedByUser or blurred), so we do it here */
     if (this.state !== "idle")
-      /** If we check for isPausedByUser and blurred before applying state; toast would run entrance animation and never apply idle state (if isPausedByUser or blurred), so we do it here */
       setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
 
     if (this.isPausedByUser) return;
@@ -196,7 +197,7 @@ class Toast {
           this.ref = el;
         }}
         id={this.toastConfig.id}
-        class={`absolute max-w-80 overflow-hidden rounded bg-white p-2.5 shadow-strong transition-all duration-300 ${applyState(
+        class={`absolute max-w-80 overflow-hidden rounded bg-white shadow-strong transition-all duration-300 ${applyState(
           this.toastConfig,
           this.state,
         )}`.trim()}
@@ -227,7 +228,12 @@ class Toast {
           [this.toasterConfig.positionY]: `${this.offset}px`,
         }}
       >
-        <div class="toast">{this.toastConfig.body}</div>
+        {/* If the toastConfig.body is a function (it's a "custom" toast) we want to leave it unstyled */}
+        <Switch fallback={this.toastConfig.body}>
+          <Match when={this.toastConfig.type !== "custom"}>
+            <div class="p-2.5">{this.toastConfig.body}</div>
+          </Match>
+        </Switch>
 
         <Show
           when={

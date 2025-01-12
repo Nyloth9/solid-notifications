@@ -35,6 +35,7 @@ export interface ToastOptions
     >
   > {
   toasterId?: string;
+  type?: Exclude<Config["type"], "custom">;
 }
 
 export type UpdateToastOptions = RequireAtLeastOne<
@@ -91,6 +92,7 @@ export interface ProgressControls {
 export interface Config {
   id?: string;
   body?: JSX.Element | string;
+  type: "default" | "success" | "error" | "loading" | "custom";
   duration: number | false;
   onEnter: string;
   enterDuration: number;

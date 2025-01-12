@@ -62,7 +62,8 @@ const App: Component = () => {
                 )),
                 {
                   duration: 5000,
-                  exitCallback: (reason) => console.log(reason),
+                  exitCallback: (reason) =>
+                    console.log("Dissmised by user? ", reason),
                 },
               );
 

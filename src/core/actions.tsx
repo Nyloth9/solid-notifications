@@ -58,6 +58,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       toasterConfig,
       toastConfig: {
         ...filteredOptions,
+        type:
+          typeof body === "function" ? "custom" : (options?.type ?? "default"),
         body: undefined,
         id: toastId,
       },
