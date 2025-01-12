@@ -122,10 +122,6 @@ export interface Config {
     showDefault?: boolean;
     style?: JSX.CSSProperties;
     className?: string;
-    animate?: {
-      keyframes?: Keyframe[];
-      options?: Omit<KeyframeAnimationOptions, "duration">;
-    };
   };
 }
 

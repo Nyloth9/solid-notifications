@@ -24,9 +24,5 @@ export const defaultConfig: Config = {
   progressBar: {
     showDefault: true,
     className: "moon-toast-progress-bar",
-    animate: {
-      keyframes: [{ width: "100%" }, { width: "0%" }],
-      options: { easing: "linear", fill: "forwards" },
-    },
   },
 };
