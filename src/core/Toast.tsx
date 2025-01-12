@@ -57,6 +57,7 @@ import {
  * - If a toast update happens while the toast is in the queue, it will update the toast without running the dismiss timer, and render it when there is enough space
  * - Now supports multiple toasters at the same time (if only one toaster is used, no arg for useToast is required)
  * - Now exposes a progress() method to get the progress of the timer, which is reactive and can be used in the UI
+ * - per toaster window blur event listener
  */
 
 class Toast {
