@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { Accessor, JSX } from "solid-js";
 import Toast from "./core/Toast";
 import { SetStoreFunction } from "solid-js/store";
 
@@ -85,6 +85,7 @@ export interface ProgressControls {
   play: () => void;
   pause: () => void;
   reset: () => void;
+  progress: Accessor<number>;
 }
 
 export interface Config {

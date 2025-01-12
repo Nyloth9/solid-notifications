@@ -194,6 +194,7 @@ function setProgressControls(toast: Toast): ProgressControls {
       toast.progressManager.reset();
       toast.isPausedByUser = true;
     },
+    progress: toast.progressManager.progress,
   };
 }
 
