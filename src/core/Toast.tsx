@@ -38,7 +38,7 @@ import {
  * - change library name to "solid-notifications"
  * ✔ - update all toasts in a toaster, update all toasts in all toasters
  * ✔ - fix a bug where timer controls dont work when toast is added to the queue
- *  - add function as body argument in notify
+ * ✔ - add function as body argument in notify
  * ✔ - added visibility change event listener
  * ✔ add option to not render toasts if the tab is blurred
  * - add clear only rendered toasts (keepQueued)
@@ -59,6 +59,7 @@ import {
  * - Now exposes a progress() method to get the progress of the timer, which is reactive and can be used in the UI
  * - per toaster window blur event listener
  * - option to not render toasts if the tab is blurred
+ * - custom toast (function as body argument)
  */
 
 class Toast {
