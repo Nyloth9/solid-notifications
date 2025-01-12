@@ -6,6 +6,18 @@
     "name": "Nyloth9",
     "url": "https://github.com/Nyloth9"
   },
+  "keywords": [
+    "toast",
+    "solidjs",
+    "solid",
+    "notification",
+    "alert",
+    "message",
+    "ui",
+    "component",
+    "moon-toast"
+  ],
+  "licence": "MIT",
   "type": "module",
   "scripts": {
     "start": "vite",
