@@ -43,6 +43,7 @@ import {
  * - add option to not render toasts if the tab is blurred
  * - add clear rendered toasts
  * - handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
+ * - add styling
  */
 
 /***
