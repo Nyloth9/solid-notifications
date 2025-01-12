@@ -228,7 +228,7 @@ class Toast {
           [this.toasterConfig.positionY]: `${this.offset}px`,
         }}
       >
-        {/* If the toastConfig.body is a function (it's a "custom" toast) we want to leave it unstyled */}
+        {/* If the toastConfig.body is a function (it's type will be "custom") we want to leave it unstyled */}
         <Switch fallback={this.toastConfig.body}>
           <Match when={this.toastConfig.type !== "custom"}>
             <div class="p-2.5">{this.toastConfig.body}</div>
