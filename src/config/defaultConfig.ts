@@ -15,7 +15,7 @@ export const defaultConfig: Config = {
   limit: 3,
   reverseToastOrder: false,
   pauseOnHover: true,
-  pauseOnWindowInactive: true,
+  pauseOnWindowInactive: true, // Will not run timer when window is inactive
   renderOnWindowInactive: false,
   enterCallback: null,
   updateCallback: null,

@@ -58,6 +58,7 @@ import {
  * - Now supports multiple toasters at the same time (if only one toaster is used, no arg for useToast is required)
  * - Now exposes a progress() method to get the progress of the timer, which is reactive and can be used in the UI
  * - per toaster window blur event listener
+ * - option to not render toasts if the tab is blurred
  */
 
 class Toast {
@@ -200,15 +201,23 @@ class Toast {
         )}`.trim()}
         onMouseEnter={() => {
           if (!this.toastConfig.pauseOnHover) return;
+          if (
+            this.store.isWindowBlurred &&
+            this.toastConfig.pauseOnWindowInactive
+          )
+            return;
           if (this.isUserByPaused) return;
-          // if (this.isWindowBlurred) return;
 
           this.progressManager.pause();
         }}
         onMouseLeave={() => {
           if (!this.toastConfig.pauseOnHover) return;
+          if (
+            this.store.isWindowBlurred &&
+            this.toastConfig.pauseOnWindowInactive
+          )
+            return;
           if (this.isUserByPaused) return;
-          //  if (this.isWindowBlurred) return;
 
           this.progressManager.play();
         }}
