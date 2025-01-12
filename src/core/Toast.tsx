@@ -1,13 +1,5 @@
-import {
-  batch,
-  createMemo,
-  createSignal,
-  JSX,
-  onCleanup,
-  onMount,
-  Show,
-} from "solid-js";
-import { createMutable, produce } from "solid-js/store";
+import { batch, JSX, onMount, Show } from "solid-js";
+import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
   applyState,
@@ -119,10 +111,6 @@ class Toast {
     // if (this.isWindowBlurred) return; //
 
     this.progressManager.play(); // This is the only place where we will start the dismiss timer programmatically (so basically when the toast is rendered)
-
-    if (this.state === "idle") return; // If a rendered toast is updated, we don't want to re-run the entrance animation again. There is also no need to re-set the state to idle
-
-    setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
   }
 
   update(args: Partial<Config>) {
