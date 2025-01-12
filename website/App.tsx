@@ -66,7 +66,7 @@ const App: Component = () => {
                 },
               );
 
-              /*         setTimeout(() => {
+              setTimeout(() => {
                 update({
                   body: (
                     <>
@@ -93,10 +93,10 @@ const App: Component = () => {
                       </div>
                     </>
                   ),
-                  duration: 5000,
+                  duration: 3000,
                   id,
                 });
-              }, 2000); */
+              }, 2000);
             }}
           >
             Create Toast Top Right

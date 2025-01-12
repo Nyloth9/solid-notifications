@@ -16,7 +16,7 @@ import {
  * ✔ - add queue for toasts? (if there is not enough space for the toast, it will be added to the queue)
  * - will remove unstyled?
  * - will remove the inline dismiss button
- * - max toast duration. If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is userPaused, it will be dismissed)
+ * - max toast duration. If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is isUserByPaused, it will be dismissed)
  * ✔ - remove overflow-control
  * ✔ - existing toast id should be checked and error should be thrown if the id already exists
  * ✔ - we are merging defaultConfig with the toast instead of config passed to the toaster <- this should be fixed
@@ -69,7 +69,8 @@ class Toast {
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
   progressManager!: ReturnType<typeof createProgressManager>;
-  userPaused = false; // True if the timer was paused by the user
+  isPaused = true; // A flag that's exposed for custom toasts. No internal use
+  isUserByPaused = false; // True if the timer was paused by the user
   offset = 0;
 
   constructor(args: ToastConstructor) {
@@ -84,9 +85,8 @@ class Toast {
 
   init() {
     /*** By assigning the timer in the constructor we lose reactivity of "state", so we assign it here */
-    this.progressManager = createProgressManager(
-      this.toastConfig.duration,
-      () => this.dismiss("__expired"),
+    this.progressManager = createProgressManager(this, () =>
+      this.dismiss("__expired"),
     );
 
     const isLimitReached =
@@ -110,8 +110,8 @@ class Toast {
     if (this.state !== "idle")
       setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
 
-    /** If we check for userPaused and blurred before applying state; toast would run entrance animation and never apply idle state (if userPaused or blurred), so we do it here */
-    if (this.userPaused) return;
+    /** If we check for isUserByPaused and blurred before applying state; toast would run entrance animation and never apply idle state (if isUserByPaused or blurred), so we do it here */
+    if (this.isUserByPaused) return;
     // if (this.isWindowBlurred) return; //
 
     this.progressManager.play(); // This is the only place where we will start the dismiss timer programmatically (so basically when the toast is rendered)
@@ -193,14 +193,14 @@ class Toast {
         )}`.trim()}
         onMouseEnter={() => {
           if (!this.toastConfig.pauseOnHover) return;
-          if (this.userPaused) return;
+          if (this.isUserByPaused) return;
           // if (this.isWindowBlurred) return;
 
           this.progressManager.pause();
         }}
         onMouseLeave={() => {
           if (!this.toastConfig.pauseOnHover) return;
-          if (this.userPaused) return;
+          if (this.isUserByPaused) return;
           //  if (this.isWindowBlurred) return;
 
           this.progressManager.play();

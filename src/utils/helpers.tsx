@@ -113,9 +113,10 @@ function applyState(
   }
 }
 
-function createProgressManager(duration: number | false, callback: () => void) {
+function createProgressManager(toast: Toast, callback: () => void) {
   const [progress, setProgress] = createSignal(0);
 
+  let duration = toast.toastConfig.duration;
   let start = performance.now();
   let elapsed = 0;
   let paused = false;
@@ -141,12 +142,14 @@ function createProgressManager(duration: number | false, callback: () => void) {
 
   const play = () => {
     paused = false;
+    toast.isPaused = false;
     start = performance.now() - elapsed;
     requestAnimationFrame(getFrame);
   };
 
   const pause = () => {
     paused = true;
+    toast.isPaused = true;
   };
 
   const update = (newDuration: number | false) => {
@@ -157,6 +160,7 @@ function createProgressManager(duration: number | false, callback: () => void) {
 
   const reset = () => {
     paused = true;
+    toast.isPaused = true;
     setProgress(0);
     elapsed = 0;
   };
@@ -171,27 +175,27 @@ function createProgressManager(duration: number | false, callback: () => void) {
 }
 
 function setProgressControls(toast: Toast): ProgressControls {
-  /** Why userPaused flag?
+  /** Why isUserByPaused flag?
    * It's basically a flag to check if the timer was paused by the user and not by the window blur and focus event listener.
    * We need this flag for the case when the timer is paused by the user, and the browser tab is switched.
    * Because we have a global event listener for window blur and focus, and because we pause all timers when the tab is not visible (if this option is enabled),
    * while we play all timers when the tab is visible again, thus the timer which was paused by the user will be played again.
-   * To avoid this, we set a userPaused flag to true when the timer is paused by the user, and then we check this flag in the blur and focus event listener
+   * To avoid this, we set a isUserByPaused flag to true when the timer is paused by the user, and then we check this flag in the blur and focus event listener
    * once the tab is visible again, and if the flag is true, we don't play the timer.
    */
 
   return {
     pause: () => {
       toast.progressManager.pause();
-      toast.userPaused = true;
+      toast.isUserByPaused = true;
     },
     play: () => {
       toast.progressManager.play();
-      toast.userPaused = false;
+      toast.isUserByPaused = false;
     },
     reset: () => {
       toast.progressManager.reset();
-      toast.userPaused = true;
+      toast.isUserByPaused = true;
     },
   };
 }

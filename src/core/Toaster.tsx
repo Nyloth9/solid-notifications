@@ -74,7 +74,7 @@ export default function Toaster(props: Partial<Config>) {
     toasts.rendered.forEach((toast) => {
       toast.isWindowBlurred = false;
 
-      if (toast.userPaused) return; // If the user paused the timer, we dont want to start it again
+      if (toast.isUserByPaused) return; // If the user paused the timer, we dont want to start it again
       toast.progressManager.play();
     });
   };
