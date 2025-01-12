@@ -19,7 +19,7 @@ render(
   () => (
     <ToastProvider>
       <Toaster id="toaster-2" />
-      {/* <Toaster id="toaster-3" positionY="bottom" reverseToastOrder /> */}
+      <Toaster id="toaster-3" positionY="bottom" reverseToastOrder />
       <App />
     </ToastProvider>
   ),

@@ -1,11 +1,4 @@
-import {
-  createMemo,
-  createSignal,
-  JSX,
-  onCleanup,
-  onMount,
-  Show,
-} from "solid-js";
+import { batch, JSX, onMount, Show } from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
@@ -23,7 +16,7 @@ import {
  * ✔ - add queue for toasts? (if there is not enough space for the toast, it will be added to the queue)
  * - will remove unstyled?
  * - will remove the inline dismiss button
- * - max toast duration. If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is static, it will be dismissed)
+ * - max toast duration. If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is isUserByPaused, it will be dismissed)
  * ✔ - remove overflow-control
  * ✔ - existing toast id should be checked and error should be thrown if the id already exists
  * ✔ - we are merging defaultConfig with the toast instead of config passed to the toaster <- this should be fixed
@@ -48,6 +41,11 @@ import {
  *  - add function as body argument in notify
  * ✔ - added visibility change event listener
  * - add option to not render toasts if the tab is blurred
+ * - add clear rendered toasts (keepQueued)
+ * - handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
+ * - add styling
+ * - add tests
+ * - add swipe to dismiss
  */
 
 /***
@@ -59,38 +57,53 @@ import {
  * - If a toast update happens while the toast is in the queue, it will update the toast without running the dismiss timer, and render it when there is enough space
  * - Now supports multiple toasters at the same time (if only one toaster is used, no arg for useToast is required)
  * - Now exposes a progress() method to get the progress of the timer, which is reactive and can be used in the UI
+ * - per toaster window blur event listener
+ * - option to not render toasts if the tab is blurred
  */
 
 class Toast {
-  private toasts; // <-- Should be removed
-  private setToasts;
+  private store; // <-- Should be removed
+  private setStore;
   toasterConfig: Config;
   toastConfig: Config;
   ref: HTMLElement | null = null;
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
   progressManager!: ReturnType<typeof createProgressManager>;
-  isStatic = false; // True if the timer was paused by the user or on window blur
+  isPaused = true; // A flag that's exposed for custom toasts. No internal use
+  isUserByPaused = false; // True if the timer was paused by the user
   offset = 0;
 
   constructor(args: ToastConstructor) {
-    this.toasts = args.toasts;
-    this.setToasts = args.setToasts;
+    this.store = args.store;
+    this.setStore = args.setStore;
     this.toasterConfig = args.toasterConfig;
     this.toastConfig = customMerge(args.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
-    this.offset = setStartingOffset(args.toasts, args.toasterConfig); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
+    this.offset = setStartingOffset(args.store, args.toasterConfig); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
 
     return createMutable(this); // This is how we make the class reactive
   }
 
   init() {
     /*** By assigning the timer in the constructor we lose reactivity of "state", so we assign it here */
-    this.progressManager = createProgressManager(
-      this.toastConfig.duration,
-      () => this.dismiss("__expired"),
+    this.progressManager = createProgressManager(this, () =>
+      this.dismiss("__expired"),
     );
 
-    this.setToasts((prev) => [this, ...prev]);
+    const isLimitReached =
+      this.toasterConfig.limit &&
+      this.store.rendered.length >= this.toasterConfig.limit;
+
+    if (isLimitReached)
+      return this.setStore("queued", [...this.store.queued, this]);
+
+    const shouldQueueDueToBlur =
+      this.store.isWindowBlurred && !this.toasterConfig.renderOnWindowInactive;
+
+    if (shouldQueueDueToBlur)
+      return this.setStore("queued", [this, ...this.store.queued]);
+
+    this.setStore("rendered", [this, ...this.store.rendered]);
   }
 
   private lifecycle() {
@@ -101,11 +114,15 @@ class Toast {
 
     if (!this.renderedAt) return;
 
+    if (this.state !== "idle")
+      /** If we check for isUserByPaused and blurred before applying state; toast would run entrance animation and never apply idle state (if isUserByPaused or blurred), so we do it here */
+      setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
+
+    if (this.isUserByPaused) return;
+    if (this.store.isWindowBlurred && this.toastConfig.pauseOnWindowInactive)
+      return;
+
     this.progressManager.play(); // This is the only place where we will start the dismiss timer programmatically (so basically when the toast is rendered)
-
-    // if (this.state === "idle") return; // If a rendered toast is updated, we don't want to re-run the entrance animation again. There is also no need to re-set the state to idle
-
-    setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
   }
 
   update(args: Partial<Config>) {
@@ -117,7 +134,7 @@ class Toast {
 
     this.progressManager.update(this.toastConfig.duration); // Update the timer with the new duration
 
-    this.lifecycle();
+    this.lifecycle(); // Should fix the situation when the toast is updated while the timer is paused (it should not start the timer again). We dont want to run the timer of the updated toast if window is blurred etc
   }
 
   dismiss(reason?: string | boolean) {
@@ -141,17 +158,27 @@ class Toast {
     this.state = "exiting";
 
     setTimeout(() => {
-      this.setToasts((prev) =>
-        prev.filter((toast) => toast.toastConfig.id !== this.toastConfig.id),
-      );
+      batch(() => {
+        this.setStore("rendered", (state) =>
+          state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
+        );
+        this.setStore("queued", (state) =>
+          state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
+        );
+      });
     }, this.toastConfig.exitDuration);
   }
 
   remove() {
     // This will remove the toast without calling the exitCallback and without the exit animation
-    this.setToasts((prev) =>
-      prev.filter((toast) => toast.toastConfig.id !== this.toastConfig.id),
-    );
+    batch(() => {
+      this.setStore("rendered", (state) =>
+        state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
+      );
+      this.setStore("queued", (state) =>
+        state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
+      );
+    });
   }
 
   render(): JSX.Element {
@@ -173,11 +200,25 @@ class Toast {
           this.state,
         )}`.trim()}
         onMouseEnter={() => {
-          if (!this.toastConfig.pauseOnHover || this.isStatic) return;
+          if (!this.toastConfig.pauseOnHover) return;
+          if (
+            this.store.isWindowBlurred &&
+            this.toastConfig.pauseOnWindowInactive
+          )
+            return;
+          if (this.isUserByPaused) return;
+
           this.progressManager.pause();
         }}
         onMouseLeave={() => {
-          if (!this.toastConfig.pauseOnHover || this.isStatic) return;
+          if (!this.toastConfig.pauseOnHover) return;
+          if (
+            this.store.isWindowBlurred &&
+            this.toastConfig.pauseOnWindowInactive
+          )
+            return;
+          if (this.isUserByPaused) return;
+
           this.progressManager.play();
         }}
         style={{

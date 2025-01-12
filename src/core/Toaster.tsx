@@ -1,32 +1,48 @@
-import { createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
-import Toast from "./Toast";
+import { batch, createEffect, For, onCleanup, onMount } from "solid-js";
 import { useService } from "./Context";
 import { customMerge, getToasterStyle } from "../utils/helpers";
-import { Config } from "../types";
+import { Config, TStore } from "../types";
 import { defaultConfig } from "../config/defaultConfig";
+import { createStore } from "solid-js/store";
 
 export default function Toaster(props: Partial<Config>) {
-  const [toasts, setToasts] = createSignal<Toast[]>([]);
+  const [store, setStore] = createStore<TStore>({
+    queued: [],
+    rendered: [],
+    isWindowBlurred:
+      typeof document !== "undefined" && document.visibilityState === "hidden",
+  });
   const { registerToaster, unregisterToaster } = useService();
   const toasterConfig: Config = customMerge(defaultConfig, props);
 
   const { id: toasterId } = registerToaster({
     id: props.id,
-    toasts,
-    setToasts,
+    store,
+    setStore,
     toasterConfig,
     counter: 0,
   });
 
   createEffect(() => {
-    /*** Here we implement the reversing of the toast order and the queue mechanic (by not showing the toasts that exceed the toast limit) ***/
-    const resolvedToasts = toasterConfig.reverseToastOrder
-      ? toasts().slice(-toasterConfig.limit).reverse()
-      : toasts().slice(-toasterConfig.limit);
+    if (store.isWindowBlurred && !toasterConfig.renderOnWindowInactive) return;
+    
+    /** Here we manage putting toasts from queue to render */
+    if (store.queued.length && store.rendered.length < toasterConfig.limit) {
+      const [nextToast, ...rest] = store.queued;
+      batch(() => {
+        setStore("queued", rest);
+        setStore("rendered", [nextToast, ...store.rendered]);
+      });
+    }
 
-    let accumulatedOffset = toasterConfig.offsetY; // <-- We want to render the first toast at the same height as positionY offset
+    /*** Here we implement the reversing of the toast order if that options is enabled ***/
+    const resolvedToasts = toasterConfig.reverseToastOrder
+      ? [...store.rendered].reverse()
+      : store.rendered;
 
     /*** Here we reorder toasts when there are changes like toast created or toast updated ***/
+    let accumulatedOffset = toasterConfig.offsetY; // <-- We want to render the first toast at the same height as positionY offset
+
     resolvedToasts.forEach((toast) => {
       if (toast.ref) {
         const _body = toast.toastConfig.body; // This ensures toast is being tracked for reactivity
@@ -37,27 +53,37 @@ export default function Toaster(props: Partial<Config>) {
     });
   });
 
-  const handleWindowBlur = () =>
-    toasts().forEach((toast) => {
-      toast.progressManager.pause();
-      toast.isStatic = true; // If you hover over the toast while the window is blurred , it will start the progress again (to avoid that we set isStatic to true and check against that on mouse enter)
-    });
+  const handleWindowBlur = () => {
+    setStore("isWindowBlurred", true);
 
-  const handleWindowFocus = () =>
-    toasts().forEach((toast) => {
+    if (!toasterConfig.pauseOnWindowInactive) return;
+
+    store.rendered.forEach((toast) => toast.progressManager.pause()); // If you hover over the toast while the window is blurred , it will start the progress again (to avoid that we check against isWindowBlurred on mouse enter)
+  };
+
+  const handleWindowFocus = () => {
+    setStore("isWindowBlurred", false);
+
+    if (!toasterConfig.pauseOnWindowInactive) return;
+
+    store.rendered.forEach((toast) => {
+      if (toast.isUserByPaused) return; // If the user paused the timer, we dont want to start it again
       toast.progressManager.play();
-      toast.isStatic = false;
     });
+  };
 
   onMount(() => {
     /*** Here we handle stopping the timer when the tab is not active ***/
-    if (toasterConfig.pauseOnWindowInactive) {
-      window.addEventListener("blur", handleWindowBlur);
-      window.addEventListener("focus", handleWindowFocus);
-    }
+
+    window.addEventListener("blur", handleWindowBlur);
+    window.addEventListener("focus", handleWindowFocus);
   });
 
-  onCleanup(() => unregisterToaster(toasterId));
+  onCleanup(() => {
+    window.removeEventListener("blur", handleWindowBlur);
+    window.removeEventListener("focus", handleWindowFocus);
+    unregisterToaster(toasterId);
+  });
 
   return (
     <div
@@ -72,9 +98,7 @@ export default function Toaster(props: Partial<Config>) {
       }}
       class="pointer-events-none fixed left-0 top-0 flex h-screen w-screen overflow-hidden"
     >
-      <For each={toasts().slice(-toasterConfig.limit)}>
-        {(toast) => toast.render()}
-      </For>
+      <For each={store.rendered}>{(toast) => toast.render()}</For>
     </div>
   );
 }

@@ -1,6 +1,13 @@
-import { Accessor, createSignal } from "solid-js";
-import { Config, ProgressControls } from "../types";
+import { createSignal } from "solid-js";
+import { Config, ProgressControls, TStore } from "../types";
 import Toast from "../core/Toast";
+
+function findToast(id: string | undefined, store: TStore): Toast | undefined {
+  if (!id) return;
+
+  const allToasts = [...store.rendered, ...store.queued];
+  return allToasts.find((toast) => toast.toastConfig.id === id);
+}
 
 export function createToastId(
   toastCounter: number,
@@ -29,12 +36,12 @@ function getToasterStyle(positionX: "left" | "right" | "center") {
 
 function setStartingOffset(
   /*** We need to set starting offset because otherwise newly created toast will always appear at positionY of the toaster and then fly to the updated offset (when reversed order is true this is a problem) ***/
-  toasts: Accessor<Toast[]>,
+  store: TStore,
   { offsetY, gutter, reverseToastOrder }: Config,
 ) {
   if (!reverseToastOrder) return offsetY;
 
-  const precedingToast = toasts()[0];
+  const precedingToast = store.rendered[0];
   if (!precedingToast) return offsetY; // Means there is only one toast so we can safely return offsetY
 
   // To get the new offset, we only need info about the preceding toast
@@ -103,9 +110,10 @@ function applyState(
   }
 }
 
-function createProgressManager(duration: number | false, callback: () => void) {
+function createProgressManager(toast: Toast, callback: () => void) {
   const [progress, setProgress] = createSignal(0);
 
+  let duration = toast.toastConfig.duration;
   let start = performance.now();
   let elapsed = 0;
   let paused = false;
@@ -131,12 +139,14 @@ function createProgressManager(duration: number | false, callback: () => void) {
 
   const play = () => {
     paused = false;
+    toast.isPaused = false;
     start = performance.now() - elapsed;
     requestAnimationFrame(getFrame);
   };
 
   const pause = () => {
     paused = true;
+    toast.isPaused = true;
   };
 
   const update = (newDuration: number | false) => {
@@ -147,6 +157,7 @@ function createProgressManager(duration: number | false, callback: () => void) {
 
   const reset = () => {
     paused = true;
+    toast.isPaused = true;
     setProgress(0);
     elapsed = 0;
   };
@@ -161,32 +172,33 @@ function createProgressManager(duration: number | false, callback: () => void) {
 }
 
 function setProgressControls(toast: Toast): ProgressControls {
-  /** Why static flag?
-   * It's basically a flag to check if the timer was paused by the user and not by the visibility change event listener.
+  /** Why isUserByPaused flag?
+   * It's basically a flag to check if the timer was paused by the user and not by the window blur and focus event listener.
    * We need this flag for the case when the timer is paused by the user, and the browser tab is switched.
-   * Because we have a global event listener for visibility change, and because we pause all timers when the tab is not visible (if this option is enabled),
+   * Because we have a global event listener for window blur and focus, and because we pause all timers when the tab is not visible (if this option is enabled),
    * while we play all timers when the tab is visible again, thus the timer which was paused by the user will be played again.
-   * To avoid this, we set a static flag to true when the timer is paused by the user, and then we check this flag in the visibility change event listener
+   * To avoid this, we set a isUserByPaused flag to true when the timer is paused by the user, and then we check this flag in the blur and focus event listener
    * once the tab is visible again, and if the flag is true, we don't play the timer.
    */
 
   return {
     pause: () => {
       toast.progressManager.pause();
-      toast.isStatic = true;
+      toast.isUserByPaused = true;
     },
     play: () => {
       toast.progressManager.play();
-      toast.isStatic = false;
+      toast.isUserByPaused = false;
     },
     reset: () => {
       toast.progressManager.reset();
-      toast.isStatic = true;
+      toast.isUserByPaused = true;
     },
   };
 }
 
 export {
+  findToast,
   getToasterStyle,
   setStartingOffset,
   customMerge,

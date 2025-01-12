@@ -15,8 +15,8 @@ export const defaultConfig: Config = {
   limit: 3,
   reverseToastOrder: false,
   pauseOnHover: true,
-  pauseOnWindowInactive: true,
-  renderOnWindowInactive: false,
+  pauseOnWindowInactive: true, // Will not run timer when window is inactive
+  renderOnWindowInactive: false, // Will not render toasts when window is inactive and will put them in the queue
   enterCallback: null,
   updateCallback: null,
   exitCallback: null,
@@ -24,9 +24,5 @@ export const defaultConfig: Config = {
   progressBar: {
     showDefault: true,
     className: "moon-toast-progress-bar",
-    animate: {
-      keyframes: [{ width: "100%" }, { width: "0%" }],
-      options: { easing: "linear", fill: "forwards" },
-    },
   },
 };

@@ -2,7 +2,7 @@ import { RegisteredToaster, Toaster } from "../types";
 
 function registerToaster(
   toasters: Map<string, Toaster>,
-  { id, toasts, setToasts, toasterConfig, counter }: Toaster,
+  { id, store, setStore, toasterConfig, counter }: Toaster,
 ): RegisteredToaster {
   if (id === "__default")
     throw new Error('Toaster ID "__default" is reserved and cannot be used.');
@@ -21,9 +21,9 @@ function registerToaster(
       "When using multiple toasters, all toasters must be provided with a unique ID.",
     );
 
-  toasters.set(id, { id, toasts, setToasts, toasterConfig, counter });
+  toasters.set(id, { id, store, setStore, toasterConfig, counter });
 
-  return { id, toasts, setToasts, toasterConfig, counter };
+  return { id, store, setStore, toasterConfig, counter };
 }
 
 function getToaster(toasters: Map<string, Toaster>, id?: string): Toaster {

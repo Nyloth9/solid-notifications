@@ -32,7 +32,7 @@ const App: Component = () => {
               const { id, progressControls } = notify(
                 createRoot(() => (
                   <>
-                    <div>🍞 Moon Toast, Toast Notification! 🌟</div>
+                    <div>{`🍞 Moon Toast, Toast Notification! 🌟`}</div>
                     <div class="block italic text-purple-600">
                       {randomText()}
                     </div>
@@ -66,7 +66,7 @@ const App: Component = () => {
                 },
               );
 
-              /*       setTimeout(() => {
+           /*    setTimeout(() => {
                 update({
                   body: (
                     <>
@@ -74,26 +74,26 @@ const App: Component = () => {
                       <div class="flex gap-1">
                         <button
                           class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                          onClick={() => timer.pause()}
+                          onClick={() => progressControls.pause()}
                         >
                           Pause timer
                         </button>
                         <button
                           class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                          onClick={() => timer.play()}
+                          onClick={() => progressControls.play()}
                         >
                           Play timer
                         </button>
                         <button
                           class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                          onClick={() => timer.reset()}
+                          onClick={() => progressControls.reset()}
                         >
                           Reset timer
                         </button>
                       </div>
                     </>
                   ),
-                  duration: 2000,
+                  duration: 3000,
                   id,
                 });
               }, 2000); */
@@ -141,7 +141,7 @@ const App: Component = () => {
             );
           }}
         >
-          Create Toast Top Right
+          Create Toast Bottom Right
         </button>
       </div>
     </div>
