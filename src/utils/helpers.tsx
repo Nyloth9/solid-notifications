@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, JSX } from "solid-js";
 import { Config, ProgressControls, TStore } from "../types";
 import Toast from "../core/Toast";
 
@@ -9,7 +9,7 @@ function findToast(id: string | undefined, store: TStore): Toast | undefined {
   return allToasts.find((toast) => toast.toastConfig.id === id);
 }
 
-export function createToastId(
+function createToastId(
   toastCounter: number,
   toasterId: string | undefined,
   userProvidedId?: string,
@@ -21,6 +21,17 @@ export function createToastId(
   }
 
   return `${toasterId}:toast-${toastCounter}`;
+}
+
+function resolveBody(
+  body: string | JSX.Element | ((toast: Toast) => JSX.Element),
+  t: Toast,
+): JSX.Element | string {
+  if (typeof body === "function") {
+    // If the body is a function, pass the toast instance to it
+    return body(t);
+  }
+  return body || `🍞 Moon Toast "${t.toastConfig.id}", ready to serve! 🌟`;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {
@@ -110,16 +121,16 @@ function applyState(
   }
 }
 
-function createProgressManager(toast: Toast, callback: () => void) {
+function createProgressManager(toast?: Toast, callback?: () => void) {
   const [progress, setProgress] = createSignal(0);
 
-  let duration = toast.toastConfig.duration;
+  let duration = toast?.toastConfig.duration;
   let start = performance.now();
   let elapsed = 0;
   let paused = false;
 
   const getFrame = () => {
-    if (!duration) return;
+    if (!duration || !callback) return;
     if (paused) return;
 
     const now = performance.now();
@@ -139,14 +150,15 @@ function createProgressManager(toast: Toast, callback: () => void) {
 
   const play = () => {
     paused = false;
-    toast.isPaused = false;
     start = performance.now() - elapsed;
     requestAnimationFrame(getFrame);
+
+    if (toast) toast.isPaused = false;
   };
 
   const pause = () => {
     paused = true;
-    toast.isPaused = true;
+    if (toast) toast.isPaused = true;
   };
 
   const update = (newDuration: number | false) => {
@@ -157,9 +169,9 @@ function createProgressManager(toast: Toast, callback: () => void) {
 
   const reset = () => {
     paused = true;
-    toast.isPaused = true;
     setProgress(0);
     elapsed = 0;
+    if (toast) toast.isPaused = true;
   };
 
   return {
@@ -200,6 +212,8 @@ function setProgressControls(toast: Toast): ProgressControls {
 
 export {
   findToast,
+  createToastId,
+  resolveBody,
   getToasterStyle,
   setStartingOffset,
   customMerge,

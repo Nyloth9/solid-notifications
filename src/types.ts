@@ -50,7 +50,7 @@ export interface ToasterContextType {
 
 export interface ToastActions {
   notify: (
-    body?: string | JSX.Element,
+    body?: string | JSX.Element | ((toast: Toast) => JSX.Element),
     options?: ToastOptions,
   ) => {
     id: string;

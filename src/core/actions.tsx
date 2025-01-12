@@ -4,6 +4,7 @@ import {
   createToastId,
   filterOptions,
   findToast,
+  resolveBody,
   setProgressControls,
 } from "../utils/helpers";
 import Toast from "./Toast";
@@ -57,10 +58,12 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       toasterConfig,
       toastConfig: {
         ...filteredOptions,
-        body: body || `🍞 Moon Toast "${toastId}", ready to serve! 🌟`,
+        body: undefined,
         id: toastId,
       },
     });
+
+    newToast.toastConfig.body = resolveBody(body, newToast);
 
     newToast.init();
 

@@ -1,4 +1,4 @@
-import { batch, JSX, onMount, Show } from "solid-js";
+import { batch, JSX, Match, onMount, Show, Switch } from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
@@ -80,7 +80,7 @@ class Toast {
     this.toasterConfig = args.toasterConfig;
     this.toastConfig = customMerge(args.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.store, args.toasterConfig); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
-
+    this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (function as body argument)
     return createMutable(this); // This is how we make the class reactive
   }
 

@@ -66,7 +66,7 @@ const App: Component = () => {
                 },
               );
 
-           /*    setTimeout(() => {
+              /*    setTimeout(() => {
                 update({
                   body: (
                     <>
@@ -104,45 +104,69 @@ const App: Component = () => {
 
           <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
-            /*  onClick={() => clearQueue()} */
+            onClick={() => clearQueue()}
           >
             Clear queue
           </button>
         </div>
 
-        <button
-          class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
-          onClick={() => {
-            const { id, progressControls } = notify(
-              <>
-                <div>🍞 Moon Toast, Toast Notification! 🌟</div>
-                <div class="flex gap-1">
-                  <button
-                    class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                    onClick={() => progressControls.pause()}
-                  >
-                    Pause timer
-                  </button>
-                  <button
-                    class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                    onClick={() => progressControls.play()}
-                  >
-                    Play timer
-                  </button>
-                  <button
-                    class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                    onClick={() => progressControls.reset()}
-                  >
-                    Reset timer
-                  </button>
-                </div>
-              </>,
-              { toasterId: "toaster-3" },
-            );
-          }}
-        >
-          Create Toast Bottom Right
-        </button>
+        <div class="flex gap-4">
+          <button
+            class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
+            onClick={() => {
+              const { id, progressControls } = notify(
+                <>
+                  <div>🍞 Moon Toast, Toast Notification! 🌟</div>
+                  <div class="flex gap-1">
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.pause()}
+                    >
+                      Pause timer
+                    </button>
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.play()}
+                    >
+                      Play timer
+                    </button>
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.reset()}
+                    >
+                      Reset timer
+                    </button>
+                  </div>
+                </>,
+                { toasterId: "toaster-3" },
+              );
+            }}
+          >
+            Create Toast Bottom Right
+          </button>
+
+          <button
+            class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
+            onClick={() => {
+              notify(
+                (t) => {
+                  return createRoot(() => (
+                    <div class={t.isPaused ? "bg-red-200" : "bg-green-200"}>
+                      <div>🍞 Moon Toast, Toast Regret! 🌟</div>
+                      <p>ID: {t.toastConfig.id}</p>
+                      <p>Offset: {t.offset}</p>
+                      <p>Progress: {t.progressManager.progress()} %</p>
+                      <p>{t.state}</p>
+                    </div>
+                  ));
+                },
+                { duration: 10000 },
+              );
+            }}
+          >
+            Create Custom Toast
+          </button>
+        </div>
       </div>
     </div>
   );
