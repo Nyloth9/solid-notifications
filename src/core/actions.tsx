@@ -63,7 +63,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       },
     });
 
-    newToast.toastConfig.body = resolveBody(body, newToast);
+    newToast.toastConfig.body = resolveBody(body, newToast); // If using a function as the first argument, we want to resolve it to JSX
 
     newToast.init();
 
