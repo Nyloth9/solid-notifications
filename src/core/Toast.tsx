@@ -24,8 +24,8 @@ import {
  * ✔ - dont allow positionX, positionY, offsetX and offsetY to be changed per Toast as this should be handled by the Toaster
  * ✔ - add option to not have a toast limit
  * ✔ - allow users to read the queue
- * - add pause on onMouseEnter etc.
- * - add pause on tab switch
+ * ✔ add pause on onMouseEnter etc.
+ * ✔ add pause on tab switch
  * ✔ - added reverseToastOrder
  * ✔ - add return types
  * ✔ - exitCallback will be called with a reason (true, false or manually provided reason) which can then be used when declaring the callback as the first argument
@@ -40,9 +40,9 @@ import {
  * ✔ - fix a bug where timer controls dont work when toast is added to the queue
  *  - add function as body argument in notify
  * ✔ - added visibility change event listener
- * - add option to not render toasts if the tab is blurred
- * - add clear rendered toasts (keepQueued)
- * - handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
+ * ✔ add option to not render toasts if the tab is blurred
+ * - add clear only rendered toasts (keepQueued)
+ * ✔ handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
  * - add styling
  * - add tests
  * - add swipe to dismiss
