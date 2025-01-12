@@ -1,12 +1,4 @@
-import {
-  batch,
-  createEffect,
-  createSignal,
-  For,
-  onCleanup,
-  onMount,
-} from "solid-js";
-import Toast from "./Toast";
+import { batch, createEffect, For, onCleanup, onMount } from "solid-js";
 import { useService } from "./Context";
 import { customMerge, getToasterStyle } from "../utils/helpers";
 import { Config, ToastStore } from "../types";
@@ -82,7 +74,7 @@ export default function Toaster(props: Partial<Config>) {
     toasts.rendered.forEach((toast) => {
       toast.isWindowBlurred = false;
 
-      if (toast.isStatic) return; // If the user paused the timer, we dont want to start it again
+      if (toast.userPaused) return; // If the user paused the timer, we dont want to start it again
       toast.progressManager.play();
     });
   };

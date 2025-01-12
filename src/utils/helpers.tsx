@@ -171,27 +171,27 @@ function createProgressManager(duration: number | false, callback: () => void) {
 }
 
 function setProgressControls(toast: Toast): ProgressControls {
-  /** Why static flag?
-   * It's basically a flag to check if the timer was paused by the user and not by the visibility change event listener.
+  /** Why userPaused flag?
+   * It's basically a flag to check if the timer was paused by the user and not by the window blur and focus event listener.
    * We need this flag for the case when the timer is paused by the user, and the browser tab is switched.
-   * Because we have a global event listener for visibility change, and because we pause all timers when the tab is not visible (if this option is enabled),
+   * Because we have a global event listener for window blur and focus, and because we pause all timers when the tab is not visible (if this option is enabled),
    * while we play all timers when the tab is visible again, thus the timer which was paused by the user will be played again.
-   * To avoid this, we set a static flag to true when the timer is paused by the user, and then we check this flag in the visibility change event listener
+   * To avoid this, we set a userPaused flag to true when the timer is paused by the user, and then we check this flag in the blur and focus event listener
    * once the tab is visible again, and if the flag is true, we don't play the timer.
    */
 
   return {
     pause: () => {
       toast.progressManager.pause();
-      toast.isStatic = true;
+      toast.userPaused = true;
     },
     play: () => {
       toast.progressManager.play();
-      toast.isStatic = false;
+      toast.userPaused = false;
     },
     reset: () => {
       toast.progressManager.reset();
-      toast.isStatic = true;
+      toast.userPaused = true;
     },
   };
 }
