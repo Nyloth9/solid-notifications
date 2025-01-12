@@ -16,7 +16,7 @@ import {
  * ✔ - add queue for toasts? (if there is not enough space for the toast, it will be added to the queue)
  * - will remove unstyled?
  * - will remove the inline dismiss button
- * - max toast duration. If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is isUserByPaused, it will be dismissed)
+ * - max toast duration. If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is isPausedByUser, it will be dismissed)
  * ✔ - remove overflow-control
  * ✔ - existing toast id should be checked and error should be thrown if the id already exists
  * ✔ - we are merging defaultConfig with the toast instead of config passed to the toaster <- this should be fixed
@@ -71,7 +71,7 @@ class Toast {
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
   progressManager!: ReturnType<typeof createProgressManager>;
   isPaused = true; // A flag that's exposed for custom toasts. No internal use
-  isUserByPaused = false; // True if the timer was paused by the user
+  isPausedByUser = false; // True if the timer was paused by the user
   offset = 0;
 
   constructor(args: ToastConstructor) {
@@ -115,10 +115,10 @@ class Toast {
     if (!this.renderedAt) return;
 
     if (this.state !== "idle")
-      /** If we check for isUserByPaused and blurred before applying state; toast would run entrance animation and never apply idle state (if isUserByPaused or blurred), so we do it here */
+      /** If we check for isPausedByUser and blurred before applying state; toast would run entrance animation and never apply idle state (if isPausedByUser or blurred), so we do it here */
       setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
 
-    if (this.isUserByPaused) return;
+    if (this.isPausedByUser) return;
     if (this.store.isWindowBlurred && this.toastConfig.pauseOnWindowInactive)
       return;
 
@@ -206,7 +206,7 @@ class Toast {
             this.toastConfig.pauseOnWindowInactive
           )
             return;
-          if (this.isUserByPaused) return;
+          if (this.isPausedByUser) return;
 
           this.progressManager.pause();
         }}
@@ -217,7 +217,7 @@ class Toast {
             this.toastConfig.pauseOnWindowInactive
           )
             return;
-          if (this.isUserByPaused) return;
+          if (this.isPausedByUser) return;
 
           this.progressManager.play();
         }}

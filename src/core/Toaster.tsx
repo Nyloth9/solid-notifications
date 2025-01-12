@@ -67,7 +67,7 @@ export default function Toaster(props: Partial<Config>) {
     if (!toasterConfig.pauseOnWindowInactive) return;
 
     store.rendered.forEach((toast) => {
-      if (toast.isUserByPaused) return; // If the user paused the timer, we dont want to start it again
+      if (toast.isPausedByUser) return; // If the user paused the timer, we dont want to start it again
       toast.progressManager.play();
     });
   };
