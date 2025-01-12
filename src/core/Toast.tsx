@@ -61,8 +61,8 @@ import {
  */
 
 class Toast {
-  private toasts; // <-- Should be removed
-  private setToasts;
+  private store; // <-- Should be removed
+  private setStore;
   toasterConfig: Config;
   toastConfig: Config;
   ref: HTMLElement | null = null;
@@ -74,11 +74,11 @@ class Toast {
   offset = 0;
 
   constructor(args: ToastConstructor) {
-    this.toasts = args.toasts;
-    this.setToasts = args.setToasts;
+    this.store = args.store;
+    this.setStore = args.setStore;
     this.toasterConfig = args.toasterConfig;
     this.toastConfig = customMerge(args.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
-    this.offset = setStartingOffset(args.toasts, args.toasterConfig); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
+    this.offset = setStartingOffset(args.store, args.toasterConfig); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
 
     return createMutable(this); // This is how we make the class reactive
   }
@@ -91,12 +91,18 @@ class Toast {
 
     const isLimitReached =
       this.toasterConfig.limit &&
-      this.toasts.rendered.length >= this.toasterConfig.limit;
+      this.store.rendered.length >= this.toasterConfig.limit;
 
     if (isLimitReached)
-      return this.setToasts("queued", [...this.toasts.queued, this]);
+      return this.setStore("queued", [...this.store.queued, this]);
 
-    this.setToasts("rendered", [this, ...this.toasts.rendered]);
+    const shouldQueueDueToBlur =
+      this.store.isWindowBlurred && !this.toasterConfig.renderOnWindowInactive;
+
+    if (shouldQueueDueToBlur)
+      return this.setStore("queued", [this, ...this.store.queued]);
+
+    this.setStore("rendered", [this, ...this.store.rendered]);
   }
 
   private lifecycle() {
@@ -108,11 +114,12 @@ class Toast {
     if (!this.renderedAt) return;
 
     if (this.state !== "idle")
+      /** If we check for isUserByPaused and blurred before applying state; toast would run entrance animation and never apply idle state (if isUserByPaused or blurred), so we do it here */
       setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
 
-    /** If we check for isUserByPaused and blurred before applying state; toast would run entrance animation and never apply idle state (if isUserByPaused or blurred), so we do it here */
     if (this.isUserByPaused) return;
-    // if (this.isWindowBlurred) return; //
+    if (this.store.isWindowBlurred && this.toastConfig.pauseOnWindowInactive)
+      return;
 
     this.progressManager.play(); // This is the only place where we will start the dismiss timer programmatically (so basically when the toast is rendered)
   }
@@ -151,10 +158,10 @@ class Toast {
 
     setTimeout(() => {
       batch(() => {
-        this.setToasts("rendered", (state) =>
+        this.setStore("rendered", (state) =>
           state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
         );
-        this.setToasts("queued", (state) =>
+        this.setStore("queued", (state) =>
           state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
         );
       });
@@ -164,10 +171,10 @@ class Toast {
   remove() {
     // This will remove the toast without calling the exitCallback and without the exit animation
     batch(() => {
-      this.setToasts("rendered", (state) =>
+      this.setStore("rendered", (state) =>
         state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
       );
-      this.setToasts("queued", (state) =>
+      this.setStore("queued", (state) =>
         state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
       );
     });
