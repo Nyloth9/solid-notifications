@@ -96,6 +96,8 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
     "toasterStyle",
     "reverseToastOrder",
     "pauseOnWindowInactive",
+    "pauseOnWindowInactive",
+    "renderOnWindowInactive",
   ];
 
   const filteredOptions = Object.fromEntries(
