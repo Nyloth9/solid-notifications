@@ -7,7 +7,9 @@ const App: Component = () => {
   );
 
   const { notify, update, dismiss, remove, getQueue, clearQueue } =
-    useToast("toaster-2");
+    useToast();
+
+  const { dismiss: globalDismiss } = useToast();
 
   /*   onMount(() => {
     const interval = setInterval(() => {
@@ -67,6 +69,10 @@ const App: Component = () => {
                 },
               );
 
+              setTimeout(() => {
+                dismiss({ id: "ads" });
+              }, 2000);
+
               /*    setTimeout(() => {
                 update({
                   body: (
@@ -117,7 +123,7 @@ const App: Component = () => {
             onClick={() => {
               const { id, progressControls } = notify(
                 <>
-                  <div>🍞 Moon Toast, Toast Notification! 🌟</div>
+                  <div>{`🍞 Moon Toast, Toast Notification! 🌟`}</div>
                   <div class="flex gap-1">
                     <button
                       class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
@@ -139,8 +145,12 @@ const App: Component = () => {
                     </button>
                   </div>
                 </>,
-                { toasterId: "toaster-3" },
+                { toasterId: "toaster-2" },
               );
+
+       /*        setTimeout(() => {
+                globalDismiss({ id, toasterId: "toaster-2" });
+              }, 2000); */
             }}
           >
             Create Toast Bottom Right
@@ -166,6 +176,25 @@ const App: Component = () => {
             }}
           >
             Create Custom Toast
+          </button>
+        </div>
+        <div class="flex gap-4">
+          <button
+            class="mt-4 rounded bg-red-600 px-4 py-2 font-bold text-white hover:bg-red-700 active:bg-red-800"
+            onClick={() => {
+              dismiss({ keepQueued: true });
+            }}
+          >
+            Dismiss on toaster-1
+          </button>
+
+          <button
+            class="mt-4 rounded bg-red-600 px-4 py-2 font-bold text-white hover:bg-red-700 active:bg-red-800"
+            onClick={() => {
+              globalDismiss({ keepQueued: true });
+            }}
+          >
+            Dismiss global
           </button>
         </div>
       </div>

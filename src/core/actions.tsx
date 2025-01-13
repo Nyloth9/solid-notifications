@@ -27,7 +27,9 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
      * 5. notify("Example text", { toasterId: "toasterId", id: "toastId", ... }) - Notify with a specific ID in a specific toaster
      */
 
-    if (targetToaster) options = { toasterId: targetToaster, ...options };
+    if (targetToaster) {
+      options = { toasterId: targetToaster, ...options };
+    }
 
     const toaster = context.getToaster(options?.toasterId);
     const { id: toasterId, store, setStore, toasterConfig } = toaster;
@@ -85,7 +87,9 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
      * 4. update({ ...newOptions }) - Update all toasts in all toasters
      */
 
-    if (targetToaster) options = { toasterId: targetToaster, ...options };
+    if (targetToaster) {
+      options = { toasterId: targetToaster, ...options };
+    }
 
     const { id, toasterId, ...rest } = options;
 
@@ -130,14 +134,68 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
   };
 
   const dismiss: ToastActions["dismiss"] = (options) => {
+    // Mount the toasterId that was provided in the useToast hook or in options
+    // If no options are provided, we want to keep the options object as undefined
+    if (targetToaster) {
+      options = { toasterId: targetToaster, ...options };
+    }
+
+    // If no argument, dismiss toasts from all toasters
+    if (!options) {
+      context.toasters.forEach((toaster) => {
+        toaster.store.rendered.forEach((toast) => toast.dismiss());
+        toaster.store.queued.forEach((toast) => toast.dismiss());
+      });
+
+      return;
+    }
+
+    // If only the keepQueued key is in the options object, we dismiss all rendered toasts in all toasters
+    if (!options.toasterId && options.keepQueued) {
+      context.toasters.forEach((toaster) => {
+        toaster.store.rendered.forEach((toast) =>
+          toast.dismiss(options.reason),
+        );
+      });
+
+      return;
+    }
+
+    // We want to throw from here if no toasterId is provided in the options object
+    const toaster = context.getToaster(options.toasterId);
+
+    // If only the id is provided, dismiss the specified toast
+    if (options?.id) {
+      const toast = findToast(options?.id, toaster.store);
+
+      if (!toast) {
+        throw new Error(
+          options.toasterId === "__default"
+            ? `Failed to dismiss toast: No toast found with the provided ID (${options.id}).`
+            : `Failed to dismiss toast: No toast found with the provided ID (${options.id}) in the toaster with the ID "${options.toasterId}".`,
+        );
+      }
+
+      toast.dismiss(options.reason);
+
+      return;
+    }
+
+    // Finally, if toasterId, dismiss toasts in specified toaster with/without keeping queued toasts
+    toaster.store.rendered.forEach((toast) => toast.dismiss(options.reason));
+    !options.keepQueued &&
+      toaster.store.queued.forEach((toast) => toast.dismiss(options.reason));
+
+    return;
+  };
+
+  const dismiss2: ToastActions["dismiss"] = (options) => {
     /**
      * Dismiss can be called in the following ways:
      * 1. dismiss({ id: "toastId" }) - Dismiss a specific toast (when there is only one toaster or useToast has specified a toasterId)
      * 2. dismiss({ toasterId: "toasterId" }) - Dismiss all toasts in a specific toaster
      * 3. dismiss({ toasterId: "toasterId", id: "toastId" }) - Dismiss a specific toast in a specific toaster
      * 4. dismiss() - Dismiss all toasts in all toasters
-     *
-     * - accepts "keepQueued" option to keep queued toasts
      */
 
     if (targetToaster) options = { toasterId: targetToaster, ...options }; // If there is no toasterId, and no options, we don't want to create an options object with undefined values
@@ -182,15 +240,9 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
   };
 
   const remove: ToastActions["remove"] = (options) => {
-    /**
-     * Remove can be called in the following ways:
-     * 1. remove({ id: "toastId" }) - Remove a specific toast (when there is only one toaster or useToast has specified a toasterId)
-     * 2. remove({ toasterId: "toasterId" }) - Remove all toasts in a specific toaster
-     * 3. remove({ toasterId: "toasterId", id: "toastId" }) - Remove a specific toast in a specific toaster
-     * 4. remove() - Remove all toasts in all toasters
-     */
-
-    if (targetToaster) options = { toasterId: targetToaster, ...options };
+    if (targetToaster) {
+      options = { toasterId: targetToaster, ...options };
+    }
 
     // If no argument, remove toasts from all toasters
     if (!options) {
@@ -204,28 +256,41 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       return;
     }
 
-    // If only the toasterId is provided, remove all toasts in the specified toaster
-    const toaster = context.getToaster(options?.toasterId);
-
-    if (options.toasterId && !options.id) {
-      batch(() => {
-        toaster.setStore("rendered", []);
-        toaster.setStore("queued", []);
+    // If only the keepQueued key is in the options object, we remove all rendered toasts in all toasters
+    if (!options.toasterId && options.keepQueued) {
+      context.toasters.forEach((toaster) => {
+        toaster.store.rendered.forEach((toast) => toast.remove());
       });
 
       return;
     }
 
-    // Finally, remove the specified toast
-    const { store } = toaster;
-    const toast = findToast(options?.id, store);
+    // We want to throw from here if no toasterId is provided in the options object
+    const toaster = context.getToaster(options?.toasterId);
 
-    if (!toast)
-      throw new Error(
-        `Failed to dismiss toast: No toast found with the provided ID (${options?.id}).`,
-      );
+    // If only the id is provided, remove the specified toast
+    if (options.id) {
+      const toast = findToast(options?.id, toaster.store);
 
-    toast.remove();
+      if (!toast) {
+        throw new Error(
+          options.toasterId === "__default"
+            ? `Failed to remove toast: No toast found with the provided ID (${options.id}).`
+            : `Failed to remove toast: No toast found with the provided ID (${options.id}) in the toaster with the ID "${options.toasterId}".`,
+        );
+      }
+
+      toast.remove();
+
+      return;
+    }
+
+    // Finally, if toasterId, dismiss toasts in specified toaster with/without keeping queued toasts
+    toaster.store.rendered.forEach((toast) => toast.remove());
+    !options.keepQueued &&
+      toaster.store.queued.forEach((toast) => toast.remove());
+
+    return;
   };
 
   const getQueue: ToastActions["getQueue"] = (toasterId = targetToaster) => {
