@@ -32,6 +32,8 @@ export interface ToastOptions
       | "limit"
       | "toasterStyle"
       | "reverseToastOrder"
+      | "pauseOnWindowInactive"
+      | "renderOnWindowInactive"
     >
   > {
   toasterId?: string;
@@ -104,7 +106,7 @@ export interface Config {
   offsetX: number;
   offsetY: number;
   gutter: number;
-  limit: number;
+  limit: number | false;
   reverseToastOrder: boolean;
   pauseOnHover: boolean;
   pauseOnWindowInactive: boolean;

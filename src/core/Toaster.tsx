@@ -27,7 +27,12 @@ export default function Toaster(props: Partial<Config>) {
     if (store.isWindowBlurred && !toasterConfig.renderOnWindowInactive) return;
 
     /** Here we manage putting toasts from queue to render */
-    if (store.queued.length && store.rendered.length < toasterConfig.limit) {
+    const shouldMoveFromQueueToRendered =
+      toasterConfig.limit &&
+      store.queued.length &&
+      store.rendered.length < toasterConfig.limit;
+
+    if (shouldMoveFromQueueToRendered) {
       const [nextToast, ...rest] = store.queued;
       batch(() => {
         setStore("queued", rest);
@@ -41,7 +46,7 @@ export default function Toaster(props: Partial<Config>) {
       : store.rendered;
 
     /*** Here we reorder toasts when there are changes like toast created or toast updated ***/
-    let accumulatedOffset = toasterConfig.offsetY; // <-- We want to render the first toast at the same height as positionY offset
+    let accumulatedOffset = toasterConfig.offsetY; // We want to render the first toast at the same height as positionY offset
 
     resolvedToasts.forEach((toast) => {
       if (toast.ref) {

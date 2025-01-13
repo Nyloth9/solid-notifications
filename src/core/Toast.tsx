@@ -71,7 +71,7 @@ class Toast {
   ref: HTMLElement | null = null;
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
-  progressManager!: ReturnType<typeof createProgressManager>;
+  progressManager: ReturnType<typeof createProgressManager>;
   isPaused = true; // A flag that's exposed for custom toasts. Has no internal use
   isPausedByUser = false; // True if the timer was paused by the user (checked on window blur and mouse hover)
   offset = 0;
@@ -203,22 +203,24 @@ class Toast {
         )}`.trim()}
         onMouseEnter={() => {
           if (!this.toastConfig.pauseOnHover) return;
-          if (
+
+          const shouldIgnoreHoverWhileBlurred =
             this.store.isWindowBlurred &&
-            this.toastConfig.pauseOnWindowInactive
-          )
-            return;
+            this.toastConfig.pauseOnWindowInactive;
+
+          if (shouldIgnoreHoverWhileBlurred) return;
           if (this.isPausedByUser) return;
 
           this.progressManager.pause();
         }}
         onMouseLeave={() => {
           if (!this.toastConfig.pauseOnHover) return;
-          if (
+
+          const shouldIgnoreHoverWhileBlurred =
             this.store.isWindowBlurred &&
-            this.toastConfig.pauseOnWindowInactive
-          )
-            return;
+            this.toastConfig.pauseOnWindowInactive;
+
+          if (shouldIgnoreHoverWhileBlurred) return;
           if (this.isPausedByUser) return;
 
           this.progressManager.play();

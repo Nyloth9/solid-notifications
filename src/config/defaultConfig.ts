@@ -3,7 +3,7 @@ import { Config } from "../types";
 export const defaultConfig: Config = {
   type: "default",
   duration: 5000,
-  onEnter: "moon-toast--slide-in-right", //solidnotif__slide-in-right
+  onEnter: "moon-toast--slide-in-right", //sn__slide-in-right
   enterDuration: 300,
   onExit: "moon-toast--slide-out-right",
   exitDuration: 150,
