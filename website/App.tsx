@@ -31,7 +31,43 @@ const App: Component = () => {
           <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => {
-              const { id, progressControls } = notify();
+              const { id, progressControls } = notify(
+                createRoot(() => (
+                  <div>
+                    <div>{`🍞 Moon Toast, Toast Notification! 🌟`}</div>
+                    <div class="block italic text-purple-600">
+                      {randomText()}
+                    </div>
+                    <div class="flex gap-1">
+                      <button
+                        class={
+                          "mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                        }
+                        onClick={() => progressControls.pause()}
+                      >
+                        Pause timer
+                      </button>
+                      <button
+                        class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                        onClick={() => progressControls.play()}
+                      >
+                        Play timer
+                      </button>
+                      <button
+                        class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                        onClick={() => progressControls.reset()}
+                      >
+                        Reset timer
+                      </button>
+                    </div>
+                  </div>
+                )),
+                {
+                  duration: 5000,
+                  exitCallback: (reason) =>
+                    console.log("Dissmised by user? ", reason),
+                },
+              );
 
               /*    setTimeout(() => {
                 update({

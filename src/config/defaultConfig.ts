@@ -25,6 +25,7 @@ export const defaultConfig: Config = {
   enterCallback: null,
   updateCallback: null,
   exitCallback: null,
+  dismissOnClick: false,
   toasterStyle: null,
   progressBar: {
     showDefault: true,

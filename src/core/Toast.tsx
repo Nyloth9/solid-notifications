@@ -203,6 +203,17 @@ class Toast {
         }}
         id={this.toastConfig.id}
         class={`${this.toastConfig.wrapperClass} ${applyState(this.toastConfig, this.state)}`.trim()}
+        onClick={(e) => {
+          if (!this.toastConfig.dismissOnClick) return;
+
+          const isInteractiveElement =
+            e.target instanceof HTMLElement &&
+            e.target.closest("a, button, input, select, textarea");
+
+          if (isInteractiveElement) return;
+
+          this.dismiss();
+        }}
         onMouseEnter={() => {
           if (!this.toastConfig.pauseOnHover) return;
 
@@ -240,24 +251,26 @@ class Toast {
         >
           <div class={this.toastConfig.class} style={this.toastConfig.style}>
             {this.toastConfig.body}
-            <div class="sn-dismiss-button" onClick={() => this.dismiss()}>
-              <span class="sr-only">Close</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2.5"
-                  d="m7 7l10 10M7 17L17 7"
-                />
-              </svg>
-            </div>
+            <Show when={!this.toastConfig.dismissOnClick}>
+              <div class="sn-dismiss-button" onClick={() => this.dismiss()}>
+                <span class="sr-only">Close</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="m7 7l10 10M7 17L17 7"
+                  />
+                </svg>
+              </div>
+            </Show>
           </div>
         </Show>
 

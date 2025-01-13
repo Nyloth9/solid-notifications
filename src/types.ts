@@ -123,6 +123,7 @@ export interface Config {
   enterCallback: (() => void) | null;
   updateCallback: (() => void) | null;
   exitCallback: ((reason?: boolean | string) => void) | null;
+  dismissOnClick: boolean;
   toasterStyle: Omit<
     JSX.CSSProperties,
     | "top"
