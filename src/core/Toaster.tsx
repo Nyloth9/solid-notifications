@@ -97,7 +97,7 @@ export default function Toaster(props: Partial<Config>) {
         ...toasterConfig.toasterStyle,
         "justify-content": getToasterStyle(toasterConfig.positionX),
       }}
-      class="pointer-events-none fixed left-0 top-0 flex h-screen w-screen overflow-hidden"
+      class="sn-toaster"
     >
       <For each={store.rendered}>{(toast) => toast.render()}</For>
     </div>

@@ -1,4 +1,4 @@
-import { batch, JSX, Match, onMount, Show, Switch } from "solid-js";
+import { batch, JSX, onMount, Show } from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
@@ -48,6 +48,10 @@ import {
  * - add tests
  * - add swipe to dismiss
  * - clean up comments
+ * - add dismiss on click body
+ * - add dismiss on click close button
+ * - add aria roles
+ * - write default config to docs
  */
 
 /***
@@ -198,10 +202,7 @@ class Toast {
           this.ref = el;
         }}
         id={this.toastConfig.id}
-        class={`absolute max-w-80 overflow-hidden rounded bg-white shadow-strong transition-all duration-300 ${applyState(
-          this.toastConfig,
-          this.state,
-        )}`.trim()}
+        class={`${this.toastConfig.wrapperClass} ${applyState(this.toastConfig, this.state)}`.trim()}
         onMouseEnter={() => {
           if (!this.toastConfig.pauseOnHover) return;
 
@@ -227,6 +228,7 @@ class Toast {
           this.progressManager.play();
         }}
         style={{
+          ...this.toastConfig.wrapperStyle,
           [this.toasterConfig.positionX]: `${this.toasterConfig.offsetX}px`,
           [this.toasterConfig.positionY]: `${this.offset}px`,
         }}
@@ -236,7 +238,27 @@ class Toast {
           when={this.toastConfig.type !== "custom"}
           fallback={this.toastConfig.body}
         >
-          <div class="p-2.5">{this.toastConfig.body}</div>
+          <div class={this.toastConfig.class} style={this.toastConfig.style}>
+            {this.toastConfig.body}
+            <div class="sn-dismiss-button" onClick={() => this.dismiss()}>
+              <span class="sr-only">Close</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="m7 7l10 10M7 17L17 7"
+                />
+              </svg>
+            </div>
+          </div>
         </Show>
 
         <Show

@@ -116,6 +116,10 @@ export interface Config {
   pauseOnHover: boolean;
   pauseOnWindowInactive: boolean;
   renderOnWindowInactive: boolean;
+  class: string;
+  style: JSX.CSSProperties | undefined;
+  wrapperClass: string;
+  wrapperStyle: JSX.CSSProperties | undefined;
   enterCallback: (() => void) | null;
   updateCallback: (() => void) | null;
   exitCallback: ((reason?: boolean | string) => void) | null;

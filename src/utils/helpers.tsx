@@ -31,7 +31,7 @@ function resolveBody(
     // If the body is a function, pass the toast instance to it
     return body(t);
   }
-  return body || `🍞 Moon Toast "${t.toastConfig.id}", ready to serve! 🌟`;
+  return body || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {

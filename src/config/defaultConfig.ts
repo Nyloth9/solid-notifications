@@ -3,9 +3,9 @@ import { Config } from "../types";
 export const defaultConfig: Config = {
   type: "default",
   duration: 5000,
-  onEnter: "moon-toast--slide-in-right", //sn__slide-in-right
+  onEnter: "sn-slide-in-right", //sn__slide-in-right
   enterDuration: 300,
-  onExit: "moon-toast--slide-out-right",
+  onExit: "sn-slide-out-right",
   exitDuration: 150,
   onIdle: "",
   positionY: "top",
@@ -18,12 +18,16 @@ export const defaultConfig: Config = {
   pauseOnHover: true,
   pauseOnWindowInactive: true, // Will not run timer when window is inactive
   renderOnWindowInactive: false, // Will not render toasts when window is inactive and will put them in the queue
+  class: "sn-toast",
+  style: undefined,
+  wrapperClass: "sn-toast-wrapper",
+  wrapperStyle: undefined,
   enterCallback: null,
   updateCallback: null,
   exitCallback: null,
   toasterStyle: null,
   progressBar: {
     showDefault: true,
-    className: "moon-toast-progress-bar",
+    className: "sn-progress-bar",
   },
 };
