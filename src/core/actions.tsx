@@ -151,7 +151,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     }
 
     // If only the keepQueued key is in the options object, we dismiss all rendered toasts in all toasters
-    if (!options.toasterId && options.keepQueued) {
+    if (!options.toasterId && !options.id && options.keepQueued) {
       context.toasters.forEach((toaster) => {
         toaster.store.rendered.forEach((toast) =>
           toast.dismiss(options.reason),
@@ -165,8 +165,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const toaster = context.getToaster(options.toasterId);
 
     // If only the id is provided, dismiss the specified toast
-    if (options?.id) {
-      const toast = findToast(options?.id, toaster.store);
+    if (options.id) {
+      const toast = findToast(options.id, toaster.store);
 
       if (!toast) {
         throw new Error(
@@ -189,56 +189,6 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     return;
   };
 
-  const dismiss2: ToastActions["dismiss"] = (options) => {
-    /**
-     * Dismiss can be called in the following ways:
-     * 1. dismiss({ id: "toastId" }) - Dismiss a specific toast (when there is only one toaster or useToast has specified a toasterId)
-     * 2. dismiss({ toasterId: "toasterId" }) - Dismiss all toasts in a specific toaster
-     * 3. dismiss({ toasterId: "toasterId", id: "toastId" }) - Dismiss a specific toast in a specific toaster
-     * 4. dismiss() - Dismiss all toasts in all toasters
-     */
-
-    if (targetToaster) options = { toasterId: targetToaster, ...options }; // If there is no toasterId, and no options, we don't want to create an options object with undefined values
-
-    // If no argument, dismiss toasts from all toasters
-    if (!options) {
-      context.toasters.forEach((toaster) => {
-        toaster.store.rendered.forEach((toast) => toast.dismiss());
-        toaster.store.queued.forEach((toast) => toast.dismiss());
-      });
-
-      return;
-    }
-
-    // Warn if the reason is "__expired"
-    if (options?.reason === "__expired") {
-      console.warn(
-        'Dismiss reason "__expired" is reserved and is not recommended to use. This may cause unexpected behavior.',
-      );
-    }
-
-    const toaster = context.getToaster(options?.toasterId);
-
-    // If only the toasterId is provided, dismiss all toasts in the specified toaster
-    if (options?.toasterId && !options?.id) {
-      toaster.store.rendered.forEach((toast) => toast.dismiss(options?.reason));
-      toaster.store.queued.forEach((toast) => toast.dismiss(options?.reason));
-
-      return;
-    }
-
-    // Finally, dismiss the specified toast
-    const { store } = toaster;
-    const toast = findToast(options?.id, store);
-
-    if (!toast)
-      throw new Error(
-        `Failed to dismiss toast: No toast found with the provided ID (${options?.id}).`,
-      );
-
-    toast.dismiss(options?.reason);
-  };
-
   const remove: ToastActions["remove"] = (options) => {
     if (targetToaster) {
       options = { toasterId: targetToaster, ...options };
@@ -257,7 +207,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     }
 
     // If only the keepQueued key is in the options object, we remove all rendered toasts in all toasters
-    if (!options.toasterId && options.keepQueued) {
+    if (!options.toasterId && !options.id && options.keepQueued) {
       context.toasters.forEach((toaster) => {
         toaster.store.rendered.forEach((toast) => toast.remove());
       });
@@ -266,11 +216,11 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     }
 
     // We want to throw from here if no toasterId is provided in the options object
-    const toaster = context.getToaster(options?.toasterId);
+    const toaster = context.getToaster(options.toasterId);
 
     // If only the id is provided, remove the specified toast
     if (options.id) {
-      const toast = findToast(options?.id, toaster.store);
+      const toast = findToast(options.id, toaster.store);
 
       if (!toast) {
         throw new Error(
