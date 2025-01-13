@@ -136,6 +136,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
      * 2. dismiss({ toasterId: "toasterId" }) - Dismiss all toasts in a specific toaster
      * 3. dismiss({ toasterId: "toasterId", id: "toastId" }) - Dismiss a specific toast in a specific toaster
      * 4. dismiss() - Dismiss all toasts in all toasters
+     *
+     * - accepts "keepQueued" option to keep queued toasts
      */
 
     if (targetToaster) options = { toasterId: targetToaster, ...options }; // If there is no toasterId, and no options, we don't want to create an options object with undefined values

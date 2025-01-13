@@ -71,8 +71,13 @@ export interface ToastActions {
     id?: string;
     toasterId?: string;
     reason?: string | boolean;
+    keepQueued?: boolean;
   }) => void;
-  remove: (options?: { id?: string; toasterId?: string }) => void;
+  remove: (options?: {
+    id?: string;
+    toasterId?: string;
+    keepQueued?: boolean;
+  }) => void;
   getQueue: (toasterId?: string) => Toast[];
   clearQueue: (toasterId?: string) => void;
 }
