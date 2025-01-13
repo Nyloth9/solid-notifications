@@ -44,6 +44,7 @@ import {
  * - add clear only rendered toasts (keepQueued)
  * ✔ handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
  * - add styling
+ * - remove toaster styling
  * - add tests
  * - add swipe to dismiss
  * - clean up comments
