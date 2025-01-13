@@ -6,8 +6,7 @@ const App: Component = () => {
     "This is the first render...",
   );
 
-  const { notify, update, dismiss, remove, getQueue, clearQueue } =
-    useToast();
+  const { notify, update, dismiss, remove, getQueue, clearQueue } = useToast("toaster-1");
 
   const { dismiss: globalDismiss } = useToast();
 
@@ -68,10 +67,6 @@ const App: Component = () => {
                     console.log("Dissmised by user? ", reason),
                 },
               );
-
-              setTimeout(() => {
-                dismiss({ id: "ads" });
-              }, 2000);
 
               /*    setTimeout(() => {
                 update({
@@ -148,7 +143,7 @@ const App: Component = () => {
                 { toasterId: "toaster-2" },
               );
 
-       /*        setTimeout(() => {
+              /*        setTimeout(() => {
                 globalDismiss({ id, toasterId: "toaster-2" });
               }, 2000); */
             }}

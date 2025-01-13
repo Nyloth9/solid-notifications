@@ -18,8 +18,8 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 render(
   () => (
     <ToastProvider>
-      <Toaster />{/* 
-      <Toaster id="toaster-2" positionY="bottom" reverseToastOrder /> */}
+      <Toaster id="toaster-1" />
+      <Toaster id="toaster-2" positionY="bottom" reverseToastOrder />
       <App />
     </ToastProvider>
   ),
