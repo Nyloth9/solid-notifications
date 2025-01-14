@@ -18,7 +18,14 @@ export interface Toaster {
 
 export type RegisteredToaster = Omit<Toaster, "id"> & { id: string };
 
-type ToastType = "default" | "success" | "error" | "loading" | "custom";
+type ToastType =
+  | "default"
+  | "success"
+  | "error"
+  | "loading"
+  | "warning"
+  | "info"
+  | "custom";
 
 export interface ToastOptions
   extends Partial<

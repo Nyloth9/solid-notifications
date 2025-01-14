@@ -355,7 +355,32 @@ function renderIcon(toast: Toast) {
     case "loading":
       return <div class="sn-icon sn-icon-loading" />;
 
-    default:
+    case "info":
+      return (
+        <svg
+          class="sn-icon sn-icon-info"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 52 52"
+        >
+          <circle
+            class="sn-icon-info-circle"
+            cx="28"
+            cy="28"
+            r="26"
+            fill="none"
+          />
+          <g transform="scale(1, -1) translate(0, -52)">
+            <path
+              class="sn-icon-info-symbol"
+              fill="none"
+              d="M26 10v22M26 36v8"
+            />
+          </g>
+        </svg>
+      );
+
+    case "warning":
+      // pepicons-pop:exclamation-circle-filled
       return (
         <svg
           class="sn-icon sn-icon-warning"
@@ -376,6 +401,9 @@ function renderIcon(toast: Toast) {
           />
         </svg>
       );
+
+    default:
+      return null;
   }
 }
 

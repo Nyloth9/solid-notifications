@@ -5,6 +5,7 @@
   --sn-color-success: #34ab53;
   --sn-color-error: #ea4335;
   --sn-color-warning: #f59e0b;
+  --sn-color-info: #3b82f6;
 
   /* Toast Wrapper */
   --sn-wrapper-border-radius: 8px;
@@ -286,6 +287,41 @@
   -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
 
+.sn-icon-info {
+  box-shadow: inset 0px 0px 0px var(--sn-color-info);
+  border-radius: 50%;
+  display: block;
+  stroke-width: 4;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  animation:
+    SNFillInfo 0.4s ease-in-out 0.4s forwards,
+    SNScale 0.3s ease-in-out 0.9s both;
+  -webkit-animation:
+    SNFillInfo 0.4s ease-in-out 0.4s forwards,
+    SNScale 0.3s ease-in-out 0.9s both;
+}
+
+.sn-icon-info-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: var(--sn-color-info);
+  fill: none;
+  animation: SNStroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  -webkit-animation: SNStroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.sn-icon-info-symbol {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  stroke-width: 8;
+  animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+  -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
 @keyframes SNRotate {
   100% {
     transform: rotate(1turn);
@@ -324,6 +360,12 @@
 @keyframes SNFillWarning {
   100% {
     box-shadow: inset 0px 0px 0px 30px var(--sn-color-warning);
+  }
+}
+
+@keyframes SNFillInfo {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px var(--sn-color-info);
   }
 }
 
