@@ -348,7 +348,7 @@ function renderIcon(toast: Toast) {
           viewBox="0 0 52 52"
         >
           <circle class="sn-icon-circle" cx="28" cy="28" r="26" fill="none" />
-          <path class="sn-icon-symbol" fill="none" d="M26 10v22M26 36v8" />
+          <path class="sn-icon-symbol" fill="none" d="M26 8v22M26 36v8" />
         </svg>
       );
 
@@ -361,7 +361,7 @@ function renderIcon(toast: Toast) {
         >
           <circle class="sn-icon-circle" cx="28" cy="28" r="26" fill="none" />
           <g transform="scale(1, -1) translate(0, -52)">
-            <path class="sn-icon-symbol" fill="none" d="M26 10v22M26 36v8" />
+            <path class="sn-icon-symbol" fill="none" d="M26 8v22M26 34v8"  />
           </g>
         </svg>
       );

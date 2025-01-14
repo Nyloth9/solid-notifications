@@ -65,16 +65,16 @@ const App: Component = () => {
                 {
                   exitCallback: (reason) =>
                     console.log("Dissmised by user? ", reason),
-                  type: "success",
+                  type: "info",
                 },
               );
 
-              /*    setTimeout(() => {
+        /*       setTimeout(() => {
                 update({ id, type: "success" });
               }, 3000);
 
               setTimeout(() => {
-                update({ id, type: "loading" });
+                update({ id, type: "error" });
               }, 6000);
 
               setTimeout(() => {
