@@ -1,7 +1,7 @@
 :root {
   /* General */
   --sn-z-index: 9999;
-  --sn-color-default: #1f2937;
+  --sn-color-loading: 31, 41, 55; /* Base RGB values */
   --sn-color-success: #34ab53;
   --sn-color-error: #ea4335;
 
@@ -239,18 +239,38 @@
   -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
 
+:root {
+  --sn-color-loading: 31, 41, 55; /* Base RGB values */
+}
+
 .sn-loading-icon {
   width: var(--sn-icon-size);
   height: var(--sn-icon-size);
   margin: var(--sn-icon-margin);
   display: grid;
   border-radius: 50%;
-  -webkit-mask: radial-gradient(farthest-side, #0000 40%, #1f2937 41%);
-  mask: radial-gradient(farthest-side, #0000 40%, #1f2937 41%);
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(var(--sn-color-loading), 1) 41%
+  );
+  mask: radial-gradient(
+    farthest-side,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(var(--sn-color-loading), 1) 41%
+  );
   background:
-    linear-gradient(0deg, rgba(31, 41, 55, 0.5) 50%, rgba(31, 41, 55, 1) 0)
+    linear-gradient(
+        0deg,
+        rgba(var(--sn-color-loading), 0.5) 50%,
+        rgba(var(--sn-color-loading), 1) 0
+      )
       center/1.9px 100%,
-    linear-gradient(90deg, rgba(31, 41, 55, 0.25) 50%, rgba(31, 41, 55, 0.75) 0)
+    linear-gradient(
+        90deg,
+        rgba(var(--sn-color-loading), 0.25) 50%,
+        rgba(var(--sn-color-loading), 0.75) 0
+      )
       center/100% 1.9px;
   background-repeat: no-repeat;
   animation: SNRotate 1s infinite steps(12);
