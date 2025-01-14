@@ -7,6 +7,7 @@
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   pointer-events: none;
+  backface-visibility: hidden;
 }
 
 .sr-only {
@@ -82,7 +83,7 @@
 }
 
 .sn-progress-bar {
-  will-change: width;
+  will-change: transform, width;
   position: absolute;
   transition: width 0.3s;
   bottom: 0;
