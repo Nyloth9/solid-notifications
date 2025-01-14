@@ -6,6 +6,11 @@ import {
   customMerge,
   setStartingOffset,
   createProgressManager,
+  handleClick,
+  handleMouseEnter,
+  handleMouseLeave,
+  renderDismissButton,
+  renderProgressBar,
 } from "../utils/helpers";
 
 /***
@@ -69,8 +74,8 @@ import {
  */
 
 class Toast {
-  private store; // <-- Should be removed
   private setStore;
+  store; // <-- Should be removed
   toasterConfig: Config;
   toastConfig: Config;
   ref: HTMLElement | null = null;
@@ -198,46 +203,12 @@ class Toast {
     return (
       <div
         data-role="toast"
-        ref={(el) => {
-          this.ref = el;
-        }}
+        ref={(el) => (this.ref = el)}
         id={this.toastConfig.id}
         class={`${this.toastConfig.wrapperClass} ${applyState(this.toastConfig, this.state)}`.trim()}
-        onClick={(e) => {
-          if (!this.toastConfig.dismissOnClick) return;
-
-          const isInteractiveElement =
-            e.target instanceof HTMLElement &&
-            e.target.closest("a, button, input, select, textarea");
-
-          if (isInteractiveElement) return;
-
-          this.dismiss();
-        }}
-        onMouseEnter={() => {
-          if (!this.toastConfig.pauseOnHover) return;
-
-          const shouldIgnoreHoverWhileBlurred =
-            this.store.isWindowBlurred &&
-            this.toastConfig.pauseOnWindowInactive;
-
-          if (shouldIgnoreHoverWhileBlurred) return;
-          if (this.isPausedByUser) return;
-
-          this.progressManager.pause();
-        }}
-        onMouseLeave={() => {
-          if (!this.toastConfig.pauseOnHover) return;
-
-          const shouldIgnoreHoverWhileBlurred =
-            this.store.isWindowBlurred &&
-            this.toastConfig.pauseOnWindowInactive;
-
-          if (shouldIgnoreHoverWhileBlurred) return;
-          if (this.isPausedByUser) return;
-
-          this.progressManager.play();
-        }}
+        onClick={(e) => handleClick(e, this)}
+        onMouseEnter={handleMouseEnter.bind(null, this)}
+        onMouseLeave={handleMouseLeave.bind(null, this)}
         style={{
           ...this.toastConfig.wrapperStyle,
           [this.toasterConfig.positionX]: `${this.toasterConfig.offsetX}px`,
@@ -251,44 +222,11 @@ class Toast {
         >
           <div class={this.toastConfig.class} style={this.toastConfig.style}>
             {this.toastConfig.body}
-            <Show when={!this.toastConfig.dismissOnClick}>
-              <div class="sn-dismiss-button" onClick={() => this.dismiss()}>
-                <span class="sr-only">Close</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2.5"
-                    d="m7 7l10 10M7 17L17 7"
-                  />
-                </svg>
-              </div>
-            </Show>
+            {renderDismissButton(this)}
           </div>
         </Show>
 
-        <Show
-          when={
-            this.toastConfig.progressBar?.showDefault &&
-            this.toastConfig.duration
-          }
-        >
-          <div
-            data-role="progress"
-            class={this.toastConfig.progressBar?.className!}
-            style={{
-              transform: `scaleX(${(100 - this.progressManager?.progress()) / 100})`,
-              "transform-origin": "left",
-            }}
-          />
-        </Show>
+        {renderProgressBar(this)}
       </div>
     );
   }

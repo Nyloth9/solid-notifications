@@ -212,6 +212,86 @@ function setProgressControls(toast: Toast): ProgressControls {
   };
 }
 
+function handleClick(e: MouseEvent, toast: Toast) {
+  if (!toast.toastConfig.dismissOnClick) return;
+
+  const isInteractiveElement =
+    e.target instanceof HTMLElement &&
+    e.target.closest("a, button, input, select, textarea");
+
+  if (isInteractiveElement) return;
+
+  toast.dismiss();
+}
+
+function handleMouseEnter(toast: Toast) {
+  if (!toast.toastConfig.pauseOnHover) return;
+
+  const shouldIgnoreHoverWhileBlurred =
+    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
+
+  if (shouldIgnoreHoverWhileBlurred) return;
+  if (toast.isPausedByUser) return;
+
+  toast.progressManager.pause();
+}
+
+function handleMouseLeave(toast: Toast) {
+  if (!toast.toastConfig.pauseOnHover) return;
+
+  const shouldIgnoreHoverWhileBlurred =
+    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
+
+  if (shouldIgnoreHoverWhileBlurred) return;
+  if (toast.isPausedByUser) return;
+
+  toast.progressManager.play();
+}
+
+function renderDismissButton(toast: Toast) {
+  if (toast.toastConfig.dismissOnClick) return null;
+
+  return (
+    <div class="sn-dismiss-button" onClick={() => toast.dismiss()}>
+      <span class="sr-only">Close</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2.5"
+          d="m7 7l10 10M7 17L17 7"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function renderProgressBar(toast: Toast) {
+  if (
+    !toast.toastConfig.progressBar?.showDefault ||
+    !toast.toastConfig.duration
+  )
+    return null;
+
+  return (
+    <div
+      data-role="progress"
+      class={toast.toastConfig.progressBar?.className!}
+      style={{
+        transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
+        "transform-origin": "left",
+      }}
+    />
+  );
+}
+
 export {
   findToast,
   createToastId,
@@ -223,4 +303,9 @@ export {
   applyState,
   createProgressManager,
   setProgressControls,
+  handleClick,
+  handleMouseEnter,
+  handleMouseLeave,
+  renderDismissButton,
+  renderProgressBar,
 };
