@@ -21,7 +21,7 @@
   --sn-dismiss-btn-hover-color: #374151;
   --sn-dismiss-btn-size: 1.15rem;
   --sn-dismiss-btn-border-radius: 0.25rem;
-  --sn-dismiss-btn-margin: -0.25rem -0.375rem;
+  --sn-dismiss-btn-margin: -0.375rem;
   --sn-dismiss-btn-transition: color 0.3s;
 
   /* Progress Bar */
