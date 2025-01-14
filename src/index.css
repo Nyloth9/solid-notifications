@@ -136,19 +136,19 @@
   display: block;
 }
 
-.sn-icon-default {
+.sn-default {
   color: var(--sn-color-default);
 }
 
-.sn-icon-success {
+.sn-success {
   color: var(--sn-color-success);
 }
 
-.sn-icon-error {
+.sn-error {
   color: var(--sn-color-error);
 }
 
-.sn-icon-info {
+.sn-info {
   color: var(--sn-color-info);
 }
 
