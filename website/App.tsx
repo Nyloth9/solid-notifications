@@ -34,11 +34,11 @@ const App: Component = () => {
               const { id, progressControls } = notify(
                 createRoot(() => (
                   <div>
-                    <div>{`🍞 Moon Toast, Toast Notification! 🌟`}</div>
-                    <div class="block italic text-purple-600">
+                    <div>{`Moon Toast, Toast Notification!`}</div>
+                    {/*   <div class="block italic text-purple-600">
                       {randomText()}
-                    </div>
-                    <div class="flex gap-1">
+                    </div> */}
+                    <div class="flex gap-1 -mx-2">
                       <button
                         class={
                           "mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"

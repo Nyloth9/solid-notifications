@@ -220,6 +220,42 @@ class Toast {
           when={this.toastConfig.type !== "custom"}
         >
           <div class={this.toastConfig.class} style={this.toastConfig.style}>
+            {/*  <svg
+              class="sn-checkmark-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 52 52"
+            >
+              <circle
+                class="sn-checkmark-icon-circle"
+                cx="26"
+                cy="26"
+                r="25"
+                fill="none"
+              />
+              <path
+                class="sn-checkmark-icon-check"
+                fill="none"
+                d="M14.1 27.2l7.1 7.2 16.7-16.8"
+              />
+            </svg> */}
+            <svg
+              class="sn-crossmark-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 52 52"
+            >
+              <circle
+                class="sn-crossmark-icon-circle"
+                cx="26"
+                cy="26"
+                r="25"
+                fill="none"
+              />
+              <path
+                class="sn-crossmark-icon-cross"
+                fill="none"
+                d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8"
+              />
+            </svg>
             {this.toastConfig.body}
             {renderDismissButton(this)}
           </div>
