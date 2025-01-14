@@ -311,19 +311,13 @@ function renderIcon(toast: Toast) {
     case "success":
       return (
         <svg
-          class="sn-icon sn-icon-checkmark"
+          class="sn-icon sn-checkmark"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle
-            class="sn-icon-checkmark-circle"
-            cx="26"
-            cy="26"
-            r="25"
-            fill="none"
-          />
+          <circle class="sn-icon-circle" cx="26" cy="26" r="25" fill="none" />
           <path
-            class="sn-icon-checkmark-symbol"
+            class="sn-icon-symbol"
             fill="none"
             d="M14.1 27.2l7.1 7.2 16.7-16.8"
           />
@@ -333,74 +327,47 @@ function renderIcon(toast: Toast) {
     case "error":
       return (
         <svg
-          class="sn-icon sn-icon-cross"
+          class="sn-icon sn-cross"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle
-            class="sn-icon-cross-circle"
-            cx="26"
-            cy="26"
-            r="25"
-            fill="none"
-          />
+          <circle class="sn-icon-circle" cx="26" cy="26" r="25" fill="none" />
           <path
-            class="sn-icon-cross-symbol"
+            class="sn-icon-symbol"
             fill="none"
             d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8"
           />
         </svg>
       );
 
-    case "loading":
-      return <div class="sn-icon sn-icon-loading" />;
+    case "warning":
+      return (
+        <svg
+          class="sn-icon sn-warning"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 52 52"
+        >
+          <circle class="sn-icon-circle" cx="28" cy="28" r="26" fill="none" />
+          <path class="sn-icon-symbol" fill="none" d="M26 10v22M26 36v8" />
+        </svg>
+      );
 
     case "info":
       return (
         <svg
-          class="sn-icon sn-icon-info"
+          class="sn-icon sn-info"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle
-            class="sn-icon-info-circle"
-            cx="28"
-            cy="28"
-            r="26"
-            fill="none"
-          />
+          <circle class="sn-icon-circle" cx="28" cy="28" r="26" fill="none" />
           <g transform="scale(1, -1) translate(0, -52)">
-            <path
-              class="sn-icon-info-symbol"
-              fill="none"
-              d="M26 10v22M26 36v8"
-            />
+            <path class="sn-icon-symbol" fill="none" d="M26 10v22M26 36v8" />
           </g>
         </svg>
       );
 
-    case "warning":
-      // pepicons-pop:exclamation-circle-filled
-      return (
-        <svg
-          class="sn-icon sn-icon-warning"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 52 52"
-        >
-          <circle
-            class="sn-icon-warning-circle"
-            cx="28"
-            cy="28"
-            r="26"
-            fill="none"
-          />
-          <path
-            class="sn-icon-warning-symbol"
-            fill="none"
-            d="M26 10v22M26 36v8"
-          />
-        </svg>
-      );
+    case "loading":
+      return <div class="sn-icon sn-icon-loading" />;
 
     default:
       return null;
