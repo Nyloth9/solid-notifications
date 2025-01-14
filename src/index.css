@@ -239,10 +239,6 @@
   -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
 
-:root {
-  --sn-color-loading: 31, 41, 55; /* Base RGB values */
-}
-
 .sn-loading-icon {
   width: var(--sn-icon-size);
   height: var(--sn-icon-size);
