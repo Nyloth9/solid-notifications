@@ -65,11 +65,11 @@ const App: Component = () => {
                 {
                   exitCallback: (reason) =>
                     console.log("Dissmised by user? ", reason),
-                  type: "info",
+                  type: "loading",
                 },
               );
 
-        /*       setTimeout(() => {
+              setTimeout(() => {
                 update({ id, type: "success" });
               }, 3000);
 
@@ -83,7 +83,7 @@ const App: Component = () => {
 
               setTimeout(() => {
                 update({ id, type: "info" });
-              }, 12000); */
+              }, 12000);
 
               /*    setTimeout(() => {
                 update({
