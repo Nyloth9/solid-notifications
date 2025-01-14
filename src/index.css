@@ -14,7 +14,7 @@
   /* Toast */
   --sn-toast-max-width: 324px;
   --sn-toast-min-width: 244px;
-  --sn-toast-gap: 10px;
+  --sn-toast-gap: 12px;
   --sn-toast-bg-color: white;
   --sn-toast-text-color: #121826;
   --sn-toast-padding: 12px 14px;
@@ -33,7 +33,6 @@
 
   /* Icon */
   --sn-icon-size: 1rem;
-  --sn-icon-margin: 0.115rem 0.15rem 0 0;
 }
 
 *[data-role="toast"] {
@@ -165,7 +164,7 @@
   width: var(--sn-icon-size);
   height: var(--sn-icon-size);
   box-shadow: inset 0px 0px 0px var(--sn-color-success);
-  margin: var(--sn-icon-margin);
+  margin-top: 1px;
   border-radius: 50%;
   display: block;
   stroke-width: 4;
@@ -203,7 +202,7 @@
   width: var(--sn-icon-size);
   height: var(--sn-icon-size);
   box-shadow: inset 0px 0px 0px var(--sn-color-error);
-  margin: var(--sn-icon-margin);
+  margin-top: 1px;
   border-radius: 50%;
   display: block;
   stroke-width: 4;
