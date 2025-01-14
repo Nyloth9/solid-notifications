@@ -25,10 +25,15 @@ export const defaultConfig: Config = {
   enterCallback: null,
   updateCallback: null,
   exitCallback: null,
+  dismissButton: {
+    showDefault: true,
+    style: undefined,
+    class: "sn-dismiss-button",
+  },
   dismissOnClick: false,
   toasterStyle: null,
   progressBar: {
     showDefault: true,
-    className: "sn-progress-bar",
+    class: "sn-progress-bar",
   },
 };

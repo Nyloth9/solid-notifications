@@ -123,6 +123,11 @@ export interface Config {
   enterCallback: (() => void) | null;
   updateCallback: (() => void) | null;
   exitCallback: ((reason?: boolean | string) => void) | null;
+  dismissButton: {
+    showDefault?: boolean;
+    style?: JSX.CSSProperties;
+    class?: string;
+  };
   dismissOnClick: boolean;
   toasterStyle: Omit<
     JSX.CSSProperties,
@@ -137,7 +142,7 @@ export interface Config {
   progressBar: {
     showDefault?: boolean;
     style?: JSX.CSSProperties;
-    className?: string;
+    class?: string;
   };
 }
 

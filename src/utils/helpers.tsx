@@ -96,7 +96,6 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
     "toasterStyle",
     "reverseToastOrder",
     "pauseOnWindowInactive",
-    "pauseOnWindowInactive",
     "renderOnWindowInactive",
   ];
 
@@ -249,10 +248,18 @@ function handleMouseLeave(toast: Toast) {
 }
 
 function renderDismissButton(toast: Toast) {
-  if (toast.toastConfig.dismissOnClick) return null;
+  if (
+    toast.toastConfig.dismissOnClick ||
+    !toast.toastConfig.dismissButton.showDefault
+  )
+    return null;
 
   return (
-    <div class="sn-dismiss-button" onClick={() => toast.dismiss()}>
+    <div
+      class={toast.toastConfig.dismissButton.class}
+      style={toast.toastConfig.dismissButton.style}
+      onClick={() => toast.dismiss()}
+    >
       <span class="sr-only">Close</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -274,19 +281,17 @@ function renderDismissButton(toast: Toast) {
 }
 
 function renderProgressBar(toast: Toast) {
-  if (
-    !toast.toastConfig.progressBar?.showDefault ||
-    !toast.toastConfig.duration
-  )
+  if (!toast.toastConfig.progressBar.showDefault || !toast.toastConfig.duration)
     return null;
 
   return (
     <div
       data-role="progress"
-      class={toast.toastConfig.progressBar?.className!}
+      class={toast.toastConfig.progressBar.class}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",
+        ...toast.toastConfig.progressBar.style,
       }}
     />
   );
