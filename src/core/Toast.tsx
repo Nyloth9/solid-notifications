@@ -91,7 +91,7 @@ class Toast {
     this.toasterConfig = args.toasterConfig;
     this.toastConfig = customMerge(args.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.store, args.toasterConfig); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
-    this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (function as body argument)
+    this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
     return createMutable(this); // This is how we make the class reactive
   }
 
@@ -119,8 +119,8 @@ class Toast {
 
   private lifecycle() {
     /*** Fires when toast is rendered and when it's updated ***/
-    /*** Special attention is required to the situation if toast update happens while the toast is staying in the queue and still wasn't rendered. ***/
-    /*** In that case, we want to update the toast in the queue, but not run its dismiss timer. ***/
+    /*** If toast update happens while the toast is staying in the queue and still wasn't rendered, ***/
+    /*** we want to update the toast in the queue, but not run its dismiss timer. ***/
     /*** This is solved by checking if the toast was rendered, and if not, don't run the lifecycle. ***/
 
     if (!this.renderedAt) return;
@@ -133,11 +133,11 @@ class Toast {
     if (this.store.isWindowBlurred && this.toastConfig.pauseOnWindowInactive)
       return;
 
-    this.progressManager.play(); // This is the only place where we will start the dismiss timer programmatically (so basically when the toast is rendered)
+    this.progressManager.play(); // This is where we first start the timer in the toast lifecycle
   }
 
   update(args: Partial<Config>) {
-    // Combine the args with the existing config
+    // Combine the args with the existing toast config
     const merged = customMerge(this.toastConfig, args);
     Object.assign(this.toastConfig, merged);
 
@@ -145,11 +145,11 @@ class Toast {
 
     this.progressManager.update(this.toastConfig.duration); // Update the timer with the new duration
 
-    this.lifecycle(); // Should fix the situation when the toast is updated while the timer is paused (it should not start the timer again). We dont want to run the timer of the updated toast if window is blurred etc
+    this.lifecycle(); // Will start the dismiss timer if conditions are met
   }
 
   dismiss(reason?: string | boolean) {
-    // The reason can be used as the argument of the exitCallback
+    /*** The reason can be used as the argument of the exitCallback ***/
     if (this.toastConfig.exitCallback) {
       switch (reason) {
         case "__expired":
@@ -181,7 +181,7 @@ class Toast {
   }
 
   remove() {
-    // This will remove the toast without calling the exitCallback and without the exit animation
+    /*** This will remove the toast without calling the exitCallback and without the exit animation ***/
     batch(() => {
       this.setStore("rendered", (state) =>
         state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
@@ -202,22 +202,22 @@ class Toast {
     return (
       <div
         data-role="toast"
-        ref={(el) => (this.ref = el)}
         id={this.toastConfig.id}
-        class={`${this.toastConfig.wrapperClass} ${applyState(this.toastConfig, this.state)}`.trim()}
-        onClick={(e) => handleClick(e, this)}
-        onMouseEnter={handleMouseEnter.bind(null, this)}
-        onMouseLeave={handleMouseLeave.bind(null, this)}
+        ref={(el) => (this.ref = el)}
         style={{
           ...this.toastConfig.wrapperStyle,
           [this.toasterConfig.positionX]: `${this.toasterConfig.offsetX}px`,
           [this.toasterConfig.positionY]: `${this.offset}px`,
         }}
+        class={`${this.toastConfig.wrapperClass} ${applyState(this.toastConfig, this.state)}`.trim()}
+        onClick={(e) => handleClick(e, this)}
+        onMouseEnter={handleMouseEnter.bind(null, this)}
+        onMouseLeave={handleMouseLeave.bind(null, this)}
       >
         {/* If the toastConfig.body is a function (it's type will be "custom") we want to leave it unstyled */}
         <Show
-          when={this.toastConfig.type !== "custom"}
           fallback={this.toastConfig.body}
+          when={this.toastConfig.type !== "custom"}
         >
           <div class={this.toastConfig.class} style={this.toastConfig.style}>
             {this.toastConfig.body}
