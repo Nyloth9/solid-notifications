@@ -299,25 +299,31 @@ function renderProgressBar(toast: Toast) {
 
 function renderIcon(toast: Toast) {
   if (!toast.toastConfig.showIcon) return null;
-  if (toast.toastConfig.icon) return toast.toastConfig.icon;
+  if (toast.toastConfig.icon) {
+    if (typeof toast.toastConfig.icon === "function") {
+      return toast.toastConfig.icon(toast.toastConfig.type);
+    }
+
+    return toast.toastConfig.icon;
+  }
 
   switch (toast.toastConfig.type) {
     case "success":
       return (
         <svg
-          class="sn-checkmark-icon"
+          class="sn-icon sn-icon-checkmark"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
           <circle
-            class="sn-checkmark-icon-circle"
+            class="sn-icon-checkmark-circle"
             cx="26"
             cy="26"
             r="25"
             fill="none"
           />
           <path
-            class="sn-checkmark-icon-check"
+            class="sn-icon-checkmark-symbol"
             fill="none"
             d="M14.1 27.2l7.1 7.2 16.7-16.8"
           />
@@ -327,19 +333,19 @@ function renderIcon(toast: Toast) {
     case "error":
       return (
         <svg
-          class="sn-cross-icon"
+          class="sn-icon sn-icon-cross"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
           <circle
-            class="sn-cross-icon-circle"
+            class="sn-icon-cross-circle"
             cx="26"
             cy="26"
             r="25"
             fill="none"
           />
           <path
-            class="sn-cross-icon-cross"
+            class="sn-icon-cross-symbol"
             fill="none"
             d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8"
           />
@@ -347,10 +353,29 @@ function renderIcon(toast: Toast) {
       );
 
     case "loading":
-      return <div class="sn-loading-icon" />;
+      return <div class="sn-icon sn-icon-loading" />;
 
     default:
-      return null;
+      return (
+        <svg
+          class="sn-icon sn-icon-warning"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 52 52"
+        >
+          <circle
+            class="sn-icon-warning-circle"
+            cx="28"
+            cy="28"
+            r="26"
+            fill="none"
+          />
+          <path
+            class="sn-icon-warning-symbol"
+            fill="none"
+            d="M26 10v22M26 36v8"
+          />
+        </svg>
+      );
   }
 }
 

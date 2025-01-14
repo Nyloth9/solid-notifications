@@ -18,6 +18,8 @@ export interface Toaster {
 
 export type RegisteredToaster = Omit<Toaster, "id"> & { id: string };
 
+type ToastType = "default" | "success" | "error" | "loading" | "custom";
+
 export interface ToastOptions
   extends Partial<
     Omit<
@@ -37,7 +39,7 @@ export interface ToastOptions
     >
   > {
   toasterId?: string;
-  type?: Exclude<Config["type"], "custom">;
+  type?: Exclude<ToastType, "custom">;
 }
 
 export type UpdateToastOptions = RequireAtLeastOne<
@@ -99,7 +101,7 @@ export interface ProgressControls {
 export interface Config {
   id?: string;
   body?: JSX.Element | string;
-  type: "default" | "success" | "error" | "loading" | "custom";
+  type: ToastType;
   duration: number | false;
   onEnter: string;
   enterDuration: number;
@@ -145,7 +147,7 @@ export interface Config {
     class?: string;
   };
   showIcon: boolean;
-  icon: JSX.Element | null;
+  icon: ((type: ToastType) => JSX.Element) | JSX.Element | null;
 }
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
