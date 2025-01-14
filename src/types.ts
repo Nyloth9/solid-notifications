@@ -99,7 +99,7 @@ export interface ProgressControls {
 export interface Config {
   id?: string;
   body?: JSX.Element | string;
-  type: "default" | "success" | "error" | "loading" | "custom";
+  type: "default" | "success" | "error" | "info" | "loading" | "custom";
   duration: number | false;
   onEnter: string;
   enterDuration: number;

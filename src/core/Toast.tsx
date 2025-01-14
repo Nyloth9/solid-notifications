@@ -220,42 +220,61 @@ class Toast {
           when={this.toastConfig.type !== "custom"}
         >
           <div class={this.toastConfig.class} style={this.toastConfig.style}>
-            {/*  <svg
-              class="sn-checkmark-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 52 52"
-            >
-              <circle
-                class="sn-checkmark-icon-circle"
-                cx="26"
-                cy="26"
-                r="25"
-                fill="none"
-              />
-              <path
-                class="sn-checkmark-icon-check"
-                fill="none"
-                d="M14.1 27.2l7.1 7.2 16.7-16.8"
-              />
-            </svg> */}
+            {/*    Check icon */}
+
             <svg
-              class="sn-crossmark-icon"
+              class="sn-icon sn-icon-success"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 52 52"
+              viewBox="0 0 20 20"
             >
-              <circle
-                class="sn-crossmark-icon-circle"
-                cx="26"
-                cy="26"
-                r="25"
-                fill="none"
-              />
               <path
-                class="sn-crossmark-icon-cross"
-                fill="none"
-                d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8"
-              />
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10 18a8 8 0 1 0 0-16a8 8 0 0 0 0 16m3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79l-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089z"
+              ></path>
             </svg>
+
+            {/*  Cross icon */}
+
+            {/* <svg
+              class="sn-icon sn-icon-error"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10 18a8 8 0 1 0 0-16a8 8 0 0 0 0 16M8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94z"
+              ></path>
+            </svg> */}
+
+            {/*  Info icon */}
+
+            {/* <svg
+              class="sn-icon sn-icon-info"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M18 10a8 8 0 1 1-16 0a8 8 0 0 1 16 0m-7-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0M9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9z"
+              ></path>
+            </svg> */}
+
+            {/*  <svg
+              class="sn-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m1 15h-2v-6h2zm0-8h-2V7h2z"
+              ></path>
+            </svg> */}
             {this.toastConfig.body}
             {renderDismissButton(this)}
           </div>
