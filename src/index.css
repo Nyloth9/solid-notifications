@@ -1,6 +1,7 @@
 :root {
   /* General */
   --sn-z-index: 9999;
+  --sn-color-default: #1f2937;
   --sn-color-success: #34ab53;
   --sn-color-error: #ea4335;
 
@@ -11,7 +12,7 @@
   --sn-wrapper-transition-duration: 0.3s;
 
   /* Toast */
-  --sn-toast-max-width: 324px;
+  --sn-toast-max-width: 344px;
   --sn-toast-min-width: 244px;
   --sn-toast-gap: 12px;
   --sn-toast-bg-color: white;
@@ -32,6 +33,7 @@
 
   /* Icon */
   --sn-icon-size: 1rem;
+  --sn-icon-margin: 1px 0 0 0;
 }
 
 *[data-role="toast"] {
@@ -164,8 +166,8 @@
 .sn-checkmark-icon {
   width: var(--sn-icon-size);
   height: var(--sn-icon-size);
+  margin: var(--sn-icon-margin);
   box-shadow: inset 0px 0px 0px var(--sn-color-success);
-  margin-top: 1px;
   border-radius: 50%;
   display: block;
   stroke-width: 4;
@@ -199,11 +201,11 @@
   -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
 
-.sn-crossmark-icon {
+.sn-cross-icon {
   width: var(--sn-icon-size);
   height: var(--sn-icon-size);
+  margin: var(--sn-icon-margin);
   box-shadow: inset 0px 0px 0px var(--sn-color-error);
-  margin-top: 1px;
   border-radius: 50%;
   display: block;
   stroke-width: 4;
@@ -217,7 +219,7 @@
     SNScale 0.3s ease-in-out 0.9s both;
 }
 
-.sn-crossmark-icon-circle {
+.sn-cross-icon-circle {
   stroke-dasharray: 166;
   stroke-dashoffset: 166;
   stroke-width: 2;
@@ -228,13 +230,51 @@
   -webkit-animation: SNStroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
 
-.sn-crossmark-icon-cross {
+.sn-cross-icon-cross {
   transform-origin: 50% 50%;
   stroke-dasharray: 48;
   stroke-dashoffset: 48;
   stroke-width: 6;
   animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
   -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+.sn-loading-icon {
+  width: var(--sn-icon-size);
+  height: var(--sn-icon-size);
+  margin: var(--sn-icon-margin);
+  display: grid;
+  border-radius: 50%;
+  -webkit-mask: radial-gradient(farthest-side, #0000 40%, #1f2937 41%);
+  mask: radial-gradient(farthest-side, #0000 40%, #1f2937 41%);
+  background:
+    linear-gradient(0deg, rgba(31, 41, 55, 0.5) 50%, rgba(31, 41, 55, 1) 0)
+      center/1.9px 100%,
+    linear-gradient(90deg, rgba(31, 41, 55, 0.25) 50%, rgba(31, 41, 55, 0.75) 0)
+      center/100% 1.9px;
+  background-repeat: no-repeat;
+  animation: SNRotate 1s infinite steps(12);
+}
+
+.sn-loading-icon::before,
+.sn-loading-icon::after {
+  content: "";
+  grid-area: 1/1;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.915;
+  transform: rotate(30deg);
+}
+
+.sn-loading-icon::after {
+  opacity: 0.83;
+  transform: rotate(60deg);
+}
+
+@keyframes SNRotate {
+  100% {
+    transform: rotate(1turn);
+  }
 }
 
 @keyframes SNStroke {

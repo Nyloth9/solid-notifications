@@ -144,6 +144,8 @@ export interface Config {
     style?: JSX.CSSProperties;
     class?: string;
   };
+  showIcon: boolean;
+  icon: JSX.Element | null;
 }
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<

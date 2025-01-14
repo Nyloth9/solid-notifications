@@ -36,4 +36,6 @@ export const defaultConfig: Config = {
     showDefault: true,
     class: "sn-progress-bar",
   },
+  showIcon: true,
+  icon: null,
 };

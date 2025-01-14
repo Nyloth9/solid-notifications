@@ -297,6 +297,63 @@ function renderProgressBar(toast: Toast) {
   );
 }
 
+function renderIcon(toast: Toast) {
+  if (!toast.toastConfig.showIcon) return null;
+  if (toast.toastConfig.icon) return toast.toastConfig.icon;
+
+  switch (toast.toastConfig.type) {
+    case "success":
+      return (
+        <svg
+          class="sn-checkmark-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 52 52"
+        >
+          <circle
+            class="sn-checkmark-icon-circle"
+            cx="26"
+            cy="26"
+            r="25"
+            fill="none"
+          />
+          <path
+            class="sn-checkmark-icon-check"
+            fill="none"
+            d="M14.1 27.2l7.1 7.2 16.7-16.8"
+          />
+        </svg>
+      );
+
+    case "error":
+      return (
+        <svg
+          class="sn-cross-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 52 52"
+        >
+          <circle
+            class="sn-cross-icon-circle"
+            cx="26"
+            cy="26"
+            r="25"
+            fill="none"
+          />
+          <path
+            class="sn-cross-icon-cross"
+            fill="none"
+            d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8"
+          />
+        </svg>
+      );
+
+    case "loading":
+      return <div class="sn-loading-icon" />;
+
+    default:
+      return null;
+  }
+}
+
 export {
   findToast,
   createToastId,
@@ -313,4 +370,5 @@ export {
   handleMouseLeave,
   renderDismissButton,
   renderProgressBar,
+  renderIcon,
 };
