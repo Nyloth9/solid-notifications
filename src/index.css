@@ -4,7 +4,6 @@
   --sn-color-default: #4b5563;
   --sn-color-success: #34ab53;
   --sn-color-error: #ea4335;
-  --sn-color-info: #2563eb;
 
   /* Toast Wrapper */
   --sn-wrapper-border-radius: 8px;
@@ -33,9 +32,8 @@
   --sn-progress-bar-bg-color: #4b5563;
 
   /* Icon */
-  --sn-icon-size: 1.375rem;
-  --sn-icon-margin: 0 0.125rem 0 0;
-  --sn-icon-color: #4b5563;
+  --sn-icon-size: 1rem;
+  --sn-icon-margin: 0.115rem 0.15rem 0 0;
 }
 
 *[data-role="toast"] {
@@ -129,29 +127,6 @@
   background-color: var(--sn-progress-bar-bg-color);
 }
 
-.sn-icon {
-  width: var(--sn-icon-size);
-  height: var(--sn-icon-size);
-  margin: var(--sn-icon-margin);
-  display: block;
-}
-
-.sn-default {
-  color: var(--sn-color-default);
-}
-
-.sn-success {
-  color: var(--sn-color-success);
-}
-
-.sn-error {
-  color: var(--sn-color-error);
-}
-
-.sn-info {
-  color: var(--sn-color-info);
-}
-
 .sn-slide-in-right {
   -webkit-animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -181,5 +156,112 @@
   100% {
     opacity: 0;
     transform: translate3d(80%, 0, 0);
+  }
+}
+
+/** Checkmark, Cross and Loading Icon **/
+
+.sn-checkmark-icon {
+  width: var(--sn-icon-size);
+  height: var(--sn-icon-size);
+  box-shadow: inset 0px 0px 0px var(--sn-color-success);
+  margin: var(--sn-icon-margin);
+  border-radius: 50%;
+  display: block;
+  stroke-width: 4;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  animation:
+    SNFill 0.4s ease-in-out 0.4s forwards,
+    SNScale 0.3s ease-in-out 0.9s both;
+  -webkit-animation:
+    SNFill 0.4s ease-in-out 0.4s forwards,
+    SNScale 0.3s ease-in-out 0.9s both;
+}
+
+.sn-checkmark-icon-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: var(--sn-color-success);
+  fill: none;
+  animation: SNStroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  -webkit-animation: SNStroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.sn-checkmark-icon-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke-width: 6;
+  animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+  -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+.sn-crossmark-icon {
+  width: var(--sn-icon-size);
+  height: var(--sn-icon-size);
+  box-shadow: inset 0px 0px 0px var(--sn-color-error);
+  margin: var(--sn-icon-margin);
+  border-radius: 50%;
+  display: block;
+  stroke-width: 4;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  animation:
+    SNFillCrosss 0.4s ease-in-out 0.4s forwards,
+    SNScale 0.3s ease-in-out 0.9s both;
+  -webkit-animation:
+    SNFillCrosss 0.4s ease-in-out 0.4s forwards,
+    SNScale 0.3s ease-in-out 0.9s both;
+}
+
+.sn-crossmark-icon-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: var(--sn-color-error);
+  fill: none;
+  animation: SNStroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  -webkit-animation: SNStroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.sn-crossmark-icon-cross {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke-width: 6;
+  animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+  -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes SNStroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes SNScale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes SNFill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px var(--sn-color-success);
+  }
+}
+
+@keyframes SNFillCrosss {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px var(--sn-color-error);
   }
 }
