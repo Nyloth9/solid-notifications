@@ -1,12 +1,49 @@
+:root {
+  /* General */
+  --sn-z-index: 9999;
+
+  /* Toast Wrapper */
+  --sn-wrapper-border-radius: 8px;
+  --sn-wrapper-box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  --sn-wrapper-transition-duration: 0.3s;
+
+  /* Toast */
+  --sn-toast-max-width: 324px;
+  --sn-toast-min-width: 244px;
+  --sn-toast-gap: 10px;
+  --sn-toast-bg-color: white;
+  --sn-toast-text-color: #121826;
+  --sn-toast-padding: 12px 14px;
+  --sn-toast-line-height: 1.25rem;
+  --sn-toast-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px,
+    rgba(0, 0, 0, 0.05) 0px 3px 3px;
+
+  /* Dismiss Button */
+  --sn-dismiss-btn-color: #9ca3af;
+  --sn-dismiss-btn-hover-color: #374151;
+  --sn-dismiss-btn-size: 1.15rem;
+  --sn-dismiss-btn-border-radius: 0.25rem;
+  --sn-dismiss-btn-margin: -0.25rem -0.375rem;
+
+  /* Progress Bar */
+  --sn-progress-bar-height: 2px;
+  --sn-progress-bar-bg-color: #4b5563;
+  --sn-progress-bar-transition: width 0.3s;
+}
+
 *[data-role="toast"] {
   pointer-events: all;
   will-change: transform, opacity, top, bottom;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 *[data-role="progress"] {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   pointer-events: none;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
@@ -24,80 +61,78 @@
 .sn-toaster {
   pointer-events: none;
   position: fixed;
-  z-index: 9999;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
   display: flex;
   overflow: hidden;
+  z-index: var(--sn-z-index);
 }
 
 .sn-toast-wrapper {
   box-sizing: border-box;
   overflow: hidden;
   position: absolute;
-  z-index: 9999;
   transition-property: transform, opacity, top, bottom;
-  transition-duration: 0.3s;
-  border-radius: 8px;
-  box-shadow:
-    rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  z-index: var(--sn-z-index);
+  transition-duration: var(--sn-wrapper-transition-duration);
+  border-radius: var(--sn-wrapper-border-radius);
+  box-shadow: var(--sn-wrapper-box-shadow);
 }
 
 .sn-toast {
   display: flex;
   overflow: hidden;
   position: relative;
-  max-width: 324px;
-  min-width: 244px;
-  gap: 10px;
-  background-color: white;
-  color: #121826;
-  padding: 12px 14px;
-  line-height: 1.25rem;
   overflow-wrap: anywhere;
-  box-shadow:
-    rgba(0, 0, 0, 0.1) 0px 3px 10px,
-    rgba(0, 0, 0, 0.05) 0px 3px 3px;
+  max-width: var(--sn-toast-max-width);
+  min-width: var(--sn-toast-min-width);
+  gap: var(--sn-toast-gap);
+  background-color: var(--sn-toast-bg-color);
+  color: var(--sn-toast-text-color);
+  padding: var(--sn-toast-padding);
+  line-height: var(--sn-toast-line-height);
+  box-shadow: var(--sn-toast-box-shadow);
 }
 
 .sn-dismiss-button {
-  margin: -0.25rem -0.375rem;
-  margin-inline-start: auto;
   display: inline-flex;
-  height: 1.15rem;
-  width: 1.15rem;
+  margin-inline-start: auto;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: 0.25rem;
   cursor: pointer;
-  color: #9ca3af;
   transition: color 0.3s;
+  margin: var(--sn-dismiss-btn-margin);
+  height: var(--sn-dismiss-btn-size);
+  width: var(--sn-dismiss-btn-size);
+  border-radius: var(--sn-dismiss-btn-border-radius);
+  color: var(--sn-dismiss-btn-color);
 }
 
 .sn-dismiss-button:hover {
-  color: #374151;
+  color: var(--sn-dismiss-btn-hover-color);
 }
 
 .sn-progress-bar {
   will-change: transform, width;
   position: absolute;
-  transition: width 0.3s;
+  transition: var(--sn-progress-bar-transition);
   bottom: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background-color: #4b5563;
+  height: var(--sn-progress-bar-height);
+  background-color: var(--sn-progress-bar-bg-color);
 }
 
 .sn-slide-in-right {
+  -webkit-animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .sn-slide-out-right {
+  -webkit-animation: SNSlideOutRight 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideOutRight 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 

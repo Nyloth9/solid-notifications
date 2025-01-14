@@ -20,7 +20,7 @@ import {
  * ✔ - will fix positionX = center
  * ✔ - add queue for toasts? (if there is not enough space for the toast, it will be added to the queue)
  * ✔ will remove unstyled?
- * - will remove the inline dismiss button
+ * ✔ will remove the floating dismiss button
  * - max toast duration? If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is isPausedByUser, it will be dismissed) - maybe
  * ✔ - remove overflow-control
  * ✔ - existing toast id should be checked and error should be thrown if the id already exists
@@ -45,16 +45,15 @@ import {
  * ✔ - fix a bug where timer controls dont work when toast is added to the queue
  * ✔ - add function as body argument in notify
  * ✔ - added visibility change event listener
- * ✔ add option to not render toasts if the tab is blurred
- * - add clear only rendered toasts (keepQueued)
- * ✔ handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
- * - add styling
- * - remove toaster styling
+ * ✔ - add option to not render toasts if the tab is blurred
+ * ✔ - add clear only rendered toasts (keepQueued)
+ * ✔ - handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
+ * ✔ - add styling
  * - add tests
  * - add swipe to dismiss
  * - clean up comments
- * - add dismiss on click body
- * - add dismiss on click close button
+ * ✔ - add dismiss on click body
+ * ✔ - add dismiss on click close button
  * - add aria roles
  * - write default config to docs
  */
@@ -224,9 +223,8 @@ class Toast {
             {this.toastConfig.body}
             {renderDismissButton(this)}
           </div>
+          {renderProgressBar(this)}
         </Show>
-
-        {renderProgressBar(this)}
       </div>
     );
   }
