@@ -6,7 +6,7 @@ export const defaultConfig: Config = {
   onEnter: undefined,
   enterDuration: 300,
   onExit: undefined,
-  exitDuration: 150,
+  exitDuration: 300,
   onIdle: undefined,
   positionY: "top",
   positionX: "right",
@@ -30,7 +30,7 @@ export const defaultConfig: Config = {
     style: undefined,
     class: "sn-dismiss-button",
   },
-  dismissOnClick: false,
+  dismissOnClick: true,
   toasterStyle: null,
   progressBar: {
     showDefault: true,

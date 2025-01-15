@@ -271,8 +271,8 @@
 
 .sn-right-top-exiting,
 .sn-right-bottom-exiting {
-  -webkit-animation: SNSlideOutRight 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideOutRight 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: SNSlideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .sn-left-top-entering,
@@ -283,8 +283,8 @@
 
 .sn-left-top-exiting,
 .sn-left-bottom-exiting {
-  -webkit-animation: SNSlideOutLeft 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideOutLeft 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: SNSlideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .sn-center-top-entering {
@@ -293,8 +293,8 @@
 }
 
 .sn-center-top-exiting {
-  -webkit-animation: SNSlideOutTop 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideOutTop 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideOutTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: SNSlideOutTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .sn-center-bottom-entering {
@@ -303,9 +303,8 @@
 }
 
 .sn-center-bottom-exiting {
-  -webkit-animation: SNSlideOutBottom 0.15s cubic-bezier(0.4, 0, 0.2, 1)
-    forwards;
-  animation: SNSlideOutBottom 0.15s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideOutBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: SNSlideOutBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes SNSlideInRight {
