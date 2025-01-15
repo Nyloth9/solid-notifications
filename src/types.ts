@@ -155,6 +155,7 @@ export interface Config {
   };
   showIcon: boolean;
   icon: ((type: ToastType) => JSX.Element) | JSX.Element | null;
+  dragTreshold: number;
 }
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<

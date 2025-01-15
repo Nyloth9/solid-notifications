@@ -38,4 +38,5 @@ export const defaultConfig: Config = {
   },
   showIcon: true,
   icon: null,
+  dragTreshold: 100,
 };

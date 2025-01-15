@@ -13,6 +13,7 @@ import {
   renderProgressBar,
   renderIcon,
   resolvePresenceAnimation,
+  createDragManager,
 } from "../utils/helpers";
 
 /***
@@ -58,6 +59,7 @@ import {
  * ✔ - add dismiss on click close button
  * - add aria roles
  * - write default config to docs
+ * - for some reason, if drag controls are enabled, if i have two toasts, pause it, and remove the one on top, no offset animation will play
  */
 
 /***
@@ -83,6 +85,7 @@ class Toast {
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
   progressManager: ReturnType<typeof createProgressManager>;
+  dragManager = createDragManager(this);
   isPaused = true; // A flag that's exposed for custom toasts. Has no internal use
   isPausedByUser = false; // True if the timer was paused by the user (checked on window blur and mouse hover)
   offset = 0;
@@ -150,7 +153,7 @@ class Toast {
     this.lifecycle(); // Will start the dismiss timer if conditions are met
   }
 
-  dismiss(reason?: string | boolean) {
+  dismiss(reason?: string | boolean, animated = true) {
     /*** The reason can be used as the argument of the exitCallback ***/
     if (this.toastConfig.exitCallback) {
       switch (reason) {
@@ -168,7 +171,7 @@ class Toast {
       this.toastConfig.exitCallback?.(reason);
     }
 
-    this.state = "exiting";
+    if (animated) this.state = "exiting";
 
     setTimeout(() => {
       batch(() => {
@@ -215,6 +218,9 @@ class Toast {
         onClick={(e) => handleClick(e, this)}
         onMouseEnter={handleMouseEnter.bind(null, this)}
         onMouseLeave={handleMouseLeave.bind(null, this)}
+        onTouchStart={this.dragManager.handleDragStart.bind(this)}
+        onTouchMove={this.dragManager.handleDragMove.bind(this)}
+        onTouchEnd={this.dragManager.handleDragEnd.bind(this)}
       >
         {/* If the toastConfig.body is a function (it's type will be "custom") we want to leave it unstyled */}
         <Show

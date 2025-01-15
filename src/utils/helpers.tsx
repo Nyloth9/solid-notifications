@@ -217,6 +217,55 @@ function setProgressControls(toast: Toast): ProgressControls {
   };
 }
 
+function createDragManager(toast: Toast) {
+  let startX = 0;
+  let currentX = 0;
+
+  const handleDragStart = (e: TouchEvent) => {
+    if (!toast.ref) return;
+
+    startX = e.touches[0].clientX;
+    toast.ref.style.transition = "none";
+    toast.progressManager.pause();
+  };
+
+  const handleDragMove = (e: TouchEvent) => {
+    if (!toast.ref) return;
+
+    currentX = e.touches[0].clientX - startX;
+    toast.ref.style.transform = `translateX(${currentX}px)`;
+  };
+
+  const handleDragEnd = () => {
+    console.log("fired transition end");
+    if (!toast.ref) return;
+
+    // Check if drag distance is sufficient to dismiss
+    if (Math.abs(currentX) > toast.toastConfig.dragTreshold) {
+      toast.ref.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+      toast.ref.style.transform = `translateX(${currentX > 0 ? "100%" : "-100%"})`;
+      toast.ref.style.opacity = "0";
+
+      toast.dismiss(undefined, false);
+    } else {
+      // Reset position if drag distance is insufficient
+      toast.progressManager.play();
+      toast.ref.style.transition = "all 0.3s ease";
+      toast.ref.style.transform = "translateX(0)";
+    }
+
+    // Reset variables
+    startX = 0;
+    currentX = 0;
+  };
+
+  return {
+    handleDragStart,
+    handleDragMove,
+    handleDragEnd,
+  };
+}
+
 function handleClick(e: MouseEvent, toast: Toast) {
   if (!toast.toastConfig.dismissOnClick) return;
 
@@ -382,6 +431,7 @@ export {
   resolvePresenceAnimation,
   createProgressManager,
   setProgressControls,
+  createDragManager,
   handleClick,
   handleMouseEnter,
   handleMouseLeave,
