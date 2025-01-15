@@ -315,19 +315,8 @@ function renderIcon(toast: Toast) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle
-            stroke="currentColor"
-            class="sn-icon-circle"
-            cx="26"
-            cy="26"
-            r="25"
-            fill="none"
-          />
-          <path
-            class="sn-icon-symbol"
-            fill="none"
-            d="M14.1 27.2l7.1 7.2 16.7-16.8"
-          />
+          <circle stroke="currentColor" cx="26" cy="26" r="25" fill="none" />
+          <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
         </svg>
       );
 
@@ -338,19 +327,8 @@ function renderIcon(toast: Toast) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle
-            stroke="currentColor"
-            class="sn-icon-circle"
-            cx="26"
-            cy="26"
-            r="25"
-            fill="none"
-          />
-          <path
-            class="sn-icon-symbol"
-            fill="none"
-            d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8"
-          />
+          <circle stroke="currentColor" cx="26" cy="26" r="25" fill="none" />
+          <path fill="none" d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8" />
         </svg>
       );
 
@@ -361,22 +339,8 @@ function renderIcon(toast: Toast) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle
-            stroke="currentColor"
-            class="sn-icon-circle"
-            cx="26"
-            cy="26"
-            r="25"
-            fill="none"
-          />
-          <path
-            style={{
-              "stroke-width": "9px",
-            }}
-            class="sn-icon-symbol"
-            fill="none"
-            d="M26 8v22M26 36v8"
-          />
+          <circle stroke="currentColor" cx="26" cy="26" r="25" fill="none" />
+          <path fill="none" d="M26 9v20M26 34v8" />
         </svg>
       );
 
@@ -387,22 +351,8 @@ function renderIcon(toast: Toast) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle
-            stroke="currentColor"
-            class="sn-icon-circle"
-            cx="26"
-            cy="26"
-            r="25"
-            fill="none"
-          />
-          <path
-            style={{
-              "stroke-width": "9px",
-            }}
-            class="sn-icon-symbol"
-            fill="none"
-            d="M26 9v8M26 22v22"
-          />
+          <circle stroke="currentColor" cx="26" cy="26" r="25" fill="none" />
+          <path fill="none" d="M26 9v8M26 22v22" />
         </svg>
       );
 
