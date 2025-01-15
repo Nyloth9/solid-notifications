@@ -2,6 +2,7 @@
   /* General */
   --sn-z-index: 9999;
   --sn-color-loading: 31, 41, 55; /* Base RGB values */
+  --sn-color-default: #1f2937;
   --sn-color-success: #34ab53;
   --sn-color-error: #ea4335;
   --sn-color-warning: #f59e0b;
@@ -31,7 +32,7 @@
 
   /* Progress Bar */
   --sn-progress-bar-height: 2px;
-  --sn-progress-bar-bg-color: #4b5563;
+  --sn-progress-bar-color: #4b5563;
 
   /* Icon */
   --sn-icon-size: 1.125rem;
@@ -127,7 +128,23 @@
   left: 0;
   right: 0;
   height: var(--sn-progress-bar-height);
-  background-color: var(--sn-progress-bar-bg-color);
+  background-color: var(--sn-progress-bar-color);
+}
+
+.sn-color-success {
+  color: var(--sn-color-success);
+}
+
+.sn-color-error {
+  color: var(--sn-color-error);
+}
+
+.sn-color-warning {
+  color: var(--sn-color-warning);
+}
+
+.sn-color-info {
+  color: var(--sn-color-info);
 }
 
 /* Checkmark, Cross, Warning, Info and Loading Icon */
@@ -168,22 +185,6 @@
   stroke-width: 6;
   animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
   -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
-}
-
-.sn-checkmark {
-  color: var(--sn-color-success);
-}
-
-.sn-cross {
-  color: var(--sn-color-error);
-}
-
-.sn-warning {
-  color: var(--sn-color-warning);
-}
-
-.sn-info {
-  color: var(--sn-color-info);
 }
 
 .sn-icon-loading {

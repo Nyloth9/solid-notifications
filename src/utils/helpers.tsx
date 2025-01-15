@@ -311,7 +311,7 @@ function renderIcon(toast: Toast) {
     case "success":
       return (
         <svg
-          class="sn-icon sn-checkmark"
+          class="sn-icon sn-color-success"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
@@ -323,7 +323,7 @@ function renderIcon(toast: Toast) {
     case "error":
       return (
         <svg
-          class="sn-icon sn-cross"
+          class="sn-icon sn-color-error"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
@@ -335,7 +335,7 @@ function renderIcon(toast: Toast) {
     case "warning":
       return (
         <svg
-          class="sn-icon sn-warning"
+          class="sn-icon sn-color-warning"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
@@ -347,7 +347,7 @@ function renderIcon(toast: Toast) {
     case "info":
       return (
         <svg
-          class="sn-icon sn-info"
+          class="sn-icon sn-color-info"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
