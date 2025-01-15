@@ -110,11 +110,11 @@ export interface Config {
   body?: JSX.Element | string;
   type: ToastType;
   duration: number | false;
-  onEnter: string;
+  onEnter: string | undefined;
   enterDuration: number;
-  onExit: string;
+  onExit: string | undefined;
   exitDuration: number;
-  onIdle: string;
+  onIdle: string | undefined;
   positionY: "top" | "bottom";
   positionX: "left" | "right" | "center";
   offsetX: number;

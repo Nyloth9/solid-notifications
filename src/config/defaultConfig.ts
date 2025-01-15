@@ -3,11 +3,11 @@ import { Config } from "../types";
 export const defaultConfig: Config = {
   type: "default",
   duration: 5000,
-  onEnter: "sn-slide-in-right", //sn__slide-in-right
+  onEnter: undefined,
   enterDuration: 300,
-  onExit: "sn-slide-out-right",
+  onExit: undefined,
   exitDuration: 150,
-  onIdle: "",
+  onIdle: undefined,
   positionY: "top",
   positionX: "right",
   offsetX: 16,

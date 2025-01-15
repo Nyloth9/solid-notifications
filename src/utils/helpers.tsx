@@ -109,17 +109,23 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
 }
 
 function applyState(
-  toasConfig: Config,
+  toastConfig: Config,
   state: "entering" | "idle" | "exiting" = "entering",
 ) {
   switch (state) {
     case "entering":
-      return toasConfig.onEnter;
+      if (toastConfig.onEnter) return toastConfig.onEnter;
     case "idle":
-      return toasConfig.onIdle;
+      if (toastConfig.onIdle) return toastConfig.onIdle;
     case "exiting":
-      return toasConfig.onExit;
+      if (toastConfig.onExit) return toastConfig.onExit;
+    default:
+      return `sn-${toastConfig.positionX}-${toastConfig.positionY}-${state}`;
   }
+}
+
+function resolvePresenceAnimation(toast: Toast) {
+  return `sn-${toast.toastConfig.positionX}-${toast.toastConfig.positionY}-${toast.state}`;
 }
 
 function createProgressManager(toast?: Toast, callback?: () => void) {
@@ -373,6 +379,7 @@ export {
   customMerge,
   filterOptions,
   applyState,
+  resolvePresenceAnimation,
   createProgressManager,
   setProgressControls,
   handleClick,
