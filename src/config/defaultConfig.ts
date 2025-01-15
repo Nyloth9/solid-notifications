@@ -30,7 +30,7 @@ export const defaultConfig: Config = {
     style: undefined,
     class: "sn-dismiss-button",
   },
-  dismissOnClick: true,
+  dismissOnClick: false,
   toasterStyle: null,
   progressBar: {
     showDefault: true,
