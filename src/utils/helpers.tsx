@@ -315,7 +315,14 @@ function renderIcon(toast: Toast) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle class="sn-icon-circle" cx="26" cy="26" r="25" fill="none" />
+          <circle
+            stroke="currentColor"
+            class="sn-icon-circle"
+            cx="26"
+            cy="26"
+            r="25"
+            fill="none"
+          />
           <path
             class="sn-icon-symbol"
             fill="none"
@@ -331,7 +338,14 @@ function renderIcon(toast: Toast) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle class="sn-icon-circle" cx="26" cy="26" r="25" fill="none" />
+          <circle
+            stroke="currentColor"
+            class="sn-icon-circle"
+            cx="26"
+            cy="26"
+            r="25"
+            fill="none"
+          />
           <path
             class="sn-icon-symbol"
             fill="none"
@@ -347,7 +361,14 @@ function renderIcon(toast: Toast) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle class="sn-icon-circle" cx="26" cy="26" r="25" fill="none" />
+          <circle
+            stroke="currentColor"
+            class="sn-icon-circle"
+            cx="26"
+            cy="26"
+            r="25"
+            fill="none"
+          />
           <path
             style={{
               "stroke-width": "9px",
@@ -366,7 +387,14 @@ function renderIcon(toast: Toast) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 52 52"
         >
-          <circle class="sn-icon-circle" cx="26" cy="26" r="25" fill="none" />
+          <circle
+            stroke="currentColor"
+            class="sn-icon-circle"
+            cx="26"
+            cy="26"
+            r="25"
+            fill="none"
+          />
           <path
             style={{
               "stroke-width": "9px",

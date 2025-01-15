@@ -5,7 +5,7 @@
   --sn-color-success: #34ab53;
   --sn-color-error: #ea4335;
   --sn-color-warning: #f59e0b;
-  --sn-color-info: #3b82f6;
+  --sn-color-info: #5493f7;
 
   /* Toast Wrapper */
   --sn-wrapper-border-radius: 8px;
@@ -34,7 +34,7 @@
   --sn-progress-bar-bg-color: #4b5563;
 
   /* Icon */
-  --sn-icon-size: 1rem;
+  --sn-icon-size: 1.125rem;
   --sn-icon-margin: 1px 0 0 0;
   --sn-icon-stroke: #fff;
 }
@@ -142,6 +142,13 @@
   display: block;
   stroke-width: 4;
   stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px;
+  animation:
+    SNFill 0.4s ease-in-out 0.4s forwards,
+    SNScale 0.3s ease-in-out 0.9s both;
+  -webkit-animation:
+    SNFill 0.4s ease-in-out 0.4s forwards,
+    SNScale 0.3s ease-in-out 0.9s both;
 }
 
 .sn-icon-circle {
@@ -164,59 +171,19 @@
 }
 
 .sn-checkmark {
-  box-shadow: inset 0px 0px 0px var(--sn-color-success);
-  animation:
-    SNFillCheck 0.4s ease-in-out 0.4s forwards,
-    SNScale 0.3s ease-in-out 0.9s both;
-  -webkit-animation:
-    SNFillCheck 0.4s ease-in-out 0.4s forwards,
-    SNScale 0.3s ease-in-out 0.9s both;
-}
-
-.sn-checkmark circle {
-  stroke: var(--sn-color-success);
+  color: var(--sn-color-success);
 }
 
 .sn-cross {
-  box-shadow: inset 0px 0px 0px var(--sn-color-error);
-  animation:
-    SNFillCross 0.4s ease-in-out 0.4s forwards,
-    SNScale 0.3s ease-in-out 0.9s both;
-  -webkit-animation:
-    SNFillCross 0.4s ease-in-out 0.4s forwards,
-    SNScale 0.3s ease-in-out 0.9s both;
-}
-
-.sn-cross circle {
-  stroke: var(--sn-color-error);
+  color: var(--sn-color-error);
 }
 
 .sn-warning {
-  box-shadow: inset 0px 0px 0px var(--sn-color-warning);
-  animation:
-    SNFillWarning 0.4s ease-in-out 0.4s forwards,
-    SNScale 0.3s ease-in-out 0.9s both;
-  -webkit-animation:
-    SNFillWarning 0.4s ease-in-out 0.4s forwards,
-    SNScale 0.3s ease-in-out 0.9s both;
-}
-
-.sn-warning circle {
-  stroke: var(--sn-color-warning);
+  color: var(--sn-color-warning);
 }
 
 .sn-info {
-  box-shadow: inset 0px 0px 0px var(--sn-color-info);
-  animation:
-    SNFillInfo 0.4s ease-in-out 0.4s forwards,
-    SNScale 0.3s ease-in-out 0.9s both;
-  -webkit-animation:
-    SNFillInfo 0.4s ease-in-out 0.4s forwards,
-    SNScale 0.3s ease-in-out 0.9s both;
-}
-
-.sn-info circle {
-  stroke: var(--sn-color-info);
+  color: var(--sn-color-info);
 }
 
 .sn-icon-loading {
@@ -287,27 +254,9 @@
   }
 }
 
-@keyframes SNFillCheck {
+@keyframes SNFill {
   100% {
-    box-shadow: inset 0px 0px 0px 30px var(--sn-color-success);
-  }
-}
-
-@keyframes SNFillCross {
-  100% {
-    box-shadow: inset 0px 0px 0px 30px var(--sn-color-error);
-  }
-}
-
-@keyframes SNFillWarning {
-  100% {
-    box-shadow: inset 0px 0px 0px 30px var(--sn-color-warning);
-  }
-}
-
-@keyframes SNFillInfo {
-  100% {
-    box-shadow: inset 0px 0px 0px 30px var(--sn-color-info);
+    box-shadow: inset 0px 0px 0px 30px currentColor;
   }
 }
 
