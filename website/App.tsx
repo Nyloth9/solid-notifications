@@ -65,7 +65,7 @@ const App: Component = () => {
                 {
                   exitCallback: (reason) =>
                     console.log("Dissmised by user? ", reason),
-                  type: "warning",
+                  type: "info",
                 },
               );
 
