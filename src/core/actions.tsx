@@ -119,10 +119,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     // Finally, update the specified toast
     const toast = findToast(id, store);
 
-    if (!toast)
-      throw new Error(
-        `Failed to update toast: No toast found with the provided ID (${id}).`,
-      );
+    if (!toast) return;
 
     const filteredOptions = filterOptions(rest as Partial<Config> | undefined);
 
