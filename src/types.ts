@@ -155,6 +155,7 @@ export interface Config {
   };
   showIcon: boolean;
   icon: ((type: ToastType) => JSX.Element) | JSX.Element | null;
+  dragToDismiss: boolean;
   dragTreshold: number;
 }
 

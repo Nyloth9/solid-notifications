@@ -38,5 +38,6 @@ export const defaultConfig: Config = {
   },
   showIcon: true,
   icon: null,
+  dragToDismiss: true,
   dragTreshold: 100,
 };

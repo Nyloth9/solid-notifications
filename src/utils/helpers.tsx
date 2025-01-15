@@ -223,6 +223,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragStart = (e: TouchEvent) => {
     if (!toast.ref) return;
+    if (!toast.toastConfig.dragToDismiss) return;
 
     startX = e.touches[0].clientX;
     toast.ref.style.transition = "none";
@@ -231,14 +232,15 @@ function createDragManager(toast: Toast) {
 
   const handleDragMove = (e: TouchEvent) => {
     if (!toast.ref) return;
+    if (!toast.toastConfig.dragToDismiss) return;
 
     currentX = e.touches[0].clientX - startX;
     toast.ref.style.transform = `translateX(${currentX}px)`;
   };
 
   const handleDragEnd = () => {
-    console.log("fired transition end");
     if (!toast.ref) return;
+    if (!toast.toastConfig.dragToDismiss) return;
 
     // Check if drag distance is sufficient to dismiss
     if (Math.abs(currentX) > toast.toastConfig.dragTreshold) {
@@ -254,7 +256,6 @@ function createDragManager(toast: Toast) {
       toast.ref.style.transform = "translateX(0)";
     }
 
-    // Reset variables
     startX = 0;
     currentX = 0;
   };
