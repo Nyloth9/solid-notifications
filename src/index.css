@@ -131,22 +131,6 @@
   background-color: var(--sn-progress-bar-color);
 }
 
-.sn-color-success {
-  color: var(--sn-color-success);
-}
-
-.sn-color-error {
-  color: var(--sn-color-error);
-}
-
-.sn-color-warning {
-  color: var(--sn-color-warning);
-}
-
-.sn-color-info {
-  color: var(--sn-color-info);
-}
-
 /* Checkmark, Cross, Warning, Info and Loading Icon */
 
 .sn-icon {
@@ -185,6 +169,22 @@
   stroke-width: 6;
   animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
   -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+.sn-icon.sn-icon-success {
+  color: var(--sn-color-success);
+}
+
+.sn-icon.sn-icon-error {
+  color: var(--sn-color-error);
+}
+
+.sn-icon.sn-icon-warning {
+  color: var(--sn-color-warning);
+}
+
+.sn-icon.sn-icon-info {
+  color: var(--sn-color-info);
 }
 
 .sn-icon-loading {
