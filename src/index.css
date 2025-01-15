@@ -35,7 +35,7 @@
 
   /* Icon */
   --sn-icon-size: 1.125rem;
-  --sn-icon-margin: 1px 0 0 0;
+  --sn-icon-margin: 0;
   --sn-icon-stroke: #fff;
 }
 
