@@ -95,17 +95,18 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     const { id, toasterId, ...rest } = options;
 
+    const resolvedArgs = filterOptions(rest as Partial<Config> | undefined);
+
     // If no id and toasterId provided, update all toasts
     if (!id && !toasterId) {
       context.toasters.forEach((toaster) => {
-        const resolvedToast = {
-          ...rest,
-          type: typeof rest.body === "function" ? "__custom" : rest.type,
-          body: typeof rest.body === "function" ? rest.body() : rest.body,
-        } as Config;
+        if (rest.body && typeof rest.body === "function") {
+          resolvedArgs.body = rest.body();
+          resolvedArgs.type = "__custom";
+        }
 
-        toaster.store.rendered.forEach((toast) => toast.update(resolvedToast));
-        toaster.store.queued.forEach((toast) => toast.update(resolvedToast));
+        toaster.store.rendered.forEach((toast) => toast.update(resolvedArgs));
+        toaster.store.queued.forEach((toast) => toast.update(resolvedArgs));
       });
 
       return;
@@ -116,14 +117,13 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const { store } = toaster;
 
     if (toasterId && !id) {
-      const resolvedToast = {
-        ...rest,
-        type: typeof rest.body === "function" ? "__custom" : rest.type,
-        body: typeof rest.body === "function" ? rest.body() : rest.body,
-      } as Config;
+      if (rest.body && typeof rest.body === "function") {
+        resolvedArgs.body = rest.body();
+        resolvedArgs.type = "__custom";
+      }
 
-      toaster.store.rendered.forEach((toast) => toast.update(resolvedToast));
-      toaster.store.queued.forEach((toast) => toast.update(resolvedToast));
+      toaster.store.rendered.forEach((toast) => toast.update(resolvedArgs));
+      toaster.store.queued.forEach((toast) => toast.update(resolvedArgs));
 
       return;
     }
@@ -133,17 +133,12 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     if (!toast) return; // Should we warn or throw here?
 
-    const resolvedToast = {
-      ...rest,
-      type: typeof rest.body === "function" ? "__custom" : rest.type,
-      body: resolveBody(rest.body, toast),
-    } as Config;
+    if (rest.body && typeof rest.body === "function") {
+      resolvedArgs.body = rest.body(toast);
+      resolvedArgs.type = "__custom";
+    }
 
-    const filteredOptions = filterOptions(
-      resolvedToast as Partial<Config> | undefined,
-    );
-
-    toast.update(filteredOptions);
+    toast.update(resolvedArgs);
 
     return {
       id: id,
