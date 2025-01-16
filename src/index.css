@@ -20,7 +20,7 @@
   --sn-toast-min-width: 244px;
   --sn-toast-gap: 16px;
   --sn-toast-text-color: #121826;
-  --sn-toast-padding: 12px 16px;
+  --sn-toast-padding: 12px 16px 11px 16px;
 
   /* Dismiss Button */
   --sn-dismiss-btn-color: #9ca3af;
@@ -114,7 +114,7 @@
   will-change: transform, width;
   height: var(--sn-progress-bar-height);
   background-color: var(--sn-progress-bar-color);
-  margin-top: calc(-1 * var(--sn-progress-bar-height));
+/*   margin-top: calc(-1 * var(--sn-progress-bar-height)); */
 }
 
 /* Checkmark, Cross, Warning, Info and Loading Icon */
