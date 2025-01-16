@@ -36,7 +36,7 @@
 
   /* Icon */
   --sn-icon-size: 1.125rem;
-  --sn-icon-margin: 0 0 0 -2px;
+  --sn-icon-margin: 0;
   --sn-icon-stroke: #fff;
 }
 
