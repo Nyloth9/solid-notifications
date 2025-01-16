@@ -57,6 +57,7 @@ import {
  * ✔ - add dismiss on click body
  * ✔ - add dismiss on click close button
  * - add aria roles
+ * - add themes?
  * - write default config to docs
  */
 
