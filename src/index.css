@@ -20,7 +20,7 @@
   --sn-toast-gap: 16px;
   --sn-toast-bg-color: white;
   --sn-toast-text-color: #121826;
-  --sn-toast-padding: 12px 14px;
+  --sn-toast-padding: 12px 16px;
 
   /* Dismiss Button */
   --sn-dismiss-btn-color: #9ca3af;
@@ -36,7 +36,7 @@
 
   /* Icon */
   --sn-icon-size: 1.125rem;
-  --sn-icon-margin: 0;
+  --sn-icon-margin: 0 0 0 -2px;
   --sn-icon-stroke: #fff;
 }
 
