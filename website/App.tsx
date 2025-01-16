@@ -54,7 +54,7 @@ const App: Component = () => {
                 },
               );
 
-              setTimeout(() => {
+              /*   setTimeout(() => {
                 update({ id, type: "warning" });
               }, 3000);
 
@@ -68,7 +68,7 @@ const App: Component = () => {
 
               setTimeout(() => {
                 update({ id, type: "loading" });
-              }, 12000);
+              }, 12000); */
 
               /*    setTimeout(() => {
                 update({
