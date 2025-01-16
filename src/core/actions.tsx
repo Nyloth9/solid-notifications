@@ -93,15 +93,15 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       options = { toasterId: targetToaster, ...options };
     }
 
-    const { id, toasterId, ...rest } = options;
+    const { id, toasterId } = options;
 
-    const resolvedArgs = filterOptions(rest as Partial<Config> | undefined);
+    const resolvedArgs = filterOptions(options as Partial<Config> | undefined);
 
     // If no id and toasterId provided, update all toasts
     if (!id && !toasterId) {
       context.toasters.forEach((toaster) => {
-        if (rest.body && typeof rest.body === "function") {
-          resolvedArgs.body = rest.body();
+        if (options.body && typeof options.body === "function") {
+          resolvedArgs.body = options.body();
           resolvedArgs.type = "__custom";
         }
 
@@ -117,8 +117,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const { store } = toaster;
 
     if (toasterId && !id) {
-      if (rest.body && typeof rest.body === "function") {
-        resolvedArgs.body = rest.body();
+      if (options.body && typeof options.body === "function") {
+        resolvedArgs.body = options.body();
         resolvedArgs.type = "__custom";
       }
 
@@ -133,8 +133,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     if (!toast) return; // Should we warn or throw here?
 
-    if (rest.body && typeof rest.body === "function") {
-      resolvedArgs.body = rest.body(toast);
+    if (options.body && typeof options.body === "function") {
+      resolvedArgs.body = options.body(toast);
       resolvedArgs.type = "__custom";
     }
 
