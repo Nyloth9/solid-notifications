@@ -23,7 +23,7 @@ const App: Component = () => {
                 createRoot(() => (
                   <div>
                     <div>{`Solid Notifications, new toast created!`}</div>
-                    {/*  <div class="-mx-2 flex gap-1">
+                    <div class="-mx-2 flex gap-1">
                       <button
                         class={
                           "mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
@@ -44,7 +44,7 @@ const App: Component = () => {
                       >
                         Reset timer
                       </button>
-                    </div> */}
+                    </div>
                   </div>
                 )),
                 {
