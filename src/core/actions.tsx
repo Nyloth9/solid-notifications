@@ -60,10 +60,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       toasterConfig,
       toastConfig: {
         ...filteredOptions,
-        type:
-          typeof body === "function"
-            ? "__custom"
-            : (options?.type ?? "default"),
+        typeofBody: typeof body === "function" ? "function" : "element",
         body: undefined,
         id: toastId,
       },
@@ -102,7 +99,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       context.toasters.forEach((toaster) => {
         if (options.body && typeof options.body === "function") {
           resolvedArgs.body = options.body();
-          resolvedArgs.type = "__custom";
+          resolvedArgs.typeofBody = "function";
         }
 
         toaster.store.rendered.forEach((toast) => toast.update(resolvedArgs));
@@ -119,7 +116,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     if (toasterId && !id) {
       if (options.body && typeof options.body === "function") {
         resolvedArgs.body = options.body();
-        resolvedArgs.type = "__custom";
+        resolvedArgs.typeofBody = "function";
       }
 
       toaster.store.rendered.forEach((toast) => toast.update(resolvedArgs));
@@ -135,7 +132,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     if (options.body && typeof options.body === "function") {
       resolvedArgs.body = options.body(toast);
-      resolvedArgs.type = "__custom";
+      resolvedArgs.typeofBody = "function";
     }
 
     toast.update(resolvedArgs);

@@ -224,7 +224,7 @@ class Toast {
         {/* If the toastConfig.body is a function (it's type will be "custom") we want to leave it unstyled */}
         <Show
           fallback={this.toastConfig.body}
-          when={this.toastConfig.type !== "__custom"}
+          when={this.toastConfig.typeofBody === "element"}
         >
           <div class={this.toastConfig.class} style={this.toastConfig.style}>
             {renderIcon(this)}

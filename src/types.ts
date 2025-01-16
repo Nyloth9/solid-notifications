@@ -24,8 +24,7 @@ type ToastType =
   | "error"
   | "loading"
   | "warning"
-  | "info"
-  | "__custom"; // __custom is a reserved type for toasts with function as body
+  | "info";
 
 export interface ToastOptions
   extends Partial<
@@ -43,10 +42,10 @@ export interface ToastOptions
       | "reverseToastOrder"
       | "pauseOnWindowInactive"
       | "renderOnWindowInactive"
+      | "typeofBody"
     >
   > {
   toasterId?: string;
-  type?: Exclude<ToastType, "__custom">;
 }
 
 export type UpdateToastOptions = RequireAtLeastOne<
@@ -110,6 +109,7 @@ export interface ProgressControls {
 export interface Config {
   id?: string;
   body?: JSX.Element | string;
+  typeofBody: "element" | "function";
   type: ToastType;
   duration: number | false;
   onEnter: string | undefined;
