@@ -26,6 +26,8 @@ type ToastType =
   | "warning"
   | "info";
 
+export type ToasterOptions = Partial<Omit<Config, "content" | "contentType">>;
+
 export interface ToastOptions
   extends Partial<
     Omit<

@@ -1,11 +1,11 @@
 import { batch, createEffect, For, onCleanup, onMount } from "solid-js";
 import { useService } from "./Context";
 import { customMerge, getToasterStyle } from "../utils/helpers";
-import { Config, TStore } from "../types";
+import { Config, ToasterOptions, TStore } from "../types";
 import { defaultConfig } from "../config/defaultConfig";
 import { createStore } from "solid-js/store";
 
-export default function Toaster(props: Partial<Config>) {
+export default function Toaster(props: ToasterOptions) {
   const toasterConfig: Config = customMerge(defaultConfig, props);
   const { registerToaster, unregisterToaster } = useService();
   const [store, setStore] = createStore<TStore>({
