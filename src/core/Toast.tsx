@@ -78,7 +78,7 @@ import {
 class Toast {
   private setStore;
   private dragManager = createDragManager(this);
-  store; // <-- Should be removed
+  store;
   toasterConfig: Config;
   toastConfig: Config;
   ref: HTMLElement | null = null;
