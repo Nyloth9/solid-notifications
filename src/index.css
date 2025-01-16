@@ -114,7 +114,6 @@
   will-change: transform, width;
   height: var(--sn-progress-bar-height);
   background-color: var(--sn-progress-bar-color);
-/*   margin-top: calc(-1 * var(--sn-progress-bar-height)); */
 }
 
 /* Checkmark, Cross, Warning, Info and Loading Icon */
