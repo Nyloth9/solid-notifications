@@ -78,6 +78,7 @@ import {
 
 class Toast {
   private setStore;
+  private dragManager = createDragManager(this);
   store; // <-- Should be removed
   toasterConfig: Config;
   toastConfig: Config;
@@ -85,7 +86,6 @@ class Toast {
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
   progressManager: ReturnType<typeof createProgressManager>;
-  dragManager = createDragManager(this);
   isPaused = true; // A flag that's exposed for custom toasts. Has no internal use
   isPausedByUser = false; // True if the timer was paused by the user (checked on window blur and mouse hover)
   offset = 0;
@@ -155,6 +155,7 @@ class Toast {
 
   dismiss(reason?: string | boolean, animated = true) {
     /*** The reason can be used as the argument of the exitCallback ***/
+    /*** Animated flag is used only for dragEnd event to disable exit animation on dismiss when toast dragged (otherwise it will jump back to start and play exit animation)  */
     if (this.toastConfig.exitCallback) {
       switch (reason) {
         case "__expired":
@@ -214,13 +215,13 @@ class Toast {
           [this.toasterConfig.positionX]: `${this.toasterConfig.offsetX}px`,
           [this.toasterConfig.positionY]: `${this.offset}px`,
         }}
-        class={`${this.toastConfig.wrapperClass} ${applyState(this.toastConfig, this.state)}`.trim()}
+        class={`${this.toastConfig.wrapperClass} ${applyState(this)}`.trim()}
         onClick={(e) => handleClick(e, this)}
         onMouseEnter={handleMouseEnter.bind(null, this)}
         onMouseLeave={handleMouseLeave.bind(null, this)}
-        onTouchStart={this.dragManager.handleDragStart.bind(this)}
-        onTouchMove={this.dragManager.handleDragMove.bind(this)}
-        onTouchEnd={this.dragManager.handleDragEnd.bind(this)}
+        onTouchStart={this.dragManager.handleDragStart}
+        onTouchMove={this.dragManager.handleDragMove}
+        onTouchEnd={this.dragManager.handleDragEnd}
       >
         {/* If the toastConfig.body is a function (it's type will be "custom") we want to leave it unstyled */}
         <Show

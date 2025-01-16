@@ -108,11 +108,10 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
   return filteredOptions;
 }
 
-function applyState(
-  toastConfig: Config,
-  state: "entering" | "idle" | "exiting" = "entering",
-) {
-  switch (state) {
+function applyState(toast: Toast) {
+  const toastConfig = toast.toastConfig;
+
+  switch (toast.state) {
     case "entering":
       if (toastConfig.onEnter) return toastConfig.onEnter;
     case "idle":
@@ -120,7 +119,7 @@ function applyState(
     case "exiting":
       if (toastConfig.onExit) return toastConfig.onExit;
     default:
-      return `sn-${toastConfig.positionX}-${toastConfig.positionY}-${state}`;
+      return `sn-${toastConfig.positionX}-${toastConfig.positionY}-${toast.state}`;
   }
 }
 
@@ -244,7 +243,7 @@ function createDragManager(toast: Toast) {
 
     // Check if drag distance is sufficient to dismiss
     if (Math.abs(currentX) > toast.toastConfig.dragTreshold) {
-      toast.ref.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+      toast.ref.style.transition = "all 0.3s ease";
       toast.ref.style.transform = `translateX(${currentX > 0 ? "100%" : "-100%"})`;
       toast.ref.style.opacity = "0";
 
