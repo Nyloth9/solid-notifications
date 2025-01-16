@@ -34,7 +34,7 @@
   --sn-progress-bar-color: #4b5563;
 
   /* Icon */
-  --sn-icon-size: 1.125rem;
+  --sn-icon-size: 1.5rem;
   --sn-icon-margin: 0;
   --sn-icon-stroke: #fff;
 }
@@ -146,7 +146,6 @@
   -webkit-animation:
     SNFill 0.4s ease-in-out 0.4s forwards,
     SNScale 0.3s ease-in-out 0.9s both;
-  box-shadow: inset 0px 0px 0px var(--sn-color-default);
   width: var(--sn-icon-size);
   height: var(--sn-icon-size);
   margin: var(--sn-icon-margin);
@@ -174,18 +173,22 @@
 
 .sn-icon.sn-icon-success {
   color: var(--sn-color-success);
+  box-shadow: inset 0px 0px 0px var(--color-success);
 }
 
 .sn-icon.sn-icon-error {
   color: var(--sn-color-error);
+  box-shadow: inset 0px 0px 0px var(--color-error);
 }
 
 .sn-icon.sn-icon-warning {
   color: var(--sn-color-warning);
+  box-shadow: inset 0px 0px 0px var(--color-warning);
 }
 
 .sn-icon.sn-icon-info {
   color: var(--sn-color-info);
+  box-shadow: inset 0px 0px 0px var(--color-info);
 }
 
 .sn-icon-loading {
