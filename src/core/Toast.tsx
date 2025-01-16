@@ -12,7 +12,6 @@ import {
   renderDismissButton,
   renderProgressBar,
   renderIcon,
-  resolvePresenceAnimation,
   createDragManager,
 } from "../utils/helpers";
 
@@ -42,7 +41,7 @@ import {
  * ✔ - add toast timer controls
  * ✔ - change dismiss, update and remove signatures
  * ✔ - enable false as duration
- * - add custom ordering support? nope
+ * - add custom ordering support?
  * - change library name to "solid-notifications"
  * ✔ - update all toasts in a toaster, update all toasts in all toasters
  * ✔ - fix a bug where timer controls dont work when toast is added to the queue
@@ -53,13 +52,12 @@ import {
  * ✔ - handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
  * ✔ - add styling
  * - add tests
- * - add swipe to dismiss
+ * ✔ add swipe to dismiss
  * - clean up comments
  * ✔ - add dismiss on click body
  * ✔ - add dismiss on click close button
  * - add aria roles
  * - write default config to docs
- * - for some reason, if drag controls are enabled, if i have two toasts, pause it, and remove the one on top, no offset animation will play
  */
 
 /***
