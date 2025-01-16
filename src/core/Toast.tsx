@@ -224,7 +224,7 @@ class Toast {
           [this.toasterConfig.positionY]: `${this.offset}px`,
         }}
       >
-        {/* If the toastConfig.body is a function (it's contentType will be "dynamic") we want to leave it unstyled */}
+        {/* If the toastConfig.content is a function (it's contentType will be "dynamic") we want to leave it unstyled */}
         <Show
           fallback={this.toastConfig.content}
           when={this.toastConfig.contentType === "static"}
