@@ -3,6 +3,7 @@ export * from "./core/Toaster";
 export { ToastProvider, useToast } from "./core/Context";
 export type {
   Toaster,
+  ToasterOptions,
   ToastOptions,
   UpdateToastOptions,
   ToasterContextType,
