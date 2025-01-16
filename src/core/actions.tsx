@@ -96,9 +96,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     // If no id and toasterId provided, update all toasts
     if (!id && !toasterId) {
       context.toasters.forEach((toaster) => {
-        [...toaster.store.rendered, ...toaster.store.queued].forEach((toast) =>
-          toast.update(rest),
-        );
+        toaster.store.rendered.forEach((toast) => toast.update(rest));
+        toaster.store.queued.forEach((toast) => toast.update(rest));
       });
 
       return;
@@ -109,9 +108,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const { store } = toaster;
 
     if (toasterId && !id) {
-      [...toaster.store.rendered, ...toaster.store.queued].forEach((toast) =>
-        toast.update(rest),
-      );
+      toaster.store.rendered.forEach((toast) => toast.update(rest));
+      toaster.store.queued.forEach((toast) => toast.update(rest));
 
       return;
     }
@@ -142,9 +140,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     // If no argument, dismiss toasts from all toasters
     if (!options) {
       context.toasters.forEach((toaster) => {
-        [...toaster.store.rendered, ...toaster.store.queued].forEach((toast) =>
-          toast.dismiss(),
-        );
+        toaster.store.rendered.forEach((toast) => toast.dismiss());
+        toaster.store.queued.forEach((toast) => toast.dismiss());
       });
 
       return;
