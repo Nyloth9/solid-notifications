@@ -77,10 +77,10 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
   const update: ToastActions["update"] = (options) => {
     /**
      * Update can be called in the following ways:
-     * 1. update({ id: "toastId", ...newOptions }) - Update a specific toast (when there is only one toaster or useToast has specified a toasterId)
-     * 2. update({ toasterId: "toasterId", ...newOptions }) - Update all toasts in a specific toaster
-     * 3. update({ toasterId: "toasterId", id: "toastId", ...newOptions }) - Update a specific toast in a specific toaster
-     * 4. update({ ...newOptions }) - Update all toasts in all toasters
+     * 1. update({content, id: "toastId", ...newOptions }) - Update a specific toast (when there is only one toaster or useToast has specified a toasterId)
+     * 2. update({content, toasterId: "toasterId", ...newOptions }) - Update all toasts in a specific toaster
+     * 3. update({content, toasterId: "toasterId", id: "toastId", ...newOptions }) - Update a specific toast in a specific toaster
+     * 4. update({content, ...newOptions }) - Update all toasts in all toasters
      */
 
     if (targetToaster) {
