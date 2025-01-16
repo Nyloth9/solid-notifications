@@ -87,7 +87,7 @@ const App: Component = () => {
 
               /*    setTimeout(() => {
                 update({
-                  body: (
+                  content: (
                     <>
                       Updated body text
                       <div class="flex gap-1">

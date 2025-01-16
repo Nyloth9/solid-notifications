@@ -5,8 +5,10 @@ import Toast from "../core/Toast";
 function findToast(id: string | undefined, store: TStore): Toast | undefined {
   if (!id) return;
 
-  const allToasts = [...store.rendered, ...store.queued];
-  return allToasts.find((toast) => toast.toastConfig.id === id);
+  const toast = store.rendered.find((toast) => toast.toastConfig.id === id);
+  if (toast) return toast;
+
+  return store.queued.find((toast) => toast.toastConfig.id === id);
 }
 
 function createToastId(
@@ -24,14 +26,14 @@ function createToastId(
 }
 
 function resolveBody(
-  body: string | JSX.Element | ((toast: Toast) => JSX.Element),
+  content: string | JSX.Element | ((toast: Toast) => JSX.Element),
   t: Toast,
 ): JSX.Element | string {
-  if (typeof body === "function") {
-    // If the body is a function, pass the toast instance to it
-    return body(t);
+  if (typeof content === "function") {
+    // If the content is a function, pass the toast instance to it
+    return content(t);
   }
-  return body || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
+  return content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {

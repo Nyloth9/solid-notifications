@@ -30,7 +30,7 @@ export interface ToastOptions
   extends Partial<
     Omit<
       Config,
-      | "body"
+      | "content"
       | "state"
       | "positionX"
       | "positionY"
@@ -42,7 +42,7 @@ export interface ToastOptions
       | "reverseToastOrder"
       | "pauseOnWindowInactive"
       | "renderOnWindowInactive"
-      | "typeofBody"
+      | "contentType"
     >
   > {
   toasterId?: string;
@@ -50,7 +50,7 @@ export interface ToastOptions
 
 export type UpdateToastOptions = RequireAtLeastOne<
   ToastOptions & {
-    body?: string | JSX.Element | ((toast?: Toast) => JSX.Element | string);
+    content?: string | JSX.Element | ((toast?: Toast) => JSX.Element | string);
   }
 >;
 
@@ -63,7 +63,7 @@ export interface ToasterContextType {
 
 export interface ToastActions {
   notify: (
-    body?: string | JSX.Element | ((toast: Toast) => JSX.Element | string),
+    content?: string | JSX.Element | ((toast: Toast) => JSX.Element | string),
     options?: ToastOptions,
   ) => {
     id: string;
@@ -108,8 +108,8 @@ export interface ProgressControls {
 
 export interface Config {
   id?: string;
-  body?: JSX.Element | string;
-  typeofBody: "element" | "function";
+  content?: JSX.Element | string;
+  contentType: "static" | "dynamic";
   type: ToastType;
   duration: number | false;
   onEnter: string | undefined;

@@ -50,7 +50,7 @@ export default function Toaster(props: Partial<Config>) {
 
     resolvedToasts.forEach((toast) => {
       if (toast.ref) {
-        const _body = toast.toastConfig.body; // This ensures toast is being tracked for reactivity
+        const _content = toast.toastConfig.content; // This ensures toast is being tracked for reactivity
         toast.offset = accumulatedOffset;
 
         accumulatedOffset += toast.ref.clientHeight + toasterConfig.gutter;

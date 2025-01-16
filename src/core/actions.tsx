@@ -17,7 +17,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
    * 4. toasterId is provided in the useToast hook, and the options object is also provided in a method, we want to merge the options object with the toasterId.
    */
 
-  const notify: ToastActions["notify"] = (body, options) => {
+  const notify: ToastActions["notify"] = (content, options) => {
     /**
      * Notify can be called in the following ways:
      * 1. notify() - default toast to showcase it works
@@ -41,10 +41,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     );
 
     // Warn if multiple toasts with the same ID are detected
-    if (
-      store.rendered.some((toast) => toast.toastConfig.id === toastId) ||
-      store.queued.some((toast) => toast.toastConfig.id === toastId)
-    ) {
+    if (findToast(toastId, store)) {
       console.warn(
         `Multiple toasts with the ID "${toastId}" detected. This may cause unexpected behavior, such as issues with the dismiss timer.`,
       );
@@ -60,13 +57,13 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       toasterConfig,
       toastConfig: {
         ...filteredOptions,
-        typeofBody: typeof body === "function" ? "function" : "element",
-        body: undefined,
+        contentType: typeof content === "function" ? "dynamic" : "static",
+        content: undefined,
         id: toastId,
       },
     });
 
-    newToast.toastConfig.body = resolveBody(body, newToast); // If using a function as the first argument, we want to resolve it to JSX
+    newToast.toastConfig.content = resolveBody(content, newToast); // If using a function as the first argument, we want to resolve it to JSX
 
     newToast.init();
 
@@ -97,9 +94,9 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     // If no id and toasterId provided, update all toasts
     if (!id && !toasterId) {
       context.toasters.forEach((toaster) => {
-        if (options.body && typeof options.body === "function") {
-          resolvedArgs.body = options.body();
-          resolvedArgs.typeofBody = "function";
+        if (options.content && typeof options.content === "function") {
+          resolvedArgs.content = options.content();
+          resolvedArgs.contentType = "dynamic";
         }
 
         toaster.store.rendered.forEach((toast) => toast.update(resolvedArgs));
@@ -114,9 +111,9 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const { store } = toaster;
 
     if (toasterId && !id) {
-      if (options.body && typeof options.body === "function") {
-        resolvedArgs.body = options.body();
-        resolvedArgs.typeofBody = "function";
+      if (options.content && typeof options.content === "function") {
+        resolvedArgs.content = options.content();
+        resolvedArgs.contentType = "dynamic";
       }
 
       toaster.store.rendered.forEach((toast) => toast.update(resolvedArgs));
@@ -130,9 +127,9 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     if (!toast) return; // Should we warn or throw here?
 
-    if (options.body && typeof options.body === "function") {
-      resolvedArgs.body = options.body(toast);
-      resolvedArgs.typeofBody = "function";
+    if (options.content && typeof options.content === "function") {
+      resolvedArgs.content = options.content(toast);
+      resolvedArgs.contentType = "dynamic";
     }
 
     toast.update(resolvedArgs);

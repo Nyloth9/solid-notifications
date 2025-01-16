@@ -45,7 +45,7 @@ import {
  * - change library name to "solid-notifications"
  * ✔ - update all toasts in a toaster, update all toasts in all toasters
  * ✔ - fix a bug where timer controls dont work when toast is added to the queue
- * ✔ - add function as body argument in notify
+ * ✔ - add function as content argument in notify
  * ✔ - added visibility change event listener
  * ✔ - add option to not render toasts if the tab is blurred
  * ✔ - add clear only rendered toasts (keepQueued)
@@ -71,7 +71,7 @@ import {
  * - Now exposes a progress() method to get the progress of the timer, which is reactive and can be used in the UI
  * - per toaster window blur event listener
  * - option to not render toasts if the tab is blurred
- * - custom toast (function as body argument), will be unstyled
+ * - custom toast (function as content argument), will be unstyled
  */
 
 class Toast {
@@ -208,27 +208,27 @@ class Toast {
         data-role="toast"
         id={this.toastConfig.id}
         ref={(el) => (this.ref = el)}
-        style={{
-          ...this.toastConfig.wrapperStyle,
-          [this.toasterConfig.positionX]: `${this.toasterConfig.offsetX}px`,
-          [this.toasterConfig.positionY]: `${this.offset}px`,
-        }}
-        class={`${this.toastConfig.wrapperClass} ${applyState(this)}`.trim()}
         onClick={(e) => handleClick(e, this)}
         onMouseEnter={handleMouseEnter.bind(null, this)}
         onMouseLeave={handleMouseLeave.bind(null, this)}
         onTouchStart={this.dragManager.handleDragStart}
         onTouchMove={this.dragManager.handleDragMove}
         onTouchEnd={this.dragManager.handleDragEnd}
+        class={`${this.toastConfig.wrapperClass} ${applyState(this)}`.trim()}
+        style={{
+          ...this.toastConfig.wrapperStyle,
+          [this.toasterConfig.positionX]: `${this.toasterConfig.offsetX}px`,
+          [this.toasterConfig.positionY]: `${this.offset}px`,
+        }}
       >
-        {/* If the toastConfig.body is a function (it's type will be "custom") we want to leave it unstyled */}
+        {/* If the toastConfig.body is a function (it's contentType will be "dynamic") we want to leave it unstyled */}
         <Show
-          fallback={this.toastConfig.body}
-          when={this.toastConfig.typeofBody === "element"}
+          fallback={this.toastConfig.content}
+          when={this.toastConfig.contentType === "static"}
         >
           <div class={this.toastConfig.class} style={this.toastConfig.style}>
             {renderIcon(this)}
-            {this.toastConfig.body}
+            {this.toastConfig.content}
             {renderDismissButton(this)}
           </div>
           {renderProgressBar(this)}
