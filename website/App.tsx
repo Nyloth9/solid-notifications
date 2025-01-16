@@ -54,8 +54,8 @@ const App: Component = () => {
                 },
               );
 
-              setTimeout(() => {
-                update({ id, type: "warning", content: "Updated body text" });
+                   setTimeout(() => {
+                update({ id, type: "warning" });
               }, 3000);
 
               setTimeout(() => {

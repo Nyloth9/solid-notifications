@@ -17,7 +17,7 @@
   /* Toast */
   --sn-toast-max-width: 344px;
   --sn-toast-min-width: 244px;
-  --sn-toast-gap: 12px;
+  --sn-toast-gap: 16px;
   --sn-toast-bg-color: white;
   --sn-toast-text-color: #121826;
   --sn-toast-padding: 12px 14px;
@@ -28,6 +28,7 @@
   --sn-dismiss-btn-size: 1.15rem;
   --sn-dismiss-btn-border-radius: 0.25rem;
   --sn-dismiss-btn-transition: color 0.3s;
+  --sn-dismiss-btn-margin: 0 -4px 0px auto;
 
   /* Progress Bar */
   --sn-progress-bar-height: 2px;
@@ -108,8 +109,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-left: auto;
-  margin-right: 0;
+  margin: var(--sn-dismiss-btn-margin);
   transition: var(--sn-dismiss-btn-transition);
   height: var(--sn-dismiss-btn-size);
   width: var(--sn-dismiss-btn-size);
