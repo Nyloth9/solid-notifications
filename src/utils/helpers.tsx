@@ -312,13 +312,14 @@ function renderDismissButton(toast: Toast) {
     return null;
 
   return (
-    <div
+    <button
+      aria-label="Close notification"
       class={toast.toastConfig.dismissButton.class}
       style={toast.toastConfig.dismissButton.style}
       onClick={() => toast.dismiss()}
     >
-      <span class="sr-only">Close</span>
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         width="100%"
@@ -333,7 +334,7 @@ function renderDismissButton(toast: Toast) {
           d="m7 7l10 10M7 17L17 7"
         />
       </svg>
-    </div>
+    </button>
   );
 }
 

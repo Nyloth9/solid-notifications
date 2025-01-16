@@ -40,4 +40,8 @@ export const defaultConfig: Config = {
   icon: null,
   dragToDismiss: true,
   dragTreshold: 100,
+  aria: {
+    role: "alert",
+    ariaLive: "polite",
+  },
 };

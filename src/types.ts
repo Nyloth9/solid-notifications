@@ -109,7 +109,7 @@ export interface ProgressControls {
 export interface Config {
   id?: string;
   content?: JSX.Element | string;
-  contentType: "static" | "dynamic";
+  contentType?: "static" | "dynamic";
   type: ToastType;
   duration: number | false;
   onEnter: string | undefined;
@@ -159,6 +159,10 @@ export interface Config {
   icon: ((type: ToastType) => JSX.Element) | JSX.Element | null;
   dragToDismiss: boolean;
   dragTreshold: number;
+  aria: {
+    ariaLive: "off" | "assertive" | "polite";
+    role: "status" | "alert";
+  };
 }
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
