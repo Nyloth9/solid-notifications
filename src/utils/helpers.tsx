@@ -125,10 +125,6 @@ function applyState(toast: Toast) {
   }
 }
 
-function resolvePresenceAnimation(toast: Toast) {
-  return `sn-${toast.toastConfig.positionX}-${toast.toastConfig.positionY}-${toast.state}`;
-}
-
 function createProgressManager(toast?: Toast, callback?: () => void) {
   const [progress, setProgress] = createSignal(0);
 
@@ -431,7 +427,6 @@ export {
   customMerge,
   filterOptions,
   applyState,
-  resolvePresenceAnimation,
   createProgressManager,
   setProgressControls,
   createDragManager,
