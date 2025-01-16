@@ -2,22 +2,10 @@ import { createRoot, createSignal, onMount, type Component } from "solid-js";
 import { useToast } from "../src/core/Context";
 
 const App: Component = () => {
-  const [randomText, setRandomText] = createSignal(
-    "This is the first render...",
-  );
-
   const { notify, update, dismiss, remove, getQueue, clearQueue } =
     useToast("toaster-1");
 
   const { dismiss: globalDismiss } = useToast();
-
-  /*   onMount(() => {
-    const interval = setInterval(() => {
-      setRandomText(`Random text: ${Math.random().toString(36).substring(7)}`);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }); */
 
   return (
     <div>
@@ -35,9 +23,6 @@ const App: Component = () => {
                 createRoot(() => (
                   <div>
                     <div>{`Solid Notifications, new toast created!`}</div>
-                    {/*   <div class="block italic text-purple-600">
-                      {randomText()}
-                    </div> */}
                     <div class="-mx-2 flex gap-1">
                       <button
                         class={
@@ -69,8 +54,8 @@ const App: Component = () => {
                 },
               );
 
-              setTimeout(() => {
-                update({ id, type: "warning" });
+              /*      setTimeout(() => {
+                update({ id, type: "warning", content: "Updated body text" });
               }, 3000);
 
               setTimeout(() => {
@@ -83,7 +68,7 @@ const App: Component = () => {
 
               setTimeout(() => {
                 update({ id, type: "loading" });
-              }, 12000);
+              }, 12000); */
 
               /*    setTimeout(() => {
                 update({

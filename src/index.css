@@ -27,7 +27,6 @@
   --sn-dismiss-btn-hover-color: #374151;
   --sn-dismiss-btn-size: 1.15rem;
   --sn-dismiss-btn-border-radius: 0.25rem;
-  --sn-dismiss-btn-margin: -0.375rem -0.375rem -0.375rem 0.125rem;
   --sn-dismiss-btn-transition: color 0.3s;
 
   /* Progress Bar */
@@ -109,8 +108,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin-left: auto;
+  margin-right: 0;
   transition: var(--sn-dismiss-btn-transition);
-  margin: var(--sn-dismiss-btn-margin);
   height: var(--sn-dismiss-btn-size);
   width: var(--sn-dismiss-btn-size);
   border-radius: var(--sn-dismiss-btn-border-radius);
@@ -134,11 +134,7 @@
 /* Checkmark, Cross, Warning, Info and Loading Icon */
 
 .sn-icon {
-  box-shadow: inset 0px 0px 0px var(--sn-color-default);
-  width: var(--sn-icon-size);
-  height: var(--sn-icon-size);
-  margin: var(--sn-icon-margin);
-  stroke: var(--sn-icon-stroke);
+  flex-shrink: 0;
   border-radius: 50%;
   display: block;
   stroke-width: 4;
@@ -150,6 +146,11 @@
   -webkit-animation:
     SNFill 0.4s ease-in-out 0.4s forwards,
     SNScale 0.3s ease-in-out 0.9s both;
+  box-shadow: inset 0px 0px 0px var(--sn-color-default);
+  width: var(--sn-icon-size);
+  height: var(--sn-icon-size);
+  margin: var(--sn-icon-margin);
+  stroke: var(--sn-icon-stroke);
 }
 
 .sn-icon circle {
