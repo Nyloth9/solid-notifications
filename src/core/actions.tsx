@@ -61,7 +61,9 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       toastConfig: {
         ...filteredOptions,
         type:
-          typeof body === "function" ? "custom" : (options?.type ?? "default"),
+          typeof body === "function"
+            ? "__custom"
+            : (options?.type ?? "default"),
         body: undefined,
         id: toastId,
       },
@@ -96,8 +98,14 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     // If no id and toasterId provided, update all toasts
     if (!id && !toasterId) {
       context.toasters.forEach((toaster) => {
-        toaster.store.rendered.forEach((toast) => toast.update(rest));
-        toaster.store.queued.forEach((toast) => toast.update(rest));
+        const resolvedToast = {
+          ...rest,
+          type: typeof rest.body === "function" ? "__custom" : rest.type,
+          body: typeof rest.body === "function" ? rest.body() : rest.body,
+        } as Config;
+
+        toaster.store.rendered.forEach((toast) => toast.update(resolvedToast));
+        toaster.store.queued.forEach((toast) => toast.update(resolvedToast));
       });
 
       return;
@@ -108,8 +116,14 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const { store } = toaster;
 
     if (toasterId && !id) {
-      toaster.store.rendered.forEach((toast) => toast.update(rest));
-      toaster.store.queued.forEach((toast) => toast.update(rest));
+      const resolvedToast = {
+        ...rest,
+        type: typeof rest.body === "function" ? "__custom" : rest.type,
+        body: typeof rest.body === "function" ? rest.body() : rest.body,
+      } as Config;
+
+      toaster.store.rendered.forEach((toast) => toast.update(resolvedToast));
+      toaster.store.queued.forEach((toast) => toast.update(resolvedToast));
 
       return;
     }
@@ -119,7 +133,15 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     if (!toast) return; // Should we warn or throw here?
 
-    const filteredOptions = filterOptions(rest as Partial<Config> | undefined);
+    const resolvedToast = {
+      ...rest,
+      type: typeof rest.body === "function" ? "__custom" : rest.type,
+      body: resolveBody(rest.body, toast),
+    } as Config;
+
+    const filteredOptions = filterOptions(
+      resolvedToast as Partial<Config> | undefined,
+    );
 
     toast.update(filteredOptions);
 

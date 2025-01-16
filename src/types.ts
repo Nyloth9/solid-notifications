@@ -25,7 +25,7 @@ type ToastType =
   | "loading"
   | "warning"
   | "info"
-  | "custom";
+  | "__custom"; // __custom is a reserved type for toasts with function as body
 
 export interface ToastOptions
   extends Partial<
@@ -46,11 +46,13 @@ export interface ToastOptions
     >
   > {
   toasterId?: string;
-  type?: Exclude<ToastType, "custom">;
+  type?: Exclude<ToastType, "__custom">;
 }
 
 export type UpdateToastOptions = RequireAtLeastOne<
-  ToastOptions & { body?: string | JSX.Element }
+  ToastOptions & {
+    body?: string | JSX.Element | ((toast?: Toast) => JSX.Element | string);
+  }
 >;
 
 export interface ToasterContextType {
@@ -62,7 +64,7 @@ export interface ToasterContextType {
 
 export interface ToastActions {
   notify: (
-    body?: string | JSX.Element | ((toast: Toast) => JSX.Element),
+    body?: string | JSX.Element | ((toast: Toast) => JSX.Element | string),
     options?: ToastOptions,
   ) => {
     id: string;
