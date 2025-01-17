@@ -18,16 +18,20 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 render(() => {
   const [offsetX, setOffsetX] = createSignal(64);
-  const [className, setClassName] = createSignal("hehehe");
+  const [show, setShow] = createSignal(true);
 
   setTimeout(() => {
-    setOffsetX(16);
-    setClassName("sn-toast");
-  }, 2000);
+    setOffsetX((prev) => prev + 300);
+    setShow(false);
+  }, 3000);
 
   return (
     <ToastProvider>
-      <Toaster id="toaster-1" offsetX={offsetX()} class={className()} />
+      <Toaster
+        id="toaster-1"
+        offsetX={offsetX()}
+        progressBar={{ showDefault: show() }}
+      />
       {/*   <Toaster id="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />
     </ToastProvider>

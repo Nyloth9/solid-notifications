@@ -2,11 +2,23 @@ import { createRoot, createSignal, onMount, type Component } from "solid-js";
 import { useToast } from "../src/core/Context";
 
 const App: Component = () => {
+  const [randomText, setRandomText] = createSignal("Hello World!");
   const { notify, update, dismiss, remove, getQueue, clearQueue } =
     useToast("toaster-1");
 
   const { dismiss: globalDismiss } = useToast();
 
+  /*   onMount(() => {
+    const interval = setInterval(() => {
+      setRandomText(
+        Math.random().toString(36).substring(2, 15) +
+          Math.random().toString(36).substring(2, 15),
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);
+  });
+ */
   return (
     <div>
       <div class="container mx-auto p-4">
@@ -23,6 +35,7 @@ const App: Component = () => {
                 createRoot(() => (
                   <div>
                     <div>{`Solid Notifications, new toast created!`}</div>
+                    {/*    <div>{randomText()}</div> */}
                     {/*  <div class="-mx-2 flex gap-1">
                       <button
                         class={
@@ -54,21 +67,25 @@ const App: Component = () => {
                 },
               );
 
-              /*   setTimeout(() => {
+              /*     setTimeout(() => {
+                update({ id, class: "warning" });
+              }, 3000); */
+
+              setTimeout(() => {
                 update({ id, type: "warning" });
-              }, 3000);
+              }, 1000);
 
               setTimeout(() => {
                 update({ id, type: "error" });
-              }, 6000);
+              }, 4000);
 
               setTimeout(() => {
                 update({ id, type: "info" });
-              }, 9000);
+              }, 6000);
 
               setTimeout(() => {
                 update({ id, type: "loading" });
-              }, 12000); */
+              }, 12000);
 
               /*    setTimeout(() => {
                 update({

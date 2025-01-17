@@ -32,7 +32,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     }
 
     const toaster = context.getToaster(options?.toasterId);
-    const { id: toasterId, store, setStore, toasterConfig } = toaster;
+    const { id: toasterId, store, setStore } = toaster;
 
     const toastId = createToastId(
       (toaster.counter += 1),
@@ -54,7 +54,6 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const newToast = new Toast({
       store,
       setStore,
-      toasterConfig,
       toastConfig: {
         ...filteredOptions,
         contentType: typeof content === "function" ? "dynamic" : "static",

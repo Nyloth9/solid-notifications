@@ -24,18 +24,19 @@ export default function Toaster(props: ToasterOptions) {
 
   createEffect(
     on(
-      () => store.toasterConfig,
-      () => {
-        store.rendered.forEach((toast) => {
-          toast.update(store.toasterConfig);
-        });
+      () => ({ ...props }),
+      (newConfig) => {
+        setStore("toasterConfig", merge(store.toasterConfig, newConfig));
+    /*     store.rendered.forEach((toast) => {
+          toast.update(newConfig);
+        }); */
       },
     ),
   );
 
   createEffect(() => {
     /*** Here we make the toasterConfig reactive (if a signal is used as a prop for example) ***/
-    setStore("toasterConfig", merge(store.toasterConfig, props));
+    // setStore("toasterConfig", merge(store.toasterConfig, props));
 
     if (store.isWindowBlurred && !store.toasterConfig.renderOnWindowInactive)
       return;

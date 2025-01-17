@@ -1,4 +1,12 @@
-import { batch, JSX, onMount, Show } from "solid-js";
+import {
+  batch,
+  createEffect,
+  createRoot,
+  JSX,
+  on,
+  onMount,
+  Show,
+} from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
@@ -119,6 +127,22 @@ class Toast {
       return this.setStore("queued", [this, ...this.store.queued]);
 
     this.setStore("rendered", [this, ...this.store.rendered]);
+
+    createRoot(() =>
+      createEffect(
+        on(
+          () => ({ ...this.store.toasterConfig }),
+          (newConfig) => {
+            const { id, offsetX, offsetY, positionX, positionY, ...rest } =
+              newConfig;
+
+            //  we need to clean up toaster specific config (for example id, offsetX, offsetY, positionX, positionY)
+
+            this.update(merge(this.toastConfig, rest));
+          },
+        ),
+      ),
+    );
   }
 
   private lifecycle() {
