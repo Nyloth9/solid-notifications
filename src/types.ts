@@ -2,7 +2,7 @@ import { Accessor, JSX } from "solid-js";
 import Toast from "./core/Toast";
 import { SetStoreFunction } from "solid-js/store";
 
-export interface TStore {
+export interface ToasterStore {
   rendered: Toast[];
   queued: Toast[];
   isWindowBlurred: boolean;
@@ -10,8 +10,8 @@ export interface TStore {
 
 export interface Toaster {
   id?: string;
-  store: TStore;
-  setStore: SetStoreFunction<TStore>;
+  store: ToasterStore;
+  setStore: SetStoreFunction<ToasterStore>;
   toasterConfig: Config;
   counter: number;
 }
@@ -95,8 +95,8 @@ export interface ToastActions {
 }
 
 export interface ToastConstructor {
-  store: TStore;
-  setStore: SetStoreFunction<TStore>;
+  store: ToasterStore;
+  setStore: SetStoreFunction<ToasterStore>;
   toastConfig?: Partial<Config>;
   toasterConfig: Config;
 }
