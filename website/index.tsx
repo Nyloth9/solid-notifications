@@ -18,14 +18,16 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 render(() => {
   const [offsetX, setOffsetX] = createSignal(64);
+  const [className, setClassName] = createSignal("hehehe");
 
   setTimeout(() => {
     setOffsetX(16);
+    setClassName("sn-toast");
   }, 2000);
 
   return (
     <ToastProvider>
-      <Toaster id="toaster-1" offsetX={offsetX()} />
+      <Toaster id="toaster-1" offsetX={offsetX()} class={className()} />
       {/*   <Toaster id="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />
     </ToastProvider>

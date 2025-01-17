@@ -24,13 +24,13 @@ export default function Toaster(props: ToasterOptions) {
   });
 
   createEffect(() => {
-    /** Here we make the toasterConfig reactive (if a signal is used as a prop for example) */
+    /*** Here we make the toasterConfig reactive (if a signal is used as a prop for example) ***/
     setStore("toasterConfig", merge(store.toasterConfig, props));
 
     if (store.isWindowBlurred && !store.toasterConfig.renderOnWindowInactive)
       return;
 
-    /** Here we manage putting toasts from queue to render */
+    /*** Here we manage putting toasts from queue to render ***/
     const shouldMoveFromQueueToRendered =
       store.toasterConfig.limit &&
       store.queued.length &&
