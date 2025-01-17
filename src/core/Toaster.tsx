@@ -1,4 +1,4 @@
-import { batch, createEffect, For, onCleanup, onMount } from "solid-js";
+import { batch, createEffect, For, on, onCleanup, onMount } from "solid-js";
 import { useService } from "./Context";
 import { merge, getToasterStyle } from "../utils/helpers";
 import { ToasterOptions, ToasterStore } from "../types";
@@ -19,9 +19,19 @@ export default function Toaster(props: ToasterOptions) {
     id: props.id,
     store,
     setStore,
-    toasterConfig: store.toasterConfig,
     counter: 0,
   });
+
+  createEffect(
+    on(
+      () => store.toasterConfig,
+      () => {
+        store.rendered.forEach((toast) => {
+          toast.update(store.toasterConfig);
+        });
+      },
+    ),
+  );
 
   createEffect(() => {
     /*** Here we make the toasterConfig reactive (if a signal is used as a prop for example) ***/

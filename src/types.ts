@@ -13,7 +13,6 @@ export interface Toaster {
   id?: string;
   store: ToasterStore;
   setStore: SetStoreFunction<ToasterStore>;
-  toasterConfig: Config;
   counter: number;
 }
 
@@ -99,7 +98,6 @@ export interface ToastConstructor {
   store: ToasterStore;
   setStore: SetStoreFunction<ToasterStore>;
   toastConfig?: Partial<Config>;
-  toasterConfig: Config;
 }
 
 export interface ProgressControls {

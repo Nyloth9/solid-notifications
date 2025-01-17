@@ -53,15 +53,19 @@ function getToasterStyle(positionX: "left" | "right" | "center") {
 function setStartingOffset(
   /*** We need to set starting offset because otherwise newly created toast will always appear at positionY of the toaster and then fly to the updated offset (when reversed order is true this is a problem) ***/
   store: ToasterStore,
-  { offsetY, gutter, reverseToastOrder }: Config,
 ) {
-  if (!reverseToastOrder) return offsetY;
+  if (!store.toasterConfig.reverseToastOrder)
+    return store.toasterConfig.offsetY;
 
   const precedingToast = store.rendered[0];
-  if (!precedingToast) return offsetY; // Means there is only one toast so we can safely return offsetY
+  if (!precedingToast) return store.toasterConfig.offsetY; // Means there is only one toast so we can safely return offsetY
 
   // To get the new offset, we only need info about the preceding toast
-  return precedingToast.offset + precedingToast.ref?.clientHeight! + gutter;
+  return (
+    precedingToast.offset +
+    precedingToast.ref?.clientHeight! +
+    store.toasterConfig.gutter
+  );
 }
 
 function merge(target: any, source: any, omit: string[] = []) {

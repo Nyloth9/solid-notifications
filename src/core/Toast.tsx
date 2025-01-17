@@ -92,9 +92,9 @@ class Toast {
   constructor(args: ToastConstructor) {
     this.store = args.store;
     this.setStore = args.setStore;
-    this.toasterConfig = args.toasterConfig;
-    this.toastConfig = merge(args.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
-    this.offset = setStartingOffset(args.store, args.toasterConfig); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
+    this.toasterConfig = args.store.toasterConfig; // We need to have access to the toaster config in the toast
+    this.toastConfig = merge(args.store.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
+    this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
     this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
     return createMutable(this); // This is how we make the class reactive
   }
@@ -141,6 +141,8 @@ class Toast {
   }
 
   update(args: Partial<Config>) {
+    console.log("Updating with", args);
+
     // Combine the args with the existing toast config
     const merged = merge(this.toastConfig, args);
     Object.assign(this.toastConfig, merged);
