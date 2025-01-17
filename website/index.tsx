@@ -19,10 +19,14 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 render(() => {
   const [offsetX, setOffsetX] = createSignal(64);
   const [show, setShow] = createSignal(true);
+  const [x, setX] = createSignal(false);
+  const [y, setY] = createSignal(false);
 
   setTimeout(() => {
     setOffsetX((prev) => prev + 300);
     setShow(false);
+    setX(true);
+    setY(true);
   }, 3000);
 
   return (
@@ -31,6 +35,9 @@ render(() => {
         id="toaster-1"
         offsetX={offsetX()}
         progressBar={{ showDefault: show() }}
+        dismissButton={{ showDefault: show() }}
+        dismissOnClick={x()}
+        dragToDismiss={y()}
       />
       {/*   <Toaster id="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />

@@ -22,17 +22,20 @@ export default function Toaster(props: ToasterOptions) {
     counter: 0,
   });
 
-  createEffect(
-    on(
-      () => ({ ...props }),
-      (newConfig) => {
-        setStore("toasterConfig", merge(store.toasterConfig, newConfig));
-    /*     store.rendered.forEach((toast) => {
+  onMount(() => {
+    createEffect(
+      on(
+        () => props,
+        (newConfig) => {
+          console.log("newConfig", newConfig);
+          // setStore("toasterConfig", merge(store.toasterConfig, newConfig));
+          /*     store.rendered.forEach((toast) => {
           toast.update(newConfig);
         }); */
-      },
-    ),
-  );
+        },
+      ),
+    );
+  });
 
   createEffect(() => {
     /*** Here we make the toasterConfig reactive (if a signal is used as a prop for example) ***/
