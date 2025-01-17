@@ -16,7 +16,9 @@ export interface Toaster {
   counter: number;
 }
 
-export type RegisteredToaster = Omit<Toaster, "toasterId"> & { toasterId: string };
+export type RegisteredToaster = Omit<Toaster, "toasterId"> & {
+  toasterId: string;
+};
 
 type ToastType =
   | "default"
@@ -113,7 +115,7 @@ export interface Config {
   id?: string;
   content?: JSX.Element | string;
   contentType?: "static" | "dynamic";
-  toasterId: string;
+  toasterId?: string;
   type: ToastType;
   duration: number | false;
   onEnter: string | undefined;
@@ -138,11 +140,9 @@ export interface Config {
   enterCallback: (() => void) | null;
   updateCallback: (() => void) | null;
   exitCallback: ((reason?: boolean | string) => void) | null;
-  dismissButton: {
-    showDefault?: boolean;
-    style?: JSX.CSSProperties;
-    class?: string;
-  };
+  showDismissButton: boolean;
+  dismissButtonStyle: JSX.CSSProperties | undefined;
+  dismissButtonClass: string;
   dismissOnClick: boolean;
   toasterStyle: Omit<
     JSX.CSSProperties,
@@ -154,19 +154,15 @@ export interface Config {
     | "align-items"
     | "pointer-events"
   > | null;
-  progressBar: {
-    showDefault?: boolean;
-    style?: JSX.CSSProperties;
-    class?: string;
-  };
+  showProgressBar: boolean;
+  progressBarStyle: JSX.CSSProperties | undefined;
+  progressBarClass: string;
   showIcon: boolean;
   icon: ((type: ToastType) => JSX.Element) | JSX.Element | null;
   dragToDismiss: boolean;
   dragTreshold: number;
-  aria: {
-    ariaLive: "off" | "assertive" | "polite";
-    role: "status" | "alert";
-  };
+  ariaLive: "off" | "assertive" | "polite";
+  role: "status" | "alert";
 }
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<

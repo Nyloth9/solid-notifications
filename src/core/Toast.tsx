@@ -211,8 +211,8 @@ class Toast {
         data-role="toast"
         id={this.toastConfig.id}
         ref={(el) => (this.ref = el)}
-        role={this.toastConfig.aria.role}
-        aria-live={this.toastConfig.aria.ariaLive}
+        role={this.toastConfig.role}
+        aria-live={this.toastConfig.ariaLive}
         onClick={(e) => handleClick(e, this)}
         onMouseEnter={handleMouseEnter.bind(null, this)}
         onMouseLeave={handleMouseLeave.bind(null, this)}

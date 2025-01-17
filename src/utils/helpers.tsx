@@ -309,17 +309,14 @@ function handleMouseLeave(toast: Toast) {
 }
 
 function renderDismissButton(toast: Toast) {
-  if (
-    toast.toastConfig.dismissOnClick ||
-    !toast.toastConfig.dismissButton.showDefault
-  )
+  if (toast.toastConfig.dismissOnClick || !toast.toastConfig.showDismissButton)
     return null;
 
   return (
     <button
       aria-label="Close notification"
-      class={toast.toastConfig.dismissButton.class}
-      style={toast.toastConfig.dismissButton.style}
+      class={toast.toastConfig.dismissButtonClass}
+      style={toast.toastConfig.dismissButtonStyle}
       onClick={() => toast.dismiss()}
     >
       <svg
@@ -343,17 +340,17 @@ function renderDismissButton(toast: Toast) {
 }
 
 function renderProgressBar(toast: Toast) {
-  if (!toast.toastConfig.progressBar.showDefault || !toast.toastConfig.duration)
+  if (!toast.toastConfig.showProgressBar || !toast.toastConfig.duration)
     return null;
 
   return (
     <div
       data-role="progress"
-      class={toast.toastConfig.progressBar.class}
+      class={toast.toastConfig.progressBarClass}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",
-        ...toast.toastConfig.progressBar.style,
+        ...toast.toastConfig.progressBarStyle,
       }}
     />
   );
