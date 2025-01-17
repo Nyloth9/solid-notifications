@@ -1,16 +1,16 @@
 import { batch, createEffect, For, onCleanup, onMount } from "solid-js";
 import { useService } from "./Context";
-import { customMerge, getToasterStyle } from "../utils/helpers";
-import { Config, ToasterOptions, ToasterStore } from "../types";
+import { merge, getToasterStyle } from "../utils/helpers";
+import { ToasterOptions, ToasterStore } from "../types";
 import { defaultConfig } from "../config/defaultConfig";
 import { createStore } from "solid-js/store";
 
 export default function Toaster(props: ToasterOptions) {
-  const toasterConfig: Config = customMerge(defaultConfig, props);
   const { registerToaster, unregisterToaster } = useService();
   const [store, setStore] = createStore<ToasterStore>({
     queued: [],
     rendered: [],
+    toasterConfig: merge(defaultConfig, props),
     isWindowBlurred:
       typeof document !== "undefined" && document.visibilityState === "hidden",
   });
@@ -19,18 +19,22 @@ export default function Toaster(props: ToasterOptions) {
     id: props.id,
     store,
     setStore,
-    toasterConfig,
+    toasterConfig: store.toasterConfig,
     counter: 0,
   });
 
   createEffect(() => {
-    if (store.isWindowBlurred && !toasterConfig.renderOnWindowInactive) return;
+    /** Here we make the toasterConfig reactive (if a signal is used as a prop for example) */
+    setStore("toasterConfig", merge(store.toasterConfig, props));
+
+    if (store.isWindowBlurred && !store.toasterConfig.renderOnWindowInactive)
+      return;
 
     /** Here we manage putting toasts from queue to render */
     const shouldMoveFromQueueToRendered =
-      toasterConfig.limit &&
+      store.toasterConfig.limit &&
       store.queued.length &&
-      store.rendered.length < toasterConfig.limit;
+      store.rendered.length < store.toasterConfig.limit;
 
     if (shouldMoveFromQueueToRendered) {
       const [nextToast, ...rest] = store.queued;
@@ -41,19 +45,20 @@ export default function Toaster(props: ToasterOptions) {
     }
 
     /*** Here we implement the reversing of the toast order if that options is enabled ***/
-    const resolvedToasts = toasterConfig.reverseToastOrder
+    const resolvedToasts = store.toasterConfig.reverseToastOrder
       ? [...store.rendered].reverse()
       : store.rendered;
 
     /*** Here we reorder toasts when there are changes like toast created or toast updated ***/
-    let accumulatedOffset = toasterConfig.offsetY; // We want to render the first toast at the same height as positionY offset
+    let accumulatedOffset = store.toasterConfig.offsetY; // We want to render the first toast at the same height as positionY offset
 
     resolvedToasts.forEach((toast) => {
       if (toast.ref) {
         const _content = toast.toastConfig.content; // This ensures toast is being tracked for reactivity
         toast.offset = accumulatedOffset;
 
-        accumulatedOffset += toast.ref.clientHeight + toasterConfig.gutter;
+        accumulatedOffset +=
+          toast.ref.clientHeight + store.toasterConfig.gutter;
       }
     });
   });
@@ -61,14 +66,14 @@ export default function Toaster(props: ToasterOptions) {
   const handleWindowBlur = () => {
     setStore("isWindowBlurred", true);
 
-    if (!toasterConfig.pauseOnWindowInactive) return;
+    if (!store.toasterConfig.pauseOnWindowInactive) return;
     store.rendered.forEach((toast) => toast.progressManager.pause()); // If you hover over the toast while the window is blurred , it will start the progress again (to avoid that we check against isWindowBlurred on mouse enter)
   };
 
   const handleWindowFocus = () => {
     setStore("isWindowBlurred", false);
 
-    if (!toasterConfig.pauseOnWindowInactive) return;
+    if (!store.toasterConfig.pauseOnWindowInactive) return;
     store.rendered.forEach((toast) => {
       if (toast.isPausedByUser) return; // If the user paused the timer, we dont want to start it again
       toast.progressManager.play();
@@ -94,8 +99,8 @@ export default function Toaster(props: ToasterOptions) {
           : `moon-toast-toaster:${toasterId}`
       }
       style={{
-        ...toasterConfig.toasterStyle,
-        "justify-content": getToasterStyle(toasterConfig.positionX),
+        ...store.toasterConfig.toasterStyle,
+        "justify-content": getToasterStyle(store.toasterConfig.positionX),
       }}
       class="sn-toaster"
     >

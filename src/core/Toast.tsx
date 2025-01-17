@@ -3,7 +3,7 @@ import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
   applyState,
-  customMerge,
+  merge,
   setStartingOffset,
   createProgressManager,
   handleClick,
@@ -93,7 +93,7 @@ class Toast {
     this.store = args.store;
     this.setStore = args.setStore;
     this.toasterConfig = args.toasterConfig;
-    this.toastConfig = customMerge(args.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
+    this.toastConfig = merge(args.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.store, args.toasterConfig); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
     this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
     return createMutable(this); // This is how we make the class reactive
@@ -142,7 +142,7 @@ class Toast {
 
   update(args: Partial<Config>) {
     // Combine the args with the existing toast config
-    const merged = customMerge(this.toastConfig, args);
+    const merged = merge(this.toastConfig, args);
     Object.assign(this.toastConfig, merged);
 
     this.toastConfig.updateCallback?.();

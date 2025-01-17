@@ -64,7 +64,7 @@ function setStartingOffset(
   return precedingToast.offset + precedingToast.ref?.clientHeight! + gutter;
 }
 
-function customMerge(target: any, source: any, omit: string[] = []) {
+function merge(target: any, source: any, omit: string[] = []) {
   const isPlainObject = (obj: any) =>
     obj && typeof obj === "object" && obj.constructor === Object;
 
@@ -76,7 +76,7 @@ function customMerge(target: any, source: any, omit: string[] = []) {
     return Object.keys(source).reduce(
       (acc, key) => {
         if (typeof key !== "symbol") {
-          acc[key] = customMerge(target[key], source[key]);
+          acc[key] = merge(target[key], source[key]);
         }
 
         return acc;
@@ -427,7 +427,7 @@ export {
   resolveBody,
   getToasterStyle,
   setStartingOffset,
-  customMerge,
+  merge,
   filterOptions,
   applyState,
   createProgressManager,

@@ -5,6 +5,7 @@ import { SetStoreFunction } from "solid-js/store";
 export interface ToasterStore {
   rendered: Toast[];
   queued: Toast[];
+  toasterConfig: Config;
   isWindowBlurred: boolean;
 }
 

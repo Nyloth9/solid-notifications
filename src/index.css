@@ -18,9 +18,9 @@
   /* Toast */
   --sn-toast-max-width: 344px;
   --sn-toast-min-width: 244px;
-  --sn-toast-gap: 16px;
+  --sn-toast-gap: 14px;
   --sn-toast-text-color: #121826;
-  --sn-toast-padding: 12px 16px 11px 16px;
+  --sn-toast-padding: 12px 14px 11px 14px;
 
   /* Dismiss Button */
   --sn-dismiss-btn-color: #9ca3af;
@@ -42,9 +42,11 @@
 
 *[data-role="toast"] {
   pointer-events: all;
-  will-change: transform, opacity, top, bottom;
+  position: absolute;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  will-change: transform, opacity, top, bottom, left, right;
+  transition-property: transform, opacity, top, bottom, left, right;
 }
 
 *[data-role="progress"] {
@@ -70,8 +72,6 @@
 .sn-toast-wrapper {
   box-sizing: border-box;
   overflow: hidden;
-  position: absolute;
-  transition-property: transform, opacity, top, bottom;
   z-index: var(--sn-z-index);
   transition-duration: var(--sn-wrapper-transition-duration);
   border-radius: var(--sn-wrapper-border-radius);
