@@ -32,7 +32,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     }
 
     const toaster = context.getToaster(options?.toasterId);
-    const { id: toasterId, store, setStore } = toaster;
+    const { toasterId, store, setStore } = toaster;
 
     const toastId = createToastId(
       (toaster.counter += 1),
@@ -179,7 +179,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
         throw new Error(
           options.toasterId === "__default"
             ? `Failed to dismiss toast: No toast found with the provided ID (${options.id}).`
-            : `Failed to dismiss toast: No toast found with the provided ID (${options.id}) in the toaster with the ID "${options.toasterId}".`,
+            : `Failed to dismiss toast: No toast found with the provided ID (${options.id}) in the toaster with the toasterId "${options.toasterId}".`,
         );
       }
 
@@ -233,7 +233,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
         throw new Error(
           options.toasterId === "__default"
             ? `Failed to remove toast: No toast found with the provided ID (${options.id}).`
-            : `Failed to remove toast: No toast found with the provided ID (${options.id}) in the toaster with the ID "${options.toasterId}".`,
+            : `Failed to remove toast: No toast found with the provided ID (${options.id}) in the toaster with the toasterId "${options.toasterId}".`,
         );
       }
 

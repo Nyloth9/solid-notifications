@@ -32,7 +32,7 @@ render(() => {
   return (
     <ToastProvider>
       <Toaster
-        id="toaster-1"
+        toasterId="toaster-1"
         offsetX={offsetX()}
         progressBar={{ showDefault: show() }}
         dismissButton={{ showDefault: show() }}

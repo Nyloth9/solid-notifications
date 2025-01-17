@@ -12,12 +12,12 @@ export function ToastProvider(props: { children: JSX.Element }) {
     return toasterService.registerToaster(toasters, toaster);
   }
 
-  function getToaster(id?: string) {
-    return toasterService.getToaster(toasters, id);
+  function getToaster(toasterId?: string) {
+    return toasterService.getToaster(toasters, toasterId);
   }
 
-  function unregisterToaster(id: string) {
-    return toasterService.unregisterToaster(toasters, id);
+  function unregisterToaster(toasterId: string) {
+    return toasterService.unregisterToaster(toasters, toasterId);
   }
 
   return (

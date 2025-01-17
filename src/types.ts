@@ -10,13 +10,13 @@ export interface ToasterStore {
 }
 
 export interface Toaster {
-  id?: string;
+  toasterId?: string;
   store: ToasterStore;
   setStore: SetStoreFunction<ToasterStore>;
   counter: number;
 }
 
-export type RegisteredToaster = Omit<Toaster, "id"> & { id: string };
+export type RegisteredToaster = Omit<Toaster, "toasterId"> & { toasterId: string };
 
 type ToastType =
   | "default"
@@ -26,7 +26,9 @@ type ToastType =
   | "warning"
   | "info";
 
-export type ToasterOptions = Partial<Omit<Config, "content" | "contentType">>;
+export type ToasterOptions = Partial<
+  Omit<Config, "content" | "contentType" | "id">
+>;
 
 export interface ToastOptions
   extends Partial<
@@ -111,6 +113,7 @@ export interface Config {
   id?: string;
   content?: JSX.Element | string;
   contentType?: "static" | "dynamic";
+  toasterId: string;
   type: ToastType;
   duration: number | false;
   onEnter: string | undefined;

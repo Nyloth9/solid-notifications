@@ -1,12 +1,4 @@
-import {
-  batch,
-  createEffect,
-  createRoot,
-  JSX,
-  on,
-  onMount,
-  Show,
-} from "solid-js";
+import { batch, JSX, onMount, Show } from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {

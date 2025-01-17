@@ -96,6 +96,7 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
   if (!options) return {};
 
   const keysToRemove: (keyof Config)[] = [
+    "toasterId",
     "positionX",
     "positionY",
     "offsetX",

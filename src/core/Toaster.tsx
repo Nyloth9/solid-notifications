@@ -15,31 +15,15 @@ export default function Toaster(props: ToasterOptions) {
       typeof document !== "undefined" && document.visibilityState === "hidden",
   });
 
-  const { id: toasterId } = registerToaster({
-    id: props.id,
+  const { toasterId } = registerToaster({
+    toasterId: props.toasterId,
     store,
     setStore,
     counter: 0,
   });
 
-  onMount(() => {
-    createEffect(
-      on(
-        () => props,
-        (newConfig) => {
-          console.log("newConfig", newConfig);
-          // setStore("toasterConfig", merge(store.toasterConfig, newConfig));
-          /*     store.rendered.forEach((toast) => {
-          toast.update(newConfig);
-        }); */
-        },
-      ),
-    );
-  });
-
   createEffect(() => {
     /*** Here we make the toasterConfig reactive (if a signal is used as a prop for example) ***/
-    // setStore("toasterConfig", merge(store.toasterConfig, props));
 
     if (store.isWindowBlurred && !store.toasterConfig.renderOnWindowInactive)
       return;
