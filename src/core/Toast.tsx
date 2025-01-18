@@ -77,10 +77,10 @@ import {
 
 function mockProps(store: any) {
   /*** Here we are transforming the toaster store (a proxy) to a props object (plain object with getters) so we can
-   * take advantage of mergeProps and keep reactivity, thus allowing us to use reactive props on the <Toaster /> component
-   * that will be merged with the per toast config. Otherwise the merge will just create a plain object and we will lose reactivity.
-   * We do it like this because if we try doing it with a Proxy, it will not work because we can't read Symbol(solid-proxy) and
-   * can't point it to the toaster store when appropriate.
+   * take advantage of mergeProps and keep reactivity, thus allowing us to use reactive props on the <Toaster /> component.
+   * Otherwise if we just merge the toaster store with toast options, the merge will just create a plain object and we will lose reactivity.
+   * If we try to achieve the same through a Proxy, it will not work because we can't read the requested key "Symbol(solid-proxy)" and thus
+   * can't point it to the relevant source (toastConfig or toasterConfig) depending on the key.
    ***/
 
   const props: Record<string, any> = {};
