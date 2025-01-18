@@ -441,6 +441,32 @@ export {
   renderDismissButton,
   renderProgressBar,
   renderIcon,
+  createMergedConfig,
 };
 
+function createMergedConfig(toastConfig: any, toasterConfig: any) {
+  return new Proxy(
+    {},
+    {
+      get(target, prop: string) {
+        // Check if the property exists in toastConfig
+        if (prop in toastConfig) {
+          return toastConfig[prop];
+        }
 
+        // If not, check in toasterConfig
+        if (prop in toasterConfig) {
+          return toasterConfig[prop];
+        }
+
+        // If the property doesn't exist in both, return undefined
+        return undefined;
+      },
+      set(target, prop: string, value) {
+        // If the property is being set, update the toastConfig
+        toastConfig[prop] = value;
+        return true;
+      },
+    },
+  );
+}

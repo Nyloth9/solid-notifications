@@ -13,6 +13,7 @@ import {
   renderProgressBar,
   renderIcon,
   createDragManager,
+  createMergedConfig,
 } from "../utils/helpers";
 
 /***
@@ -95,6 +96,7 @@ class Toast {
     this.toastConfig = merge(args.store.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
     this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
+    this.x = createMergedConfig(args.toastConfig, args.store.toasterConfig);
     return createMutable(this); // This is how we make the class reactive
   }
 
@@ -119,6 +121,8 @@ class Toast {
       return this.setStore("queued", [this, ...this.store.queued]);
 
     this.setStore("rendered", [this, ...this.store.rendered]);
+
+    console.log(this.x);
   }
 
   private lifecycle() {
@@ -221,7 +225,7 @@ class Toast {
         onTouchEnd={this.dragManager.handleDragEnd}
         class={`${this.toastConfig.wrapperClass} ${applyState(this)}`.trim()}
         style={{
-          ...this.toastConfig.wrapperStyle,
+          ...this.x.wrapperStyle,
           [this.store.toasterConfig.positionX]:
             `${this.store.toasterConfig.offsetX}px`,
           [this.store.toasterConfig.positionY]: `${this.offset}px`,
