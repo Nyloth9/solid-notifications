@@ -75,7 +75,14 @@ import {
  * - custom toast (function as content argument), will be unstyled
  */
 
-function transformStoreToProps(store: any) {
+function mockProps(store: any) {
+  /*** Here we are transforming the toaster store (a proxy) to a props object (plain object with getters) so we can
+   * take advantage of mergeProps and keep reactivity, thus allowing us to use reactive props on the <Toaster /> component
+   * that will be merged with the per toast config. Otherwise the merge will just create a plain object and we will lose reactivity.
+   * We do it like this because if we try doing it with a Proxy, it will not work because we can't read Symbol(solid-proxy) and
+   * can't point it to the toaster store when appropriate.
+   ***/
+
   const props: Record<string, any> = {};
 
   // Dynamically create getters for each key in the store
@@ -109,16 +116,10 @@ class Toast {
 
     console.log(
       "mega merge; ",
-      mergeProps(
-        transformStoreToProps(args.store.toasterConfig),
-        args.toastConfig,
-      ),
+      mergeProps(mockProps(args.store.toasterConfig), args.toastConfig),
     );
 
-    this.x = mergeProps(
-      transformStoreToProps(args.store.toasterConfig),
-      args.toastConfig,
-    );
+    this.x = mergeProps(mockProps(args.store.toasterConfig), args.toastConfig);
     this.toastConfig = args.toastConfig; // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
     this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
