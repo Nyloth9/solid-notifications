@@ -1,4 +1,4 @@
-import { batch, JSX, onMount, Show } from "solid-js";
+import { batch, createMemo, JSX, mergeProps, onMount, Show } from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
@@ -13,6 +13,7 @@ import {
   renderProgressBar,
   renderIcon,
   createDragManager,
+  createToastConfigDynamically,
 } from "../utils/helpers";
 
 /***
@@ -92,6 +93,10 @@ class Toast {
   constructor(args: ToastConstructor) {
     this.store = args.store;
     this.setStore = args.setStore;
+    console.log(
+      createToastConfigDynamically(args.toastConfig, args.store.toasterConfig),
+    );
+
     this.toasterConfig = args.store.toasterConfig; // We need to have access to the toaster config in the toast
     this.toastConfig = merge(args.store.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)

@@ -1,6 +1,13 @@
-import { batch, createEffect, For, on, onCleanup, onMount } from "solid-js";
+import {
+  batch,
+  createEffect,
+  For,
+  mergeProps,
+  onCleanup,
+  onMount,
+} from "solid-js";
 import { useService } from "./Context";
-import { merge, getToasterStyle } from "../utils/helpers";
+import { getToasterStyle } from "../utils/helpers";
 import { ToasterOptions, ToasterStore } from "../types";
 import { defaultConfig } from "../config/defaultConfig";
 import { createStore } from "solid-js/store";
@@ -10,7 +17,7 @@ export default function Toaster(props: ToasterOptions) {
   const [store, setStore] = createStore<ToasterStore>({
     queued: [],
     rendered: [],
-    toasterConfig: merge(defaultConfig, props),
+    toasterConfig: mergeProps(defaultConfig, props),
     isWindowBlurred:
       typeof document !== "undefined" && document.visibilityState === "hidden",
   });
@@ -20,6 +27,10 @@ export default function Toaster(props: ToasterOptions) {
     store,
     setStore,
     counter: 0,
+  });
+
+  createEffect(() => {
+    console.log("Props changed, ", {...props});
   });
 
   createEffect(() => {
