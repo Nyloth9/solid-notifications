@@ -27,6 +27,12 @@ render(() => {
       setClass1("1asdasdsad");
       setBg("white");
     }, 3000);
+
+    setTimeout(() => {
+      setOffsetX((prev) => prev + 300);
+      setClass1("sn-toast-wrapper");
+      setBg("purple");
+    }, 6000);
   });
 
   return (

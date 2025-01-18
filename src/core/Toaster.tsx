@@ -29,9 +29,6 @@ export default function Toaster(props: ToasterOptions) {
     counter: 0,
   });
 
-  console.log("Toaster props: ", props);
-  console.log("Merged toaster props: ", mergeProps(defaultConfig, props));
-
   createEffect(() => {
     if (store.isWindowBlurred && !store.toasterConfig.renderOnWindowInactive)
       return;
