@@ -2,74 +2,16 @@ import { createSignal, JSX } from "solid-js";
 import { Config, ProgressControls, ToasterStore, ToastOptions } from "../types";
 import Toast from "../core/Toast";
 
-function createConfigProxy(toastConfig: ToastOptions, toasterConfig: Config) {
-  // Using a Proxy allows us to dynamically resolve toast configuration properties.
-  // If a property doesn't exist in toastConfig, we can check in toasterConfig.
-  // We also use proxy to keep the reactivity of the toasterConfig object.
-  // By doing this, we can use signals as props for the <Toaster /> and the changes will be reflected on the toast
-  // but only for the props that have not been overwritten by the options passed in notify or update.
-
-  return new Proxy(
-    {},
-    {
-      get(target, prop: string) {
-        // Check if the property exists in toastConfig
-        if (prop in toastConfig) {
-          return toastConfig[prop as keyof ToastOptions];
-        }
-
-        // If not, check in toasterConfig
-        if (prop in toasterConfig) {
-          return toasterConfig[prop as keyof Config];
-        }
-
-        return undefined;
-      },
-      set(_target, prop: string, value) {
-        console.warn(
-          `Invoked Proxy.set(). You tried to set ${prop} to ${value}. Are you sure you want to do this?`,
-        );
-        toastConfig[prop as keyof ToastOptions] = value;
-        return true;
-      },
-    },
-  );
-}
-
-function merge(target: any, source: any, omit: string[] = []) {
-  const isPlainObject = (obj: any) =>
-    obj && typeof obj === "object" && obj.constructor === Object;
-
-  if (Array.isArray(target)) {
-    return source; // Replace arrays (otherwise animation keyframes will not work)
-  }
-
-  if (isPlainObject(target) && isPlainObject(source)) {
-    return Object.keys(source).reduce(
-      (acc, key) => {
-        if (typeof key !== "symbol") {
-          acc[key] = merge(target[key], source[key]);
-        }
-
-        return acc;
-      },
-      { ...target },
-    );
-  }
-
-  return source;
-}
-
 function findToast(
   id: string | undefined,
   store: ToasterStore,
 ): Toast | undefined {
   if (!id) return;
 
-  const toast = store.rendered.find((toast) => toast.configProxy.id === id);
+  const toast = store.rendered.find((toast) => toast.toastConfig.id === id);
   if (toast) return toast;
 
-  return store.queued.find((toast) => toast.configProxy.id === id);
+  return store.queued.find((toast) => toast.toastConfig.id === id);
 }
 
 function createToastId(
@@ -94,7 +36,7 @@ function resolveBody(
     // If the content is a function, pass the toast instance to it
     return content(t);
   }
-  return content || `🍞 Toast "${t.configProxy.id}" ready to serve!`;
+  return content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {
@@ -126,6 +68,30 @@ function setStartingOffset(
   );
 }
 
+function merge(target: any, source: any, omit: string[] = []) {
+  const isPlainObject = (obj: any) =>
+    obj && typeof obj === "object" && obj.constructor === Object;
+
+  if (Array.isArray(target)) {
+    return source; // Replace arrays (otherwise animation keyframes will not work)
+  }
+
+  if (isPlainObject(target) && isPlainObject(source)) {
+    return Object.keys(source).reduce(
+      (acc, key) => {
+        if (typeof key !== "symbol") {
+          acc[key] = merge(target[key], source[key]);
+        }
+
+        return acc;
+      },
+      { ...target },
+    );
+  }
+
+  return source;
+}
+
 function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
   if (!options) return {};
 
@@ -153,24 +119,24 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
 }
 
 function applyState(toast: Toast) {
-  const Proxy = toast.configProxy;
+  const toastConfig = toast.toastConfig;
 
   switch (toast.state) {
     case "entering":
-      if (Proxy.onEnter) return Proxy.onEnter;
+      if (toastConfig.onEnter) return toastConfig.onEnter;
     case "idle":
-      if (Proxy.onIdle) return Proxy.onIdle;
+      if (toastConfig.onIdle) return toastConfig.onIdle;
     case "exiting":
-      if (Proxy.onExit) return Proxy.onExit;
+      if (toastConfig.onExit) return toastConfig.onExit;
     default:
-      return `sn-${Proxy.positionX}-${Proxy.positionY}-${toast.state}`;
+      return `sn-${toastConfig.positionX}-${toastConfig.positionY}-${toast.state}`;
   }
 }
 
 function createProgressManager(toast?: Toast, callback?: () => void) {
   const [progress, setProgress] = createSignal(0);
 
-  let duration = toast?.configProxy.duration;
+  let duration = toast?.toastConfig.duration;
   let start = performance.now();
   let elapsed = 0;
   let paused = false;
@@ -262,7 +228,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragStart = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.configProxy.dragToDismiss) return;
+    if (!toast.toastConfig.dragToDismiss) return;
 
     startX = e.touches[0].clientX;
     toast.ref.style.transition = "none";
@@ -271,7 +237,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragMove = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.configProxy.dragToDismiss) return;
+    if (!toast.toastConfig.dragToDismiss) return;
 
     currentX = e.touches[0].clientX - startX;
     toast.ref.style.transform = `translateX(${currentX}px)`;
@@ -279,10 +245,10 @@ function createDragManager(toast: Toast) {
 
   const handleDragEnd = () => {
     if (!toast.ref) return;
-    if (!toast.configProxy.dragToDismiss) return;
+    if (!toast.toastConfig.dragToDismiss) return;
 
     // Check if drag distance is sufficient to dismiss
-    if (Math.abs(currentX) > toast.configProxy.dragTreshold) {
+    if (Math.abs(currentX) > toast.toastConfig.dragTreshold) {
       toast.ref.style.transition = "all 0.3s ease";
       toast.ref.style.transform = `translateX(${currentX > 0 ? "100%" : "-100%"})`;
       toast.ref.style.opacity = "0";
@@ -307,7 +273,7 @@ function createDragManager(toast: Toast) {
 }
 
 function handleClick(e: MouseEvent, toast: Toast) {
-  if (!toast.configProxy.dismissOnClick) return;
+  if (!toast.toastConfig.dismissOnClick) return;
 
   const isInteractiveElement =
     e.target instanceof HTMLElement &&
@@ -319,10 +285,10 @@ function handleClick(e: MouseEvent, toast: Toast) {
 }
 
 function handleMouseEnter(toast: Toast) {
-  if (!toast.configProxy.pauseOnHover) return;
+  if (!toast.toastConfig.pauseOnHover) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.configProxy.pauseOnWindowInactive;
+    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -331,10 +297,10 @@ function handleMouseEnter(toast: Toast) {
 }
 
 function handleMouseLeave(toast: Toast) {
-  if (!toast.configProxy.pauseOnHover) return;
+  if (!toast.toastConfig.pauseOnHover) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.configProxy.pauseOnWindowInactive;
+    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -343,14 +309,14 @@ function handleMouseLeave(toast: Toast) {
 }
 
 function renderDismissButton(toast: Toast) {
-  if (toast.configProxy.dismissOnClick || !toast.configProxy.showDismissButton)
+  if (toast.toastConfig.dismissOnClick || !toast.toastConfig.showDismissButton)
     return null;
 
   return (
     <button
       aria-label="Close notification"
-      class={toast.configProxy.dismissButtonClass}
-      style={toast.configProxy.dismissButtonStyle}
+      class={toast.toastConfig.dismissButtonClass}
+      style={toast.toastConfig.dismissButtonStyle}
       onClick={() => toast.dismiss()}
     >
       <svg
@@ -374,33 +340,33 @@ function renderDismissButton(toast: Toast) {
 }
 
 function renderProgressBar(toast: Toast) {
-  if (!toast.configProxy.showProgressBar || !toast.toastConfig.duration)
+  if (!toast.toastConfig.showProgressBar || !toast.toastConfig.duration)
     return null;
 
   return (
     <div
       data-role="progress"
-      class={toast.configProxy.progressBarClass}
+      class={toast.toastConfig.progressBarClass}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",
-        ...toast.configProxy.progressBarStyle,
+        ...toast.toastConfig.progressBarStyle,
       }}
     />
   );
 }
 
 function renderIcon(toast: Toast) {
-  if (!toast.configProxy.showIcon) return null;
-  if (toast.configProxy.icon) {
-    if (typeof toast.configProxy.icon === "function") {
-      return toast.configProxy.icon(toast.configProxy.type);
+  if (!toast.toastConfig.showIcon) return null;
+  if (toast.toastConfig.icon) {
+    if (typeof toast.toastConfig.icon === "function") {
+      return toast.toastConfig.icon(toast.toastConfig.type);
     }
 
-    return toast.configProxy.icon;
+    return toast.toastConfig.icon;
   }
 
-  switch (toast.configProxy.type) {
+  switch (toast.toastConfig.type) {
     case "success":
       return (
         <svg
@@ -475,5 +441,39 @@ export {
   renderDismissButton,
   renderProgressBar,
   renderIcon,
-  createConfigProxy,
+  createMergedConfig,
 };
+
+function createMergedConfig(toastConfig: ToastOptions, toasterConfig: Config) {
+  // Using a Proxy allows us to dynamically resolve toast configuration properties.
+  // If a property doesn't exist in toastConfig, we can check in toasterConfig.
+  // We also use proxy to keep the reactivity of the toasterConfig object.
+  // By doing this, we can use signals as props for the <Toaster /> and the changes will be reflected on the toast
+  // (only for the props that have not been overridden by the options passed in notify or update).
+
+  return new Proxy(
+    {},
+    {
+      get(target, prop: string) {
+        console.log(target);
+        // Check if the property exists in toastConfig
+        if (prop in toastConfig) {
+          return toastConfig[prop as keyof ToastOptions];
+        }
+
+        // If not, check in toasterConfig
+        if (prop in toasterConfig) {
+          return toasterConfig[prop as keyof Config];
+        }
+
+        // If the property doesn't exist in both, return undefined
+        return undefined;
+      },
+      set(_target, prop: string, value) {
+        // If the property is being set, update the toastConfig
+        toastConfig[prop as keyof ToastOptions] = value;
+        return true;
+      },
+    },
+  );
+}

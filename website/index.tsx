@@ -6,7 +6,7 @@ import "../src/index.css";
 import App from "./App";
 import { ToastProvider } from "../src/core/Context";
 import Toaster from "../src/core/Toaster";
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 
 const root = document.getElementById("root");
 
@@ -21,11 +21,13 @@ render(() => {
   const [class1, setClass1] = createSignal("sn-toast-wrapper");
   const [bg, setBg] = createSignal("red");
 
-  setTimeout(() => {
-    setOffsetX((prev) => prev + 300);
-    setClass1("1asdasdsad");
-    setBg("blue");
-  }, 3000);
+  onMount(() => {
+    setTimeout(() => {
+      setOffsetX((prev) => prev + 300);
+      setClass1("1asdasdsad");
+      setBg("blue");
+    }, 3000);
+  });
 
   return (
     <ToastProvider>

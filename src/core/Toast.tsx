@@ -13,7 +13,7 @@ import {
   renderProgressBar,
   renderIcon,
   createDragManager,
-  createConfigProxy,
+  createMergedConfig,
 } from "../utils/helpers";
 
 /***
@@ -80,8 +80,7 @@ class Toast {
   private setStore;
   private dragManager = createDragManager(this);
   store;
-  toastConfig;
-  configProxy; // Check the createConfigProxy function for more info
+  toastConfig: Config;
   ref: HTMLElement | null = null;
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
@@ -89,17 +88,15 @@ class Toast {
   isPaused = true; // A flag that's exposed for custom toasts. Has no internal use
   isPausedByUser = false; // True if the timer was paused by the user (checked on window blur and mouse hover)
   offset = 0;
+  x: any;
 
   constructor(args: ToastConstructor) {
     this.store = args.store;
     this.setStore = args.setStore;
+    this.toastConfig = merge(args.store.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
     this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
-    this.toastConfig = merge(args.store.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
-    this.configProxy = createConfigProxy(
-      this.toastConfig,
-      args.store.toasterConfig,
-    ) as Config;
+    this.x = createMergedConfig(this.toastConfig, args.store.toasterConfig);
     return createMutable(this); // This is how we make the class reactive
   }
 
@@ -135,10 +132,10 @@ class Toast {
 
     /** If we check for isPausedByUser and blurred before applying state; toast would run entrance animation and never apply idle state (if isPausedByUser or blurred), so we do it here */
     if (this.state !== "idle")
-      setTimeout(() => (this.state = "idle"), this.configProxy.enterDuration);
+      setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
 
     if (this.isPausedByUser) return;
-    if (this.store.isWindowBlurred && this.configProxy.pauseOnWindowInactive)
+    if (this.store.isWindowBlurred && this.toastConfig.pauseOnWindowInactive)
       return;
 
     this.progressManager.play(); // This is where we first start the timer in the toast lifecycle
@@ -151,9 +148,9 @@ class Toast {
     const merged = merge(this.toastConfig, args);
     Object.assign(this.toastConfig, merged);
 
-    this.configProxy.updateCallback?.();
+    this.toastConfig.updateCallback?.();
 
-    this.progressManager.update(this.configProxy.duration); // Update the timer with the new duration
+    this.progressManager.update(this.toastConfig.duration); // Update the timer with the new duration
 
     this.lifecycle(); // Will start the dismiss timer if conditions are met
   }
@@ -161,7 +158,7 @@ class Toast {
   dismiss(reason?: string | boolean, animated = true) {
     /*** The reason can be used as the argument of the exitCallback ***/
     /*** Animated flag is used only for dragEnd event to disable exit animation on dismiss when toast dragged (otherwise it will jump back to start and play exit animation)  */
-    if (this.configProxy.exitCallback) {
+    if (this.toastConfig.exitCallback) {
       switch (reason) {
         case "__expired":
           reason = false; // If the reason was "__expired", that means the toast was dismissed by the Timer
@@ -174,7 +171,7 @@ class Toast {
           break;
       }
 
-      this.configProxy.exitCallback?.(reason);
+      this.toastConfig.exitCallback?.(reason);
     }
 
     if (animated) this.state = "exiting";
@@ -182,23 +179,23 @@ class Toast {
     setTimeout(() => {
       batch(() => {
         this.setStore("rendered", (state) =>
-          state.filter((t) => t.toastConfig.id !== this.configProxy.id),
+          state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
         );
         this.setStore("queued", (state) =>
-          state.filter((t) => t.toastConfig.id !== this.configProxy.id),
+          state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
         );
       });
-    }, this.configProxy.exitDuration);
+    }, this.toastConfig.exitDuration);
   }
 
   remove() {
     /*** This will remove the toast without calling the exitCallback and without the exit animation ***/
     batch(() => {
       this.setStore("rendered", (state) =>
-        state.filter((t) => t.configProxy.id !== this.configProxy.id),
+        state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
       );
       this.setStore("queued", (state) =>
-        state.filter((t) => t.configProxy.id !== this.configProxy.id),
+        state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
       );
     });
   }
@@ -206,26 +203,26 @@ class Toast {
   render(): JSX.Element {
     onMount(() => {
       this.renderedAt = Date.now(); // We dont want to run this in the lifecycle because lifecycle can also run on update (which can happen before the toast is rendered)
-      this.configProxy.enterCallback?.();
+      this.toastConfig.enterCallback?.();
       this.lifecycle(); // Will start the dismiss timer
     });
 
     return (
       <div
         data-role="toast"
-        id={this.configProxy.id}
+        id={this.toastConfig.id}
         ref={(el) => (this.ref = el)}
-        role={this.configProxy.role}
-        aria-live={this.configProxy.ariaLive}
+        role={this.toastConfig.role}
+        aria-live={this.toastConfig.ariaLive}
         onClick={(e) => handleClick(e, this)}
         onMouseEnter={handleMouseEnter.bind(null, this)}
         onMouseLeave={handleMouseLeave.bind(null, this)}
         onTouchStart={this.dragManager.handleDragStart}
         onTouchMove={this.dragManager.handleDragMove}
         onTouchEnd={this.dragManager.handleDragEnd}
-        class={`${this.configProxy.wrapperClass} ${applyState(this)}`.trim()}
+        class={`${this.toastConfig.wrapperClass} ${applyState(this)}`.trim()}
         style={{
-          ...this.configProxy.wrapperStyle,
+          ...this.x.wrapperStyle,
           [this.store.toasterConfig.positionX]:
             `${this.store.toasterConfig.offsetX}px`,
           [this.store.toasterConfig.positionY]: `${this.offset}px`,
@@ -233,12 +230,12 @@ class Toast {
       >
         {/* If the toastConfig.content is a function (it's contentType will be "dynamic") we want to leave it unstyled */}
         <Show
-          fallback={this.configProxy.content}
-          when={this.configProxy.contentType === "static"}
+          fallback={this.toastConfig.content}
+          when={this.toastConfig.contentType === "static"}
         >
-          <div class={this.configProxy.class} style={this.configProxy.style}>
+          <div class={this.toastConfig.class} style={this.toastConfig.style}>
             {renderIcon(this)}
-            {this.configProxy.content}
+            {this.toastConfig.content}
             {renderDismissButton(this)}
           </div>
           {renderProgressBar(this)}
