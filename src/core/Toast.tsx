@@ -1,4 +1,4 @@
-import { batch, createMemo, JSX, mergeProps, onMount, Show } from "solid-js";
+import { batch, JSX, mergeProps, onMount, Show } from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
@@ -75,6 +75,19 @@ import {
  * - custom toast (function as content argument), will be unstyled
  */
 
+function transformStoreToProps(store: any) {
+  const props: Record<string, any> = {};
+
+  // Dynamically create getters for each key in the store
+  Object.keys(store).forEach((key) => {
+    Object.defineProperty(props, key, {
+      get: () => store[key],
+    });
+  });
+
+  return props;
+}
+
 class Toast {
   private setStore;
   private dragManager = createDragManager(this);
@@ -87,10 +100,25 @@ class Toast {
   isPaused = true; // A flag that's exposed for custom toasts. Has no internal use
   isPausedByUser = false; // True if the timer was paused by the user (checked on window blur and mouse hover)
   offset = 0;
+  x;
 
   constructor(args: ToastConstructor) {
     this.store = args.store;
     this.setStore = args.setStore;
+    console.log("toasterConfig inside toast: ", args.store.toasterConfig);
+
+    console.log(
+      "mega merge; ",
+      mergeProps(
+        transformStoreToProps(args.store.toasterConfig),
+        args.toastConfig,
+      ),
+    );
+
+    this.x = mergeProps(
+      transformStoreToProps(args.store.toasterConfig),
+      args.toastConfig,
+    );
     this.toastConfig = args.toastConfig; // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
     this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
