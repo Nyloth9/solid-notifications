@@ -1,5 +1,5 @@
 import { createSignal, JSX } from "solid-js";
-import { Config, ProgressControls, ToasterStore, ToastOptions } from "../types";
+import { Config, ProgressControls, ToasterStore } from "../types";
 import Toast from "../core/Toast";
 
 function findToast(
@@ -8,10 +8,10 @@ function findToast(
 ): Toast | undefined {
   if (!id) return;
 
-  const toast = store.rendered.find((toast) => toast.toastConfig.id === id);
+  const toast = store.rendered.find((toast) => toast.getValue("id") === id);
   if (toast) return toast;
 
-  return store.queued.find((toast) => toast.toastConfig.id === id);
+  return store.queued.find((toast) => toast.getValue("id") === id);
 }
 
 function createToastId(
@@ -36,7 +36,7 @@ function resolveBody(
     // If the content is a function, pass the toast instance to it
     return content(t);
   }
-  return content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
+  return content || `🍞 Toast "${t.getValue("id")}" ready to serve!`;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {
@@ -118,25 +118,27 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
   return filteredOptions;
 }
 
-function applyState(toast: Toast) {
-  const toastConfig = toast.toastConfig;
+function applyState(t: Toast) {
+  const onEnter = t.getValue("onEnter");
+  const onIdle = t.getValue("onIdle");
+  const onExit = t.getValue("onExit");
 
-  switch (toast.state) {
+  switch (t.state) {
     case "entering":
-      if (toastConfig.onEnter) return toastConfig.onEnter;
+      if (onEnter) return onEnter;
     case "idle":
-      if (toastConfig.onIdle) return toastConfig.onIdle;
+      if (onIdle) return onIdle;
     case "exiting":
-      if (toastConfig.onExit) return toastConfig.onExit;
+      if (onExit) return onExit;
     default:
-      return `sn-${toastConfig.positionX}-${toastConfig.positionY}-${toast.state}`;
+      return `sn-${t.getValue("positionX")}-${t.getValue("positionY")}-${t.state}`;
   }
 }
 
 function createProgressManager(toast?: Toast, callback?: () => void) {
   const [progress, setProgress] = createSignal(0);
 
-  let duration = toast?.toastConfig.duration;
+  let duration = toast?.getValue("duration");
   let start = performance.now();
   let elapsed = 0;
   let paused = false;
@@ -228,7 +230,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragStart = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.toastConfig.dragToDismiss) return;
+    if (!toast.getValue("dragToDismiss")) return;
 
     startX = e.touches[0].clientX;
     toast.ref.style.transition = "none";
@@ -237,7 +239,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragMove = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.toastConfig.dragToDismiss) return;
+    if (!toast.getValue("dragToDismiss")) return;
 
     currentX = e.touches[0].clientX - startX;
     toast.ref.style.transform = `translateX(${currentX}px)`;
@@ -245,10 +247,10 @@ function createDragManager(toast: Toast) {
 
   const handleDragEnd = () => {
     if (!toast.ref) return;
-    if (!toast.toastConfig.dragToDismiss) return;
+    if (!toast.getValue("dragToDismiss")) return;
 
     // Check if drag distance is sufficient to dismiss
-    if (Math.abs(currentX) > toast.toastConfig.dragTreshold) {
+    if (Math.abs(currentX) > toast.getValue("dragTreshold")) {
       toast.ref.style.transition = "all 0.3s ease";
       toast.ref.style.transform = `translateX(${currentX > 0 ? "100%" : "-100%"})`;
       toast.ref.style.opacity = "0";
@@ -273,7 +275,7 @@ function createDragManager(toast: Toast) {
 }
 
 function handleClick(e: MouseEvent, toast: Toast) {
-  if (!toast.toastConfig.dismissOnClick) return;
+  if (!toast.getValue("dismissOnClick")) return;
 
   const isInteractiveElement =
     e.target instanceof HTMLElement &&
@@ -285,10 +287,10 @@ function handleClick(e: MouseEvent, toast: Toast) {
 }
 
 function handleMouseEnter(toast: Toast) {
-  if (!toast.toastConfig.pauseOnHover) return;
+  if (!toast.getValue("pauseOnHover")) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
+    toast.store.isWindowBlurred && toast.getValue("pauseOnWindowInactive");
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -297,10 +299,10 @@ function handleMouseEnter(toast: Toast) {
 }
 
 function handleMouseLeave(toast: Toast) {
-  if (!toast.toastConfig.pauseOnHover) return;
+  if (!toast.getValue("pauseOnHover")) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
+    toast.store.isWindowBlurred && toast.getValue("pauseOnWindowInactive");
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -309,14 +311,14 @@ function handleMouseLeave(toast: Toast) {
 }
 
 function renderDismissButton(toast: Toast) {
-  if (toast.toastConfig.dismissOnClick || !toast.toastConfig.showDismissButton)
+  if (toast.getValue("dismissOnClick") || !toast.getValue("showDismissButton"))
     return null;
 
   return (
     <button
       aria-label="Close notification"
-      class={toast.toastConfig.dismissButtonClass}
-      style={toast.toastConfig.dismissButtonStyle}
+      class={toast.getValue("dismissButtonClass")}
+      style={toast.getValue("dismissButtonStyle")}
       onClick={() => toast.dismiss()}
     >
       <svg
@@ -340,33 +342,36 @@ function renderDismissButton(toast: Toast) {
 }
 
 function renderProgressBar(toast: Toast) {
-  if (!toast.toastConfig.showProgressBar || !toast.toastConfig.duration)
+  if (!toast.getValue("showProgressBar") || !toast.getValue("duration"))
     return null;
 
   return (
     <div
       data-role="progress"
-      class={toast.toastConfig.progressBarClass}
+      class={toast.getValue("progressBarClass")}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",
-        ...toast.toastConfig.progressBarStyle,
+        ...toast.getValue("progressBarStyle"),
       }}
     />
   );
 }
 
 function renderIcon(toast: Toast) {
-  if (!toast.toastConfig.showIcon) return null;
-  if (toast.toastConfig.icon) {
-    if (typeof toast.toastConfig.icon === "function") {
-      return toast.toastConfig.icon(toast.toastConfig.type);
+  if (!toast.getValue("showIcon")) return null;
+
+  const icon = toast.getValue("icon");
+
+  if (icon) {
+    if (typeof icon === "function") {
+      return icon(toast.getValue("type"));
     }
 
-    return toast.toastConfig.icon;
+    return icon;
   }
 
-  switch (toast.toastConfig.type) {
+  switch (toast.getValue("type")) {
     case "success":
       return (
         <svg
@@ -441,39 +446,4 @@ export {
   renderDismissButton,
   renderProgressBar,
   renderIcon,
-  createMergedConfig,
 };
-
-function createMergedConfig(toastConfig: ToastOptions, toasterConfig: Config) {
-  // Using a Proxy allows us to dynamically resolve toast configuration properties.
-  // If a property doesn't exist in toastConfig, we can check in toasterConfig.
-  // We also use proxy to keep the reactivity of the toasterConfig object.
-  // By doing this, we can use signals as props for the <Toaster /> and the changes will be reflected on the toast
-  // (only for the props that have not been overridden by the options passed in notify or update).
-
-  return new Proxy(
-    {},
-    {
-      get(target, prop: string) {
-        console.log(target);
-        // Check if the property exists in toastConfig
-        if (prop in toastConfig) {
-          return toastConfig[prop as keyof ToastOptions];
-        }
-
-        // If not, check in toasterConfig
-        if (prop in toasterConfig) {
-          return toasterConfig[prop as keyof Config];
-        }
-
-        // If the property doesn't exist in both, return undefined
-        return undefined;
-      },
-      set(_target, prop: string, value) {
-        // If the property is being set, update the toastConfig
-        toastConfig[prop as keyof ToastOptions] = value;
-        return true;
-      },
-    },
-  );
-}

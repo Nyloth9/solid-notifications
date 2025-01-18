@@ -101,7 +101,7 @@ export interface ToastActions {
 export interface ToastConstructor {
   store: ToasterStore;
   setStore: SetStoreFunction<ToasterStore>;
-  toastConfig?: Partial<Config>;
+  toastConfig: ToastOptions;
 }
 
 export interface ProgressControls {
