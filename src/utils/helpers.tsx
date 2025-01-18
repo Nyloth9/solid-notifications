@@ -441,29 +441,6 @@ export {
   renderDismissButton,
   renderProgressBar,
   renderIcon,
-  createToastConfigDynamically,
 };
 
-function createToastConfigDynamically(toastConfig: any, toasterConfig: any) {
-  const mergedConfig: any = {};
 
-  // Iterate through the properties of toasterConfig and merge them with toastConfig
-  for (const key in toasterConfig) {
-    if (toastConfig.hasOwnProperty(key)) {
-      // If key exists in toastConfig, use that value
-      mergedConfig[key] = toastConfig[key];
-    } else {
-      // If key doesn't exist in toastConfig, fallback to toasterConfig's value
-      mergedConfig[key] = toasterConfig[key]; // Store a reference to toasterConfig
-    }
-  }
-
-  // Ensure properties in toastConfig are kept as is
-  for (const key in toastConfig) {
-    if (!mergedConfig.hasOwnProperty(key)) {
-      mergedConfig[key] = toastConfig[key];
-    }
-  }
-
-  return mergedConfig;
-}

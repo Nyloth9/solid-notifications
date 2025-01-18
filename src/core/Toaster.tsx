@@ -29,9 +29,9 @@ export default function Toaster(props: ToasterOptions) {
     counter: 0,
   });
 
-  createEffect(() => {
+  /* createEffect(() => {
     console.log("Props changed, ", { ...props });
-  });
+  }); */
 
   createEffect(() => {
     if (store.isWindowBlurred && !store.toasterConfig.renderOnWindowInactive)

@@ -40,8 +40,5 @@
   },
   "peerDependencies": {
     "solid-js": "^1.9.3"
-  },
-  "dependencies": {
-    "deepmerge": "^4.3.1"
   }
 }

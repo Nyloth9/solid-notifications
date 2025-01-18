@@ -13,7 +13,6 @@ import {
   renderProgressBar,
   renderIcon,
   createDragManager,
-  createToastConfigDynamically,
 } from "../utils/helpers";
 
 /***
@@ -88,6 +87,7 @@ class Toast {
   isPaused = true; // A flag that's exposed for custom toasts. Has no internal use
   isPausedByUser = false; // True if the timer was paused by the user (checked on window blur and mouse hover)
   offset = 0;
+  x: any;
 
   constructor(args: ToastConstructor) {
     this.store = args.store;
