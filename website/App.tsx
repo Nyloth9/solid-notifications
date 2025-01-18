@@ -67,17 +67,21 @@ const App: Component = () => {
                 },
               );
 
-              /*     setTimeout(() => {
-                update({ id, class: "warning" });
-              }, 3000); */
+              setTimeout(() => {
+                update({
+                  id,
 
-      /*         setTimeout(() => {
+                  style: { "background-color": "yellow" },
+                });
+              }, 4000);
+
+              /*         setTimeout(() => {
                 update({ id, type: "warning" });
               }, 1000);
 
               setTimeout(() => {
                 update({ id, type: "error" });
-              }, 4000);
+              }, 4000);*/
 
               setTimeout(() => {
                 update({ id, type: "info" });
@@ -85,7 +89,7 @@ const App: Component = () => {
 
               setTimeout(() => {
                 update({ id, type: "loading" });
-              }, 12000); */
+              }, 8000);
 
               /*    setTimeout(() => {
                 update({

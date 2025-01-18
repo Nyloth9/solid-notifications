@@ -1,6 +1,64 @@
 import { createSignal, JSX } from "solid-js";
-import { Config, ProgressControls, ToasterStore } from "../types";
+import { Config, ProgressControls, ToasterStore, ToastOptions } from "../types";
 import Toast from "../core/Toast";
+
+function createConfigProxy(toastConfig: ToastOptions, toasterConfig: Config) {
+  // Using a Proxy allows us to dynamically resolve toast configuration properties.
+  // If a property doesn't exist in toastConfig, we can check in toasterConfig.
+  // We also use proxy to keep the reactivity of the toasterConfig object.
+  // By doing this, we can use signals as props for the <Toaster /> and the changes will be reflected on the toast
+  // (only for the props that have not been overridden by the options passed in notify or update).
+
+  return new Proxy(
+    {},
+    {
+      get(target, prop: string) {
+        // Check if the property exists in toastConfig
+        if (prop in toastConfig) {
+          return toastConfig[prop as keyof ToastOptions];
+        }
+
+        // If not, check in toasterConfig
+        if (prop in toasterConfig) {
+          return toasterConfig[prop as keyof Config];
+        }
+
+        return undefined;
+      },
+      set(_target, prop: string, value) {
+        console.warn(
+          `Invoked Proxy.set(). You tried to set ${prop} to ${value}. Are you sure you want to do this?`,
+        );
+        toastConfig[prop as keyof ToastOptions] = value;
+        return true;
+      },
+    },
+  );
+}
+
+function merge(target: any, source: any, omit: string[] = []) {
+  const isPlainObject = (obj: any) =>
+    obj && typeof obj === "object" && obj.constructor === Object;
+
+  if (Array.isArray(target)) {
+    return source; // Replace arrays (otherwise animation keyframes will not work)
+  }
+
+  if (isPlainObject(target) && isPlainObject(source)) {
+    return Object.keys(source).reduce(
+      (acc, key) => {
+        if (typeof key !== "symbol") {
+          acc[key] = merge(target[key], source[key]);
+        }
+
+        return acc;
+      },
+      { ...target },
+    );
+  }
+
+  return source;
+}
 
 function findToast(
   id: string | undefined,
@@ -8,10 +66,10 @@ function findToast(
 ): Toast | undefined {
   if (!id) return;
 
-  const toast = store.rendered.find((toast) => toast.toastConfig.id === id);
+  const toast = store.rendered.find((toast) => toast.Proxy.id === id);
   if (toast) return toast;
 
-  return store.queued.find((toast) => toast.toastConfig.id === id);
+  return store.queued.find((toast) => toast.Proxy.id === id);
 }
 
 function createToastId(
@@ -36,7 +94,7 @@ function resolveBody(
     // If the content is a function, pass the toast instance to it
     return content(t);
   }
-  return content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
+  return content || `🍞 Toast "${t.Proxy.id}" ready to serve!`;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {
@@ -68,30 +126,6 @@ function setStartingOffset(
   );
 }
 
-function merge(target: any, source: any, omit: string[] = []) {
-  const isPlainObject = (obj: any) =>
-    obj && typeof obj === "object" && obj.constructor === Object;
-
-  if (Array.isArray(target)) {
-    return source; // Replace arrays (otherwise animation keyframes will not work)
-  }
-
-  if (isPlainObject(target) && isPlainObject(source)) {
-    return Object.keys(source).reduce(
-      (acc, key) => {
-        if (typeof key !== "symbol") {
-          acc[key] = merge(target[key], source[key]);
-        }
-
-        return acc;
-      },
-      { ...target },
-    );
-  }
-
-  return source;
-}
-
 function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
   if (!options) return {};
 
@@ -119,24 +153,24 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
 }
 
 function applyState(toast: Toast) {
-  const toastConfig = toast.toastConfig;
+  const Proxy = toast.Proxy;
 
   switch (toast.state) {
     case "entering":
-      if (toastConfig.onEnter) return toastConfig.onEnter;
+      if (Proxy.onEnter) return Proxy.onEnter;
     case "idle":
-      if (toastConfig.onIdle) return toastConfig.onIdle;
+      if (Proxy.onIdle) return Proxy.onIdle;
     case "exiting":
-      if (toastConfig.onExit) return toastConfig.onExit;
+      if (Proxy.onExit) return Proxy.onExit;
     default:
-      return `sn-${toastConfig.positionX}-${toastConfig.positionY}-${toast.state}`;
+      return `sn-${Proxy.positionX}-${Proxy.positionY}-${toast.state}`;
   }
 }
 
 function createProgressManager(toast?: Toast, callback?: () => void) {
   const [progress, setProgress] = createSignal(0);
 
-  let duration = toast?.toastConfig.duration;
+  let duration = toast?.Proxy.duration;
   let start = performance.now();
   let elapsed = 0;
   let paused = false;
@@ -228,7 +262,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragStart = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.toastConfig.dragToDismiss) return;
+    if (!toast.Proxy.dragToDismiss) return;
 
     startX = e.touches[0].clientX;
     toast.ref.style.transition = "none";
@@ -237,7 +271,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragMove = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.toastConfig.dragToDismiss) return;
+    if (!toast.Proxy.dragToDismiss) return;
 
     currentX = e.touches[0].clientX - startX;
     toast.ref.style.transform = `translateX(${currentX}px)`;
@@ -245,10 +279,10 @@ function createDragManager(toast: Toast) {
 
   const handleDragEnd = () => {
     if (!toast.ref) return;
-    if (!toast.toastConfig.dragToDismiss) return;
+    if (!toast.Proxy.dragToDismiss) return;
 
     // Check if drag distance is sufficient to dismiss
-    if (Math.abs(currentX) > toast.toastConfig.dragTreshold) {
+    if (Math.abs(currentX) > toast.Proxy.dragTreshold) {
       toast.ref.style.transition = "all 0.3s ease";
       toast.ref.style.transform = `translateX(${currentX > 0 ? "100%" : "-100%"})`;
       toast.ref.style.opacity = "0";
@@ -273,7 +307,7 @@ function createDragManager(toast: Toast) {
 }
 
 function handleClick(e: MouseEvent, toast: Toast) {
-  if (!toast.toastConfig.dismissOnClick) return;
+  if (!toast.Proxy.dismissOnClick) return;
 
   const isInteractiveElement =
     e.target instanceof HTMLElement &&
@@ -285,10 +319,10 @@ function handleClick(e: MouseEvent, toast: Toast) {
 }
 
 function handleMouseEnter(toast: Toast) {
-  if (!toast.toastConfig.pauseOnHover) return;
+  if (!toast.Proxy.pauseOnHover) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
+    toast.store.isWindowBlurred && toast.Proxy.pauseOnWindowInactive;
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -297,10 +331,10 @@ function handleMouseEnter(toast: Toast) {
 }
 
 function handleMouseLeave(toast: Toast) {
-  if (!toast.toastConfig.pauseOnHover) return;
+  if (!toast.Proxy.pauseOnHover) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
+    toast.store.isWindowBlurred && toast.Proxy.pauseOnWindowInactive;
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -309,14 +343,13 @@ function handleMouseLeave(toast: Toast) {
 }
 
 function renderDismissButton(toast: Toast) {
-  if (toast.toastConfig.dismissOnClick || !toast.toastConfig.showDismissButton)
-    return null;
+  if (toast.Proxy.dismissOnClick || !toast.Proxy.showDismissButton) return null;
 
   return (
     <button
       aria-label="Close notification"
-      class={toast.toastConfig.dismissButtonClass}
-      style={toast.toastConfig.dismissButtonStyle}
+      class={toast.Proxy.dismissButtonClass}
+      style={toast.Proxy.dismissButtonStyle}
       onClick={() => toast.dismiss()}
     >
       <svg
@@ -340,33 +373,32 @@ function renderDismissButton(toast: Toast) {
 }
 
 function renderProgressBar(toast: Toast) {
-  if (!toast.toastConfig.showProgressBar || !toast.toastConfig.duration)
-    return null;
+  if (!toast.Proxy.showProgressBar || !toast.toastConfig.duration) return null;
 
   return (
     <div
       data-role="progress"
-      class={toast.toastConfig.progressBarClass}
+      class={toast.Proxy.progressBarClass}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",
-        ...toast.toastConfig.progressBarStyle,
+        ...toast.Proxy.progressBarStyle,
       }}
     />
   );
 }
 
 function renderIcon(toast: Toast) {
-  if (!toast.toastConfig.showIcon) return null;
-  if (toast.toastConfig.icon) {
-    if (typeof toast.toastConfig.icon === "function") {
-      return toast.toastConfig.icon(toast.toastConfig.type);
+  if (!toast.Proxy.showIcon) return null;
+  if (toast.Proxy.icon) {
+    if (typeof toast.Proxy.icon === "function") {
+      return toast.Proxy.icon(toast.Proxy.type);
     }
 
-    return toast.toastConfig.icon;
+    return toast.Proxy.icon;
   }
 
-  switch (toast.toastConfig.type) {
+  switch (toast.Proxy.type) {
     case "success":
       return (
         <svg
@@ -441,32 +473,5 @@ export {
   renderDismissButton,
   renderProgressBar,
   renderIcon,
-  createMergedConfig,
+  createConfigProxy,
 };
-
-function createMergedConfig(toastConfig: any, toasterConfig: any) {
-  return new Proxy(
-    {},
-    {
-      get(target, prop: string) {
-        // Check if the property exists in toastConfig
-        if (prop in toastConfig) {
-          return toastConfig[prop];
-        }
-
-        // If not, check in toasterConfig
-        if (prop in toasterConfig) {
-          return toasterConfig[prop];
-        }
-
-        // If the property doesn't exist in both, return undefined
-        return undefined;
-      },
-      set(target, prop: string, value) {
-        // If the property is being set, update the toastConfig
-        toastConfig[prop] = value;
-        return true;
-      },
-    },
-  );
-}

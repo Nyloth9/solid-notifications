@@ -61,7 +61,6 @@ export default function Toaster(props: ToasterOptions) {
 
     resolvedToasts.forEach((toast) => {
       if (toast.ref) {
-        const _content = toast.toastConfig.content; // This ensures toast is being tracked for reactivity
         toast.offset = accumulatedOffset;
 
         accumulatedOffset +=
