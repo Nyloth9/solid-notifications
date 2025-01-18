@@ -80,7 +80,6 @@ class Toast {
   private setStore;
   private dragManager = createDragManager(this);
   store;
-  toasterConfig: Config;
   toastConfig: Config;
   ref: HTMLElement | null = null;
   state: "entering" | "idle" | "exiting" = "entering";
@@ -93,11 +92,6 @@ class Toast {
   constructor(args: ToastConstructor) {
     this.store = args.store;
     this.setStore = args.setStore;
-    console.log(
-      createToastConfigDynamically(args.toastConfig, args.store.toasterConfig),
-    );
-
-    this.toasterConfig = args.store.toasterConfig; // We need to have access to the toaster config in the toast
     this.toastConfig = merge(args.store.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config
     this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
     this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
@@ -111,14 +105,15 @@ class Toast {
     );
 
     const isLimitReached =
-      this.toasterConfig.limit &&
-      this.store.rendered.length >= this.toasterConfig.limit;
+      this.store.toasterConfig.limit &&
+      this.store.rendered.length >= this.store.toasterConfig.limit;
 
     if (isLimitReached)
       return this.setStore("queued", [...this.store.queued, this]);
 
     const shouldQueueDueToBlur =
-      this.store.isWindowBlurred && !this.toasterConfig.renderOnWindowInactive;
+      this.store.isWindowBlurred &&
+      !this.store.toasterConfig.renderOnWindowInactive;
 
     if (shouldQueueDueToBlur)
       return this.setStore("queued", [this, ...this.store.queued]);
@@ -227,8 +222,9 @@ class Toast {
         class={`${this.toastConfig.wrapperClass} ${applyState(this)}`.trim()}
         style={{
           ...this.toastConfig.wrapperStyle,
-          [this.toasterConfig.positionX]: `${this.toasterConfig.offsetX}px`,
-          [this.toasterConfig.positionY]: `${this.offset}px`,
+          [this.store.toasterConfig.positionX]:
+            `${this.store.toasterConfig.offsetX}px`,
+          [this.store.toasterConfig.positionY]: `${this.offset}px`,
         }}
       >
         {/* If the toastConfig.content is a function (it's contentType will be "dynamic") we want to leave it unstyled */}

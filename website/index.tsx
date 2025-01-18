@@ -31,6 +31,7 @@ render(() => {
     <ToastProvider>
       <Toaster
         toasterId="toaster-1"
+        positionY="bottom"
         offsetX={offsetX()}
         wrapperClass={class1()}
         wrapperStyle={{ "background-color": bg() }}

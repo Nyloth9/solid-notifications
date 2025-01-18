@@ -30,12 +30,10 @@ export default function Toaster(props: ToasterOptions) {
   });
 
   createEffect(() => {
-    console.log("Props changed, ", {...props});
+    console.log("Props changed, ", { ...props });
   });
 
   createEffect(() => {
-    /*** Here we make the toasterConfig reactive (if a signal is used as a prop for example) ***/
-
     if (store.isWindowBlurred && !store.toasterConfig.renderOnWindowInactive)
       return;
 
