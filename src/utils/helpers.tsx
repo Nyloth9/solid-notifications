@@ -7,7 +7,7 @@ function createConfigProxy(toastConfig: ToastOptions, toasterConfig: Config) {
   // If a property doesn't exist in toastConfig, we can check in toasterConfig.
   // We also use proxy to keep the reactivity of the toasterConfig object.
   // By doing this, we can use signals as props for the <Toaster /> and the changes will be reflected on the toast
-  // (only for the props that have not been overridden by the options passed in notify or update).
+  // but only for the props that have not been overwritten by the options passed in notify or update.
 
   return new Proxy(
     {},
@@ -66,10 +66,10 @@ function findToast(
 ): Toast | undefined {
   if (!id) return;
 
-  const toast = store.rendered.find((toast) => toast.Proxy.id === id);
+  const toast = store.rendered.find((toast) => toast.configProxy.id === id);
   if (toast) return toast;
 
-  return store.queued.find((toast) => toast.Proxy.id === id);
+  return store.queued.find((toast) => toast.configProxy.id === id);
 }
 
 function createToastId(
@@ -94,7 +94,7 @@ function resolveBody(
     // If the content is a function, pass the toast instance to it
     return content(t);
   }
-  return content || `🍞 Toast "${t.Proxy.id}" ready to serve!`;
+  return content || `🍞 Toast "${t.configProxy.id}" ready to serve!`;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {
@@ -153,7 +153,7 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
 }
 
 function applyState(toast: Toast) {
-  const Proxy = toast.Proxy;
+  const Proxy = toast.configProxy;
 
   switch (toast.state) {
     case "entering":
@@ -170,7 +170,7 @@ function applyState(toast: Toast) {
 function createProgressManager(toast?: Toast, callback?: () => void) {
   const [progress, setProgress] = createSignal(0);
 
-  let duration = toast?.Proxy.duration;
+  let duration = toast?.configProxy.duration;
   let start = performance.now();
   let elapsed = 0;
   let paused = false;
@@ -262,7 +262,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragStart = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.Proxy.dragToDismiss) return;
+    if (!toast.configProxy.dragToDismiss) return;
 
     startX = e.touches[0].clientX;
     toast.ref.style.transition = "none";
@@ -271,7 +271,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragMove = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.Proxy.dragToDismiss) return;
+    if (!toast.configProxy.dragToDismiss) return;
 
     currentX = e.touches[0].clientX - startX;
     toast.ref.style.transform = `translateX(${currentX}px)`;
@@ -279,10 +279,10 @@ function createDragManager(toast: Toast) {
 
   const handleDragEnd = () => {
     if (!toast.ref) return;
-    if (!toast.Proxy.dragToDismiss) return;
+    if (!toast.configProxy.dragToDismiss) return;
 
     // Check if drag distance is sufficient to dismiss
-    if (Math.abs(currentX) > toast.Proxy.dragTreshold) {
+    if (Math.abs(currentX) > toast.configProxy.dragTreshold) {
       toast.ref.style.transition = "all 0.3s ease";
       toast.ref.style.transform = `translateX(${currentX > 0 ? "100%" : "-100%"})`;
       toast.ref.style.opacity = "0";
@@ -307,7 +307,7 @@ function createDragManager(toast: Toast) {
 }
 
 function handleClick(e: MouseEvent, toast: Toast) {
-  if (!toast.Proxy.dismissOnClick) return;
+  if (!toast.configProxy.dismissOnClick) return;
 
   const isInteractiveElement =
     e.target instanceof HTMLElement &&
@@ -319,10 +319,10 @@ function handleClick(e: MouseEvent, toast: Toast) {
 }
 
 function handleMouseEnter(toast: Toast) {
-  if (!toast.Proxy.pauseOnHover) return;
+  if (!toast.configProxy.pauseOnHover) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.Proxy.pauseOnWindowInactive;
+    toast.store.isWindowBlurred && toast.configProxy.pauseOnWindowInactive;
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -331,10 +331,10 @@ function handleMouseEnter(toast: Toast) {
 }
 
 function handleMouseLeave(toast: Toast) {
-  if (!toast.Proxy.pauseOnHover) return;
+  if (!toast.configProxy.pauseOnHover) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.Proxy.pauseOnWindowInactive;
+    toast.store.isWindowBlurred && toast.configProxy.pauseOnWindowInactive;
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -343,13 +343,14 @@ function handleMouseLeave(toast: Toast) {
 }
 
 function renderDismissButton(toast: Toast) {
-  if (toast.Proxy.dismissOnClick || !toast.Proxy.showDismissButton) return null;
+  if (toast.configProxy.dismissOnClick || !toast.configProxy.showDismissButton)
+    return null;
 
   return (
     <button
       aria-label="Close notification"
-      class={toast.Proxy.dismissButtonClass}
-      style={toast.Proxy.dismissButtonStyle}
+      class={toast.configProxy.dismissButtonClass}
+      style={toast.configProxy.dismissButtonStyle}
       onClick={() => toast.dismiss()}
     >
       <svg
@@ -373,32 +374,33 @@ function renderDismissButton(toast: Toast) {
 }
 
 function renderProgressBar(toast: Toast) {
-  if (!toast.Proxy.showProgressBar || !toast.toastConfig.duration) return null;
+  if (!toast.configProxy.showProgressBar || !toast.toastConfig.duration)
+    return null;
 
   return (
     <div
       data-role="progress"
-      class={toast.Proxy.progressBarClass}
+      class={toast.configProxy.progressBarClass}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",
-        ...toast.Proxy.progressBarStyle,
+        ...toast.configProxy.progressBarStyle,
       }}
     />
   );
 }
 
 function renderIcon(toast: Toast) {
-  if (!toast.Proxy.showIcon) return null;
-  if (toast.Proxy.icon) {
-    if (typeof toast.Proxy.icon === "function") {
-      return toast.Proxy.icon(toast.Proxy.type);
+  if (!toast.configProxy.showIcon) return null;
+  if (toast.configProxy.icon) {
+    if (typeof toast.configProxy.icon === "function") {
+      return toast.configProxy.icon(toast.configProxy.type);
     }
 
-    return toast.Proxy.icon;
+    return toast.configProxy.icon;
   }
 
-  switch (toast.Proxy.type) {
+  switch (toast.configProxy.type) {
     case "success":
       return (
         <svg
