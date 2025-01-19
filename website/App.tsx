@@ -76,7 +76,7 @@ const App: Component = () => {
                       case "info":
                         return { "background-color": "blue" };
                       case "loading":
-                        return { "background-color": "red" };
+                        return { "background-color": "black" };
                       default:
                         return { "background-color": "gray" };
                     }
@@ -85,19 +85,12 @@ const App: Component = () => {
               );
 
               setTimeout(() => {
-                update({
-                  id,
-                  wrapperStyle: { "padding-top": "100px" },
-                });
-              }, 2000);
-
-              /*         setTimeout(() => {
                 update({ id, type: "warning" });
               }, 1000);
 
               setTimeout(() => {
                 update({ id, type: "error" });
-              }, 4000);*/
+              }, 4000);
 
               setTimeout(() => {
                 update({ id, type: "info" });

@@ -26,7 +26,7 @@ render(() => {
       setOffsetX((prev) => prev + 100);
       setClass1("1asdasdsad");
       setBg("white");
-    }, 4000);
+    }, 2000);
 
     /*     setTimeout(() => {
       setOffsetX((prev) => prev + 300);
