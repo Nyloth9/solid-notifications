@@ -3,8 +3,6 @@ import { useToast } from "../src/core/Context";
 
 const App: Component = () => {
   const [randomText, setRandomText] = createSignal("Hello World!");
-  const [body, setBody] = createSignal("Hello World!");
-
   const { notify, update, dismiss, remove, getQueue, clearQueue } =
     useToast("toaster-1");
 
@@ -12,7 +10,7 @@ const App: Component = () => {
 
   onMount(() => {
     const interval = setInterval(() => {
-      setBody(
+      setRandomText(
         Math.random().toString(36).substring(2, 15) +
           Math.random().toString(36).substring(2, 15),
       );
@@ -33,28 +31,58 @@ const App: Component = () => {
           <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => {
-              const { id, progressControls } = notify(body, {
-                exitCallback: (reason) =>
-                  console.log("Dissmised by user? ", reason),
-                type: "success",
-                duration: 10000,
-                wrapperStyle: (type) => {
-                  switch (type) {
-                    case "success":
-                      return { "background-color": "green" };
-                    case "error":
-                      return { "background-color": "red" };
-                    case "warning":
-                      return { "background-color": "yellow" };
-                    case "info":
-                      return { "background-color": "blue" };
-                    case "loading":
-                      return { "background-color": "black" };
-                    default:
-                      return { "background-color": "gray" };
-                  }
+              const { id, progressControls } = notify(
+                createRoot(() => (
+                  <div>
+                    <div>{`Solid Notifications, new toast created!`}</div>
+                    {/*    <div>{randomText()}</div> */}
+                    {/*  <div class="-mx-2 flex gap-1">
+                      <button
+                        class={
+                          "mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                        }
+                        onClick={() => progressControls.pause()}
+                      >
+                        Pause timer
+                      </button>
+                      <button
+                        class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                        onClick={() => progressControls.play()}
+                      >
+                        Play timer
+                      </button>
+                      <button
+                        class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                        onClick={() => progressControls.reset()}
+                      >
+                        Reset timer
+                      </button>
+                    </div> */}
+                  </div>
+                )),
+                {
+                  exitCallback: (reason) =>
+                    console.log("Dissmised by user? ", reason),
+                  type: "success",
+                  duration: 10000,
+                  progressBarStyle: (type) => {
+                    switch (type) {
+                      case "success":
+                        return { "background-color": "green" };
+                      case "error":
+                        return { "background-color": "red" };
+                      case "warning":
+                        return { "background-color": "yellow" };
+                      case "info":
+                        return { "background-color": "blue" };
+                      case "loading":
+                        return { "background-color": "black" };
+                      default:
+                        return { "background-color": "gray" };
+                    }
+                  },
                 },
-              });
+              );
 
               setTimeout(() => {
                 update({ id, type: "warning" });

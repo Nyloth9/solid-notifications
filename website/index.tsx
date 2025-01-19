@@ -17,32 +17,9 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 }
 
 render(() => {
-  const [offsetX, setOffsetX] = createSignal(64);
-  const [class1, setClass1] = createSignal("sn-toast-wrapper");
-  const [bg, setBg] = createSignal("red");
-
-  onMount(() => {
-    setTimeout(() => {
-      setOffsetX((prev) => prev + 100);
-      setClass1("1asdasdsad");
-      setBg("white");
-    }, 2000);
-
-    /*     setTimeout(() => {
-      setOffsetX((prev) => prev + 300);
-      setClass1("sn-toast-wrapper");
-      setBg("purple");
-    }, 6000); */
-  });
-
   return (
     <ToastProvider>
-      <Toaster
-        toasterId="toaster-1"
-        offsetX={offsetX()}
-        wrapperClass={class1()}
-        wrapperStyle={{ "background-color": "white" }}
-      />
+      <Toaster toasterId="toaster-1" />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />
     </ToastProvider>
