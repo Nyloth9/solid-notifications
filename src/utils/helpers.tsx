@@ -28,7 +28,7 @@ function createToastId(
   return `${toasterId}:toast-${toastCounter}`;
 }
 
-function resolveBody(
+function resolveContent(
   content: string | JSX.Element | ((toast: Toast) => JSX.Element),
   t: Toast,
 ): JSX.Element | string {
@@ -37,6 +37,14 @@ function resolveBody(
     return content(t);
   }
   return content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
+}
+
+function resolvePropValue(key: keyof Config, t: Toast): string {
+  if (typeof t.toastConfig[key] === "function") {
+    return t.toastConfig[key](t.toastConfig.type) as string;
+  }
+
+  return t.toastConfig[key] as string;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {
@@ -421,7 +429,8 @@ function renderIcon(toast: Toast) {
 export {
   findToast,
   createToastId,
-  resolveBody,
+  resolveContent,
+  resolvePropValue,
   getToasterStyle,
   setStartingOffset,
   mockProps,

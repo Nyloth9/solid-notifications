@@ -8,7 +8,7 @@ const App: Component = () => {
 
   const { dismiss: globalDismiss } = useToast();
 
-    onMount(() => {
+  onMount(() => {
     const interval = setInterval(() => {
       setRandomText(
         Math.random().toString(36).substring(2, 15) +
@@ -65,6 +65,22 @@ const App: Component = () => {
                     console.log("Dissmised by user? ", reason),
                   type: "success",
                   duration: 10000,
+                  class: (type) => {
+                    switch (type) {
+                      case "success":
+                        return "bg-green-200";
+                      case "warning":
+                        return "bg-yellow-200";
+                      case "error":
+                        return "bg-red-200";
+                      case "info":
+                        return "bg-cyan-200";
+                      case "loading":
+                        return "bg-indigo-400";
+                      default:
+                        return "bg-white";
+                    }
+                  },
                 },
               );
 

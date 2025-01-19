@@ -4,7 +4,7 @@ import {
   createToastId,
   filterOptions,
   findToast,
-  resolveBody,
+  resolveContent,
   setProgressControls,
 } from "../utils/helpers";
 import Toast from "./Toast";
@@ -62,7 +62,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       },
     });
 
-    newToast.toastConfig.content = resolveBody(content, newToast); // If using a function as the first argument, we want to resolve it to JSX
+    newToast.toastConfig.content = resolveContent(content, newToast); // If using a function as the first argument, we want to resolve it to JSX
 
     newToast.init();
 

@@ -133,7 +133,7 @@ export interface Config {
   pauseOnHover: boolean;
   pauseOnWindowInactive: boolean;
   renderOnWindowInactive: boolean;
-  class: string;
+  class: string | ((type: ToastType) => string);
   style: JSX.CSSProperties | undefined;
   wrapperClass: string;
   wrapperStyle: JSX.CSSProperties | undefined;

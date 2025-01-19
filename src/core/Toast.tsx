@@ -13,6 +13,7 @@ import {
   renderIcon,
   createDragManager,
   mockProps,
+  resolvePropValue,
 } from "../utils/helpers";
 
 /***
@@ -238,7 +239,10 @@ class Toast {
           fallback={this.toastConfig.content}
           when={this.toastConfig.contentType === "static"}
         >
-          <div class={this.toastConfig.class} style={this.toastConfig.style}>
+          <div
+            class={resolvePropValue("class", this)}
+            style={this.toastConfig.style}
+          >
             {renderIcon(this)}
             {this.toastConfig.content}
             {renderDismissButton(this)}
