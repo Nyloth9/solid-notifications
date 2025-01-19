@@ -144,11 +144,17 @@ class Toast {
 
   update(args: Partial<Config>) {
     console.log("Updating with", args);
+    
+    Object.keys(args).forEach((key) => {
+      if (key in this.toastConfig) {
+        delete this.toastConfig[key]; // Remove the key from toastConfig
+      }
+    });
 
-    // Combine the args with the existing toast config
-    const merged = merge(this.toastConfig, args);
-    Object.assign(this.toastConfig, merged);
+    // Step 2: Use Object.assign to merge the new values into toastConfig
+    Object.assign(this.toastConfig, args);
 
+    // Ensure callback is executed after the update
     this.toastConfig.updateCallback?.();
 
     this.progressManager.update(this.toastConfig.duration); // Update the timer with the new duration

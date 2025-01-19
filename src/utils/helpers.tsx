@@ -82,6 +82,10 @@ function mockProps(store: any) {
   Object.keys(store).forEach((key) => {
     Object.defineProperty(props, key, {
       get: () => store[key],
+      set: (value: any) => {
+        console.log("Setting value", key, value);
+        store[key] = value; // Mutating the store object in place
+      },
     });
   });
 

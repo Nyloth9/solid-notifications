@@ -26,13 +26,13 @@ render(() => {
       setOffsetX((prev) => prev + 300);
       setClass1("1asdasdsad");
       setBg("white");
-    }, 3000);
+    }, 4000);
 
-    setTimeout(() => {
+    /*     setTimeout(() => {
       setOffsetX((prev) => prev + 300);
       setClass1("sn-toast-wrapper");
       setBg("purple");
-    }, 6000);
+    }, 6000); */
   });
 
   return (
@@ -41,7 +41,7 @@ render(() => {
         toasterId="toaster-1"
         offsetX={offsetX()}
         wrapperClass={class1()}
-        wrapperStyle={{ "background-color": bg() }}
+        wrapperStyle={{ "background-color": "green" }}
       />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />

@@ -64,16 +64,16 @@ const App: Component = () => {
                   exitCallback: (reason) =>
                     console.log("Dissmised by user? ", reason),
                   type: "success",
+                  duration: 10000,
                 },
               );
 
               setTimeout(() => {
                 update({
                   id,
-
-                  style: { "background-color": "yellow" },
+                  wrapperStyle: { "background-color": "yellow" },
                 });
-              }, 4000);
+              }, 2000);
 
               /*         setTimeout(() => {
                 update({ id, type: "warning" });
@@ -83,13 +83,13 @@ const App: Component = () => {
                 update({ id, type: "error" });
               }, 4000);*/
 
-              setTimeout(() => {
+              /*      setTimeout(() => {
                 update({ id, type: "info" });
               }, 6000);
 
               setTimeout(() => {
                 update({ id, type: "loading" });
-              }, 8000);
+              }, 8000); */
 
               /*    setTimeout(() => {
                 update({
