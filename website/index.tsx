@@ -6,7 +6,6 @@ import "../src/index.css";
 import App from "./App";
 import { ToastProvider } from "../src/core/Context";
 import Toaster from "../src/core/Toaster";
-import { createSignal, onMount } from "solid-js";
 
 const root = document.getElementById("root");
 
