@@ -95,16 +95,12 @@ export default function Toaster(props: ToasterOptions) {
 
   return (
     <div
-      id={
-        toasterId === "__default"
-          ? "moon-toast-toaster"
-          : `moon-toast-toaster:${toasterId}`
-      }
+      class="sn-toaster"
+      id={toasterId === "__default" ? "sn-toaster" : `sn-toaster:${toasterId}`}
       style={{
         ...store.toasterConfig.toasterStyle,
         "justify-content": getToasterStyle(store.toasterConfig.positionX),
       }}
-      class="sn-toaster"
     >
       <For each={store.rendered}>{(toast) => toast.render()}</For>
     </div>

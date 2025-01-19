@@ -15,7 +15,7 @@
     "message",
     "ui",
     "component",
-    "moon-toast"
+    "solid-notifications"
   ],
   "licence": "MIT",
   "type": "module",
