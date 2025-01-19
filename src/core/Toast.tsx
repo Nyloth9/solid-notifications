@@ -144,10 +144,10 @@ class Toast {
 
   update(args: Partial<Config>) {
     console.log("Updating with", args);
-    
+
     Object.keys(args).forEach((key) => {
       if (key in this.toastConfig) {
-        delete this.toastConfig[key]; // Remove the key from toastConfig
+        delete this.toastConfig[key as keyof Config];
       }
     });
 
