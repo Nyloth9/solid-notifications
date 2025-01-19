@@ -1,4 +1,4 @@
-import { batch, JSX, mergeProps, onMount, Show } from "solid-js";
+import { batch, createMemo, JSX, mergeProps, onMount, Show } from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
@@ -13,6 +13,7 @@ import {
   renderProgressBar,
   renderIcon,
   createDragManager,
+  mockProps,
 } from "../utils/helpers";
 
 /***
@@ -75,31 +76,11 @@ import {
  * - custom toast (function as content argument), will be unstyled
  */
 
-function mockProps(store: any) {
-  /*** Here we are transforming the toaster store (a proxy) to a props object (plain object with getters) so we can
-   * take advantage of mergeProps and keep reactivity, thus allowing us to use reactive props on the <Toaster /> component.
-   * Otherwise if we just merge the toaster store with toast options, the merge will just create a plain object and we will lose reactivity.
-   * If we try to achieve the same through a Proxy, it will not work because we can't read the requested key "Symbol(solid-proxy)" and thus
-   * can't point it to the relevant source (toastConfig or toasterConfig) depending on the key.
-   ***/
-
-  const props: Record<string, any> = {};
-
-  // Dynamically create getters for each key in the store
-  Object.keys(store).forEach((key) => {
-    Object.defineProperty(props, key, {
-      get: () => store[key],
-    });
-  });
-
-  return props;
-}
-
 class Toast {
   private setStore;
   private dragManager = createDragManager(this);
   store;
-  toastConfig: Partial<Config>;
+  toastConfig: Config;
   ref: HTMLElement | null = null;
   state: "entering" | "idle" | "exiting" = "entering";
   renderedAt: number | undefined; // Flag to check against when we need to know if the toast was rendered
@@ -107,20 +88,14 @@ class Toast {
   isPaused = true; // A flag that's exposed for custom toasts. Has no internal use
   isPausedByUser = false; // True if the timer was paused by the user (checked on window blur and mouse hover)
   offset = 0;
-  x;
 
   constructor(args: ToastConstructor) {
     this.store = args.store;
     this.setStore = args.setStore;
-    console.log("toasterConfig inside toast: ", args.store.toasterConfig);
-
-    console.log(
-      "mega merge; ",
-      mergeProps(mockProps(args.store.toasterConfig), args.toastConfig),
-    );
-
-    this.x = mergeProps(mockProps(args.store.toasterConfig), args.toastConfig);
-    this.toastConfig = args.toastConfig; // Combine the per toast config with the toaster config
+    this.toastConfig = mergeProps(
+      mockProps(args.store.toasterConfig),
+      args.toastConfig,
+    ) as Config; // Combine the per toast config with the toaster config and keep reactivity
     this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
     this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
     return createMutable(this); // This is how we make the class reactive
@@ -158,23 +133,25 @@ class Toast {
 
     /** If we check for isPausedByUser and blurred before applying state; toast would run entrance animation and never apply idle state (if isPausedByUser or blurred), so we do it here */
     if (this.state !== "idle")
-      setTimeout(() => (this.state = "idle"), this.getValue("enterDuration"));
+      setTimeout(() => (this.state = "idle"), this.toastConfig.enterDuration);
 
     if (this.isPausedByUser) return;
-    if (this.store.isWindowBlurred && this.getValue("pauseOnWindowInactive"))
+    if (this.store.isWindowBlurred && this.toastConfig.pauseOnWindowInactive)
       return;
 
     this.progressManager.play(); // This is where we first start the timer in the toast lifecycle
   }
 
   update(args: Partial<Config>) {
+    console.log("Updating with", args);
+
     // Combine the args with the existing toast config
     const merged = merge(this.toastConfig, args);
     Object.assign(this.toastConfig, merged);
 
-    this.getValue("updateCallback")?.();
+    this.toastConfig.updateCallback?.();
 
-    this.progressManager.update(this.getValue("duration")); // Update the timer with the new duration
+    this.progressManager.update(this.toastConfig.duration); // Update the timer with the new duration
 
     this.lifecycle(); // Will start the dismiss timer if conditions are met
   }
@@ -182,7 +159,7 @@ class Toast {
   dismiss(reason?: string | boolean, animated = true) {
     /*** The reason can be used as the argument of the exitCallback ***/
     /*** Animated flag is used only for dragEnd event to disable exit animation on dismiss when toast dragged (otherwise it will jump back to start and play exit animation)  */
-    if (this.getValue("exitCallback")) {
+    if (this.toastConfig.exitCallback) {
       switch (reason) {
         case "__expired":
           reason = false; // If the reason was "__expired", that means the toast was dismissed by the Timer
@@ -195,7 +172,7 @@ class Toast {
           break;
       }
 
-      this.getValue("exitCallback")?.(reason);
+      this.toastConfig.exitCallback?.(reason);
     }
 
     if (animated) this.state = "exiting";
@@ -203,67 +180,63 @@ class Toast {
     setTimeout(() => {
       batch(() => {
         this.setStore("rendered", (state) =>
-          state.filter((t) => t.getValue("id") !== this.getValue("id")),
+          state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
         );
         this.setStore("queued", (state) =>
-          state.filter((t) => t.getValue("id") !== this.getValue("id")),
+          state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
         );
       });
-    }, this.getValue("exitDuration"));
+    }, this.toastConfig.exitDuration);
   }
 
   remove() {
     /*** This will remove the toast without calling the exitCallback and without the exit animation ***/
     batch(() => {
       this.setStore("rendered", (state) =>
-        state.filter((t) => t.getValue("id") !== this.getValue("id")),
+        state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
       );
       this.setStore("queued", (state) =>
-        state.filter((t) => t.getValue("id") !== this.getValue("id")),
+        state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
       );
     });
-  }
-
-  getValue<T extends keyof Config>(key: T): Config[T] {
-    return this.toastConfig[key] ?? this.store.toasterConfig[key];
   }
 
   render(): JSX.Element {
     onMount(() => {
       this.renderedAt = Date.now(); // We dont want to run this in the lifecycle because lifecycle can also run on update (which can happen before the toast is rendered)
-      this.getValue("enterCallback")?.();
+      this.toastConfig.enterCallback?.();
       this.lifecycle(); // Will start the dismiss timer
     });
 
     return (
       <div
         data-role="toast"
-        id={this.getValue("id")}
+        id={this.toastConfig.id}
         ref={(el) => (this.ref = el)}
-        role={this.getValue("role")}
-        aria-live={this.getValue("ariaLive")}
+        role={this.toastConfig.role}
+        aria-live={this.toastConfig.ariaLive}
         onClick={(e) => handleClick(e, this)}
         onMouseEnter={handleMouseEnter.bind(null, this)}
         onMouseLeave={handleMouseLeave.bind(null, this)}
         onTouchStart={this.dragManager.handleDragStart}
         onTouchMove={this.dragManager.handleDragMove}
         onTouchEnd={this.dragManager.handleDragEnd}
-        class={`${this.getValue("wrapperClass")} ${applyState(this)}`.trim()}
+        class={`${this.toastConfig.wrapperClass} ${applyState(this)}`.trim()}
         style={{
-          ...this.getValue("wrapperStyle"),
+          ...this.toastConfig.wrapperStyle,
           [this.store.toasterConfig.positionX]:
             `${this.store.toasterConfig.offsetX}px`,
           [this.store.toasterConfig.positionY]: `${this.offset}px`,
         }}
       >
-        {/* If the toast content is a function (it's contentType will be "dynamic") we want to leave it unstyled */}
+        {/* If the toastConfig.content is a function (it's contentType will be "dynamic") we want to leave it unstyled */}
         <Show
-          fallback={this.getValue("content")}
-          when={this.getValue("contentType") === "static"}
+          fallback={this.toastConfig.content}
+          when={this.toastConfig.contentType === "static"}
         >
-          <div class={this.getValue("class")} style={this.getValue("style")}>
+          <div class={this.toastConfig.class} style={this.toastConfig.style}>
             {renderIcon(this)}
-            {this.getValue("content")}
+            {this.toastConfig.content}
             {renderDismissButton(this)}
           </div>
           {renderProgressBar(this)}

@@ -8,10 +8,10 @@ function findToast(
 ): Toast | undefined {
   if (!id) return;
 
-  const toast = store.rendered.find((toast) => toast.getValue("id") === id);
+  const toast = store.rendered.find((toast) => toast.toastConfig.id === id);
   if (toast) return toast;
 
-  return store.queued.find((toast) => toast.getValue("id") === id);
+  return store.queued.find((toast) => toast.toastConfig.id === id);
 }
 
 function createToastId(
@@ -36,7 +36,7 @@ function resolveBody(
     // If the content is a function, pass the toast instance to it
     return content(t);
   }
-  return content || `🍞 Toast "${t.getValue("id")}" ready to serve!`;
+  return content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {
@@ -66,6 +66,26 @@ function setStartingOffset(
     precedingToast.ref?.clientHeight! +
     store.toasterConfig.gutter
   );
+}
+
+function mockProps(store: any) {
+  /*** Here we are transforming the toaster store (a proxy) to a props object (plain object with getters) so we can
+   * take advantage of mergeProps and keep reactivity, thus allowing us to use reactive props on the <Toaster /> component.
+   * Otherwise if we just merge the toaster store with toast options, the merge will just create a plain object and we will lose reactivity.
+   * If we try to achieve the same through a Proxy, it will not work because we can't read the requested key "Symbol(solid-proxy)" and thus
+   * can't point it to the relevant source (toastConfig or toasterConfig) depending on the key.
+   ***/
+
+  const props: Record<string, any> = {};
+
+  // Dynamically create getters for each key in the store
+  Object.keys(store).forEach((key) => {
+    Object.defineProperty(props, key, {
+      get: () => store[key],
+    });
+  });
+
+  return props;
 }
 
 function merge(target: any, source: any, omit: string[] = []) {
@@ -118,27 +138,25 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
   return filteredOptions;
 }
 
-function applyState(t: Toast) {
-  const onEnter = t.getValue("onEnter");
-  const onIdle = t.getValue("onIdle");
-  const onExit = t.getValue("onExit");
+function applyState(toast: Toast) {
+  const toastConfig = toast.toastConfig;
 
-  switch (t.state) {
+  switch (toast.state) {
     case "entering":
-      if (onEnter) return onEnter;
+      if (toastConfig.onEnter) return toastConfig.onEnter;
     case "idle":
-      if (onIdle) return onIdle;
+      if (toastConfig.onIdle) return toastConfig.onIdle;
     case "exiting":
-      if (onExit) return onExit;
+      if (toastConfig.onExit) return toastConfig.onExit;
     default:
-      return `sn-${t.getValue("positionX")}-${t.getValue("positionY")}-${t.state}`;
+      return `sn-${toastConfig.positionX}-${toastConfig.positionY}-${toast.state}`;
   }
 }
 
 function createProgressManager(toast?: Toast, callback?: () => void) {
   const [progress, setProgress] = createSignal(0);
 
-  let duration = toast?.getValue("duration");
+  let duration = toast?.toastConfig.duration;
   let start = performance.now();
   let elapsed = 0;
   let paused = false;
@@ -230,7 +248,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragStart = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.getValue("dragToDismiss")) return;
+    if (!toast.toastConfig.dragToDismiss) return;
 
     startX = e.touches[0].clientX;
     toast.ref.style.transition = "none";
@@ -239,7 +257,7 @@ function createDragManager(toast: Toast) {
 
   const handleDragMove = (e: TouchEvent) => {
     if (!toast.ref) return;
-    if (!toast.getValue("dragToDismiss")) return;
+    if (!toast.toastConfig.dragToDismiss) return;
 
     currentX = e.touches[0].clientX - startX;
     toast.ref.style.transform = `translateX(${currentX}px)`;
@@ -247,10 +265,10 @@ function createDragManager(toast: Toast) {
 
   const handleDragEnd = () => {
     if (!toast.ref) return;
-    if (!toast.getValue("dragToDismiss")) return;
+    if (!toast.toastConfig.dragToDismiss) return;
 
     // Check if drag distance is sufficient to dismiss
-    if (Math.abs(currentX) > toast.getValue("dragTreshold")) {
+    if (Math.abs(currentX) > toast.toastConfig.dragTreshold) {
       toast.ref.style.transition = "all 0.3s ease";
       toast.ref.style.transform = `translateX(${currentX > 0 ? "100%" : "-100%"})`;
       toast.ref.style.opacity = "0";
@@ -275,7 +293,7 @@ function createDragManager(toast: Toast) {
 }
 
 function handleClick(e: MouseEvent, toast: Toast) {
-  if (!toast.getValue("dismissOnClick")) return;
+  if (!toast.toastConfig.dismissOnClick) return;
 
   const isInteractiveElement =
     e.target instanceof HTMLElement &&
@@ -287,10 +305,10 @@ function handleClick(e: MouseEvent, toast: Toast) {
 }
 
 function handleMouseEnter(toast: Toast) {
-  if (!toast.getValue("pauseOnHover")) return;
+  if (!toast.toastConfig.pauseOnHover) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.getValue("pauseOnWindowInactive");
+    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -299,10 +317,10 @@ function handleMouseEnter(toast: Toast) {
 }
 
 function handleMouseLeave(toast: Toast) {
-  if (!toast.getValue("pauseOnHover")) return;
+  if (!toast.toastConfig.pauseOnHover) return;
 
   const shouldIgnoreHoverWhileBlurred =
-    toast.store.isWindowBlurred && toast.getValue("pauseOnWindowInactive");
+    toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
 
   if (shouldIgnoreHoverWhileBlurred) return;
   if (toast.isPausedByUser) return;
@@ -311,14 +329,14 @@ function handleMouseLeave(toast: Toast) {
 }
 
 function renderDismissButton(toast: Toast) {
-  if (toast.getValue("dismissOnClick") || !toast.getValue("showDismissButton"))
+  if (toast.toastConfig.dismissOnClick || !toast.toastConfig.showDismissButton)
     return null;
 
   return (
     <button
       aria-label="Close notification"
-      class={toast.getValue("dismissButtonClass")}
-      style={toast.getValue("dismissButtonStyle")}
+      class={toast.toastConfig.dismissButtonClass}
+      style={toast.toastConfig.dismissButtonStyle}
       onClick={() => toast.dismiss()}
     >
       <svg
@@ -342,36 +360,33 @@ function renderDismissButton(toast: Toast) {
 }
 
 function renderProgressBar(toast: Toast) {
-  if (!toast.getValue("showProgressBar") || !toast.getValue("duration"))
+  if (!toast.toastConfig.showProgressBar || !toast.toastConfig.duration)
     return null;
 
   return (
     <div
       data-role="progress"
-      class={toast.getValue("progressBarClass")}
+      class={toast.toastConfig.progressBarClass}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",
-        ...toast.getValue("progressBarStyle"),
+        ...toast.toastConfig.progressBarStyle,
       }}
     />
   );
 }
 
 function renderIcon(toast: Toast) {
-  if (!toast.getValue("showIcon")) return null;
-
-  const icon = toast.getValue("icon");
-
-  if (icon) {
-    if (typeof icon === "function") {
-      return icon(toast.getValue("type"));
+  if (!toast.toastConfig.showIcon) return null;
+  if (toast.toastConfig.icon) {
+    if (typeof toast.toastConfig.icon === "function") {
+      return toast.toastConfig.icon(toast.toastConfig.type);
     }
 
-    return icon;
+    return toast.toastConfig.icon;
   }
 
-  switch (toast.getValue("type")) {
+  switch (toast.toastConfig.type) {
     case "success":
       return (
         <svg
@@ -434,6 +449,7 @@ export {
   resolveBody,
   getToasterStyle,
   setStartingOffset,
+  mockProps,
   merge,
   filterOptions,
   applyState,
