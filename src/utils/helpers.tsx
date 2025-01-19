@@ -39,22 +39,6 @@ function resolveContent(
   return content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
 }
 
-function resolveClass(key: keyof Config, t: Toast): string {
-  if (typeof t.toastConfig[key] === "function") {
-    return t.toastConfig[key](t.toastConfig.type) as string;
-  }
-
-  return t.toastConfig[key] as string;
-}
-
-function resolveStyle(key: keyof Config, t: Toast): JSX.CSSProperties {
-  if (typeof t.toastConfig[key] === "function") {
-    return t.toastConfig[key](t.toastConfig.type) as JSX.CSSProperties;
-  }
-
-  return t.toastConfig[key] as JSX.CSSProperties;
-}
-
 function resolvePropValue(key: keyof Config, t: Toast) {
   if (typeof t.toastConfig[key] === "function") {
     return t.toastConfig[key](t.toastConfig.type);
