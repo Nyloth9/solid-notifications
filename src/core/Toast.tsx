@@ -73,6 +73,7 @@ import {
  * - per toaster window blur event listener
  * - option to not render toasts if the tab is blurred
  * - custom toast (function as content argument), will be unstyled
+ * - all around reactivity, pass signals to ToastProvider, Toasters and Toasts and the changes will reflect in the UI
  */
 
 class Toast {
