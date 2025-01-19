@@ -143,21 +143,19 @@ class Toast {
   }
 
   update(args: Partial<Config>) {
-    console.log("Updating with", args);
-
+    /*** Delete the references to the store.toasterConfig and replace them with arguments from the update ***/
+    /*** Otherwise, we would be updating the store.toasterConfig itself. Deleting and re-creating the key also triggers reactivity. ***/
     Object.keys(args).forEach((key) => {
       if (key in this.toastConfig) {
         delete this.toastConfig[key as keyof Config];
       }
     });
 
-    // Step 2: Use Object.assign to merge the new values into toastConfig
     Object.assign(this.toastConfig, args);
 
-    // Ensure callback is executed after the update
     this.toastConfig.updateCallback?.();
 
-    this.progressManager.update(this.toastConfig.duration); // Update the timer with the new duration
+    this.progressManager.update(this.toastConfig.duration); // Update the timer with the new (or old) duration
 
     this.lifecycle(); // Will start the dismiss timer if conditions are met
   }

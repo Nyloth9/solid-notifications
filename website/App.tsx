@@ -83,13 +83,13 @@ const App: Component = () => {
                 update({ id, type: "error" });
               }, 4000);*/
 
-              /*      setTimeout(() => {
+              setTimeout(() => {
                 update({ id, type: "info" });
               }, 6000);
 
               setTimeout(() => {
                 update({ id, type: "loading" });
-              }, 8000); */
+              }, 8000);
 
               /*    setTimeout(() => {
                 update({
