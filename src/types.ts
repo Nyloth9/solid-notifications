@@ -20,7 +20,7 @@ export type RegisteredToaster = Omit<Toaster, "toasterId"> & {
   toasterId: string;
 };
 
-type ToastType =
+export type ToastType =
   | "default"
   | "success"
   | "error"
@@ -113,7 +113,7 @@ export interface ProgressControls {
 
 export interface Config {
   id?: string;
-  content?: JSX.Element | string;
+  content?: string | JSX.Element | ((toast: Toast) => JSX.Element | string);
   contentType?: "static" | "dynamic";
   toasterId?: string;
   type: ToastType;
@@ -147,8 +147,11 @@ export interface Config {
   updateCallback: (() => void) | null;
   exitCallback: ((reason?: boolean | string) => void) | null;
   showDismissButton: boolean;
-  dismissButtonStyle: JSX.CSSProperties | undefined;
-  dismissButtonClass: string;
+  dismissButtonClass: string | ((type: ToastType) => string);
+  dismissButtonStyle:
+    | JSX.CSSProperties
+    | ((type: ToastType) => JSX.CSSProperties)
+    | undefined;
   dismissOnClick: boolean;
   toasterStyle: Omit<
     JSX.CSSProperties,

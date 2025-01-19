@@ -1,5 +1,5 @@
 import { createSignal, JSX } from "solid-js";
-import { Config, ProgressControls, ToasterStore } from "../types";
+import { Config, ProgressControls, ToasterStore, ToastType } from "../types";
 import Toast from "../core/Toast";
 
 function findToast(
@@ -28,23 +28,24 @@ function createToastId(
   return `${toasterId}:toast-${toastCounter}`;
 }
 
-function resolveContent(
-  content: string | JSX.Element | ((toast: Toast) => JSX.Element),
-  t: Toast,
-): JSX.Element | string {
-  if (typeof content === "function") {
+function resolveContent(t: Toast): JSX.Element | string {
+  if (typeof t.toastConfig.content === "function") {
     // If the content is a function, pass the toast instance to it
-    return content(t);
+    return t.toastConfig.content(t);
   }
-  return content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
+  return (
+    t.toastConfig.content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`
+  );
 }
 
-function resolvePropValue(key: keyof Config, t: Toast) {
-  if (typeof t.toastConfig[key] === "function") {
-    return t.toastConfig[key](t.toastConfig.type);
+function resolvePropValue<K extends keyof Config>(key: K, t: Toast) {
+  const prop = t.toastConfig[key];
+
+  if (typeof prop === "function") {
+    return (prop as (type: ToastType) => unknown)(t.toastConfig.type);
   }
 
-  return t.toastConfig[key];
+  return prop;
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {
@@ -318,8 +319,8 @@ function renderDismissButton(toast: Toast) {
   return (
     <button
       aria-label="Close notification"
-      class={toast.toastConfig.dismissButtonClass}
-      style={toast.toastConfig.dismissButtonStyle}
+      class={resolvePropValue("dismissButtonClass", toast) as string}
+      style={resolvePropValue("dismissButtonStyle", toast) as JSX.CSSProperties}
       onClick={() => toast.dismiss()}
     >
       <svg

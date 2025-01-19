@@ -14,6 +14,7 @@ import {
   createDragManager,
   mockProps,
   resolvePropValue,
+  resolveContent,
 } from "../utils/helpers";
 
 /***
@@ -228,7 +229,7 @@ class Toast {
         onTouchEnd={this.dragManager.handleDragEnd}
         class={`${resolvePropValue("wrapperClass", this)} ${applyState(this)}`.trim()}
         style={{
-          ...this.toastConfig.wrapperStyle,
+          ...(resolvePropValue("wrapperStyle", this) as JSX.CSSProperties),
           [this.store.toasterConfig.positionX]:
             `${this.store.toasterConfig.offsetX}px`,
           [this.store.toasterConfig.positionY]: `${this.offset}px`,
@@ -236,7 +237,7 @@ class Toast {
       >
         {/* If the toastConfig.content is a function (it's contentType will be "dynamic") we want to leave it unstyled */}
         <Show
-          fallback={this.toastConfig.content}
+          fallback={resolveContent(this)}
           when={this.toastConfig.contentType === "static"}
         >
           <div
@@ -244,7 +245,7 @@ class Toast {
             style={resolvePropValue("style", this) as JSX.CSSProperties}
           >
             {renderIcon(this)}
-            {this.toastConfig.content}
+            {resolveContent(this)}
             {renderDismissButton(this)}
           </div>
           {renderProgressBar(this)}

@@ -57,12 +57,12 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       toastConfig: {
         ...filteredOptions,
         contentType: typeof content === "function" ? "dynamic" : "static",
-        content: undefined,
+        content: content,
         id: toastId,
       },
     });
 
-    newToast.toastConfig.content = resolveContent(content, newToast); // If using a function as the first argument, we want to resolve it to JSX
+   // newToast.toastConfig.content = resolveContent(content, newToast); // If using a function as the first argument, we want to resolve it to JSX
 
     newToast.init();
 
