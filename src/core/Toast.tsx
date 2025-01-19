@@ -1,9 +1,8 @@
-import { batch, createMemo, JSX, mergeProps, onMount, Show } from "solid-js";
+import { batch, JSX, mergeProps, onMount, Show } from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
   applyState,
-  merge,
   setStartingOffset,
   createProgressManager,
   handleClick,

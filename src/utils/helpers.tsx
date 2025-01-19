@@ -78,42 +78,13 @@ function mockProps(store: any) {
 
   const props: Record<string, any> = {};
 
-  // Dynamically create getters for each key in the store
   Object.keys(store).forEach((key) => {
     Object.defineProperty(props, key, {
       get: () => store[key],
-      set: (value: any) => {
-        console.log("Setting value", key, value);
-        store[key] = value; // Mutating the store object in place
-      },
     });
   });
 
   return props;
-}
-
-function merge(target: any, source: any, omit: string[] = []) {
-  const isPlainObject = (obj: any) =>
-    obj && typeof obj === "object" && obj.constructor === Object;
-
-  if (Array.isArray(target)) {
-    return source; // Replace arrays (otherwise animation keyframes will not work)
-  }
-
-  if (isPlainObject(target) && isPlainObject(source)) {
-    return Object.keys(source).reduce(
-      (acc, key) => {
-        if (typeof key !== "symbol") {
-          acc[key] = merge(target[key], source[key]);
-        }
-
-        return acc;
-      },
-      { ...target },
-    );
-  }
-
-  return source;
 }
 
 function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
@@ -454,7 +425,6 @@ export {
   getToasterStyle,
   setStartingOffset,
   mockProps,
-  merge,
   filterOptions,
   applyState,
   createProgressManager,
