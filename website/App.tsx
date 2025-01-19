@@ -8,7 +8,7 @@ const App: Component = () => {
 
   const { dismiss: globalDismiss } = useToast();
 
-  /*   onMount(() => {
+    onMount(() => {
     const interval = setInterval(() => {
       setRandomText(
         Math.random().toString(36).substring(2, 15) +
@@ -18,7 +18,7 @@ const App: Component = () => {
 
     return () => clearInterval(interval);
   });
- */
+
   return (
     <div>
       <div class="container mx-auto p-4">

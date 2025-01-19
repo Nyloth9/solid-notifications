@@ -95,9 +95,9 @@ class Toast {
     this.toastConfig = mergeProps(
       mockProps(args.store.toasterConfig),
       args.toastConfig,
-    ) as Config; // Combine the per toast config with the toaster config and keep reactivity
+    ) as Config; // Combine the per toast config with the toaster config and keep reactivity, more info in the helper function
     this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
-    this.progressManager = createProgressManager(); // We need to initialize it here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
+    this.progressManager = createProgressManager(); // We need to initialize the progressManager here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
     return createMutable(this); // This is how we make the class reactive
   }
 
@@ -162,7 +162,7 @@ class Toast {
 
   dismiss(reason?: string | boolean, animated = true) {
     /*** The reason can be used as the argument of the exitCallback ***/
-    /*** Animated flag is used only for dragEnd event to disable exit animation on dismiss when toast dragged (otherwise it will jump back to start and play exit animation)  */
+    /*** Animated flag is used only for dragEnd event to disable exit animation on dismiss when toast dragged (otherwise it will jump back to start and play the exit animation)  */
     if (this.toastConfig.exitCallback) {
       switch (reason) {
         case "__expired":

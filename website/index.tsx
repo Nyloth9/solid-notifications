@@ -23,7 +23,7 @@ render(() => {
 
   onMount(() => {
     setTimeout(() => {
-      setOffsetX((prev) => prev + 300);
+      setOffsetX((prev) => prev + 100);
       setClass1("1asdasdsad");
       setBg("white");
     }, 4000);
