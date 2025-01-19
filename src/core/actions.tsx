@@ -62,8 +62,6 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       },
     });
 
-   // newToast.toastConfig.content = resolveContent(content, newToast); // If using a function as the first argument, we want to resolve it to JSX
-
     newToast.init();
 
     return {

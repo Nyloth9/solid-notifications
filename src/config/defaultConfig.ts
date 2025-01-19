@@ -1,6 +1,7 @@
 import { Config } from "../types";
 
 export const defaultConfig: Config = {
+  theme: "light",
   type: "default",
   duration: 5000,
   onEnter: undefined,

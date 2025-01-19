@@ -227,7 +227,7 @@ class Toast {
         onTouchStart={this.dragManager.handleDragStart}
         onTouchMove={this.dragManager.handleDragMove}
         onTouchEnd={this.dragManager.handleDragEnd}
-        class={`${resolvePropValue("wrapperClass", this)} ${applyState(this)}`.trim()}
+        class={`${resolvePropValue("wrapperClass", this)} sn-theme__${this.toastConfig.theme} sn-type__${this.toastConfig.type} ${applyState(this)}`.trim()}
         style={{
           ...(resolvePropValue("wrapperStyle", this) as JSX.CSSProperties),
           [this.store.toasterConfig.positionX]:
@@ -241,7 +241,7 @@ class Toast {
           when={this.toastConfig.contentType === "static"}
         >
           <div
-            class={resolvePropValue("class", this) as string}
+            class={`${resolvePropValue("class", this) as string} sn-theme__${this.toastConfig.theme} sn-type__${this.toastConfig.type}`}
             style={resolvePropValue("style", this) as JSX.CSSProperties}
           >
             {renderIcon(this)}

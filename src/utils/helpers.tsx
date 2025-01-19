@@ -133,7 +133,7 @@ function applyState(toast: Toast) {
     case "exiting":
       if (toastConfig.onExit) return toastConfig.onExit;
     default:
-      return `sn-${toastConfig.positionX}-${toastConfig.positionY}-${toast.state}`;
+      return `sn-state__${toastConfig.positionX}-${toastConfig.positionY}-${toast.state}`;
   }
 }
 
@@ -319,7 +319,7 @@ function renderDismissButton(toast: Toast) {
   return (
     <button
       aria-label="Close notification"
-      class={resolvePropValue("dismissButtonClass", toast) as string}
+      class={`${resolvePropValue("dismissButtonClass", toast) as string} sn-theme__${toast.toastConfig.theme} sn-type__${toast.toastConfig.type}`}
       style={resolvePropValue("dismissButtonStyle", toast) as JSX.CSSProperties}
       onClick={() => toast.dismiss()}
     >
@@ -349,8 +349,9 @@ function renderProgressBar(toast: Toast) {
 
   return (
     <div
+      role="progressbar"
       data-role="progress"
-      class={resolvePropValue("progressBarClass", toast) as string}
+      class={`${resolvePropValue("progressBarClass", toast) as string} sn-theme__${toast.toastConfig.theme} sn-type__${toast.toastConfig.type}`}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",

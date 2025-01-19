@@ -252,46 +252,46 @@
 
 /* Presence Animations */
 
-.sn-right-top-entering,
-.sn-right-bottom-entering {
+.sn-state__right-top-entering,
+.sn-state__right-bottom-entering {
   -webkit-animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.sn-right-top-exiting,
-.sn-right-bottom-exiting {
+.sn-state__right-top-exiting,
+.sn-state__right-bottom-exiting {
   -webkit-animation: SNSlideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.sn-left-top-entering,
-.sn-left-bottom-entering {
+.sn-state__left-top-entering,
+.sn-state__left-bottom-entering {
   -webkit-animation: SNSlideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.sn-left-top-exiting,
-.sn-left-bottom-exiting {
+.sn-state__left-top-exiting,
+.sn-state__left-bottom-exiting {
   -webkit-animation: SNSlideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.sn-center-top-entering {
+.sn-state__center-top-entering {
   -webkit-animation: SNSlideInTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideInTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.sn-center-top-exiting {
+.sn-state__center-top-exiting {
   -webkit-animation: SNSlideOutTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideOutTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.sn-center-bottom-entering {
+.sn-state__center-bottom-entering {
   -webkit-animation: SNSlideInBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideInBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.sn-center-bottom-exiting {
+.sn-state__center-bottom-exiting {
   -webkit-animation: SNSlideOutBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation: SNSlideOutBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
