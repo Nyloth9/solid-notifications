@@ -39,12 +39,28 @@ function resolveContent(
   return content || `🍞 Toast "${t.toastConfig.id}" ready to serve!`;
 }
 
-function resolvePropValue(key: keyof Config, t: Toast): string {
+function resolveClass(key: keyof Config, t: Toast): string {
   if (typeof t.toastConfig[key] === "function") {
     return t.toastConfig[key](t.toastConfig.type) as string;
   }
 
   return t.toastConfig[key] as string;
+}
+
+function resolveStyle(key: keyof Config, t: Toast): JSX.CSSProperties {
+  if (typeof t.toastConfig[key] === "function") {
+    return t.toastConfig[key](t.toastConfig.type) as JSX.CSSProperties;
+  }
+
+  return t.toastConfig[key] as JSX.CSSProperties;
+}
+
+function resolvePropValue(key: keyof Config, t: Toast) {
+  if (typeof t.toastConfig[key] === "function") {
+    return t.toastConfig[key](t.toastConfig.type);
+  }
+
+  return t.toastConfig[key];
 }
 
 function getToasterStyle(positionX: "left" | "right" | "center") {
@@ -349,11 +365,11 @@ function renderProgressBar(toast: Toast) {
   return (
     <div
       data-role="progress"
-      class={toast.toastConfig.progressBarClass}
+      class={resolvePropValue("progressBarClass", toast) as string}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",
-        ...toast.toastConfig.progressBarStyle,
+        ...(resolvePropValue("progressBarStyle", toast) as JSX.CSSProperties),
       }}
     />
   );

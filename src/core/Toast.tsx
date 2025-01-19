@@ -226,7 +226,7 @@ class Toast {
         onTouchStart={this.dragManager.handleDragStart}
         onTouchMove={this.dragManager.handleDragMove}
         onTouchEnd={this.dragManager.handleDragEnd}
-        class={`${this.toastConfig.wrapperClass} ${applyState(this)}`.trim()}
+        class={`${resolvePropValue("wrapperClass", this)} ${applyState(this)}`.trim()}
         style={{
           ...this.toastConfig.wrapperStyle,
           [this.store.toasterConfig.positionX]:
@@ -240,8 +240,8 @@ class Toast {
           when={this.toastConfig.contentType === "static"}
         >
           <div
-            class={resolvePropValue("class", this)}
-            style={this.toastConfig.style}
+            class={resolvePropValue("class", this) as string}
+            style={resolvePropValue("style", this) as JSX.CSSProperties}
           >
             {renderIcon(this)}
             {this.toastConfig.content}

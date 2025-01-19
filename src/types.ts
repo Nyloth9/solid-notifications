@@ -134,9 +134,15 @@ export interface Config {
   pauseOnWindowInactive: boolean;
   renderOnWindowInactive: boolean;
   class: string | ((type: ToastType) => string);
-  style: JSX.CSSProperties | undefined;
-  wrapperClass: string;
-  wrapperStyle: JSX.CSSProperties | undefined;
+  style:
+    | JSX.CSSProperties
+    | ((type: ToastType) => JSX.CSSProperties)
+    | undefined;
+  wrapperClass: string | ((type: ToastType) => string);
+  wrapperStyle:
+    | JSX.CSSProperties
+    | ((type: ToastType) => JSX.CSSProperties)
+    | undefined;
   enterCallback: (() => void) | null;
   updateCallback: (() => void) | null;
   exitCallback: ((reason?: boolean | string) => void) | null;
@@ -155,8 +161,11 @@ export interface Config {
     | "pointer-events"
   > | null;
   showProgressBar: boolean;
-  progressBarStyle: JSX.CSSProperties | undefined;
-  progressBarClass: string;
+  progressBarClass: string | ((type: ToastType) => string);
+  progressBarStyle:
+    | JSX.CSSProperties
+    | ((type: ToastType) => JSX.CSSProperties)
+    | undefined;
   showIcon: boolean;
   icon: ((type: ToastType) => JSX.Element) | JSX.Element | null;
   dragToDismiss: boolean;

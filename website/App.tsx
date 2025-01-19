@@ -65,20 +65,20 @@ const App: Component = () => {
                     console.log("Dissmised by user? ", reason),
                   type: "success",
                   duration: 10000,
-                  class: (type) => {
+                  progressBarStyle: (type) => {
                     switch (type) {
                       case "success":
-                        return "bg-green-200";
-                      case "warning":
-                        return "bg-yellow-200";
+                        return { "background-color": "green" };
                       case "error":
-                        return "bg-red-200";
+                        return { "background-color": "red" };
+                      case "warning":
+                        return { "background-color": "yellow" };
                       case "info":
-                        return "bg-cyan-200";
+                        return { "background-color": "blue" };
                       case "loading":
-                        return "bg-indigo-400";
+                        return { "background-color": "red" };
                       default:
-                        return "bg-white";
+                        return { "background-color": "gray" };
                     }
                   },
                 },
@@ -87,7 +87,7 @@ const App: Component = () => {
               setTimeout(() => {
                 update({
                   id,
-                  wrapperStyle: { "background-color": "yellow" },
+                  wrapperStyle: { "padding-top": "100px" },
                 });
               }, 2000);
 

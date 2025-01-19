@@ -41,7 +41,7 @@ render(() => {
         toasterId="toaster-1"
         offsetX={offsetX()}
         wrapperClass={class1()}
-        wrapperStyle={{ "background-color": "green" }}
+        wrapperStyle={{ "background-color": "white" }}
       />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />
