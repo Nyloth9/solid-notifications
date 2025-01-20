@@ -72,11 +72,11 @@ const App: Component = () => {
                       case "error":
                         return { "background-color": "red" };
                       case "warning":
-                        return { "background-color": "yellow" };
+                        return { "background-color": "orange" };
                       case "info":
                         return { "background-color": "blue" };
                       case "loading":
-                        return { "background-color": "red" };
+                        return { "background-color": "#374151" };
                       default:
                         return { "background-color": "gray" };
                     }
