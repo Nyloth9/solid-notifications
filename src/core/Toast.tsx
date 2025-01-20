@@ -156,9 +156,6 @@ class Toast {
     });
 
     Object.assign(this.toastConfig, args);
-    // this.toastConfig = Object.assign({}, this.toastConfig, args);
-
-    // this.toastConfig = { ...this.toastConfig };
 
     this.toastConfig.updateCallback?.();
 

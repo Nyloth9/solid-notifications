@@ -65,22 +65,7 @@ const App: Component = () => {
                     console.log("Dissmised by user? ", reason),
 
                   duration: 10000,
-                  class: (type) => {
-                    switch (type) {
-                      case "success":
-                        return "p-6";
-                      case "error":
-                        return "p-12";
-                      case "warning":
-                        return "p-6";
-                      case "info":
-                        return "p-12";
-                      case "loading":
-                        return "p-6";
-                      default:
-                        return "p-12";
-                    }
-                  },
+
                   progressBarStyle: (type) => {
                     switch (type) {
                       case "success":
