@@ -61,6 +61,7 @@ import {
  * - add aria roles
  * - add themes?
  * - write default config to docs
+ * - add promise support
  */
 
 /***
