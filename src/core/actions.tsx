@@ -255,11 +255,18 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     const toaster = context.getToaster(options?.toasterId);
 
+    const toastId = createToastId(
+      (toaster.counter += 1),
+      options?.toasterId,
+      options?.id,
+    );
+
     const toast = new Toast({
       store: toaster.store,
       setStore: toaster.setStore,
       toastConfig: {
         ...options,
+        id: toastId,
         type: "loading",
         duration: false,
         contentType:

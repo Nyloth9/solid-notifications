@@ -26,7 +26,7 @@ onMount(() => {
     setClassName("bg-green-200");
   }, 4000);
 
-/*   setInterval(() => {
+  /*   setInterval(() => {
     setStyle({
       "margin-top": `${Math.floor(Math.random() * 100)}px`,
     });
@@ -38,9 +38,8 @@ render(() => {
     <ToastProvider>
       <Toaster
         toasterId="toaster-1"
-        wrapperClass={className()}
-/*         wrapperStyle={style()} */
-        reverseToastOrder
+        /*   wrapperClass={className()} */
+        /*         wrapperStyle={style()} */
       />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />
