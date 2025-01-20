@@ -94,6 +94,15 @@ export interface ToastActions {
     toasterId?: string;
     keepQueued?: boolean;
   }) => void;
+  promise: <T>(
+    promise: Promise<T>,
+    messages: {
+      pending: string | JSX.Element;
+      success: string | JSX.Element | ((data: T) => string | JSX.Element);
+      error: string | JSX.Element | ((error: any) => string | JSX.Element);
+    },
+    options?: ToastOptions,
+  ) => Promise<T>;
   getQueue: (toasterId?: string) => Toast[];
   clearQueue: (toasterId?: string) => void;
 }

@@ -3,7 +3,7 @@ import { useToast } from "../src/core/Context";
 
 const App: Component = () => {
   const [randomText, setRandomText] = createSignal("Hello World!");
-  const { notify, update, dismiss, remove, getQueue, clearQueue } =
+  const { notify, update, dismiss, remove, promise, getQueue, clearQueue } =
     useToast("toaster-1");
 
   const { dismiss: globalDismiss } = useToast();
@@ -18,6 +18,18 @@ const App: Component = () => {
 
     return () => clearInterval(interval);
   });
+
+  function someAsyncFunction(shouldFail = false): Promise<string> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (shouldFail) {
+          reject("Something went wrong!");
+        } else {
+          resolve("Done");
+        }
+      }, 4000);
+    });
+  }
 
   return (
     <div>
@@ -229,6 +241,20 @@ const App: Component = () => {
             Dismiss global
           </button>
         </div>
+        <button
+          class="mt-4 rounded bg-indigo-600 px-4 py-2 font-bold text-white hover:bg-indigo-700 active:bg-indigo-800"
+          onClick={() => {
+            const x = promise(someAsyncFunction(true), {
+              pending: "Pending...",
+              success: (data) => `Success! ${data}`,
+              error: (error) => `Error! ${error}`,
+            });
+
+            console.log(x);
+          }}
+        >
+          Promise
+        </button>
       </div>
     </div>
   );

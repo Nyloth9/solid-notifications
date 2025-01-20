@@ -44,7 +44,7 @@ import {
  * ✔ - change dismiss, update and remove signatures
  * ✔ - enable false as duration
  * - add custom ordering support?
- * - change library name to "solid-notifications"
+ * ✔ change library name to "solid-notifications"
  * ✔ - update all toasts in a toaster, update all toasts in all toasters
  * ✔ - fix a bug where timer controls dont work when toast is added to the queue
  * ✔ - add function as content argument in notify
@@ -58,7 +58,7 @@ import {
  * - clean up comments
  * ✔ - add dismiss on click body
  * ✔ - add dismiss on click close button
- * - add aria roles
+ * ✔ add aria roles
  * - add themes?
  * - write default config to docs
  * - add promise support

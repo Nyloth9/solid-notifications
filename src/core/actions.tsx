@@ -248,6 +248,53 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     return;
   };
 
+  const promise: ToastActions["promise"] = (promise, messages, options) => {
+    if (targetToaster) {
+      options = { toasterId: targetToaster, ...options };
+    }
+
+    const toaster = context.getToaster(options?.toasterId);
+
+    const toast = new Toast({
+      store: toaster.store,
+      setStore: toaster.setStore,
+      toastConfig: {
+        type: "loading",
+        ...options,
+        contentType:
+          typeof messages.pending === "function" ? "dynamic" : "static",
+        content: messages.pending,
+      },
+    });
+
+    toast.init();
+
+    promise.then(
+      (data) => {
+        toast.update({
+          type: "success",
+          content:
+            typeof messages.success === "function"
+              ? messages.success(data)
+              : messages.success,
+          contentType: "static",
+        });
+      },
+      (error) => {
+        toast.update({
+          type: "error",
+          content:
+            typeof messages.error === "function"
+              ? messages.error(error)
+              : messages.error,
+          contentType: "static",
+        });
+      },
+    );
+
+    return promise;
+  };
+
   const getQueue: ToastActions["getQueue"] = (toasterId = targetToaster) => {
     /**
      * getQueue can only be called for a specific toaster in the following ways:
@@ -287,6 +334,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     update,
     dismiss,
     remove,
+    promise,
     getQueue,
     clearQueue,
   };
