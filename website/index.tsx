@@ -27,7 +27,11 @@ onMount(() => {
 render(() => {
   return (
     <ToastProvider>
-      <Toaster toasterId="toaster-1" wrapperClass={className()} />
+      <Toaster
+        toasterId="toaster-1"
+        wrapperClass={className()}
+        reverseToastOrder
+      />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />
     </ToastProvider>

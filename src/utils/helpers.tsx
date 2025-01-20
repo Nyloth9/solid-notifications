@@ -127,16 +127,6 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
   return filteredOptions;
 }
 
-function updateWithoutOwnProperties(toasterConfig: Config, t: Toast) {
-  const filteredConfig = Object.fromEntries(
-    Object.entries(toasterConfig).filter(
-      ([key]) => !t.ownProperties.includes(key),
-    ),
-  );
-
-  Object.assign(t.toastConfig, filteredConfig);
-}
-
 function applyState(toast: Toast) {
   const toastConfig = toast.toastConfig;
 
@@ -452,7 +442,6 @@ export {
   setStartingOffset,
   merge,
   filterOptions,
-  updateWithoutOwnProperties,
   applyState,
   createProgressManager,
   setProgressControls,

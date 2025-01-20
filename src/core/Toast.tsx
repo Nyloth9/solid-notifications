@@ -82,7 +82,7 @@ import {
 class Toast {
   private setStore;
   private dragManager = createDragManager(this);
-  ownProperties: string[] = []; // We keep track of the properties that are unique to this toast to not override them when the toaster updates
+  private ownProperties: string[] = []; // We keep track of the properties that are unique to this toast to not override them when the toaster updates
   store;
   toastConfig: Config;
   ref: HTMLElement | null = null;
@@ -203,6 +203,14 @@ class Toast {
         state.filter((t) => t.toastConfig.id !== this.toastConfig.id),
       );
     });
+  }
+
+  patch(args: Config) {
+    const filteredConfig = Object.fromEntries(
+      Object.entries(args).filter(([key]) => !this.ownProperties.includes(key)),
+    );
+
+    Object.assign(this.toastConfig, filteredConfig);
   }
 
   render(): JSX.Element {
