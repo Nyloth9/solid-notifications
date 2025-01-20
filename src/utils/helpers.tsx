@@ -319,7 +319,7 @@ function renderDismissButton(toast: Toast) {
   return (
     <button
       aria-label="Close notification"
-      class={`${resolvePropValue("dismissButtonClass", toast) as string} sn-theme__${toast.toastConfig.theme} sn-type__${toast.toastConfig.type}`}
+      class={resolvePropValue("dismissButtonClass", toast) as string}
       style={resolvePropValue("dismissButtonStyle", toast) as JSX.CSSProperties}
       onClick={() => toast.dismiss()}
     >
@@ -351,7 +351,7 @@ function renderProgressBar(toast: Toast) {
     <div
       role="progressbar"
       data-role="progress"
-      class={`${resolvePropValue("progressBarClass", toast) as string} sn-theme__${toast.toastConfig.theme} sn-type__${toast.toastConfig.type}`}
+      class={resolvePropValue("progressBarClass", toast) as string}
       style={{
         transform: `scaleX(${(100 - toast.progressManager?.progress()) / 100})`,
         "transform-origin": "left",

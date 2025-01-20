@@ -241,7 +241,7 @@ class Toast {
           when={this.toastConfig.contentType === "static"}
         >
           <div
-            class={`${resolvePropValue("class", this) as string} sn-theme__${this.toastConfig.theme} sn-type__${this.toastConfig.type}`}
+            class={resolvePropValue("class", this) as string}
             style={resolvePropValue("style", this) as JSX.CSSProperties}
           >
             {renderIcon(this)}
