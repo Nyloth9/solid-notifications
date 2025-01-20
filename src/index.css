@@ -35,8 +35,8 @@
   --sn-progress-bar-color: #4b5563;
 
   /* Icon */
-  --sn-icon-size: 1.125rem;
-  --sn-icon-margin: 0;
+  --sn-icon-size: 1rem;
+  --sn-icon-margin: 2px 0 0 0;
   --sn-icon-stroke: #fff;
 }
 

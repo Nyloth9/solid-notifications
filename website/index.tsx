@@ -16,13 +16,11 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
-const [className, setClassName] = createSignal(
-  "bg-red-900 dark:bg-gray-800 mt-12",
-);
+const [className, setClassName] = createSignal("bg-red-200");
 
 onMount(() => {
   setTimeout(() => {
-    setClassName("bg-green-900 dark:bg-gray-800 mt-24");
+    setClassName("bg-green-200");
   }, 4000);
 });
 

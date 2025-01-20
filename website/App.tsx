@@ -98,7 +98,11 @@ const App: Component = () => {
               }, 6000);
 
               setTimeout(() => {
-                update({ id, type: "loading" });
+                update({
+                  id,
+                  type: "loading",
+                  wrapperClass: "sn-toast-wrapper",
+                });
               }, 8000);
 
               /*    setTimeout(() => {

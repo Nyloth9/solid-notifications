@@ -77,23 +77,28 @@ function setStartingOffset(
   );
 }
 
-function mockProps(store: any) {
-  /*** Here we are transforming the toaster store (a proxy) to a props object (plain object with getters) so we can
-   * take advantage of mergeProps and keep reactivity, thus allowing us to use reactive props on the <Toaster /> component.
-   * Otherwise if we just merge the toaster store with toast options, the merge will just create a plain object and we will lose reactivity.
-   * If we try to achieve the same through a Proxy, it will not work because we can't read the requested key "Symbol(solid-proxy)" and thus
-   * can't point it to the relevant source (toastConfig or toasterConfig) depending on the key.
-   ***/
+function merge(target: any, source: any) {
+  const isPlainObject = (obj: any) =>
+    obj && typeof obj === "object" && obj.constructor === Object;
 
-  const props: Record<string, any> = {};
+  if (Array.isArray(target)) {
+    return source;
+  }
 
-  Object.keys(store).forEach((key) => {
-    Object.defineProperty(props, key, {
-      get: () => store[key],
-    });
-  });
+  if (isPlainObject(target) && isPlainObject(source)) {
+    return Object.keys(source).reduce(
+      (acc, key) => {
+        if (typeof key !== "symbol") {
+          acc[key] = merge(target[key], source[key]);
+        }
 
-  return props;
+        return acc;
+      },
+      { ...target },
+    );
+  }
+
+  return source;
 }
 
 function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
@@ -120,6 +125,16 @@ function filterOptions(options: Partial<Config> | undefined): Partial<Config> {
   );
 
   return filteredOptions;
+}
+
+function updateWithoutOwnProperties(toasterConfig: Config, t: Toast) {
+  const filteredConfig = Object.fromEntries(
+    Object.entries(toasterConfig).filter(
+      ([key]) => !t.ownProperties.includes(key),
+    ),
+  );
+
+  Object.assign(t.toastConfig, filteredConfig);
 }
 
 function applyState(toast: Toast) {
@@ -435,8 +450,9 @@ export {
   resolvePropValue,
   getToasterStyle,
   setStartingOffset,
-  mockProps,
+  merge,
   filterOptions,
+  updateWithoutOwnProperties,
   applyState,
   createProgressManager,
   setProgressControls,

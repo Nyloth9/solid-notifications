@@ -3,11 +3,12 @@ import {
   createEffect,
   For,
   mergeProps,
+  on,
   onCleanup,
   onMount,
 } from "solid-js";
 import { useService } from "./Context";
-import { getToasterStyle } from "../utils/helpers";
+import { getToasterStyle, updateWithoutOwnProperties } from "../utils/helpers";
 import { ToasterOptions, ToasterStore } from "../types";
 import { defaultConfig } from "../config/defaultConfig";
 import { createStore } from "solid-js/store";
@@ -30,6 +31,12 @@ export default function Toaster(props: ToasterOptions) {
   });
 
   createEffect(() => {
+    /** Here we track if toasterConfig has changed, and if it has, we update all toasts in the toaster except the props that are unique to the toast (ownProperties) ***/
+    [...store.queued, ...store.rendered].forEach((t) =>
+      updateWithoutOwnProperties(store.toasterConfig, t),
+    );
+
+    /*** If set to not render on windowInactive, we want to wait untill window is visible again to start rendering toasts ***/
     if (store.isWindowBlurred && !store.toasterConfig.renderOnWindowInactive)
       return;
 
@@ -52,7 +59,7 @@ export default function Toaster(props: ToasterOptions) {
       ? [...store.rendered].reverse()
       : store.rendered;
 
-    /*** Here we reorder toasts when there are changes like toast created or toast updated ***/
+    /*** Here we reorder toasts (manage their positions) when there are changes such as toast created or toast updated ***/
     let accumulatedOffset = store.toasterConfig.offsetY; // We want to render the first toast at the same height as positionY offset
 
     resolvedToasts.forEach((toast) => {
