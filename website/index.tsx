@@ -40,6 +40,7 @@ render(() => {
         toasterId="toaster-1"
         /*   wrapperClass={className()} */
         /*         wrapperStyle={style()} */
+        theme="dark"
       />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />

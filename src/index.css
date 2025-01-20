@@ -1,13 +1,11 @@
 :root {
   /* General */
   --sn-z-index: 9999;
-  --sn-color-loading: 31, 41, 55; /* Base RGB values */
   --sn-color-default: #121826;
   --sn-color-success: #34ab53;
   --sn-color-error: #ea4335;
   --sn-color-warning: #f59e0b;
   --sn-color-info: #5493f7;
-  --sn-color-loading-dark: 224, 230, 245;
 
   /* Toast Wrapper */
   --sn-wrapper-border-radius: 6px;
@@ -193,17 +191,43 @@
 }
 
 .sn-icon-loading {
-  width: var(--sn-icon-size);
-  height: var(--sn-icon-size);
+  display: grid;
   border-radius: 50%;
-  border: calc(var(--sn-icon-size) / 8) solid;
-  border-color: #dbdcef;
-  border-right-color: var(--sn-color-loading);
-  animation: spinner-d3wgkg 1s infinite linear;
+  -webkit-mask: radial-gradient(farthest-side, #00000000 40%, #1f2937 41%);
+  mask: radial-gradient(farthest-side, #00000000 40%, #1f2937 41%);
+  background:
+    linear-gradient(0deg, #1f293780 50%, #1f2937 0) center/1.9px 100%,
+    linear-gradient(90deg, #1f293740 50%, #1f2937bf 0) center/100% 1.9px;
+  background-repeat: no-repeat;
+  animation: SNRotate 1s infinite steps(12);
 }
 
-@keyframes spinner-d3wgkg {
-  to {
+.sn-theme-dark .sn-icon-loading {
+  -webkit-mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
+  mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
+  background:
+    linear-gradient(0deg, #efefef80 50%, #efefef 0) center/1.9px 100%,
+    linear-gradient(90deg, #efefef40 50%, #efefefbf 0) center/100% 1.9px;
+  background-repeat: no-repeat;
+}
+
+.sn-icon-loading::before,
+.sn-icon-loading::after {
+  content: "";
+  grid-area: 1/1;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.915;
+  transform: rotate(30deg);
+}
+
+.sn-icon-loading::after {
+  opacity: 0.83;
+  transform: rotate(60deg);
+}
+
+@keyframes SNRotate {
+  100% {
     transform: rotate(1turn);
   }
 }
