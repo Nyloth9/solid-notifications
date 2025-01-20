@@ -156,22 +156,22 @@
   -webkit-animation: SNStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
 
-.sn-icon.sn-icon-success {
+.sn-type-success .sn-icon {
   color: var(--sn-color-success);
   box-shadow: inset 0px 0px 0px var(--color-success);
 }
 
-.sn-icon.sn-icon-error {
+.sn-type-error .sn-icon {
   color: var(--sn-color-error);
   box-shadow: inset 0px 0px 0px var(--color-error);
 }
 
-.sn-icon.sn-icon-warning {
+.sn-type-warning .sn-icon {
   color: var(--sn-color-warning);
   box-shadow: inset 0px 0px 0px var(--color-warning);
 }
 
-.sn-icon.sn-icon-info {
+.sn-type-info .sn-icon {
   color: var(--sn-color-info);
   box-shadow: inset 0px 0px 0px var(--color-info);
 }

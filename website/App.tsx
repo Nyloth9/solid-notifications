@@ -65,7 +65,7 @@ const App: Component = () => {
                     console.log("Dissmised by user? ", reason),
 
                   duration: 10000,
-
+                  type: "success",
                   progressBarStyle: (type) => {
                     switch (type) {
                       case "success":
@@ -87,7 +87,7 @@ const App: Component = () => {
 
               setTimeout(() => {
                 update({ id, type: "warning" });
-              }, 1000);
+              }, 2000);
 
               setTimeout(() => {
                 update({ id, type: "error" });
