@@ -17,11 +17,20 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 }
 
 const [className, setClassName] = createSignal("bg-red-200");
+const [style, setStyle] = createSignal({
+  "margin-top": "0px",
+});
 
 onMount(() => {
   setTimeout(() => {
     setClassName("bg-green-200");
   }, 4000);
+
+  setInterval(() => {
+    setStyle({
+      "margin-top": `${Math.floor(Math.random() * 100)}px`,
+    });
+  }, 1000);
 });
 
 render(() => {
@@ -30,6 +39,7 @@ render(() => {
       <Toaster
         toasterId="toaster-1"
         wrapperClass={className()}
+        wrapperStyle={style()}
         reverseToastOrder
       />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}

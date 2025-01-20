@@ -206,6 +206,7 @@ class Toast {
   }
 
   patch(args: Config) {
+    /** Used to patch toasterConfig (when changed) to the toast, without touch the unique properties of the toast */
     const filteredConfig = Object.fromEntries(
       Object.entries(args).filter(([key]) => !this.ownProperties.includes(key)),
     );
