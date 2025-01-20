@@ -6,6 +6,7 @@ import "../src/index.css";
 import App from "./App";
 import { ToastProvider } from "../src/core/Context";
 import Toaster from "../src/core/Toaster";
+import { createSignal, onMount } from "solid-js";
 
 const root = document.getElementById("root");
 
@@ -15,10 +16,20 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
+const [className, setClassName] = createSignal(
+  "bg-red-900 dark:bg-gray-800 mt-12",
+);
+
+onMount(() => {
+  setTimeout(() => {
+    setClassName("bg-green-900 dark:bg-gray-800 mt-24");
+  }, 4000);
+});
+
 render(() => {
   return (
     <ToastProvider>
-      <Toaster toasterId="toaster-1" />
+      <Toaster toasterId="toaster-1" wrapperClass={className()} />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />
     </ToastProvider>

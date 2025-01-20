@@ -133,7 +133,7 @@ function applyState(toast: Toast) {
     case "exiting":
       if (toastConfig.onExit) return toastConfig.onExit;
     default:
-      return `sn-state__${toastConfig.positionX}-${toastConfig.positionY}-${toast.state}`;
+      return `sn-state-${toastConfig.positionX}-${toastConfig.positionY}-${toast.state}`;
   }
 }
 

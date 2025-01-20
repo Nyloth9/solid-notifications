@@ -148,6 +148,7 @@ class Toast {
   update(args: Partial<Config>) {
     /*** Delete the references to the store.toasterConfig and replace them with arguments from the update ***/
     /*** Otherwise, we would be updating the store.toasterConfig itself. Deleting and re-creating the key also triggers reactivity. ***/
+
     Object.keys(args).forEach((key) => {
       if (key in this.toastConfig) {
         delete this.toastConfig[key as keyof Config];
@@ -155,6 +156,9 @@ class Toast {
     });
 
     Object.assign(this.toastConfig, args);
+    // this.toastConfig = Object.assign({}, this.toastConfig, args);
+
+    // this.toastConfig = { ...this.toastConfig };
 
     this.toastConfig.updateCallback?.();
 
@@ -228,7 +232,7 @@ class Toast {
         onTouchStart={this.dragManager.handleDragStart}
         onTouchMove={this.dragManager.handleDragMove}
         onTouchEnd={this.dragManager.handleDragEnd}
-        class={`${resolvePropValue("wrapperClass", this)} sn-theme__${this.toastConfig.theme} sn-type__${this.toastConfig.type} ${applyState(this)}`.trim()}
+        class={`${resolvePropValue("wrapperClass", this)} sn-theme-${this.toastConfig.theme} sn-type-${this.toastConfig.type} ${applyState(this)}`.trim()}
         style={{
           ...(resolvePropValue("wrapperStyle", this) as JSX.CSSProperties),
           [this.store.toasterConfig.positionX]:
