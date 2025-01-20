@@ -18,9 +18,9 @@
   /* Toast */
   --sn-toast-max-width: 344px;
   --sn-toast-min-width: 244px;
-  --sn-toast-gap: 14px;
+  --sn-toast-gap: 16px;
   --sn-toast-text-color: #121826;
-  --sn-toast-padding: 12px 14px 11px 14px;
+  --sn-toast-padding: 16px 20px 14px 16px;
 
   /* Dismiss Button */
   --sn-dismiss-btn-color: #9ca3af;
@@ -35,8 +35,8 @@
   --sn-progress-bar-color: #4b5563;
 
   /* Icon */
-  --sn-icon-size: 1rem;
-  --sn-icon-margin: 2px 0 0 0;
+  --sn-icon-size: 1.125rem;
+  --sn-icon-margin: 0;
   --sn-icon-stroke: #fff;
 }
 
