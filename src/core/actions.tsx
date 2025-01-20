@@ -259,8 +259,9 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       store: toaster.store,
       setStore: toaster.setStore,
       toastConfig: {
-        type: "loading",
         ...options,
+        type: "loading",
+        duration: false,
         contentType:
           typeof messages.pending === "function" ? "dynamic" : "static",
         content: messages.pending,
@@ -278,6 +279,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
               ? messages.success(data)
               : messages.success,
           contentType: "static",
+          duration: options?.duration || toaster.store.toasterConfig.duration,
         });
       },
       (error) => {
@@ -288,6 +290,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
               ? messages.error(error)
               : messages.error,
           contentType: "static",
+          duration: options?.duration || toaster.store.toasterConfig.duration,
         });
       },
     );

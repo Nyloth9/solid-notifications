@@ -244,11 +244,32 @@ const App: Component = () => {
         <button
           class="mt-4 rounded bg-indigo-600 px-4 py-2 font-bold text-white hover:bg-indigo-700 active:bg-indigo-800"
           onClick={() => {
-            const x = promise(someAsyncFunction(true), {
-              pending: "Pending...",
-              success: (data) => `Success! ${data}`,
-              error: (error) => `Error! ${error}`,
-            });
+            const x = promise(
+              someAsyncFunction(true),
+              {
+                pending: "Pending...",
+                success: (data) => `Success! ${data}`,
+                error: (error) => `Error! ${error}`,
+              },
+              {
+                progressBarStyle: (type) => {
+                  switch (type) {
+                    case "success":
+                      return { "background-color": "green" };
+                    case "error":
+                      return { "background-color": "red" };
+                    case "warning":
+                      return { "background-color": "orange" };
+                    case "info":
+                      return { "background-color": "blue" };
+                    case "loading":
+                      return { "background-color": "#374151" };
+                    default:
+                      return { "background-color": "gray" };
+                  }
+                },
+              },
+            );
 
             console.log(x);
           }}
