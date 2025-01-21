@@ -11,10 +11,7 @@
   --sn-wrapper-border-radius: 6px;
   --sn-wrapper-transition-duration: 0.3s;
   --sn-wrapper-bg-color: white;
-  --sn-wrapper-bg-color-dark: #1f2937;
   --sn-wrapper-box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  --sn-wrapper-box-shadow-dark: rgba(0, 0, 0, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
   /* Toast */
@@ -23,7 +20,6 @@
   --sn-toast-gap: 16px;
   --sn-toast-padding: 16px 18px 14px 18px;
   --sn-toast-text-color: #121826;
-  --sn-toast-text-color-dark: #f9fafb;
 
   /* Dismiss Button */
   --sn-dismiss-btn-size: 1.175rem;
@@ -31,20 +27,28 @@
   --sn-dismiss-btn-transition: color 0.3s;
   --sn-dismiss-btn-margin: 0 -4px 0px auto;
   --sn-dismiss-btn-color: #9ca3af;
-  --sn-dismiss-btn-color-dark: #bfc5cf;
   --sn-dismiss-btn-hover-color: #374151;
-  --sn-dismiss-btn-hover-color-dark: #f9fafb;
 
   /* Progress Bar */
   --sn-progress-bar-height: 2px;
   --sn-progress-bar-color: #4b5563;
-  --sn-progress-bar-color-dark: #9ca3af;
 
   /* Icon */
   --sn-icon-size: 1.125rem;
   --sn-icon-margin: 0;
   --sn-icon-stroke: #fff;
-  --sn-icon-stroke-dark: #fff;
+}
+
+/* Dark Theme */
+.sn-theme-dark {
+  --sn-wrapper-bg-color: #1f2937;
+  --sn-wrapper-box-shadow: rgba(0, 0, 0, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  --sn-toast-text-color: #f9fafb;
+  --sn-dismiss-btn-color: #bfc5cf;
+  --sn-dismiss-btn-hover-color: #f9fafb;
+  --sn-progress-bar-color: #9ca3af;
+  --sn-icon-stroke: #fff;
 }
 
 *[data-role="toast"] {
@@ -210,6 +214,15 @@
   transform: rotate(60deg);
 }
 
+.sn-theme-dark .sn-icon-loading {
+  -webkit-mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
+  mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
+  background:
+    linear-gradient(0deg, #efefef80 50%, #efefef 0) center/1.9px 100%,
+    linear-gradient(90deg, #efefef40 50%, #efefefbf 0) center/100% 1.9px;
+  background-repeat: no-repeat;
+}
+
 @keyframes SNRotate {
   100% {
     transform: rotate(1turn);
@@ -237,42 +250,6 @@
   100% {
     box-shadow: inset 0px 0px 0px 30px currentColor;
   }
-}
-
-/* Dark Mode */
-
-.sn-toast-wrapper.sn-theme-dark {
-  background-color: var(--sn-wrapper-bg-color-dark);
-  box-shadow: var(--sn-wrapper-box-shadow-dark);
-}
-
-.sn-theme-dark .sn-toast {
-  color: var(--sn-toast-text-color-dark);
-}
-
-.sn-theme-dark .sn-dismiss-button {
-  color: var(--sn-dismiss-btn-color-dark);
-}
-
-.sn-theme-dark .sn-dismiss-button:hover {
-  color: var(--sn-dismiss-btn-hover-color-dark);
-}
-
-.sn-theme-dark .sn-progress-bar {
-  background-color: var(--sn-progress-bar-color-dark);
-}
-
-.sn-theme-dark .sn-icon {
-  stroke: var(--sn-icon-stroke-dark);
-}
-
-.sn-theme-dark .sn-icon-loading {
-  -webkit-mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
-  mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
-  background:
-    linear-gradient(0deg, #efefef80 50%, #efefef 0) center/1.9px 100%,
-    linear-gradient(90deg, #efefef40 50%, #efefefbf 0) center/100% 1.9px;
-  background-repeat: no-repeat;
 }
 
 /* Colored progress bar */
