@@ -33,9 +33,9 @@ export default function Toaster(props: ToasterOptions) {
   createEffect(
     on(
       () => ({ ...store.toasterConfig }),
-      (newValue) =>
+      (newConfig) =>
         /** Here we track if toasterConfig has changed, and if it has, we update all toasts in the toaster, excluding the props that are unique to the toast (ownProperties) ***/
-        [...store.queued, ...store.rendered].forEach((t) => t.patch(newValue)),
+        [...store.queued, ...store.rendered].forEach((t) => t.patch(newConfig)),
     ),
   );
 
