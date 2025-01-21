@@ -164,7 +164,10 @@ function createProgressManager(toast?: Toast, callback?: () => void) {
 
     setProgress(newProgress);
 
-    if (newProgress >= 100) return callback();
+    if (newProgress >= 100) {
+      paused = true;
+      return callback();
+    }
 
     requestAnimationFrame(getFrame);
   };

@@ -150,8 +150,7 @@ class Toast {
 
     Object.keys(args).forEach((key) => this.ownProperties.add(key));
 
-    const merged = merge(this.toastConfig, args);
-    Object.assign(this.toastConfig, merged);
+    Object.assign(this.toastConfig, args);
 
     this.toastConfig.updateCallback?.();
 
