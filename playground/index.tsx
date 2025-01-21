@@ -17,6 +17,7 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 }
 
 const [className, setClassName] = createSignal("bg-red-200");
+const [theme, setTheme] = createSignal("light");
 const [style, setStyle] = createSignal({
   "margin-top": "0px",
 });
@@ -40,10 +41,16 @@ render(() => {
         toasterId="toaster-1"
         /*   wrapperClass={className()} */
         /*         wrapperStyle={style()} */
-       theme="dark"
+        theme={theme()}
       />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />
+      <button
+        class="mt-4 rounded bg-indigo-600 px-4 py-2 font-bold text-white hover:bg-indigo-700 active:bg-indigo-800"
+        onClick={() => setTheme(theme() === "light" ? "dark" : "light")}
+      >
+        Change theme
+      </button>
     </ToastProvider>
   );
 }, root!);

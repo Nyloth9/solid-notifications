@@ -2,7 +2,7 @@
 export default {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./website/**/*.{js,jsx,ts,tsx}",
+    "./playground/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {

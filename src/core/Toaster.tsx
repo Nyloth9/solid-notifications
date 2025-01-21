@@ -30,12 +30,14 @@ export default function Toaster(props: ToasterOptions) {
     counter: 0,
   });
 
-  createEffect(() => {
-    /** Here we track if toasterConfig has changed, and if it has, we update all toasts in the toaster, excluding the props that are unique to the toast (ownProperties) ***/
-    [...store.queued, ...store.rendered].forEach((t) =>
-      t.patch(store.toasterConfig),
-    );
-  });
+  createEffect(
+    on(
+      () => ({ ...store.toasterConfig }),
+      (newValue) =>
+        /** Here we track if toasterConfig has changed, and if it has, we update all toasts in the toaster, excluding the props that are unique to the toast (ownProperties) ***/
+        [...store.queued, ...store.rendered].forEach((t) => t.patch(newValue)),
+    ),
+  );
 
   createEffect(() => {
     /*** If set to not render on windowInactive, we want to wait untill window is visible again to start rendering toasts ***/
