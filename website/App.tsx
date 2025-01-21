@@ -78,7 +78,7 @@ const App: Component = () => {
 
                   duration: 10000,
                   type: "success",
-                  progressBarStyle: (type) => {
+              /*     progressBarStyle: (type) => {
                     switch (type) {
                       case "success":
                         return { "background-color": "green" };
@@ -93,7 +93,7 @@ const App: Component = () => {
                       default:
                         return { "background-color": "gray" };
                     }
-                  },
+                  }, */
                 },
               );
 
@@ -252,6 +252,7 @@ const App: Component = () => {
                 error: (error) => `Error! ${error}`,
               },
               {
+                theme: "light",
                 progressBarStyle: (type) => {
                   switch (type) {
                     case "success":

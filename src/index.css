@@ -13,7 +13,6 @@
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   --sn-wrapper-transition-duration: 0.3s;
   --sn-wrapper-bg-color: white;
-  /* dark mode */
   --sn-wrapper-bg-color-dark: #1f2937;
   --sn-wrapper-box-shadow-dark: rgba(0, 0, 0, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -24,7 +23,6 @@
   --sn-toast-gap: 16px;
   --sn-toast-text-color: #121826;
   --sn-toast-padding: 16px 18px 14px 18px;
-  /* dark mode */
   --sn-toast-text-color-dark: #f9fafb;
 
   /* Dismiss Button */
@@ -34,10 +32,13 @@
   --sn-dismiss-btn-border-radius: 0.25rem;
   --sn-dismiss-btn-transition: color 0.3s;
   --sn-dismiss-btn-margin: 0 -4px 0px auto;
+  --sn-dismiss-btn-color-dark: #bfc5cf;
+  --sn-dismiss-btn-hover-color-dark: #f9fafb;
 
   /* Progress Bar */
   --sn-progress-bar-height: 2px;
   --sn-progress-bar-color: #4b5563;
+  --sn-progress-bar-color-dark: #9ca3af;
 
   /* Icon */
   --sn-icon-size: 1.125rem;
@@ -84,11 +85,6 @@
   background-color: var(--sn-wrapper-bg-color);
 }
 
-.sn-toast-wrapper.sn-theme-dark {
-  background-color: var(--sn-wrapper-bg-color-dark);
-  box-shadow: var(--sn-wrapper-box-shadow-dark);
-}
-
 .sn-toast {
   display: flex;
   overflow: hidden;
@@ -99,10 +95,6 @@
   gap: var(--sn-toast-gap);
   color: var(--sn-toast-text-color);
   padding: var(--sn-toast-padding);
-}
-
-.sn-theme-dark .sn-toast {
-  color: var(--sn-toast-text-color-dark);
 }
 
 .sn-dismiss-button {
@@ -202,15 +194,6 @@
   animation: SNRotate 1s infinite steps(12);
 }
 
-.sn-theme-dark .sn-icon-loading {
-  -webkit-mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
-  mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
-  background:
-    linear-gradient(0deg, #efefef80 50%, #efefef 0) center/1.9px 100%,
-    linear-gradient(90deg, #efefef40 50%, #efefefbf 0) center/100% 1.9px;
-  background-repeat: no-repeat;
-}
-
 .sn-icon-loading::before,
 .sn-icon-loading::after {
   content: "";
@@ -253,6 +236,38 @@
   100% {
     box-shadow: inset 0px 0px 0px 30px currentColor;
   }
+}
+
+/* Dark Mode */
+
+.sn-toast-wrapper[data-theme="dark"] {
+  background-color: var(--sn-wrapper-bg-color-dark);
+  box-shadow: var(--sn-wrapper-box-shadow-dark);
+}
+
+.sn-toast-wrapper[data-theme="dark"] .sn-toast {
+  color: var(--sn-toast-text-color-dark);
+}
+
+.sn-toast-wrapper[data-theme="dark"] .sn-dismiss-button {
+  color: var(--sn-dismiss-btn-color-dark);
+}
+
+.sn-toast-wrapper[data-theme="dark"] .sn-dismiss-button:hover {
+  color: var(--sn-dismiss-btn-hover-color-dark);
+}
+
+.sn-toast-wrapper[data-theme="dark"] .sn-progress-bar {
+  background-color: var(--sn-progress-bar-color-dark);
+}
+
+.sn-toast-wrapper[data-theme="dark"] .sn-icon-loading {
+  -webkit-mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
+  mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
+  background:
+    linear-gradient(0deg, #efefef80 50%, #efefef 0) center/1.9px 100%,
+    linear-gradient(90deg, #efefef40 50%, #efefefbf 0) center/100% 1.9px;
+  background-repeat: no-repeat;
 }
 
 /* Presence Animations */

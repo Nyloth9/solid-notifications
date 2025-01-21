@@ -224,6 +224,7 @@ class Toast {
     return (
       <div
         data-role="toast"
+        data-theme={this.toastConfig.theme}
         id={this.toastConfig.id}
         ref={(el) => (this.ref = el)}
         role={this.toastConfig.role}
@@ -234,7 +235,7 @@ class Toast {
         onTouchStart={this.dragManager.handleDragStart}
         onTouchMove={this.dragManager.handleDragMove}
         onTouchEnd={this.dragManager.handleDragEnd}
-        class={`${resolvePropValue("wrapperClass", this)} sn-theme-${this.toastConfig.theme} sn-type-${this.toastConfig.type} ${applyState(this)}`.trim()}
+        class={`${resolvePropValue("wrapperClass", this)} sn-type-${this.toastConfig.type} ${applyState(this)}`.trim()}
         style={{
           ...(resolvePropValue("wrapperStyle", this) as JSX.CSSProperties),
           [this.store.toasterConfig.positionX]:
