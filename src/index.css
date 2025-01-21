@@ -275,7 +275,7 @@
   background-repeat: no-repeat;
 }
 
-/* Uncomment for colored progress bar */
+/* Colored progress bar */
 .sn-type-success .sn-progress-bar {
   background-color: var(--sn-color-success);
 }
