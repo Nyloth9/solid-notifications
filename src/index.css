@@ -275,6 +275,23 @@
   background-repeat: no-repeat;
 }
 
+/* Uncomment for colored progress bar */
+.sn-toast-wrapper.sn-type-success .sn-progress-bar {
+  background-color: var(--sn-color-success);
+}
+
+.sn-toast-wrapper.sn-type-error .sn-progress-bar {
+  background-color: var(--sn-color-error);
+}
+
+.sn-toast-wrapper.sn-type-warning .sn-progress-bar {
+  background-color: var(--sn-color-warning);
+}
+
+.sn-toast-wrapper.sn-type-info .sn-progress-bar {
+  background-color: var(--sn-color-info);
+}
+
 /* Presence Animations */
 
 .sn-state-right-top-entering,
