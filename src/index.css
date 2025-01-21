@@ -241,32 +241,32 @@
 
 /* Dark Mode */
 
-.sn-toast-wrapper[data-theme="dark"] {
+.sn-toast-wrapper.sn-theme-dark {
   background-color: var(--sn-wrapper-bg-color-dark);
   box-shadow: var(--sn-wrapper-box-shadow-dark);
 }
 
-.sn-toast-wrapper[data-theme="dark"] .sn-toast {
+.sn-theme-dark .sn-toast {
   color: var(--sn-toast-text-color-dark);
 }
 
-.sn-toast-wrapper[data-theme="dark"] .sn-dismiss-button {
+.sn-theme-dark .sn-dismiss-button {
   color: var(--sn-dismiss-btn-color-dark);
 }
 
-.sn-toast-wrapper[data-theme="dark"] .sn-dismiss-button:hover {
+.sn-theme-dark .sn-dismiss-button:hover {
   color: var(--sn-dismiss-btn-hover-color-dark);
 }
 
-.sn-toast-wrapper[data-theme="dark"] .sn-progress-bar {
+.sn-theme-dark .sn-progress-bar {
   background-color: var(--sn-progress-bar-color-dark);
 }
 
-.sn-toast-wrapper[data-theme="dark"] .sn-icon {
+.sn-theme-dark .sn-icon {
   stroke: var(--sn-icon-stroke-dark);
 }
 
-.sn-toast-wrapper[data-theme="dark"] .sn-icon-loading {
+.sn-theme-dark .sn-icon-loading {
   -webkit-mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
   mask: radial-gradient(farthest-side, #0000 40%, #efefef 41%);
   background:

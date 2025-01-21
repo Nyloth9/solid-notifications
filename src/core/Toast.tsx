@@ -1,4 +1,4 @@
-import { batch, JSX, mergeProps, onMount, Show } from "solid-js";
+import { batch, JSX, onMount, Show } from "solid-js";
 import { createMutable } from "solid-js/store";
 import { Config, ToastConstructor } from "../types";
 import {
@@ -59,9 +59,9 @@ import {
  * ✔ - add dismiss on click body
  * ✔ - add dismiss on click close button
  * ✔ add aria roles
- * - add themes?
+ * ✔ add themes?
  * - write default config to docs
- * - add promise support
+ * ✔ add promise support
  */
 
 /***
@@ -82,7 +82,7 @@ import {
 class Toast {
   private setStore;
   private dragManager = createDragManager(this);
-  private ownProperties: Set<string>; // We keep track of the properties that are unique to this toast to not override them when the toaster updates
+  private ownProperties: Set<string>; // We keep track of the properties that are unique to this toast to not override them when the toaster config changes
   store;
   toastConfig: Config;
   ref: HTMLElement | null = null;
@@ -206,7 +206,7 @@ class Toast {
   }
 
   patch(args: Config) {
-    /** Used to patch toasterConfig (when changed) to the toast, without touch the unique properties of the toast */
+    /** Used to patch toasterConfig (when changed) to the toast, without touching the unique properties of the toast */
     const filteredConfig = Object.fromEntries(
       Object.entries(args).filter(([key]) => !this.ownProperties.has(key)),
     );
@@ -224,7 +224,6 @@ class Toast {
     return (
       <div
         data-role="toast"
-        data-theme={this.toastConfig.theme}
         id={this.toastConfig.id}
         ref={(el) => (this.ref = el)}
         role={this.toastConfig.role}
@@ -235,7 +234,7 @@ class Toast {
         onTouchStart={this.dragManager.handleDragStart}
         onTouchMove={this.dragManager.handleDragMove}
         onTouchEnd={this.dragManager.handleDragEnd}
-        class={`${resolvePropValue("wrapperClass", this)} sn-type-${this.toastConfig.type} ${applyState(this)}`.trim()}
+        class={`${resolvePropValue("wrapperClass", this)} sn-theme-${this.toastConfig.theme} sn-type-${this.toastConfig.type} ${applyState(this)}`.trim()}
         style={{
           ...(resolvePropValue("wrapperStyle", this) as JSX.CSSProperties),
           [this.store.toasterConfig.positionX]:
