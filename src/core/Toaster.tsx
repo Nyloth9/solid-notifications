@@ -35,7 +35,9 @@ export default function Toaster(props: ToasterOptions) {
     [...store.queued, ...store.rendered].forEach((t) =>
       t.patch(store.toasterConfig),
     );
+  });
 
+  createEffect(() => {
     /*** If set to not render on windowInactive, we want to wait untill window is visible again to start rendering toasts ***/
     if (store.isWindowBlurred && !store.toasterConfig.renderOnWindowInactive)
       return;

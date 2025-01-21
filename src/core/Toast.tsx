@@ -82,7 +82,7 @@ import {
 class Toast {
   private setStore;
   private dragManager = createDragManager(this);
-  private ownProperties: string[] = []; // We keep track of the properties that are unique to this toast to not override them when the toaster updates
+  private ownProperties: Set<string>; // We keep track of the properties that are unique to this toast to not override them when the toaster updates
   store;
   toastConfig: Config;
   ref: HTMLElement | null = null;
@@ -96,7 +96,7 @@ class Toast {
   constructor(args: ToastConstructor) {
     this.store = args.store;
     this.setStore = args.setStore;
-    this.ownProperties = Object.keys(args.toastConfig!);
+    this.ownProperties = new Set(Object.keys(args.toastConfig!));
     this.toastConfig = merge(args.store.toasterConfig, args.toastConfig); // Combine the per toast config with the toaster config and keep reactivity. More info in the helper function
     this.offset = setStartingOffset(args.store); // We need to change the starting offset to prevent the toast from flying to the updated offset (more info in the helper function)
     this.progressManager = createProgressManager(); // We need to initialize the progressManager here so the user can acces it when using custom toast (if we initialize it with "this" like in init method, we will lose reactivity)
@@ -148,7 +148,7 @@ class Toast {
     /*** Delete the references to the store.toasterConfig and replace them with arguments from the update ***/
     /*** Otherwise, we would be updating the store.toasterConfig itself. Deleting and re-creating the key also triggers reactivity. ***/
 
-    this.ownProperties = [...this.ownProperties, ...Object.keys(args)]; // We want to keep track of the properties that are unique to this toast to not override them when updating the toaster
+    Object.keys(args).forEach((key) => this.ownProperties.add(key));
 
     const merged = merge(this.toastConfig, args);
     Object.assign(this.toastConfig, merged);
@@ -208,7 +208,7 @@ class Toast {
   patch(args: Config) {
     /** Used to patch toasterConfig (when changed) to the toast, without touch the unique properties of the toast */
     const filteredConfig = Object.fromEntries(
-      Object.entries(args).filter(([key]) => !this.ownProperties.includes(key)),
+      Object.entries(args).filter(([key]) => !this.ownProperties.has(key)),
     );
 
     Object.assign(this.toastConfig, filteredConfig);
