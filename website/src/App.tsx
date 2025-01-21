@@ -1,6 +1,7 @@
 import type { Component } from "solid-js";
 import Example from "./components/Example.mdx";
 import logo from "./logo.svg";
+import Counter from "./components/Counter";
 
 const App: Component = () => {
   return (
@@ -19,7 +20,7 @@ const App: Component = () => {
           Learn Solid
         </a>
       </header>
-      <Example />
+      <Example components={{ Counter }} />
     </div>
   );
 };
