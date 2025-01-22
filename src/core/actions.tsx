@@ -269,8 +269,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
         id: toastId,
         type: "loading",
         duration: false,
-        contentType:
-          typeof messages.pending === "function" ? "dynamic" : "static",
+        contentType: "static",
         content: messages.pending,
       },
     });
