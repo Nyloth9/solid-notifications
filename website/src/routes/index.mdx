@@ -1,0 +1,37 @@
+---
+section: "home"
+title: "Solid Notifications"
+description: "A simple notification system for SolidJS"
+tags: ["test", "page"]
+---
+
+import Code from "~/components/Code";
+import Title from "~/components/Title";
+
+<Title>Home</Title>
+
+# Hello World!
+
+Visit [https://solidjs.com](https://solidjs.com) to learn how to build Solid apps. {{ "class": "lead", "id": "Marko" }}
+
+Try do never do this shit again...
+
+<Code lang="jsx">
+
+```jsx
+// src/components/Counter.jsx
+import { createSignal } from "solid-js";
+
+export default function Counter() {
+  const [count, setCount] = createSignal(0);
+
+  return (
+    <div>
+      <p>Count: {count()}</p>
+      <button onClick={() => setCount(count() + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+</Code>
