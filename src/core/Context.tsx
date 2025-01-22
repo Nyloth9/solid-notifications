@@ -5,7 +5,7 @@ import toastActions from "./actions";
 
 const ToasterContext = createContext<ToasterContextType>();
 
-export function ToastProvider(props: { children: JSX.Element }) {
+export default function ToastProvider(props: { children: JSX.Element }) {
   const toasters = new Map<string, Toaster>();
 
   function registerToaster(toaster: Toaster) {

@@ -1,8 +1,8 @@
-export * from "./core/Toast";
-export * from "./core/Toaster";
-export { ToastProvider, useToast } from "./core/Context";
+export { default as Toast } from "./core/Toast";
+export { default as Toaster } from "./core/Toaster";
+export { default as ToastProvider } from "./core/Context";
+export { useToast } from "./core/Context";
 export type {
-  Toaster,
   ToasterStore,
   ToasterOptions,
   ToastOptions,
