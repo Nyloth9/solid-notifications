@@ -4,7 +4,7 @@ import { render } from "solid-js/web";
 import "./index.css";
 import "../src/index.css";
 import App from "./App";
-import { ToastProvider } from "../src/core/Context";
+import ToastProvider from "../src/core/Context";
 import Toaster from "../src/core/Toaster";
 import { createSignal, onMount } from "solid-js";
 

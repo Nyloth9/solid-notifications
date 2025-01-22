@@ -109,6 +109,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border: none;
+  padding: 0;
+  background: transparent;
   margin: var(--sn-dismiss-btn-margin);
   transition: var(--sn-dismiss-btn-transition);
   height: var(--sn-dismiss-btn-size);
