@@ -5,22 +5,34 @@ import "@fontsource/inter";
 import "./app.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 
-export async function getThemeFromCookiesOrSession(request: Request) {
-  "use server";
+const fetchTheme = async () => {
+  "use server"
 
-  console.log(request);
+  try {
+    const response = await fetch("http://localhost:3000/api/getTheme", {
+      method: "GET", // Default is GET, but it's good to be explicit.
+      headers: {
+        "Content-Type": "application/json", // Ensures the request expects JSON.
+      },
+    });
 
-  if (typeof document === "undefined") {
-    return "light";
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const theme = await response.json(); // Parse the response JSON.
+    console.log("Theme data:", theme);
+    return theme;
+  } catch (error) {
+    console.error("Error fetching theme:", error);
+    return null;
   }
-
-  const cookies = document.cookie;
-  const theme = cookies.match(/theme=(light|dark)/);
-  return theme ? theme[1] : "light"; // Default to light if no theme found
-}
+};
 
 export default function App() {
   onMount(() => {
+    fetchTheme();
+
     const html = document.querySelector("html");
     const storageTheme = localStorage.getItem("theme");
 
@@ -31,7 +43,7 @@ export default function App() {
   });
 
   return (
-    <ThemeProvider initialTheme={getThemeFromCookiesOrSession()}>
+    <ThemeProvider initialTheme={"dark"}>
       <div class="w-full">
         <div class="h-full lg:ml-72 xl:ml-80">
           <header class="contents lg:pointer-events-none lg:fixed lg:inset-0 lg:z-40 lg:flex">
