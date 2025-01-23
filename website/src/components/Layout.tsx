@@ -1,5 +1,5 @@
 import { JSX } from "solid-js";
-import { useTheme } from "./theme";
+import { useTheme } from "../util/theme";
 
 interface Props {
   children: JSX.Element;
@@ -83,7 +83,7 @@ export default function Layout(props: Props) {
                   width="22"
                   height="22"
                   viewBox="0 0 14 14"
-                  class="fill-blue-500 -mt-0.5"
+                  class="-mt-0.5 fill-blue-500"
                 >
                   <g>
                     <path d="M9.5 4.5A2.5 2.5 0 0 0 7 2H2.5A2.5 2.5 0 0 0 1 6.5v5a1 1 0 0 0 1 1h5.5a1 1 0 0 0 1-1v-5a2.49 2.49 0 0 0 1-2" />
