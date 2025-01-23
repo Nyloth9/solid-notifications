@@ -61,7 +61,7 @@ export default function Layout(props: Props) {
                 Find something...
               </button>
             </div>
-            <div class="flex items-center gap-3 lg:hidden">
+            <div class="flex items-center gap-4 lg:hidden">
               <button
                 type="button"
                 class="flex h-6 w-6 items-center justify-center rounded-md transition hover:bg-slate-900/5 dark:hover:bg-white/5"
@@ -77,13 +77,13 @@ export default function Layout(props: Props) {
                   <path d="M.5 1h9M.5 8h9M.5 4.5h9" />
                 </svg>
               </button>
-              <a aria-label="Home" href="/" class="flex items-center gap-2">
+              <a aria-label="Home" href="/" class="flex items-center gap-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="22"
                   height="22"
                   viewBox="0 0 14 14"
-                  class="fill-blue-500"
+                  class="fill-blue-500 -mt-0.5"
                 >
                   <g>
                     <path d="M9.5 4.5A2.5 2.5 0 0 0 7 2H2.5A2.5 2.5 0 0 0 1 6.5v5a1 1 0 0 0 1 1h5.5a1 1 0 0 0 1-1v-5a2.49 2.49 0 0 0 1-2" />
