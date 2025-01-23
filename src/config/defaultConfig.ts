@@ -14,7 +14,7 @@ export const defaultConfig: Config = {
   offsetX: 16,
   offsetY: 16,
   gutter: 16,
-  limit: 3,
+  limit: 5,
   reverseToastOrder: false,
   pauseOnHover: true,
   pauseOnWindowInactive: true, // Will not run timer when window is inactive
