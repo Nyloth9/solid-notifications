@@ -86,18 +86,20 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     const { id, toasterId } = options;
 
-    const resolvedArgs = filterOptions(options as Partial<Config> | undefined);
+    const filteredOptions = filterOptions(
+      options as Partial<Config> | undefined,
+    );
+
+    if (filteredOptions.content) {
+      filteredOptions.contentType =
+        typeof filteredOptions.content === "function" ? "dynamic" : "static";
+    }
 
     // If no id and toasterId provided, update all toasts
     if (!id && !toasterId) {
       context.toasters.forEach((toaster) => {
-        if (options.content && typeof options.content === "function") {
-          resolvedArgs.content = options.content();
-          resolvedArgs.contentType = "dynamic";
-        }
-
-        toaster.store.rendered.forEach((toast) => toast.update(resolvedArgs));
-        toaster.store.queued.forEach((toast) => toast.update(resolvedArgs));
+        toaster.store.rendered.forEach((t) => t.update(filteredOptions));
+        toaster.store.queued.forEach((t) => t.update(filteredOptions));
       });
 
       return;
@@ -108,13 +110,8 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     const { store } = toaster;
 
     if (toasterId && !id) {
-      if (options.content && typeof options.content === "function") {
-        resolvedArgs.content = options.content();
-        resolvedArgs.contentType = "dynamic";
-      }
-
-      toaster.store.rendered.forEach((toast) => toast.update(resolvedArgs));
-      toaster.store.queued.forEach((toast) => toast.update(resolvedArgs));
+      toaster.store.rendered.forEach((t) => t.update(filteredOptions));
+      toaster.store.queued.forEach((t) => t.update(filteredOptions));
 
       return;
     }
@@ -124,12 +121,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     if (!toast) return; // Should we warn or throw here?
 
-    if (options.content && typeof options.content === "function") {
-      resolvedArgs.content = options.content(toast);
-      resolvedArgs.contentType = "dynamic";
-    }
-
-    toast.update(resolvedArgs);
+    toast.update(filteredOptions);
 
     return {
       id: id,

@@ -78,7 +78,7 @@ const App: Component = () => {
 
                   duration: 10000,
                   type: "success",
-              /*     progressBarStyle: (type) => {
+                  /*     progressBarStyle: (type) => {
                     switch (type) {
                       case "success":
                         return { "background-color": "green" };
@@ -102,11 +102,11 @@ const App: Component = () => {
               }, 2000);
 
               setTimeout(() => {
-                update({ id, type: "error" });
+                update({ id, type: "error", content: () => "Error!" });
               }, 4000);
 
               setTimeout(() => {
-                update({ id, type: "info" });
+                update({ id, type: "info", content: <div>Info!</div> });
               }, 6000);
 
               setTimeout(() => {
