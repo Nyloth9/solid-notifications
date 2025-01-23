@@ -1,10 +1,9 @@
 import type { APIEvent } from "@solidjs/start/server";
 import { getCookie } from "vinxi/http";
 
-export async function GET(event: APIEvent) {
-  console.log("getTheme inside route", event);
-
-  return {
-    theme: "light",
-  };
+export async function GET() {
+  return new Response(JSON.stringify({ theme: "dark" }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }
