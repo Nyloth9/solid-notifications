@@ -255,6 +255,10 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     const toaster = context.getToaster(options?.toasterId);
 
+    const filteredOptions = filterOptions(
+      options as Partial<Config> | undefined,
+    );
+
     const toastId = createToastId(
       (toaster.counter += 1),
       options?.toasterId,
@@ -265,7 +269,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       store: toaster.store,
       setStore: toaster.setStore,
       toastConfig: {
-        ...options,
+        ...filteredOptions,
         id: toastId,
         type: "loading",
         duration: false,
