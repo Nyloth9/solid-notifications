@@ -3,8 +3,8 @@ import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
 import "@fontsource/inter";
 import "./app.css";
-import { ThemeProvider, useTheme } from "./components/theme";
-import Layout from "./components/layout";
+import { ThemeProvider } from "./components/theme";
+import Layout from "./components/Layout";
 
 export default function App() {
   return (
