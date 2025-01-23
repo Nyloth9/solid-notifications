@@ -4,7 +4,6 @@ import {
   createToastId,
   filterOptions,
   findToast,
-  resolveContent,
   setProgressControls,
 } from "../utils/helpers";
 import Toast from "./Toast";
