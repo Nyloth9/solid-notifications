@@ -1,8 +1,9 @@
+import "./app.css";
+import "@fontsource/inter";
+
 import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
-import "@fontsource/inter";
-import "./app.css";
 import { ThemeProvider } from "./components/theme";
 import Layout from "./components/Layout";
 
