@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default function Layout(props: Props) {
-  const { setTheme } = useTheme();
+  const { setTheme, getTheme } = useTheme();
 
   return (
     <div class="h-full lg:ml-72 xl:ml-80">
@@ -139,7 +139,8 @@ export default function Layout(props: Props) {
                 <button
                   type="button"
                   onClick={() => {
-                    setTheme("dark");
+                    const activeTheme = getTheme();
+                    setTheme(activeTheme === "dark" ? "light" : "dark");
                   }}
                   class="flex h-6 w-6 items-center justify-center rounded-md transition hover:bg-slate-900/5 dark:hover:bg-white/5"
                   aria-label="Switch to dark theme"

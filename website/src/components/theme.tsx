@@ -20,11 +20,7 @@ type ThemeProviderProps = {
   children: JSX.Element;
 };
 
-/**
- * Provides the theme context to its child components.
- */
 export function ThemeProvider(props: ThemeProviderProps) {
-  // Create theme storage signal
   const [getTheme, setTheme] = createStorageSignal<Theme>(
     "theme",
     globalThis.matchMedia?.("(prefers-color-scheme: light)").matches
@@ -32,16 +28,12 @@ export function ThemeProvider(props: ThemeProviderProps) {
       : "dark",
   );
 
-  // Add or remove "dark" class when theme changes
   createEffect(() => {
-    // Destructure document element
     const { documentElement } = document;
     const { classList } = documentElement;
 
-    // Disable CSS transitions while changing theme
-    // disableTransitions();
+    disableTransitions();
 
-    // Add or remove "dark" class
     if (getTheme() === "dark") {
       classList.add("dark");
       documentElement.setAttribute("data-theme", "dark");
@@ -54,11 +46,12 @@ export function ThemeProvider(props: ThemeProviderProps) {
   return <ThemeContext.Provider value={{ setTheme, getTheme }} {...props} />;
 }
 
-/**
- * Provides the ability to access the theme context.
- *
- * @returns The theme context.
- */
 export function useTheme() {
   return useContext(ThemeContext)!;
+}
+
+function disableTransitions() {
+  const { classList } = document.documentElement;
+  classList.add("disable-transitions");
+  setTimeout(() => classList.remove("disable-transitions"), 100);
 }

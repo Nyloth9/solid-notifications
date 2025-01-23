@@ -7,3 +7,8 @@ body {
     "Open Sans", "Helvetica Neue", sans-serif;
   @apply dark:bg-gray-900;
 }
+
+.disable-transitions,
+.disable-transitions * {
+  transition: none !important;
+}
