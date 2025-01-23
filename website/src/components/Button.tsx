@@ -6,7 +6,7 @@ export default function Button(props: Props) {
   return (
     <button
       type="button"
-      class="shadow-flat hover:shadow-lg inline-flex items-center justify-center gap-1.5 overflow-hidden rounded bg-white px-3 py-1 text-sm font-medium text-slate-700 transition-all dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white"
+      class="shadow-flat inline-flex items-center justify-center gap-1.5 overflow-hidden rounded bg-blue-500 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:active:bg-blue-800"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
