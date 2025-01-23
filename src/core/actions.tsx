@@ -119,7 +119,7 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
     // Finally, update the specified toast
     const toast = findToast(id, store);
 
-    if (!toast) return; // Should we warn or throw here?
+    if (!toast) return; // Should we warn or throw here, or do nothing?
 
     toast.update(filteredOptions);
 
