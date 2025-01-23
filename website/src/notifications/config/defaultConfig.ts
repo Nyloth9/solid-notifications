@@ -13,7 +13,7 @@ export const defaultConfig: Config = {
   positionX: "right",
   offsetX: 12,
   offsetY: 12,
-  gutter: 16,
+  gutter: 12,
   limit: 5,
   reverseToastOrder: false,
   pauseOnHover: true,
