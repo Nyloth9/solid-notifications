@@ -27,7 +27,15 @@ const fetchTheme = async () => {
   }
 };
 
-export default function App() {
+export const route = {
+  load: () => {
+    fetchTheme();
+  },
+};
+
+export default function App(props) {
+  console.log("props", props);
+
   onMount(() => {
     fetchTheme();
 
