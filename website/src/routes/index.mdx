@@ -8,7 +8,7 @@ tags: ["test", "page"]
 import Code from "~/components/Code";
 import Title from "~/components/Title";
 import Button from "~/components/Button";
-import IntroPanel from "~/components/Panels";
+import { IntroToasters, IntroButton, QueuePanel } from "~/components/Panels";
 import { useToast } from "~/notifications";
 
 <Title>Home</Title>
@@ -17,12 +17,8 @@ import { useToast } from "~/notifications";
 
 Reactive, customizable toast notifications for SolidJS. {{ "class": "lead" }}
 
-<Button
-  toastBody="New toast ready to serve!"
-  toastOptions={{ toasterId: "toaster-1" }}
->
-  Create a Toast!
-</Button>
+<IntroToasters />
+<IntroButton />
 
 <Code lang="jsx">
 
@@ -54,7 +50,7 @@ Solid Notifications is a toast notification library made for SolidJS. It’s sim
 - Signal to read the length of the queue and manage it accordingly.
 - Clear queue or clear rendered toasts with a single function call.
 
-{IntroPanel().queueManagement}
+<QueuePanel />
 
 ### 2. Reactivity: {{"class": "mt-0"}}
 

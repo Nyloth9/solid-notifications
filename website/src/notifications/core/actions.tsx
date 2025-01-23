@@ -26,8 +26,6 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
      * 5. notify("Example text", { toasterId: "toasterId", id: "toastId", ... }) - Notify with a specific ID in a specific toaster
      */
 
-    console.log("notify", content, options);
-
     if (targetToaster) {
       options = { toasterId: targetToaster, ...options };
     }
