@@ -80,8 +80,8 @@ export default function Layout(props: Props) {
               <a aria-label="Home" href="/" class="flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
+                  width="22"
+                  height="22"
                   viewBox="0 0 14 14"
                   class="fill-blue-500"
                 >
@@ -95,7 +95,7 @@ export default function Layout(props: Props) {
                   </g>
                 </svg>
 
-                <span class="text-xs font-bold dark:text-white">
+                <span class="text-sm font-bold dark:text-white">
                   Solid Notifications
                 </span>
               </a>
