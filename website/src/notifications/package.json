@@ -1,0 +1,47 @@
+{
+  "name": "solid-notifications",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A Solidjs toast notifications library",
+  "author": {
+    "name": "Nyloth9",
+    "url": "https://github.com/Nyloth9"
+  },
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && ncp index.css dist/index.css",
+    "prepublishOnly": "npm run build"
+  },
+  "exports": {
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.es.js"
+    },
+    "require": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.umd.js"
+    }
+  },
+  "peerDependencies": {
+    "solid-js": "^1.9.3"
+  },
+  "keywords": [
+    "toast",
+    "solidjs",
+    "solid",
+    "notification",
+    "alert",
+    "message",
+    "ui",
+    "component",
+    "solid-notifications"
+  ],
+  "license": "MIT",
+  "browser": {},
+  "typesVersions": {}
+}

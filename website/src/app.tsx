@@ -5,8 +5,7 @@ import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
 import { ThemeProvider } from "./util/theme";
-import ToastProvider from "../../src/core/Context";
-import Toaster from "../../src/core/Toaster";
+import { ToastProvider, Toaster } from "./notifications";
 import Layout from "./components/Layout";
 
 export default function App() {

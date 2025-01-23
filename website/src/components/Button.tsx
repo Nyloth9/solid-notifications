@@ -1,4 +1,4 @@
-import { useToast } from "../../../src/core/Context";
+import { useToast } from "~/notifications";
 
 interface Props {
   children: string;
