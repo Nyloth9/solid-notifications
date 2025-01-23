@@ -60,13 +60,13 @@ body {
 
 /* Dark Theme */
 .sn-theme-dark {
-  --sn-wrapper-bg-color: #1f2937;
+  --sn-wrapper-bg-color: #182135;
   --sn-wrapper-box-shadow: rgba(0, 0, 0, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  --sn-toast-text-color: #94a3b8;
+  --sn-toast-text-color: #ced4db;
   --sn-dismiss-btn-color: #bfc5cf;
   --sn-dismiss-btn-hover-color: #f9fafb;
-  --sn-progress-bar-color: #9ca3af;
+  --sn-progress-bar-color: #7c8189;
   --sn-icon-stroke: #fff;
 }
 

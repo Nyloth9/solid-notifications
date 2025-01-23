@@ -1,7 +1,9 @@
 import { Toaster, useToast } from "~/notifications";
+import { useTheme } from "~/util/theme";
 
 function IntroToasters() {
-  return <Toaster toasterId="toaster-1" limit={3} />;
+  const { getTheme } = useTheme();
+  return <Toaster toasterId="toaster-1" limit={3} positionY="bottom" theme={getTheme()} />;
 }
 
 function IntroButton() {

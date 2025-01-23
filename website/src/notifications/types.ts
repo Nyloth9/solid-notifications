@@ -129,7 +129,7 @@ export interface Config {
   id?: string;
   content?: string | JSX.Element | ((toast: Toast) => JSX.Element | string);
   contentType?: "static" | "dynamic";
-  theme: "light" | "dark" | string;
+  theme: "light" | "dark" | string | undefined | null;
   toasterId?: string;
   type: ToastType;
   duration: number | false;
