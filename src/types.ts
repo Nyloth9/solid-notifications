@@ -54,11 +54,16 @@ export interface ToastOptions
   toasterId?: string;
 }
 
-export type UpdateToastOptions = RequireAtLeastOne<
+export type ToastUpdateOptions = RequireAtLeastOne<
   ToastOptions & {
     content?: string | JSX.Element | ((toast?: Toast) => JSX.Element | string);
   }
 >;
+
+export type ToastContent =
+  | string
+  | JSX.Element
+  | ((toast: Toast) => JSX.Element);
 
 export interface ToasterContextType {
   toasters: Map<string, Toaster>;
@@ -76,7 +81,7 @@ export interface ToastActions {
     ref: HTMLElement | null;
     progressControls: ProgressControls;
   };
-  update: (options: UpdateToastOptions) =>
+  update: (options: ToastUpdateOptions) =>
     | {
         id: string | undefined;
         ref: HTMLElement | null;

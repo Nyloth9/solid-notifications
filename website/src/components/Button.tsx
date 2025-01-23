@@ -1,7 +1,9 @@
-import { useToast } from "~/notifications";
+import { ToastContent, ToastOptions, useToast } from "~/notifications";
 
 interface Props {
   children: string;
+  toastBody?: ToastContent;
+  toastOptions?: ToastOptions;
 }
 
 export default function Button(props: Props) {
@@ -10,7 +12,12 @@ export default function Button(props: Props) {
   return (
     <button
       type="button"
-      onClick={() => notify()}
+      onClick={() =>
+        notify(
+          props.toastBody || "This is a toast message!",
+          props.toastOptions,
+        )
+      }
       class="inline-flex items-center justify-center gap-1.5 overflow-hidden rounded bg-blue-500 px-3 py-1.5 text-sm font-medium text-white shadow-flat transition-colors hover:bg-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:active:bg-blue-800"
     >
       <svg
