@@ -94,14 +94,17 @@ export default function Toaster(props: ToasterOptions) {
   };
 
   onMount(() => {
+    if (typeof document === "undefined") return;
     window.addEventListener("blur", handleWindowBlur);
     window.addEventListener("focus", handleWindowFocus);
   });
 
   onCleanup(() => {
+    unregisterToaster(toasterId);
+    
+    if (typeof document === "undefined") return;
     window.removeEventListener("blur", handleWindowBlur);
     window.removeEventListener("focus", handleWindowFocus);
-    unregisterToaster(toasterId);
   });
 
   return (

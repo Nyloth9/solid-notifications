@@ -1,12 +1,17 @@
+import { useToast } from "../../../src/core/Context";
+
 interface Props {
   children: string;
 }
 
 export default function Button(props: Props) {
+  const { notify } = useToast();
+
   return (
     <button
       type="button"
-      class="shadow-flat inline-flex items-center justify-center gap-1.5 overflow-hidden rounded bg-blue-500 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:active:bg-blue-800"
+      onClick={() => notify()}
+      class="inline-flex items-center justify-center gap-1.5 overflow-hidden rounded bg-blue-500 px-3 py-1.5 text-sm font-medium text-white shadow-flat transition-colors hover:bg-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:active:bg-blue-800"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
