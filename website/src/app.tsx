@@ -12,7 +12,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <ToastProvider>
-        <Toaster />
+        <Toaster toasterId="toaster-1" />
         <Layout>
           <Router
             root={(props) => {

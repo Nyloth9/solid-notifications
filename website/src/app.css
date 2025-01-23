@@ -35,6 +35,8 @@ body {
   --sn-toast-max-width: 344px;
   --sn-toast-min-width: 264px;
   --sn-toast-gap: 16px;
+  --sn-toast-font-size: 0.875rem;
+  --sn-toast-line-height: 1.5;
   --sn-toast-padding: 14px 16px 12px 16px;
   --sn-toast-text-color: #334155;
 
@@ -113,6 +115,8 @@ body {
   overflow: hidden;
   position: relative;
   overflow-wrap: anywhere;
+  font-size: var(--sn-toast-font-size);
+  line-height: var(--sn-toast-line-height);
   max-width: var(--sn-toast-max-width);
   min-width: var(--sn-toast-min-width);
   gap: var(--sn-toast-gap);

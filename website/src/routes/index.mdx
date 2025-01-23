@@ -8,6 +8,7 @@ tags: ["test", "page"]
 import Code from "~/components/Code";
 import Title from "~/components/Title";
 import Button from "~/components/Button";
+import IntroPanel from "~/components/Panels";
 import { useToast } from "~/notifications";
 
 <Title>Home</Title>
@@ -16,7 +17,12 @@ import { useToast } from "~/notifications";
 
 Reactive, customizable toast notifications for SolidJS. {{ "class": "lead" }}
 
-<Button toastBody="New toast ready to serve!">Create a Toast!</Button>
+<Button
+  toastBody="New toast ready to serve!"
+  toastOptions={{ toasterId: "toaster-1" }}
+>
+  Create a Toast!
+</Button>
 
 <Code lang="jsx">
 
@@ -38,7 +44,7 @@ export default function App() {
 
 </Code>
 
-<div class="px-4">
+Solid Notifications is a toast notification library made for SolidJS. It’s simple to use, highly customizable, and fits projects of any size
 
 ## Core Features:
 
@@ -48,15 +54,7 @@ export default function App() {
 - Signal to read the length of the queue and manage it accordingly.
 - Clear queue or clear rendered toasts with a single function call.
 
-<div class="-mt-2 pl-3 mb-6">
-  <button
-    class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 transition hover:bg-slate-900/2.5 hover:text-slate-900 dark:text-slate-400 dark:ring-white/10 dark:hover:bg-white/5 dark:hover:text-white"
-    href="/sdks"
-  >
-    <p class="m-0">Create Toast</p>
-  </button>
-  <p class="ml-3 inline text-emerald-500">Queued Toasts: 0</p>
-</div>
+{IntroPanel().queueManagement}
 
 ### 2. Reactivity: {{"class": "mt-0"}}
 
@@ -77,27 +75,25 @@ export default function App() {
 
 ### 5. User Interaction Features: {{"class": "mt-0"}}
 
-- Pause timer on onMouseEnter, tab switch, window blur or by user action.
-- Swipe-to-dismiss functionality.
-- Dismiss toasts on clicking the body or the close button.
+- Pause timer on onMouseEnter, tab switch, window blur or by user action. {{ "class": "m-0" }}
+- Swipe-to-dismiss functionality. {{ "class": "m-0" }}
+- Dismiss toasts on clicking the body or the close button. {{ "class": "m-0" }}
 
 ### 6. Timer Control: {{"class": "mt-0"}}
 
-- Full control over toast timers, including pausing and resetting.
-- Support for infinite duration.
+- Full control over toast timers, including pausing and resetting. {{ "class": "m-0" }}
+- Support for infinite duration. {{ "class": "m-0" }}
 
 ### 7. Visibility and Tab Management: {{"class": "mt-0"}}
 
-- Option to prevent rendering of toasts if the tab is blurred.
-- Visibility change event listeners per toaster to manage timers accordingly.
+- Option to prevent rendering of toasts if the tab is blurred. {{ "class": "m-0" }}
+- Visibility change event listeners per toaster to manage timers accordingly. {{ "class": "m-0" }}
 
 ### 8. Accessibility: {{"class": "mt-0"}}
 
-- Built-in ARIA roles for accessibility.
+- Built-in ARIA roles for accessibility. {{ "class": "m-0" }}
 
 ### 9. Callbacks and Events: {{"class": "mt-0"}}
 
-- Custom callbacks for toast exit with detailed reasons (true, false, or custom provided).
-- Lifecycle hooks to handle specific events like dismissal or updates.
-
-</div>
+- Custom callbacks for toast exit with detailed reasons (true, false, or custom provided). {{ "class": "m-0" }}
+- Lifecycle hooks to handle specific events like dismissal or updates. {{ "class": "m-0" }}

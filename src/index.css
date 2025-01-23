@@ -19,6 +19,8 @@
   --sn-toast-min-width: 264px;
   --sn-toast-gap: 16px;
   --sn-toast-padding: 16px 18px 14px 18px;
+  --sn-toast-font-size: 0.875rem;
+  --sn-toast-line-height: 1.5;
   --sn-toast-text-color: #121826;
 
   /* Dismiss Button */
@@ -95,6 +97,8 @@
   overflow: hidden;
   position: relative;
   overflow-wrap: anywhere;
+  font-size: var(--sn-toast-font-size);
+  line-height: var(--sn-toast-line-height);
   max-width: var(--sn-toast-max-width);
   min-width: var(--sn-toast-min-width);
   gap: var(--sn-toast-gap);
