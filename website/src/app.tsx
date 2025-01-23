@@ -6,8 +6,6 @@ import "./app.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 
 const fetchTheme = async () => {
-  "use server"
-
   try {
     const response = await fetch("http://localhost:3000/api/getTheme", {
       method: "GET", // Default is GET, but it's good to be explicit.
