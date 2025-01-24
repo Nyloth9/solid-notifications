@@ -20,7 +20,7 @@ export default function Toaster(props: ToasterOptions) {
     rendered: [],
     toasterConfig: mergeProps(defaultConfig, props),
     isWindowBlurred:
-      typeof document !== "undefined" && document.visibilityState === "hidden",
+      typeof window !== "undefined" && document.visibilityState === "hidden",
   });
 
   const { toasterId } = registerToaster({
@@ -94,7 +94,7 @@ export default function Toaster(props: ToasterOptions) {
   };
 
   onMount(() => {
-    if (typeof document === "undefined") return;
+    if (typeof window === "undefined") return;
     window.addEventListener("blur", handleWindowBlur);
     window.addEventListener("focus", handleWindowFocus);
   });
@@ -102,7 +102,7 @@ export default function Toaster(props: ToasterOptions) {
   onCleanup(() => {
     unregisterToaster(toasterId);
     
-    if (typeof document === "undefined") return;
+    if (typeof window === "undefined") return;
     window.removeEventListener("blur", handleWindowBlur);
     window.removeEventListener("focus", handleWindowFocus);
   });
