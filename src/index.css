@@ -18,26 +18,26 @@
   --sn-toast-max-width: 334px;
   --sn-toast-min-width: 264px;
   --sn-toast-gap: 16px;
-  --sn-toast-padding: 16px 18px 14px 18px;
   --sn-toast-font-size: 0.875rem;
   --sn-toast-line-height: 1.5;
-  --sn-toast-text-color: #121826;
+  --sn-toast-padding: 14px 16px 14px 16px;
+  --sn-toast-text-color: #334155;
 
   /* Dismiss Button */
   --sn-dismiss-btn-size: 1.175rem;
   --sn-dismiss-btn-border-radius: 0.25rem;
   --sn-dismiss-btn-transition: color 0.3s;
-  --sn-dismiss-btn-margin: 0 -4px 0px auto;
+  --sn-dismiss-btn-margin: 2px -4px 0px auto;
   --sn-dismiss-btn-color: #9ca3af;
   --sn-dismiss-btn-hover-color: #374151;
 
   /* Progress Bar */
   --sn-progress-bar-height: 2px;
-  --sn-progress-bar-color: #4b5563;
+  --sn-progress-bar-color: #748aa8;
 
   /* Icon */
   --sn-icon-size: 1.125rem;
-  --sn-icon-margin: 0;
+  --sn-icon-margin: 2px 0 0 0;
   --sn-icon-stroke: #fff;
   --sn-icon-fill: #121826;
 }
