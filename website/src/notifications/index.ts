@@ -9,6 +9,7 @@ export type {
   ToastOptions,
   ToastOptionsUpdate,
   ToastContent,
+  ToastPromiseMessages,
   ToasterContextType,
   ToastActions,
   ProgressControls,

@@ -60,14 +60,20 @@ export interface ToastOptions
 
 export type ToastOptionsUpdate = RequireAtLeastOne<
   ToastOptions & {
-    content?: string | JSX.Element | ((toast?: Toast) => JSX.Element | string);
+    content?: ToastContent;
   }
 >;
 
 export type ToastContent =
   | string
   | JSX.Element
-  | ((toast: Toast) => JSX.Element);
+  | ((toast: Toast) => JSX.Element | string);
+
+export interface ToastPromiseMessages {
+  pending: string | JSX.Element;
+  success: string | JSX.Element | ((data: any) => string | JSX.Element);
+  error: string | JSX.Element | ((error: any) => string | JSX.Element);
+}
 
 export interface ToasterContextType {
   toasters: Map<string, Toaster>;
@@ -79,7 +85,7 @@ export interface ToasterContextType {
 
 export interface ToastActions {
   notify: (
-    content?: string | JSX.Element | ((toast: Toast) => JSX.Element | string),
+    content?: ToastContent,
     options?: ToastOptions,
   ) => {
     id: string;
@@ -106,11 +112,7 @@ export interface ToastActions {
   }) => void;
   promise: <T>(
     promise: Promise<T>,
-    messages: {
-      pending: string | JSX.Element;
-      success: string | JSX.Element | ((data: T) => string | JSX.Element);
-      error: string | JSX.Element | ((error: any) => string | JSX.Element);
-    },
+    messages: ToastPromiseMessages,
     options?: ToastOptions,
   ) => Promise<T>;
   getQueue: (toasterId?: string) => Toast[];
@@ -132,7 +134,7 @@ export interface ProgressControls {
 
 export interface Config {
   id?: string;
-  content?: string | JSX.Element | ((toast: Toast) => JSX.Element | string);
+  content?: ToastContent;
   contentType?: "static" | "dynamic";
   theme: "light" | "dark" | string | undefined | null;
   toasterId?: string;
