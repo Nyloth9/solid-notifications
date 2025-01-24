@@ -30,29 +30,6 @@ export default function Toaster(props: ToasterOptions) {
     counter: 0,
   });
 
-  const handleResize = () => {
-    if (typeof window === "undefined") return;
-
-    const svh = window.innerHeight;
-    const offsetY = store.toasterConfig.offsetY || 0;
-
-    // Trigger reorder logic when svh changes
-    let accumulatedOffset = offsetY;
-    const resolvedToasts = store.toasterConfig.reverseToastOrder
-      ? [...store.rendered].reverse()
-      : store.rendered;
-
-    batch(() => {
-      resolvedToasts.forEach((toast) => {
-        if (toast.ref) {
-          toast.offset = accumulatedOffset;
-          accumulatedOffset +=
-            toast.ref.clientHeight + store.toasterConfig.gutter;
-        }
-      });
-    });
-  };
-
   createEffect(
     /** Here we track if toasterConfig has changed, and if it has, we update all toasts in the toaster, excluding the props that are unique to the toast (ownProperties) ***/
     on(
@@ -80,8 +57,6 @@ export default function Toaster(props: ToasterOptions) {
         setStore("rendered", [nextToast, ...store.rendered]);
       });
     }
-
-    handleResize();
 
     /*** Here we implement the reversing of the toast order if that options is enabled ***/
     const resolvedToasts = store.toasterConfig.reverseToastOrder
@@ -120,6 +95,8 @@ export default function Toaster(props: ToasterOptions) {
 
   onMount(() => {
     if (typeof window === "undefined") return;
+    window.addEventListener("resize", () => alert("resize"));
+
     window.addEventListener("blur", handleWindowBlur);
     window.addEventListener("focus", handleWindowFocus);
   });
