@@ -386,46 +386,49 @@ export default function Layout(props: Props) {
           </nav>
         </div>
       </header>
-
-      {props.children}
-      <footer class="mx-auto w-full max-w-2xl space-y-10 pb-16 lg:max-w-5xl">
-        <div class="flex">
-          <div class="ml-auto flex flex-col items-end gap-3">
-            <a
-              class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-900 transition hover:bg-slate-200 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
-              aria-label="Next: Quickstart"
-              href="/quickstart"
-            >
-              Next
-              <svg
-                viewBox="0 0 20 20"
-                fill="none"
-                aria-hidden="true"
-                class="-mr-1 mt-0.5 h-5 w-5"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m11.5 6.5 3 3.5m0 0-3 3.5m3-3.5h-9"
-                ></path>
-              </svg>
-            </a>
-            <a
-              tabindex="-1"
-              aria-hidden="true"
-              class="text-base font-semibold text-slate-900 transition hover:text-slate-600 dark:text-white dark:hover:text-slate-300"
-              href="/quickstart"
-            >
-              Quickstart
-            </a>
+      <div class="relative flex h-full flex-col px-4 pt-14 sm:px-6 lg:px-8">
+        <main class="w-full flex-auto text-left">
+          <div class="prose dark:prose-invert [html_:where(&>*)]:mx-auto [html_:where(&>*)]:max-w-2xl [html_:where(&>*)]:lg:mx-[calc(50%-min(50%,theme(maxWidth.lg)))] [html_:where(&>*)]:lg:max-w-3xl">
+            <article class="pb-10 pt-14">{props.children}</article>
           </div>
-        </div>
-        <div class="flex flex-col items-center justify-between gap-5 border-t border-slate-900/5 pt-8 dark:border-white/5 sm:flex-row">
-          <p class="text-xs text-slate-600 dark:text-slate-400">
-            © Copyright {new Date().getFullYear()} Solid Notifications
-          </p>
-          <div class="flex gap-4">
+        </main>
+        <footer class="mx-auto w-full max-w-2xl space-y-10 pb-16 lg:max-w-5xl">
+          <div class="flex">
+            <div class="ml-auto flex flex-col items-end gap-3">
+              <a
+                class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-900 transition hover:bg-slate-200 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+                aria-label="Next: Quickstart"
+                href="/quickstart"
+              >
+                Next
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                  class="-mr-1 mt-0.5 h-5 w-5"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m11.5 6.5 3 3.5m0 0-3 3.5m3-3.5h-9"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                tabindex="-1"
+                aria-hidden="true"
+                class="text-base font-semibold text-slate-900 transition hover:text-slate-600 dark:text-white dark:hover:text-slate-300"
+                href="/quickstart"
+              >
+                Quickstart
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-5 border-t border-slate-900/5 pt-8 dark:border-white/5">
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              © Copyright {new Date().getFullYear()} Solid Notifications
+            </p>
             <a
               class="group"
               href="https://github.com/nyloth9"
@@ -436,7 +439,7 @@ export default function Layout(props: Props) {
               <svg
                 viewBox="0 0 20 20"
                 aria-hidden="true"
-                class="h-5 w-5 fill-slate-700 dark:fill-slate-500 transition group-hover:fill-slate-900 dark:group-hover:fill-slate-400"
+                class="h-5 w-5 fill-slate-700 transition group-hover:fill-slate-900 dark:fill-slate-500 dark:group-hover:fill-slate-400"
               >
                 <path
                   fill-rule="evenodd"
@@ -446,8 +449,8 @@ export default function Layout(props: Props) {
               </svg>
             </a>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 }
