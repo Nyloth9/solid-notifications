@@ -1,4 +1,3 @@
-import { createSignal } from "solid-js";
 import { Toaster, useToast } from "~/notifications";
 import { useTheme } from "~/util/theme";
 
@@ -8,24 +7,20 @@ function Toasters() {
   return (
     <div>
       <Toaster toasterId="toaster-1" theme={getTheme()} />
-      <Toaster
-        toasterId="toaster-2"
-        theme={getTheme()}
-        limit={3}
-        positionY="bottom"
-      />
+      <Toaster toasterId="toaster-2" theme={getTheme()} limit={3} />
     </div>
   );
 }
 
 function CoreFeatures(props: { feature: string }) {
-  const { notify, getQueue } = useToast();
+  const { notify, getQueue, dismiss } = useToast();
 
   if (props.feature === "intro-button")
     return (
       <button
         type="button"
         onClick={() => {
+          resetToasters("toaster-1", dismiss);
           notify("🚀 New toast ready to serve!", {
             toasterId: "toaster-1",
           });
@@ -55,6 +50,7 @@ function CoreFeatures(props: { feature: string }) {
       <div class="not-prose -mt-2 mb-6 pl-3">
         <button
           onClick={() => {
+            resetToasters("toaster-2", dismiss);
             notify("Create more than three toasts to see the effect.", {
               toasterId: "toaster-2",
             });
@@ -73,3 +69,12 @@ function CoreFeatures(props: { feature: string }) {
 }
 
 export { Toasters, CoreFeatures };
+
+const resetToasters = (activeToasterId: string, dismiss: any) => {
+  if (typeof document === "undefined") return;
+
+  const allToasters = document.querySelectorAll(".sn-toaster");
+  allToasters.forEach((toaster) => {
+    if (toaster.id !== activeToasterId) dismiss({ toasterId: toaster.id });
+  });
+};
