@@ -430,3 +430,7 @@ body {
   border-width: 0px 1px;
   @apply border border-slate-400 bg-slate-300 dark:border-slate-800 dark:bg-slate-700;
 }
+
+.scrollbar-md::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-600;
+}
