@@ -102,7 +102,7 @@ const App: Component = () => {
               }, 2000);
 
               setTimeout(() => {
-                update({ id, type: "error", content: () => "Error!" });
+                update({ id, type: "error", content: "Error! Lorem Ipsum is simply dummy text of the printing and typesetting industry." });
               }, 4000);
 
               setTimeout(() => {
