@@ -70,21 +70,37 @@ function CoreFeatures(props: { feature: string }) {
             notify(
               (t) => {
                 return (
-                  <>
-                    <div class="rounded px-4 py-2">
-                      <p class="font-medium text-slate-900 dark:text-slate-50">
-                        Current progress:{" "}
-                        {Math.round(t.progressManager.progress())}
-                      </p>
-                      Hook into the progress() signal to update the progress bar
-                      <div
-                        class="absolute left-0 top-0 h-full bg-cyan-600/20"
-                        style={{
-                          width: `${t.progressManager.progress()}%`,
-                        }}
-                      />
-                    </div>
-                  </>
+                  <div class="not-prose relative rounded-md px-4 py-2 text-sm">
+                    Hook into the progress() signal to update the progress bar
+                    <p class="text-xs font-medium text-blue-600 dark:text-emerald-200">
+                      Current progress:{" "}
+                      {Math.round(t.progressManager.progress())}
+                    </p>
+                    <div
+                      class="absolute left-0 top-0 h-full bg-blue-600/10"
+                      style={{
+                        width: `${t.progressManager.progress()}%`,
+                      }}
+                    />
+                    <button class="absolute right-0 top-0 h-6 w-6 bg-white">
+                      <svg
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="100%"
+                        height="100%"
+                      >
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2.5"
+                          d="m7 7l10 10M7 17L17 7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 );
               },
               {

@@ -125,7 +125,6 @@ body {
 
 .sn-toast-wrapper {
   box-sizing: border-box;
-  overflow: hidden;
   z-index: var(--sn-z-index);
   max-width: var(--sn-wrapper-max-width);
   min-width: var(--sn-wrapper-min-width);
@@ -141,6 +140,7 @@ body {
   position: relative;
   overflow-wrap: anywhere;
   font-size: var(--sn-toast-font-size);
+  border-radius: var(--sn-wrapper-border-radius);
   line-height: var(--sn-toast-line-height);
   gap: var(--sn-toast-gap);
   color: var(--sn-toast-text-color);
