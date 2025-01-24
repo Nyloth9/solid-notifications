@@ -70,19 +70,25 @@ function CoreFeatures(props: { feature: string }) {
             notify(
               (t) => {
                 return (
-                  <div class="not-prose relative rounded-md px-4 py-2 text-sm">
-                    Hook into the progress() signal to update the progress bar
-                    <p class="text-xs font-medium text-blue-600 dark:text-emerald-200">
-                      Current progress:{" "}
-                      {Math.round(t.progressManager.progress())}
-                    </p>
-                    <div
-                      class="absolute left-0 top-0 h-full bg-blue-600/10"
-                      style={{
-                        width: `${t.progressManager.progress()}%`,
-                      }}
-                    />
-                    <button class="absolute right-0 top-0 h-6 w-6 bg-white">
+                  <>
+                    <div class="not-prose relative overflow-hidden rounded-md px-4 py-2 text-xs shadow-stripe">
+                      Hook into the progress() signal to update the progress bar
+                      width or other properties.
+                      <p class="text-xs font-medium text-blue-600 dark:text-emerald-200">
+                        Current progress:{" "}
+                        {Math.round(t.progressManager.progress())}
+                      </p>
+                      <div
+                        class="absolute left-0 top-0 h-full bg-blue-600/10"
+                        style={{
+                          width: `${t.progressManager.progress()}%`,
+                        }}
+                      />
+                    </div>
+                    <button
+                      onClick={() => t.dismiss()}
+                      class="absolute -right-1 -top-1 h-4 w-4 rounded-full border border-slate-200 bg-white"
+                    >
                       <svg
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +106,7 @@ function CoreFeatures(props: { feature: string }) {
                         />
                       </svg>
                     </button>
-                  </div>
+                  </>
                 );
               },
               {
