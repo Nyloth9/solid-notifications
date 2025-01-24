@@ -55,6 +55,7 @@
   --sn-icon-stroke: #fff;
 }
 
+/* Toast Types */
 .sn-type-success {
   --sn-progress-bar-color: var(--sn-color-success);
   --sn-icon-fill: var(--sn-color-success);
@@ -75,6 +76,7 @@
   --sn-icon-fill: var(--sn-color-info);
 }
 
+/* General CSS */
 *[data-role="toast"] {
   pointer-events: all;
   position: absolute;
