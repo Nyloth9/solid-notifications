@@ -8,7 +8,7 @@ tags: ["test", "page"]
 import Code from "~/components/Code";
 import Title from "~/components/Title";
 import Button from "~/components/Button";
-import { IntroToasters, IntroButton, QueuePanel } from "~/components/Panels";
+import { Toasters, CoreFeatures } from "~/panels/intro";
 import { useToast } from "~/notifications";
 
 <Title>Home</Title>
@@ -17,8 +17,8 @@ import { useToast } from "~/notifications";
 
 Reactive, customizable toast notifications for SolidJS. {{ "class": "lead" }}
 
-<IntroToasters />
-<IntroButton />
+<Toasters />
+<CoreFeatures feature="intro-button" />
 
 It’s simple to use, highly customizable, and fits projects of any size.
 
@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <div>
-      <button onClick={() => "New toast ready to serve!"}>
+      <button onClick={() => notify("New toast ready to serve!")}>
         Create a Toast!
       </button>
     </div>
@@ -50,7 +50,7 @@ export default function App() {
 - Signal to read the length of the queue and manage it accordingly.
 - Clear queue or clear rendered toasts with a single function call.
 
-<QueuePanel />
+<CoreFeatures feature="queue-showcase" />
 
 ### 2. Reactivity: {{"class": "mt-0"}}
 

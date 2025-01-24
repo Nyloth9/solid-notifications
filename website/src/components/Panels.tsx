@@ -1,18 +1,6 @@
 import { Toaster, useToast } from "~/notifications";
 import { useTheme } from "~/util/theme";
 
-function IntroToasters() {
-  const { getTheme } = useTheme();
-  return (
-    <Toaster
-      toasterId="toaster-1"
-      limit={3}
-      positionY="bottom"
-      theme={getTheme()}
-    />
-  );
-}
-
 function IntroButton() {
   const { notify } = useToast();
 
@@ -50,10 +38,9 @@ function QueuePanel() {
     <div class="not-prose -mt-2 mb-6 pl-3">
       <button
         onClick={() => {
-          notify(
-            "Create more than three toasts to see the effect.",
-            { toasterId: "toaster-1" },
-          );
+          notify("Create more than three toasts to see the effect.", {
+            toasterId: "toaster-1",
+          });
         }}
         class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
       >
@@ -66,4 +53,4 @@ function QueuePanel() {
   );
 }
 
-export { IntroToasters, IntroButton, QueuePanel };
+export { IntroButton, QueuePanel };
