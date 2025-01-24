@@ -25,7 +25,7 @@ const [style, setStyle] = createSignal({
 onMount(() => {
   setTimeout(() => {
     setClassName("bg-green-200");
-    setTheme("dark");
+    //setTheme("dark");
   }, 4000);
 
   /*   setInterval(() => {
