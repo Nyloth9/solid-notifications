@@ -2,10 +2,14 @@ import { createContext, JSX, useContext } from "solid-js";
 import { Toaster, ToasterContextType } from "../types";
 import { toasterService } from "./services";
 import toastActions from "./actions";
+import { ToasterOptions } from "../../website/src/notifications";
 
+interface Props extends ToasterOptions {
+  children: JSX.Element;
+}
 const ToasterContext = createContext<ToasterContextType>();
 
-export default function ToastProvider(props: { children: JSX.Element }) {
+export default function ToastProvider(props: Props) {
   const toasters = new Map<string, Toaster>();
 
   function registerToaster(toaster: Toaster) {
