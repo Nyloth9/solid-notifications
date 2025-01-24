@@ -63,6 +63,7 @@ import {
  * - write default config to docs
  * ✔ add promise support
  * - add icon class and icon style
+ * - add theme to propValue arguments
  */
 
 /***

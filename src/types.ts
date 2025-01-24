@@ -186,6 +186,11 @@ export interface Config {
     | undefined;
   showIcon: boolean;
   icon: ((type: ToastType) => JSX.Element) | JSX.Element | null;
+  iconClass: string | ((type: ToastType) => string) | undefined;
+  iconStyle:
+    | JSX.CSSProperties
+    | ((type: ToastType) => JSX.CSSProperties)
+    | undefined;
   dragToDismiss: boolean;
   dragTreshold: number;
   ariaLive: "off" | "assertive" | "polite";

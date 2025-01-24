@@ -36,6 +36,8 @@ export const defaultConfig: Config = {
   progressBarClass: "sn-progress-bar",
   showIcon: true,
   icon: null,
+  iconClass: undefined,
+  iconStyle: undefined,
   dragToDismiss: true,
   dragTreshold: 100,
   ariaLive: "polite",

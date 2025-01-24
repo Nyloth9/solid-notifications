@@ -19,14 +19,14 @@ function Toasters() {
 }
 
 function CoreFeatures(props: { feature: string }) {
-  const { notify, getQueue, dismiss } = useToast();
+  const { notify, getQueue } = useToast();
 
   if (props.feature === "intro-button")
     return (
       <button
         type="button"
         onClick={() => {
-          notify("🚀 Toast ready to serve!", {
+          notify("🚀 New toast ready to serve!", {
             toasterId: "toaster-1",
           });
         }}

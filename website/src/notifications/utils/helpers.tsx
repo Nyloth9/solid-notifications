@@ -378,8 +378,8 @@ function renderIcon(toast: Toast) {
 
     return (
       <div
-        class={toast.toastConfig.iconClass}
-        style={toast.toastConfig.iconStyle}
+        class={resolvePropValue("iconClass", toast) as string}
+        style={resolvePropValue("iconStyle", toast) as JSX.CSSProperties}
       >
         {toast.toastConfig.icon}
       </div>
