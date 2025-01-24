@@ -376,7 +376,14 @@ function renderIcon(toast: Toast) {
       return toast.toastConfig.icon(toast.toastConfig.type);
     }
 
-    return toast.toastConfig.icon;
+    return (
+      <div
+        class={toast.toastConfig.iconClass}
+        style={toast.toastConfig.iconStyle}
+      >
+        {toast.toastConfig.icon}
+      </div>
+    );
   }
 
   switch (toast.toastConfig.type) {

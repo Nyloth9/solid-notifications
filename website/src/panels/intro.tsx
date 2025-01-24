@@ -26,7 +26,9 @@ function CoreFeatures(props: { feature: string }) {
       <button
         type="button"
         onClick={() => {
-          notify("Toast ready to serve!", { toasterId: "toaster-1" });
+          notify("🚀 Toast ready to serve!", {
+            toasterId: "toaster-1",
+          });
         }}
         class="not-prose inline-flex items-center justify-center gap-1.5 overflow-hidden rounded bg-blue-500 px-3 py-1.5 text-sm font-medium text-white shadow-flat transition-colors hover:bg-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:active:bg-blue-800"
       >
