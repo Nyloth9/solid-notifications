@@ -8,7 +8,12 @@ function Toasters() {
   return (
     <div>
       <Toaster toasterId="toaster-1" theme={getTheme()} />
-      <Toaster toasterId="toaster-2" theme={getTheme()} limit={3} />
+      <Toaster
+        toasterId="toaster-2"
+        theme={getTheme()}
+        limit={3}
+        positionY="bottom"
+      />
     </div>
   );
 }
