@@ -51,7 +51,7 @@ function QueuePanel() {
       <button
         onClick={() => {
           notify(
-            "Toast limit is set to three. Create more than three toasts to send new ones to queue.",
+            "Create more than three toasts to see the effect.",
             { toasterId: "toaster-1" },
           );
         }}
