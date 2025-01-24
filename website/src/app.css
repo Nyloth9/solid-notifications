@@ -427,3 +427,18 @@ body {
     transform: translate3d(0, 80%, 0) scale(0.9);
   }
 }
+
+.scrollbar-md::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.scrollbar-md::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-900;
+}
+
+.scrollbar-md::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  border-width: 0px 1px;
+  @apply border border-slate-500 bg-slate-400 dark:border-slate-800 dark:bg-slate-700;
+}
