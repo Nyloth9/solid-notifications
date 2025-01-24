@@ -8,8 +8,10 @@ const ToasterContext = createContext<ToasterContextType>();
 
 export default function ToastProvider(props: ToastProviderOptions) {
   const toasters = new Map<string, Toaster>();
-  const [_children, rest] = splitProps(props, ["children"]);
-  const providerProps = mergeProps(defaultConfig, rest);
+  const providerProps = mergeProps(
+    defaultConfig,
+    splitProps(props, ["children"])[1],
+  );
 
   function registerToaster(toaster: Toaster) {
     return toasterService.registerToaster(toasters, toaster);

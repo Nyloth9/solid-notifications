@@ -108,7 +108,8 @@ export default function Layout(props: Props) {
                     <li>
                       <a
                         class="flex items-center gap-1 text-sm leading-5 text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                        href="#"
+                        href="https://github.com/Nyloth9/solid-notifications"
+                        target="_blank"
                       >
                         <svg
                           height="22"
