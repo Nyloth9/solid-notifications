@@ -95,7 +95,9 @@ export default function Toaster(props: ToasterOptions) {
 
   onMount(() => {
     if (typeof window === "undefined") return;
-    window.addEventListener("resize", () => alert("resize"));
+    window.addEventListener("resize", () =>
+      setStore("rendered", [...store.rendered]),
+    );
 
     window.addEventListener("blur", handleWindowBlur);
     window.addEventListener("focus", handleWindowFocus);
