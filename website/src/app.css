@@ -44,7 +44,7 @@ body {
   --sn-dismiss-btn-size: 1.175rem;
   --sn-dismiss-btn-border-radius: 0.25rem;
   --sn-dismiss-btn-transition: color 0.3s;
-  --sn-dismiss-btn-margin: 2px -4px 0px auto;
+  --sn-dismiss-btn-margin: 1px -4px 0px auto;
   --sn-dismiss-btn-color: #9ca3af;
   --sn-dismiss-btn-hover-color: #374151;
 
