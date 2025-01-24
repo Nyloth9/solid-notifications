@@ -83,7 +83,9 @@ export default function Toaster(props: ToasterOptions) {
     store.rendered.forEach((toast) => toast.progressManager.pause()); // If you hover over the toast while the window is blurred , it will start the progress again (to avoid that we check against isWindowBlurred on mouse enter)
   };
 
-  
+  const handleWindowResize = () => {
+    setStore("rendered", [...store.rendered]);
+  };
 
   const handleWindowFocus = () => {
     setStore("isWindowBlurred", false);
@@ -97,12 +99,9 @@ export default function Toaster(props: ToasterOptions) {
 
   onMount(() => {
     if (typeof window === "undefined") return;
-/*     window.addEventListener("resize", () =>
-      setStore("rendered", [...store.rendered]),
-    ); */
-
     window.addEventListener("blur", handleWindowBlur);
     window.addEventListener("focus", handleWindowFocus);
+    //  window.addEventListener("resize", handleWindowResize);
   });
 
   onCleanup(() => {
@@ -111,6 +110,7 @@ export default function Toaster(props: ToasterOptions) {
     if (typeof window === "undefined") return;
     window.removeEventListener("blur", handleWindowBlur);
     window.removeEventListener("focus", handleWindowFocus);
+    //  window.removeEventListener("resize", handleWindowResize);
   });
 
   return (
