@@ -392,7 +392,7 @@ export default function Layout(props: Props) {
         <div class="flex">
           <div class="ml-auto flex flex-col items-end gap-3">
             <a
-              class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium text-zinc-900 transition hover:bg-zinc-200 dark:bg-zinc-800/40 dark:text-zinc-400 dark:ring-1 dark:ring-inset dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+              class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-900 transition hover:bg-slate-200 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
               aria-label="Next: Quickstart"
               href="/quickstart"
             >
@@ -414,15 +414,15 @@ export default function Layout(props: Props) {
             <a
               tabindex="-1"
               aria-hidden="true"
-              class="text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300"
+              class="text-base font-semibold text-slate-900 transition hover:text-slate-600 dark:text-white dark:hover:text-slate-300"
               href="/quickstart"
             >
               Quickstart
             </a>
           </div>
         </div>
-        <div class="flex flex-col items-center justify-between gap-5 border-t border-zinc-900/5 pt-8 dark:border-white/5 sm:flex-row">
-          <p class="text-xs text-zinc-600 dark:text-zinc-400">
+        <div class="flex flex-col items-center justify-between gap-5 border-t border-slate-900/5 pt-8 dark:border-white/5 sm:flex-row">
+          <p class="text-xs text-slate-600 dark:text-slate-400">
             © Copyright {new Date().getFullYear()} Solid Notifications
           </p>
           <div class="flex gap-4">
@@ -436,7 +436,7 @@ export default function Layout(props: Props) {
               <svg
                 viewBox="0 0 20 20"
                 aria-hidden="true"
-                class="h-5 w-5 fill-zinc-700 transition group-hover:fill-zinc-900 dark:group-hover:fill-zinc-500"
+                class="h-5 w-5 fill-slate-700 dark:fill-slate-500 transition group-hover:fill-slate-900 dark:group-hover:fill-slate-400"
               >
                 <path
                   fill-rule="evenodd"
