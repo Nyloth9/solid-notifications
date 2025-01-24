@@ -32,7 +32,7 @@ body {
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
   /* Toast */
-  --sn-toast-max-width: 344px;
+  --sn-toast-max-width: 334px;
   --sn-toast-min-width: 264px;
   --sn-toast-gap: 16px;
   --sn-toast-font-size: 0.875rem;
@@ -93,8 +93,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
   width: 100vw;
+  height: 100svh;
   display: flex;
   overflow: hidden;
   z-index: var(--sn-z-index);
