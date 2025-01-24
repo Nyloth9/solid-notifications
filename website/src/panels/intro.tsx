@@ -1,9 +1,6 @@
 import { Toaster, useToast } from "~/notifications";
-import { useTheme } from "~/util/theme";
 
 function Toasters() {
-  const { getTheme } = useTheme();
-
   return (
     <div>
       <Toaster toasterId="toaster-1" />
