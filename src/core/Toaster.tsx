@@ -10,15 +10,15 @@ import {
 import { useService } from "./Context";
 import { getToasterStyle } from "../utils/helpers";
 import { ToasterOptions, ToasterStore } from "../types";
-import { defaultConfig } from "../config/defaultConfig";
 import { createStore } from "solid-js/store";
 
 export default function Toaster(props: ToasterOptions) {
-  const { registerToaster, unregisterToaster } = useService();
+  const { registerToaster, unregisterToaster, providerProps } = useService();
+
   const [store, setStore] = createStore<ToasterStore>({
     queued: [],
     rendered: [],
-    toasterConfig: mergeProps(defaultConfig, props),
+    toasterConfig: mergeProps(providerProps, props),
     isWindowBlurred:
       typeof window !== "undefined" && document.visibilityState === "hidden",
   });

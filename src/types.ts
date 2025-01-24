@@ -67,6 +67,7 @@ export type ToastContent =
 
 export interface ToasterContextType {
   toasters: Map<string, Toaster>;
+  providerProps: Config;
   registerToaster: (args: Toaster) => RegisteredToaster;
   getToaster: (id?: string) => Toaster;
   unregisterToaster: (id: string) => void;

@@ -25,6 +25,7 @@ const [style, setStyle] = createSignal({
 onMount(() => {
   setTimeout(() => {
     setClassName("bg-green-200");
+    setTheme("dark");
   }, 4000);
 
   /*   setInterval(() => {
@@ -36,12 +37,10 @@ onMount(() => {
 
 render(() => {
   return (
-    <ToastProvider>
+    <ToastProvider theme={theme()}>
       <Toaster
         toasterId="toaster-1"
-        /*   wrapperClass={className()} */
         /*         wrapperStyle={style()} */
-        theme={theme()}
       />
       {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
       <App />

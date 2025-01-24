@@ -3,7 +3,6 @@ import { RegisteredToaster, Toaster } from "../types";
 function registerToaster(
   toasters: Map<string, Toaster>,
   { toasterId, store, setStore, counter }: Toaster,
-  providerProps?: any,
 ): RegisteredToaster {
   if (toasterId === "__default")
     throw new Error(
@@ -25,7 +24,7 @@ function registerToaster(
 
   toasters.set(toasterId, { toasterId, store, setStore, counter });
 
-  return { toasterId, store, setStore, counter, providerProps };
+  return { toasterId, store, setStore, counter };
 }
 
 function getToaster(

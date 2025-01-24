@@ -1,8 +1,15 @@
-import { createContext, JSX, useContext } from "solid-js";
+import {
+  createContext,
+  JSX,
+  mergeProps,
+  splitProps,
+  useContext,
+} from "solid-js";
 import { Toaster, ToasterContextType } from "../types";
 import { toasterService } from "./services";
 import toastActions from "./actions";
 import { ToasterOptions } from "../../website/src/notifications";
+import { defaultConfig } from "../config/defaultConfig";
 
 interface Props extends ToasterOptions {
   children: JSX.Element;
@@ -11,6 +18,8 @@ const ToasterContext = createContext<ToasterContextType>();
 
 export default function ToastProvider(props: Props) {
   const toasters = new Map<string, Toaster>();
+  const [_children, rest] = splitProps(props, ["children"]);
+  const providerProps = mergeProps(defaultConfig, rest);
 
   function registerToaster(toaster: Toaster) {
     return toasterService.registerToaster(toasters, toaster);
@@ -27,6 +36,7 @@ export default function ToastProvider(props: Props) {
   return (
     <ToasterContext.Provider
       value={{
+        providerProps,
         toasters,
         registerToaster,
         getToaster,
@@ -48,6 +58,7 @@ export function useService() {
   }
 
   return {
+    providerProps: context.providerProps,
     registerToaster: context.registerToaster,
     unregisterToaster: context.unregisterToaster,
     getToaster: context.getToaster,
