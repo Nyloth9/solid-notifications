@@ -1,22 +1,12 @@
-import {
-  createContext,
-  JSX,
-  mergeProps,
-  splitProps,
-  useContext,
-} from "solid-js";
-import { Toaster, ToasterContextType } from "../types";
+import { createContext, mergeProps, splitProps, useContext } from "solid-js";
+import { Toaster, ToasterContextType, ToastProviderOptions } from "../types";
 import { toasterService } from "./services";
 import toastActions from "./actions";
-import { ToasterOptions } from "../../website/src/notifications";
 import { defaultConfig } from "../config/defaultConfig";
 
-interface Props extends ToasterOptions {
-  children: JSX.Element;
-}
 const ToasterContext = createContext<ToasterContextType>();
 
-export default function ToastProvider(props: Props) {
+export default function ToastProvider(props: ToastProviderOptions) {
   const toasters = new Map<string, Toaster>();
   const [_children, rest] = splitProps(props, ["children"]);
   const providerProps = mergeProps(defaultConfig, rest);

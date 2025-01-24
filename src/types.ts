@@ -28,6 +28,10 @@ export type ToastType =
   | "warning"
   | "info";
 
+export interface ToastProviderOptions extends ToasterOptions {
+  children: JSX.Element;
+}
+
 export type ToasterOptions = Partial<
   Omit<Config, "content" | "contentType" | "id">
 >;
@@ -54,7 +58,7 @@ export interface ToastOptions
   toasterId?: string;
 }
 
-export type ToastUpdateOptions = RequireAtLeastOne<
+export type ToastOptionsUpdate = RequireAtLeastOne<
   ToastOptions & {
     content?: string | JSX.Element | ((toast?: Toast) => JSX.Element | string);
   }
@@ -82,7 +86,7 @@ export interface ToastActions {
     ref: HTMLElement | null;
     progressControls: ProgressControls;
   };
-  update: (options: ToastUpdateOptions) =>
+  update: (options: ToastOptionsUpdate) =>
     | {
         id: string | undefined;
         ref: HTMLElement | null;

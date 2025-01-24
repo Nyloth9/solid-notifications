@@ -4,12 +4,13 @@ export { default as ToastProvider } from "./core/Context";
 export { useToast } from "./core/Context";
 export type {
   ToasterStore,
+  ToastProviderOptions,
   ToasterOptions,
   ToastOptions,
-  ToastUpdateOptions,
+  ToastOptionsUpdate,
+  ToastContent,
   ToasterContextType,
   ToastActions,
-  ToastContent,
   ProgressControls,
   Config,
 } from "./types";
