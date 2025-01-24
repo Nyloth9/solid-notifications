@@ -8,6 +8,8 @@
   --sn-color-info: #5493f7;
 
   /* Toast Wrapper */
+  --sn-wrapper-max-width: 334px;
+  --sn-wrapper-min-width: 264px;
   --sn-wrapper-border-radius: 6px;
   --sn-wrapper-transition-duration: 0.3s;
   --sn-wrapper-bg-color: white;
@@ -15,8 +17,6 @@
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
   /* Toast */
-  --sn-toast-max-width: 334px;
-  --sn-toast-min-width: 264px;
   --sn-toast-gap: 16px;
   --sn-toast-font-size: 0.875rem;
   --sn-toast-line-height: 1.5;
@@ -110,6 +110,8 @@
   box-sizing: border-box;
   overflow: hidden;
   z-index: var(--sn-z-index);
+  max-width: var(--sn-wrapper-max-width);
+  min-width: var(--sn-wrapper-min-width);
   transition-duration: var(--sn-wrapper-transition-duration);
   border-radius: var(--sn-wrapper-border-radius);
   box-shadow: var(--sn-wrapper-box-shadow);
@@ -123,8 +125,6 @@
   overflow-wrap: anywhere;
   font-size: var(--sn-toast-font-size);
   line-height: var(--sn-toast-line-height);
-  max-width: var(--sn-toast-max-width);
-  min-width: var(--sn-toast-min-width);
   gap: var(--sn-toast-gap);
   color: var(--sn-toast-text-color);
   padding: var(--sn-toast-padding);

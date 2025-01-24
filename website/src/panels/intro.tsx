@@ -62,6 +62,43 @@ function CoreFeatures(props: { feature: string }) {
       </div>
     );
 
+  if (props.feature === "progress-showcase")
+    return (
+      <div class="not-prose -mt-2 mb-6 pl-3">
+        <button
+          onClick={() => {
+            notify(
+              (t) => {
+                return (
+                  <>
+                    <div class="rounded px-4 py-2">
+                      <p class="font-medium text-slate-900 dark:text-slate-50">
+                        Current progress:{" "}
+                        {Math.round(t.progressManager.progress())}
+                      </p>
+                      Hook into the progress() signal to update the progress bar
+                      <div
+                        class="absolute left-0 top-0 h-full bg-cyan-600/20"
+                        style={{
+                          width: `${t.progressManager.progress()}%`,
+                        }}
+                      />
+                    </div>
+                  </>
+                );
+              },
+              {
+                toasterId: "toaster-1",
+              },
+            );
+          }}
+          class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          Custom progress bar
+        </button>
+      </div>
+    );
+
   return <div class="text-red-600">Feature not found</div>;
 }
 
