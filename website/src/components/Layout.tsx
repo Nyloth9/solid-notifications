@@ -10,7 +10,7 @@ export default function Layout(props: Props) {
   const { setTheme, getTheme } = useTheme();
 
   return (
-    <ToastProvider theme={getTheme()} type="success">
+    <ToastProvider theme={getTheme()}>
       <div class="h-full lg:ml-72 xl:ml-80">
         <header class="contents lg:pointer-events-none lg:fixed lg:inset-0 lg:z-40 lg:flex">
           <div class="contents lg:pointer-events-auto lg:block lg:w-72 lg:overflow-y-auto lg:border-r lg:border-slate-900/10 lg:px-6 lg:pb-8 lg:pt-4 lg:dark:border-white/10 xl:w-80">
