@@ -5,7 +5,7 @@ function Toasters() {
     <div>
       <Toaster toasterId="toaster-1" />
       <Toaster toasterId="toaster-2" limit={3} />
-      <Toaster toasterId="toaster-3" positionY="bottom" />
+      <Toaster toasterId="toaster-3" positionY="bottom" offsetX={24} offsetY={24} gutter={16} />
       <Toaster toasterId="toaster-4" positionY="bottom" positionX="center" />
       <Toaster toasterId="toaster-5" positionY="top" positionX="left" />
     </div>
