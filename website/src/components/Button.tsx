@@ -1,4 +1,4 @@
-import { ToastContent, ToastOptions, useToast } from "~/notifications";
+import { ToastContent, ToastOptions, useToast } from "~/notifications_old";
 
 interface Props {
   children: string;

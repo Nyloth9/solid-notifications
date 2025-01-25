@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "build-local": "cd ../src && npm run build"
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.1",
@@ -21,8 +22,7 @@
     "remark-frontmatter": "^5.0.0",
     "solid-js": "^1.9.2",
     "solid-mdx": "^0.0.7",
-    "vinxi": "^0.4.3",
-    "solid-notifications": "file:../src"
+    "vinxi": "^0.4.3"
   },
   "overrides": {
     "vite": "5.4.10"
