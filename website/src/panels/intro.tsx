@@ -75,7 +75,7 @@ function CoreFeatures(props: { feature: string }) {
               (t) => {
                 return (
                   <>
-                    <div class="not-prose relative overflow-hidden rounded-md px-4 py-2 text-xs shadow-stripe dark:shadow-dark">
+                    <div class="not-prose relative overflow-hidden rounded-md bg-white px-4 py-2 text-xs shadow-stripe dark:bg-slate-800 dark:shadow-dark">
                       Hook into the progress() signal to update the progress bar
                       width or other properties.
                       <p class="text-xs font-medium text-emerald-600 dark:text-emerald-200">
