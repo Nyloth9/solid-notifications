@@ -4,7 +4,8 @@ function Toasters() {
   return (
     <div>
       <Toaster toasterId="toaster-1" />
-      <Toaster toasterId="toaster-2" limit={3} positionY="bottom" />
+      <Toaster toasterId="toaster-2" limit={3} />
+      <Toaster toasterId="toaster-3" positionY="bottom" />
     </div>
   );
 }
@@ -67,6 +68,7 @@ function CoreFeatures(props: { feature: string }) {
       <div class="not-prose -mt-2 mb-6 pl-3">
         <button
           onClick={() => {
+            resetToasters("toaster-3", dismiss);
             notify(
               (t) => {
                 return (
@@ -110,7 +112,7 @@ function CoreFeatures(props: { feature: string }) {
                 );
               },
               {
-                toasterId: "toaster-1",
+                toasterId: "toaster-3",
               },
             );
           }}
