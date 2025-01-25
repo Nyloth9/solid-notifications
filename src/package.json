@@ -7,28 +7,26 @@
     "name": "Nyloth9",
     "url": "https://github.com/Nyloth9"
   },
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "source": "./index.tsx",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c ./rollup.config.js && ncp index.css dist/index.css",
+    "build": "tsup && ncp index.css dist/index.css",
     "prepublishOnly": "npm run build"
   },
   "exports": {
-    "import": {
+    ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.es.js"
-    },
-    "require": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.umd.js"
+      "solid": "./dist/index.jsx",
+      "default": "./dist/index.js"
     }
   },
   "peerDependencies": {
-    "solid-js": "^1.9.3"
+    "solid-js": "^1.9.4"
   },
   "keywords": [
     "toast",
@@ -41,5 +39,7 @@
     "component",
     "solid-notifications"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "browser": {},
+  "typesVersions": {}
 }
