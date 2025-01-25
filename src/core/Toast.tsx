@@ -254,8 +254,8 @@ class Toast {
             {renderIcon(this)}
             {resolveContent(this)}
             {renderDismissButton(this)}
+            {renderProgressBar(this)}
           </div>
-          {renderProgressBar(this)}
         </Show>
       </div>
     );
