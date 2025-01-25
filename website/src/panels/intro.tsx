@@ -18,7 +18,7 @@ function CoreFeatures(props: { feature: string }) {
       <button
         type="button"
         onClick={() => {
-          resetToasters("toaster-1", dismiss);
+          resetToasters(["toaster-1"], dismiss);
           notify("🚀 New toast ready to serve!", {
             toasterId: "toaster-1",
           });
@@ -48,7 +48,7 @@ function CoreFeatures(props: { feature: string }) {
       <div class="not-prose -mt-2 mb-6 pl-3">
         <button
           onClick={() => {
-            resetToasters("toaster-2", dismiss);
+            resetToasters(["toaster-2"], dismiss);
             notify("Create more than three toasts to see the effect.", {
               toasterId: "toaster-2",
             });
@@ -68,7 +68,7 @@ function CoreFeatures(props: { feature: string }) {
       <div class="not-prose -mt-2 mb-6 pl-3">
         <button
           onClick={() => {
-            resetToasters("toaster-3", dismiss);
+            resetToasters(["toaster-3"], dismiss);
             notify(
               (t) => {
                 return (
@@ -128,11 +128,13 @@ function CoreFeatures(props: { feature: string }) {
 
 export { Toasters, CoreFeatures };
 
-const resetToasters = (activeToasterId: string, dismiss: any) => {
+const resetToasters = (excludeToasterIds: string[], dismiss: any) => {
   if (typeof document === "undefined") return;
 
   const allToasters = document.querySelectorAll(".sn-toaster");
   allToasters.forEach((toaster) => {
-    if (toaster.id !== activeToasterId) dismiss({ toasterId: toaster.id });
+    if (!excludeToasterIds.includes(toaster.id)) {
+      dismiss({ toasterId: toaster.id });
+    }
   });
 };
