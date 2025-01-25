@@ -1,6 +1,6 @@
 import { JSX } from "solid-js";
 import { useTheme } from "../util/theme";
-import { ToastProvider } from "~/notifications";
+import { ToastProvider } from "this-is-a-test-cffeeasdasd";
 
 interface Props {
   children: JSX.Element;

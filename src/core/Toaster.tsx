@@ -7,10 +7,10 @@ import {
   onCleanup,
   onMount,
 } from "solid-js";
+import { createStore } from "solid-js/store";
 import { useService } from "./Context";
 import { getToasterStyle } from "../utils/helpers";
 import { ToasterOptions, ToasterStore } from "../types";
-import { createStore } from "solid-js/store";
 
 export default function Toaster(props: ToasterOptions) {
   const { registerToaster, unregisterToaster, providerProps } = useService();

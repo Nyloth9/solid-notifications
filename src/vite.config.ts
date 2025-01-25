@@ -4,8 +4,8 @@ import dts from "vite-plugin-dts";
 
 export default defineConfig({
   plugins: [
-    solidPlugin(),
-    dts({ rollupTypes: true, tsconfigPath: "../tsconfig.json" }),
+    solidPlugin({ ssr: true }),
+    dts({ rollupTypes: true, tsconfigPath: "./tsconfig.json" }),
   ],
   build: {
     target: "esnext",
