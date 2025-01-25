@@ -11,9 +11,9 @@
   --sn-wrapper-max-width: 334px;
   --sn-wrapper-min-width: 264px;
   --sn-wrapper-transition-duration: 0.3s;
-  --sn-wrapper-bg-color: white;
 
   /* Toast */
+  --sn-toast-bg-color: white;
   --sn-toast-gap: 16px;
   --sn-toast-font-size: 0.875rem;
   --sn-toast-line-height: 1.5;
@@ -44,7 +44,7 @@
 
 /* Dark Theme */
 .sn-theme-dark {
-  --sn-wrapper-bg-color: #1f2937;
+  --sn-toast-bg-color: #1f2937;
   --sn-toast-text-color: #f9fafb;
   --sn-toast-box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),
     0 0 0 1px hsla(0, 0%, 0%, 0.05), 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02),
@@ -112,7 +112,6 @@
   max-width: var(--sn-wrapper-max-width);
   min-width: var(--sn-wrapper-min-width);
   transition-duration: var(--sn-wrapper-transition-duration);
-  background-color: var(--sn-wrapper-bg-color);
 }
 
 .sn-toast {
@@ -120,6 +119,7 @@
   overflow: hidden;
   position: relative;
   overflow-wrap: anywhere;
+  background-color: var(--sn-toast-bg-color);
   border-radius: var(--sn-toast-border-radius);
   font-size: var(--sn-toast-font-size);
   line-height: var(--sn-toast-line-height);
@@ -181,7 +181,7 @@
   margin: var(--sn-icon-margin);
   stroke: var(--sn-icon-stroke);
   color: var(--sn-icon-fill);
-  box-shadow: inset 0px 0px 0px 30px var(--sn-wrapper-bg-color);
+  box-shadow: inset 0px 0px 0px 30px var(--sn-toast-bg-color);
 }
 
 .sn-icon circle {

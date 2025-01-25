@@ -145,16 +145,17 @@ function CoreFeatures(props: { feature: string }) {
             resetToasters(["toaster-4", "toaster-5"], dismiss);
             notify("✨ Top-left toaster activated!", {
               toasterId: "toaster-5",
-              type: "success",
-              /*  style: {
+              theme: "dark",
+              style: {
                 background: `linear-gradient(
                   120deg,
-                  #ff7eb3, 
-                  #ff758c, 
-                  #ff4d4d, 
-                  #ff6a00
-                )`
-              }, */
+                  #1e3a8a, 
+                  #111827,  
+                  #4b5563   
+                )`,
+                "background-size": `300% 300%`,
+                animation: `dark-gradient-animation 5s ease infinite`,
+              },
             });
           }}
           class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
