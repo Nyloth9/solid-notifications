@@ -5,7 +5,13 @@ function Toasters() {
     <div>
       <Toaster toasterId="toaster-1" />
       <Toaster toasterId="toaster-2" limit={3} />
-      <Toaster toasterId="toaster-3" positionY="bottom" offsetX={24} offsetY={24} gutter={16} />
+      <Toaster
+        toasterId="toaster-3"
+        positionY="bottom"
+        offsetX={24}
+        offsetY={24}
+        gutter={16}
+      />
       <Toaster toasterId="toaster-4" positionY="bottom" positionX="center" />
       <Toaster toasterId="toaster-5" positionY="top" positionX="left" />
     </div>
@@ -25,7 +31,7 @@ function CoreFeatures(props: { feature: string }) {
             toasterId: "toaster-1",
           });
         }}
-        class="not-prose inline-flex items-center justify-center gap-1.5 overflow-hidden rounded bg-blue-500 px-3 py-1.5 text-sm font-medium text-white shadow-flat transition-colors hover:bg-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:active:bg-blue-800"
+        class="inline-flex items-center justify-center gap-1.5 overflow-hidden rounded bg-blue-500 px-3 py-1.5 text-sm font-medium text-white shadow-flat transition-colors hover:bg-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:active:bg-blue-800"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +53,7 @@ function CoreFeatures(props: { feature: string }) {
 
   if (props.feature === "queue-showcase")
     return (
-      <div class="not-prose -mt-2 mb-6 pl-3">
+      <div class="-mt-2 mb-6 pl-3">
         <button
           onClick={() => {
             resetToasters(["toaster-2"], dismiss);
@@ -67,7 +73,7 @@ function CoreFeatures(props: { feature: string }) {
 
   if (props.feature === "progress-showcase")
     return (
-      <div class="not-prose -mt-2 mb-6 pl-3">
+      <div class="-mt-2 mb-6 pl-3">
         <button
           onClick={() => {
             resetToasters(["toaster-3"], dismiss);
@@ -75,7 +81,7 @@ function CoreFeatures(props: { feature: string }) {
               (t) => {
                 return (
                   <>
-                    <div class="not-prose relative overflow-hidden rounded-md bg-white px-4 py-2 text-xs shadow-stripe dark:bg-slate-800 dark:shadow-dark">
+                    <div class="relative overflow-hidden rounded-md bg-white px-4 py-2 text-xs shadow-stripe dark:bg-slate-800 dark:shadow-dark">
                       Hook into the progress() signal to update the progress bar
                       width or other properties.
                       <p class="text-xs font-medium text-emerald-600 dark:text-emerald-200">
@@ -127,7 +133,7 @@ function CoreFeatures(props: { feature: string }) {
 
   if (props.feature === "multiple-toasters-showcase")
     return (
-      <div class="not-prose -mt-2 mb-6 flex gap-1.5 pl-3">
+      <div class="-mt-2 mb-6 flex gap-1.5 pl-3">
         <button
           onClick={() => {
             resetToasters(["toaster-4", "toaster-5"], dismiss);
