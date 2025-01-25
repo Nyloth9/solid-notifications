@@ -1,3 +1,4 @@
+import { Title as PageTitle } from "@solidjs/meta";
 import { useLocation } from "@solidjs/router";
 
 interface Props {
@@ -7,14 +8,10 @@ interface Props {
 export default function Title(props: Props) {
   const location = useLocation();
 
-  if (typeof document === "undefined") {
-    return null;
-  }
-
-  document.title =
+  const title =
     location.pathname === "/"
       ? "Solid Notifications"
       : `${props.children} | Solid Notifications`;
 
-  return null;
+  return <PageTitle>{title}</PageTitle>;
 }
