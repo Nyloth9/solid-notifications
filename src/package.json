@@ -1,5 +1,5 @@
 {
-  "name": "this-is-a-test-cffeeasdasd",
+  "name": "solid-notifications",
   "type": "module",
   "version": "1.0.1",
   "description": "A Solidjs toast notifications library",
@@ -14,7 +14,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build && ncp index.css dist/index.css",
+    "build": "rollup -c ./rollup.config.js && ncp index.css dist/index.css",
     "prepublishOnly": "npm run build"
   },
   "exports": {
@@ -41,7 +41,5 @@
     "component",
     "solid-notifications"
   ],
-  "license": "MIT",
-  "browser": {},
-  "typesVersions": {}
+  "license": "MIT"
 }
