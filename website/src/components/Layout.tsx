@@ -34,7 +34,7 @@ export default function Layout(props: Props) {
                 </svg>
 
                 <span class="-mb-1 font-bold dark:text-white">
-                  Solid Notifications
+                  Solid Notifications FIX THIS
                 </span>
               </a>
             </div>
