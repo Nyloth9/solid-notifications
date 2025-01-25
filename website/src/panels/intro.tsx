@@ -6,6 +6,8 @@ function Toasters() {
       <Toaster toasterId="toaster-1" />
       <Toaster toasterId="toaster-2" limit={3} />
       <Toaster toasterId="toaster-3" positionY="bottom" />
+      <Toaster toasterId="toaster-4" positionY="bottom" positionX="center" />
+      <Toaster toasterId="toaster-5" positionY="top" positionX="left" />
     </div>
   );
 }
@@ -119,6 +121,35 @@ function CoreFeatures(props: { feature: string }) {
           class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
         >
           Custom progress bar
+        </button>
+      </div>
+    );
+
+  if (props.feature === "multiple-toasters-showcase")
+    return (
+      <div class="not-prose -mt-2 mb-6 flex gap-1.5 pl-3">
+        <button
+          onClick={() => {
+            resetToasters(["toaster-4", "toaster-5"], dismiss);
+            notify("🎉 Bottom-center toaster activated!", {
+              toasterId: "toaster-4",
+            });
+          }}
+          class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          Create bottom center
+        </button>
+
+        <button
+          onClick={() => {
+            resetToasters(["toaster-4", "toaster-5"], dismiss);
+            notify("✨ Top-left toaster activated!", {
+              toasterId: "toaster-5",
+            });
+          }}
+          class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          Create top left
         </button>
       </div>
     );
