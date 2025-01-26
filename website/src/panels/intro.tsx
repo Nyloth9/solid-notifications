@@ -192,6 +192,7 @@ function CoreFeatures(props: { feature: string }) {
                     </span>
                     <button
                       type="button"
+                      onClick={() => t.dismiss()}
                       class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-900 focus:ring-2 focus:ring-slate-300 dark:bg-slate-800 dark:text-slate-500 dark:hover:bg-slate-700 dark:hover:text-white"
                       data-dismiss-target="#toast-notification"
                       aria-label="Close"
@@ -253,7 +254,7 @@ function CoreFeatures(props: { feature: string }) {
                       </span>
                     </div>
                   </div>
-                  <div class="mt-2 mb-0.5 w-full rounded-full bg-slate-200 dark:bg-slate-900">
+                  <div class="mb-0.5 mt-2 w-full rounded-full bg-slate-200 dark:bg-slate-900">
                     <div
                       class="h-1 w-full rounded-full bg-blue-500 dark:bg-slate-100"
                       data-role="progress"
@@ -263,7 +264,7 @@ function CoreFeatures(props: { feature: string }) {
                     />
                   </div>
 
-                  <button class="mt-3 bg-blue-600 rounded px-2 py-0.5 text-xs text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700">
+                  <button class="mt-3 rounded bg-blue-600 px-2 py-0.5 text-xs text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700">
                     View comment
                     <span class="sr-only">View comment</span>
                   </button>
