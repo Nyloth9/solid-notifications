@@ -15,6 +15,7 @@ function Toasters() {
       <Toaster toasterId="toaster-4" positionY="bottom" positionX="center" />
       <Toaster toasterId="toaster-5" positionY="top" positionX="left" />
       <Toaster toasterId="toaster-6" reverseToastOrder />
+      <Toaster toasterId="toaster-7" positionY="top" />
     </div>
   );
 }
@@ -54,7 +55,7 @@ function CoreFeatures(props: { feature: string }) {
 
   if (props.feature === "queue-showcase")
     return (
-      <div class="-mt-2 mb-6 pl-3 flex-wrap">
+      <div class="-mt-2 mb-6 flex-wrap pl-3">
         <button
           onClick={() => {
             resetToasters(["toaster-2"], dismiss);
@@ -134,7 +135,7 @@ function CoreFeatures(props: { feature: string }) {
 
   if (props.feature === "multiple-toasters-showcase")
     return (
-      <div class="-mt-2 mb-6 flex gap-1.5 pl-3 flex-wrap">
+      <div class="-mt-2 mb-6 flex flex-wrap gap-1.5 pl-3">
         <button
           onClick={() => {
             resetToasters(["toaster-4", "toaster-5"], dismiss);
@@ -174,7 +175,7 @@ function CoreFeatures(props: { feature: string }) {
 
   if (props.feature === "customizability-showcase") {
     return (
-      <div class="-mt-2 mb-6 flex gap-1.5 pl-3 flex-wrap">
+      <div class="-mt-2 mb-6 flex flex-wrap gap-1.5 pl-3">
         <button
           onClick={() => {
             resetToasters(["toaster-6"], dismiss);
@@ -301,6 +302,69 @@ function CoreFeatures(props: { feature: string }) {
       </div>
     );
   }
+
+  if (props.feature === "timer-showcase")
+    return (
+      <div class="-mt-2 mb-6 flex-wrap pl-3">
+        <button
+          onClick={() => {
+            resetToasters(["toaster-7"], dismiss);
+            const { progressControls } = notify(
+              <div>
+                <div>
+                  Easy to use timer controls to manage the duration of the
+                  toast.
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                  <button
+                    class="mt-2 rounded-sm bg-transparent text-xs text-slate-600 hover:text-slate-900 active:translate-y-px dark:text-slate-300 dark:hover:text-white"
+                    onClick={() => progressControls.pause()}
+                  >
+                    Pause timer
+                  </button>
+                  <button
+                    class="mt-2 rounded-sm bg-transparent text-xs text-slate-600 hover:text-slate-900 active:translate-y-px dark:text-slate-300 dark:hover:text-white"
+                    onClick={() => progressControls.play()}
+                  >
+                    Play timer
+                  </button>
+                  <button
+                    class="mt-2 rounded-sm bg-transparent text-xs text-slate-600 hover:text-slate-900 active:translate-y-px dark:text-slate-300 dark:hover:text-white"
+                    onClick={() => progressControls.reset()}
+                  >
+                    Reset timer
+                  </button>
+                </div>
+              </div>,
+
+              {
+                toasterId: "toaster-7",
+                pauseOnHover: false,
+                duration: 10000,
+                icon: (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    class="-mt-1 text-emerald-600"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M12 20a8 8 0 0 0 8-8a8 8 0 0 0-8-8a8 8 0 0 0-8 8a8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10a10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67l-.75 1.23L11 13V7z"
+                    />
+                  </svg>
+                ),
+              },
+            );
+          }}
+          class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          Timer management
+        </button>
+      </div>
+    );
 
   return <div class="text-red-600">Feature not found</div>;
 }
