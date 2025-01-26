@@ -194,7 +194,7 @@ function CoreFeatures(props: { feature: string }) {
                       alt="Jese Leos image"
                     />
                     <div class="text-sm font-normal">
-                      <span class="mb-1 text-sm font-bold text-white drop-shadow">
+                      <span class="mb-1 text-xs font-bold text-white drop-shadow">
                         Vampire Lord
                       </span>
                       <div class="mb-2 text-xs font-normal leading-5 text-white">
