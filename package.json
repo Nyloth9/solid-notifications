@@ -1,5 +1,5 @@
 {
-  "name": "solid-notifications-monorepo",
+  "name": "solid-notifications",
   "version": "0.0.0",
   "description": "A Solidjs toast notifications library",
   "author": {

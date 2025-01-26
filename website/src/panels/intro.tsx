@@ -1,4 +1,4 @@
-import { Toaster, useToast } from "solid-notifications";
+import { Toaster, useToast } from "this-is-a-test-package-987";
 
 function Toasters() {
   return (

@@ -22,8 +22,8 @@
     "remark-frontmatter": "^5.0.0",
     "solid-js": "^1.9.2",
     "solid-mdx": "^0.0.7",
-    "vinxi": "^0.4.3",
-    "solid-notifications": "../src"
+    "this-is-a-test-package-987": "^1.0.1",
+    "vinxi": "^0.4.3"
   },
   "overrides": {
     "vite": "5.4.10"
