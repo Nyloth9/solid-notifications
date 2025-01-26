@@ -339,10 +339,10 @@ function CoreFeatures(props: { feature: string }) {
           onClick={() => {
             resetToasters(["toaster-1"], dismiss);
             notify(
-              <div>
+              <div class="px-2">
                 <div class="mb-3 flex flex-col gap-2">
                   <p>Click the toast body to dismiss it.</p>
-                  <p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">
                     If the click target is an interactive element, the toast
                     will not be dismissed.
                   </p>
@@ -352,7 +352,7 @@ function CoreFeatures(props: { feature: string }) {
                   name="email"
                   id="email"
                   aria-label="Email"
-                  class="mb-2 block w-full rounded-sm bg-white px-3 py-1 text-sm text-slate-900 outline outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-[#182135] dark:text-white dark:outline-slate-600 dark:placeholder:text-slate-400 dark:focus:outline-indigo-700 sm:text-sm/6"
+                  class="mb-2 block w-full rounded bg-slate-50 px-3 py-1 text-sm text-slate-900 outline outline-1 -outline-offset-1 outline-slate-400 placeholder:text-slate-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-[#182135] dark:text-white dark:outline-slate-500 dark:placeholder:text-slate-400 dark:focus:outline-indigo-700 sm:text-sm/6"
                   placeholder="you@example.com"
                 />
               </div>,
