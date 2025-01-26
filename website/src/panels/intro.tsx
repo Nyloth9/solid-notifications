@@ -252,6 +252,7 @@ function CoreFeatures(props: { feature: string }) {
         </button>
         <button
           onClick={() => {
+            resetToasters(["toaster-6"], dismiss);
             const { id } = notify(
               "Supports success, error, warning and info types.",
               {
@@ -279,6 +280,7 @@ function CoreFeatures(props: { feature: string }) {
 
         <button
           onClick={() => {
+            resetToasters(["toaster-6"], dismiss);
             const succeedOrFail = new Promise<void>((resolve, reject) => {
               setTimeout(() => {
                 Math.random() > 0.5 ? resolve() : reject();
