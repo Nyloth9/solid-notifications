@@ -3,7 +3,7 @@ import { Toaster, useToast } from "this-is-a-test-package-987";
 function Toasters() {
   return (
     <div>
-      <Toaster toasterId="toaster-1" type="loading" />
+      <Toaster toasterId="toaster-1" />
       <Toaster toasterId="toaster-2" limit={3} />
       <Toaster
         toasterId="toaster-3"
@@ -14,12 +14,13 @@ function Toasters() {
       />
       <Toaster toasterId="toaster-4" positionY="bottom" positionX="center" />
       <Toaster toasterId="toaster-5" positionY="top" positionX="left" />
+      <Toaster toasterId="toaster-6" reverseToastOrder />
     </div>
   );
 }
 
 function CoreFeatures(props: { feature: string }) {
-  const { notify, getQueue, dismiss } = useToast();
+  const { notify, update, promise, getQueue, dismiss } = useToast();
 
   if (props.feature === "intro-button")
     return (
@@ -170,6 +171,136 @@ function CoreFeatures(props: { feature: string }) {
         </button>
       </div>
     );
+
+  if (props.feature === "customizability-showcase") {
+    return (
+      <div class="-mt-2 mb-6 flex gap-1.5 pl-3">
+        <button
+          onClick={() => {
+            resetToasters(["toaster-6"], dismiss);
+            notify(
+              (t) => (
+                <div
+                  class="border-3 w-full rounded-lg border-red-700 bg-gradient-to-r from-red-500 to-red-900 p-4 text-gray-500"
+                  style={{
+                    "box-shadow": "0px 5px 9px 0px rgba(45,8,255,0.26)",
+                  }}
+                  role="alert"
+                >
+                  <div class="flex gap-3">
+                    <img
+                      class="h-9 w-9 rounded-full object-cover"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrbjamcO9AR2y0SVWakds7_eAPUJZCKvgHDA&s"
+                      alt="Jese Leos image"
+                    />
+                    <div class="text-sm font-normal">
+                      <span class="mb-1 text-sm font-bold text-white drop-shadow">
+                        Vampire Lord
+                      </span>
+                      <div class="mb-2 text-xs font-normal leading-5 text-white">
+                        The wisdom has been added to the eternal archives.
+                      </div>
+                      <div class="mb-3 w-full rounded-full bg-red-950">
+                        <div
+                          class="h-1 w-full rounded-full bg-white"
+                          data-role="progress"
+                          style={{
+                            width: `${100 - t.progressManager.progress()}%`,
+                          }}
+                        />
+                      </div>
+                      <a
+                        href="#"
+                        class="inline-flex rounded-lg bg-red-900 px-2.5 py-0.5 text-center text-xs font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-400"
+                      >
+                        Reply
+                      </a>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => t.dismiss()}
+                      class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg p-1.5 text-red-100 hover:bg-red-700 hover:text-white focus:ring-2 focus:ring-red-400"
+                      aria-label="Close"
+                    >
+                      <span class="sr-only">Close</span>
+                      <svg
+                        class="h-3 w-3"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 14"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ),
+              { toasterId: "toaster-6" },
+            );
+          }}
+          class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          Create custom
+        </button>
+        <button
+          onClick={() => {
+            const { id } = notify(
+              "Supports success, error, warning and info types.",
+              {
+                toasterId: "toaster-6",
+                type: "success",
+              },
+            );
+
+            setTimeout(() => {
+              update({ id, type: "error", toasterId: "toaster-6" });
+            }, 2000);
+
+            setTimeout(() => {
+              update({ id, type: "warning", toasterId: "toaster-6" });
+            }, 4000);
+
+            setTimeout(() => {
+              update({ id, type: "info", toasterId: "toaster-6" });
+            }, 6000);
+          }}
+          class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          Toast types
+        </button>
+
+        <button
+          onClick={() => {
+            const succeedOrFail = new Promise<void>((resolve, reject) => {
+              setTimeout(() => {
+                Math.random() > 0.5 ? resolve() : reject();
+              }, 2000);
+            });
+
+            promise(
+              succeedOrFail,
+              {
+                pending: "Processing your request...",
+                success: "Request completed successfully!",
+                error: "Request failed. Please try again.",
+              },
+              { toasterId: "toaster-6" },
+            );
+          }}
+          class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          Toast promise
+        </button>
+      </div>
+    );
+  }
 
   return <div class="text-red-600">Feature not found</div>;
 }
