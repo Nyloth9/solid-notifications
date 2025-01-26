@@ -79,14 +79,13 @@ const App: Component = () => {
                   duration: 10000,
                   type: "success",
                   progressBarStyle: ({ type }) => {
-                    console.log(type);
                     switch (type) {
                       case "success":
-                        return { "background-color": "green" };
+                        return { "background-color": "red" };
                       case "error":
                         return { "background-color": "red" };
                       case "warning":
-                        return { "background-color": "orange" };
+                        return { "background-color": "purple" };
                       case "info":
                         return { "background-color": "blue" };
                       case "loading":
@@ -98,7 +97,7 @@ const App: Component = () => {
                 },
               );
 
-              /*             setTimeout(() => {
+              setTimeout(() => {
                 update({ id, type: "warning" });
               }, 2000);
 
@@ -121,7 +120,7 @@ const App: Component = () => {
                   type: "loading",
                   wrapperClass: "sn-toast-wrapper",
                 });
-              }, 8000); */
+              }, 8000);
 
               /*    setTimeout(() => {
                 update({

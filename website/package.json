@@ -22,7 +22,7 @@
     "remark-frontmatter": "^5.0.0",
     "solid-js": "^1.9.2",
     "solid-mdx": "^0.0.7",
-    "this-is-a-test-package-987": "^1.0.7",
+    "this-is-a-test-package-987": "^1.0.8",
     "vinxi": "^0.4.3"
   },
   "overrides": {
