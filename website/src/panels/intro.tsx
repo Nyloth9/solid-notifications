@@ -15,7 +15,7 @@ function Toasters() {
       <Toaster toasterId="toaster-4" positionY="bottom" positionX="center" />
       <Toaster toasterId="toaster-5" positionY="top" positionX="left" />
       <Toaster toasterId="toaster-6" reverseToastOrder />
-      <Toaster toasterId="toaster-7" positionY="top" />
+      <Toaster toasterId="toaster-7" positionX="center" />
     </div>
   );
 }
@@ -182,7 +182,7 @@ function CoreFeatures(props: { feature: string }) {
             notify(
               (t) => (
                 <div
-                  class="border-3 w-full rounded-lg border-red-700 bg-gradient-to-r from-red-500 to-red-900 p-4 text-gray-500"
+                  class="border-3 w-full rounded-lg border-red-700 bg-gradient-to-r from-red-500 to-red-900 p-3 text-gray-500"
                   style={{
                     "box-shadow": "0px 5px 9px 0px rgba(45,8,255,0.26)",
                   }}
