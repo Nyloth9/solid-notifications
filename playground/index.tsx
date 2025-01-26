@@ -42,7 +42,7 @@ render(() => {
         toasterId="toaster-1"
         /*         wrapperStyle={style()} */
       />
-      {/* <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder /> */}
+      <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder />
       <App />
       <button
         class="mt-4 rounded bg-indigo-600 px-4 py-2 font-bold text-white hover:bg-indigo-700 active:bg-indigo-800"
