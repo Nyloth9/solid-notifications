@@ -5,7 +5,7 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "build-local": "cd ../src && npm run build"
+    "sn-publish": "cd ../src && npm publish"
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.1",
@@ -22,7 +22,7 @@
     "remark-frontmatter": "^5.0.0",
     "solid-js": "^1.9.2",
     "solid-mdx": "^0.0.7",
-    "this-is-a-test-package-987": "^1.0.5",
+    "this-is-a-test-package-987": "^1.0.6",
     "vinxi": "^0.4.3"
   },
   "overrides": {
