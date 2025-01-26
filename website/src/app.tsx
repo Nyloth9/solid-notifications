@@ -1,7 +1,7 @@
 import "@fontsource/inter";
 import "./app.css";
 
-import { Router } from "@solidjs/router";
+import { Router, useLocation } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
 import { ThemeProvider } from "./util/theme";
@@ -14,11 +14,15 @@ export default function App() {
       <ThemeProvider>
         <Link rel="icon" href="/favicon.svg" />
         <Link rel="mask-icon" href="/favicon.svg" color="#3b82f6" />
-        <Layout>
-          <Router root={(props) => <Suspense>{props.children}</Suspense>}>
-            <FileRoutes />
-          </Router>
-        </Layout>
+        <Router
+          root={(props) => (
+            <Layout>
+              <Suspense>{props.children}</Suspense>
+            </Layout>
+          )}
+        >
+          <FileRoutes />
+        </Router>
       </ThemeProvider>
     </MetaProvider>
   );

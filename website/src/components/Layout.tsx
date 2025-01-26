@@ -1,13 +1,56 @@
-import { JSX } from "solid-js";
+import { createEffect, createSignal, For, JSX, onMount, Show } from "solid-js";
 import { useTheme } from "../util/theme";
 import { ToastProvider } from "this-is-a-test-package-987";
+import { useLocation } from "@solidjs/router";
 
 interface Props {
   children: JSX.Element;
 }
 
+const sidebarItems = [
+  {
+    title: "Introduction",
+    url: "/",
+    items: [{ title: "Core features", hash: "#core-features" }],
+  },
+  {
+    title: "Guides",
+    url: "/guides",
+    items: [
+      { title: "Introduction", hash: "#introduction" },
+      { title: "Quickstart", hash: "#quickstart" },
+      { title: "SDKs", hash: "#sdks" },
+      { title: "Authentication", hash: "#authentication" },
+      { title: "Pagination", hash: "#pagination" },
+      {
+        title: "Example using cursors",
+        hash: "#example-using-cursors",
+      },
+      { title: "Errors", hash: "#errors" },
+      { title: "Webhooks", hash: "#webhooks" },
+    ],
+  },
+  {
+    title: "Resources",
+    url: "/resources",
+    items: [
+      { title: "Contacts", hash: "#contacts" },
+      { title: "Conversations", hash: "#conversations" },
+      { title: "Messages", hash: "#messages" },
+      { title: "Groups", hash: "#groups" },
+      { title: "Attachments", hash: "#attachments" },
+    ],
+  },
+];
+
 export default function Layout(props: Props) {
   const { setTheme, getTheme } = useTheme();
+  const [path, setPath] = createSignal("/");
+  const location = useLocation();
+
+  createEffect(() => {
+    setPath(location.pathname + location.hash);
+  });
 
   return (
     <ToastProvider theme={getTheme()} wrapperClass="sn-toast-wrapper not-prose">
@@ -208,37 +251,51 @@ export default function Layout(props: Props) {
                     Support
                   </a>
                 </li>
-                <li class="relative mt-6 md:mt-0">
-                  <h2 class="text-xs font-semibold text-slate-900 dark:text-white">
-                    Introduction
-                  </h2>
-                  <div class="relative mt-3 pl-2">
-                    <div
-                      class="absolute inset-x-0 top-0 bg-slate-800/2.5 will-change-transform dark:bg-white/2.5"
-                      style="height: 64px; top: 128px; border-radius: 8px; opacity: 1; transform: none; transform-origin: 50% 50% 0px;"
-                    />
-                    <div
-                      class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
-                      style="transform: none; transform-origin: 50% 50% 0px;"
-                    />
-                    <div
-                      class="absolute left-2 h-6 w-px bg-emerald-500"
-                      style="top: 132px; opacity: 1; transform: none; transform-origin: 50% 50% 0px;"
-                    />
-                    <ul role="list" class="border-l border-transparent">
-                      <li class="relative">
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/#core-features"
-                        >
-                          <span class="truncate">Core features</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
 
-                <li class="relative mt-6">
+                <For each={sidebarItems}>
+                  {({ title, url, items }) => {
+                    return (
+                      <li class="relative mt-6">
+                        <h2 class="text-xs font-semibold text-slate-900 dark:text-white">
+                          {title}
+                        </h2>
+                        <div class="relative mt-3 pl-2">
+                          <div
+                            class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
+                            style="transform: none; transform-origin: 50% 50% 0px;"
+                          />
+                          {/*  <div
+                            class="absolute left-2 h-6 w-px bg-emerald-500"
+                            style="top: 128px; opacity: 1; transform: none; transform-origin: 50% 50% 0px;"
+                          /> */}
+                          <ul role="list" class="border-l border-transparent">
+                            <For each={items}>
+                              {({ title, hash }) => {
+                                return (
+                                  <li
+                                    class={`relative rounded-r-md ${path() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
+                                  >
+                                    <a
+                                      class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                                      href={url + hash}
+                                    >
+                                      <span class="truncate">{title}</span>
+                                    </a>
+                                    <Show when={path() === url + hash}>
+                                      <div class="absolute top-0 h-8 w-px bg-emerald-500" />
+                                    </Show>
+                                  </li>
+                                );
+                              }}
+                            </For>
+                          </ul>
+                        </div>
+                      </li>
+                    );
+                  }}
+                </For>
+
+                {/*    <li class="relative mt-6">
                   <h2 class="text-xs font-semibold text-slate-900 dark:text-white">
                     Guides
                   </h2>
@@ -416,7 +473,7 @@ export default function Layout(props: Props) {
                       </li>
                     </ul>
                   </div>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
