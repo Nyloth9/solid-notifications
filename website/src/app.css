@@ -1,4 +1,4 @@
-@import "../../src/index.css";
+@import "this-is-a-test-package-987/index.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

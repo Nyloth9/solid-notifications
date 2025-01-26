@@ -1,7 +1,7 @@
 {
   "name": "this-is-a-test-package-987",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "A Solidjs toast notifications library",
   "author": {
     "name": "Nyloth9",
@@ -22,8 +22,11 @@
       "types": "./dist/index.d.ts",
       "solid": "./dist/index.jsx",
       "default": "./dist/index.js"
-    }
+    },
+    "./index.css": "./dist/index.css"
   },
+  "./dist/index.css": "./dist/index.css",
+  "./index.css": "./dist/index.css",
   "peerDependencies": {
     "solid-js": "^1.9.4"
   },

@@ -3,7 +3,7 @@ import { Toaster, useToast } from "this-is-a-test-package-987";
 function Toasters() {
   return (
     <div>
-      <Toaster toasterId="toaster-1" />
+      <Toaster toasterId="toaster-1" type="loading" />
       <Toaster toasterId="toaster-2" limit={3} />
       <Toaster
         toasterId="toaster-3"

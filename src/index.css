@@ -212,6 +212,7 @@
     linear-gradient(0deg, #1f293780 50%, #1f2937 0) center/1.9px 100%,
     linear-gradient(90deg, #1f293740 50%, #1f2937bf 0) center/100% 1.9px;
   background-repeat: no-repeat;
+  box-shadow: none;
   animation: SNRotate 1s infinite steps(12);
 }
 
