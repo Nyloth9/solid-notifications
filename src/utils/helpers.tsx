@@ -1,5 +1,5 @@
 import { createSignal, JSX } from "solid-js";
-import { Config, ProgressControls, ToasterStore, ToastType } from "../types";
+import { Config, ProgressControls, ToasterStore, ToastContext } from "../types";
 import Toast from "../core/Toast";
 
 function findToast(
@@ -42,7 +42,10 @@ function resolvePropValue<K extends keyof Config>(key: K, t: Toast) {
   const prop = t.toastConfig[key];
 
   if (typeof prop === "function") {
-    return (prop as (type: ToastType) => unknown)(t.toastConfig.type);
+    return (prop as (args: ToastContext) => unknown)({
+      theme: t.toastConfig.theme,
+      type: t.toastConfig.type,
+    });
   }
 
   return prop;
@@ -373,7 +376,10 @@ function renderIcon(toast: Toast) {
   if (!toast.toastConfig.showIcon) return null;
   if (toast.toastConfig.icon) {
     if (typeof toast.toastConfig.icon === "function") {
-      return toast.toastConfig.icon(toast.toastConfig.type);
+      return toast.toastConfig.icon({
+        theme: toast.toastConfig.theme,
+        type: toast.toastConfig.type,
+      });
     }
 
     return toast.toastConfig.icon;

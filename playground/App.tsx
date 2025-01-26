@@ -78,7 +78,8 @@ const App: Component = () => {
 
                   duration: 10000,
                   type: "success",
-                  /*     progressBarStyle: (type) => {
+                  progressBarStyle: ({ type }) => {
+                    console.log(type);
                     switch (type) {
                       case "success":
                         return { "background-color": "green" };
@@ -93,16 +94,21 @@ const App: Component = () => {
                       default:
                         return { "background-color": "gray" };
                     }
-                  }, */
+                  },
                 },
               );
 
-              setTimeout(() => {
+              /*             setTimeout(() => {
                 update({ id, type: "warning" });
               }, 2000);
 
               setTimeout(() => {
-                update({ id, type: "error", content: "Error! Lorem Ipsum is simply dummy text of the printing and typesetting industry." });
+                update({
+                  id,
+                  type: "error",
+                  content:
+                    "Error! Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                });
               }, 4000);
 
               setTimeout(() => {
@@ -115,7 +121,7 @@ const App: Component = () => {
                   type: "loading",
                   wrapperClass: "sn-toast-wrapper",
                 });
-              }, 8000);
+              }, 8000); */
 
               /*    setTimeout(() => {
                 update({
@@ -253,22 +259,6 @@ const App: Component = () => {
               },
               {
                 theme: "light",
-                progressBarStyle: (type) => {
-                  switch (type) {
-                    case "success":
-                      return { "background-color": "green" };
-                    case "error":
-                      return { "background-color": "red" };
-                    case "warning":
-                      return { "background-color": "orange" };
-                    case "info":
-                      return { "background-color": "blue" };
-                    case "loading":
-                      return { "background-color": "#374151" };
-                    default:
-                      return { "background-color": "gray" };
-                  }
-                },
               },
             );
 

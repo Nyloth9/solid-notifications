@@ -132,11 +132,16 @@ export interface ProgressControls {
   progress: Accessor<number>;
 }
 
+export interface ToastContext {
+  theme: string | undefined | null;
+  type: ToastType;
+}
+
 export interface Config {
   id?: string;
   content?: ToastContent;
   contentType?: "static" | "dynamic";
-  theme: "light" | "dark" | string | undefined | null;
+  theme: string | undefined | null;
   toasterId?: string;
   type: ToastType;
   duration: number | false;
@@ -155,24 +160,24 @@ export interface Config {
   pauseOnHover: boolean;
   pauseOnWindowInactive: boolean;
   renderOnWindowInactive: boolean;
-  class: string | ((type: ToastType) => string);
+  class: string | ((args: ToastContext) => string);
   style:
     | JSX.CSSProperties
-    | ((type: ToastType) => JSX.CSSProperties)
+    | ((args: ToastContext) => JSX.CSSProperties)
     | undefined;
-  wrapperClass: string | ((type: ToastType) => string);
+  wrapperClass: string | ((args: ToastContext) => string);
   wrapperStyle:
     | JSX.CSSProperties
-    | ((type: ToastType) => JSX.CSSProperties)
+    | ((args: ToastContext) => JSX.CSSProperties)
     | undefined;
   enterCallback: (() => void) | null;
   updateCallback: (() => void) | null;
   exitCallback: ((reason?: boolean | string) => void) | null;
   showDismissButton: boolean;
-  dismissButtonClass: string | ((type: ToastType) => string);
+  dismissButtonClass: string | ((args: ToastContext) => string);
   dismissButtonStyle:
     | JSX.CSSProperties
-    | ((type: ToastType) => JSX.CSSProperties)
+    | ((args: ToastContext) => JSX.CSSProperties)
     | undefined;
   dismissOnClick: boolean;
   toasterStyle: Omit<
@@ -186,13 +191,13 @@ export interface Config {
     | "pointer-events"
   > | null;
   showProgressBar: boolean;
-  progressBarClass: string | ((type: ToastType) => string);
+  progressBarClass: string | ((args: ToastContext) => string);
   progressBarStyle:
     | JSX.CSSProperties
-    | ((type: ToastType) => JSX.CSSProperties)
+    | ((args: ToastContext) => JSX.CSSProperties)
     | undefined;
   showIcon: boolean;
-  icon: ((type: ToastType) => JSX.Element) | JSX.Element | null;
+  icon: ((args: ToastContext) => JSX.Element) | JSX.Element | null;
   dragToDismiss: boolean;
   dragTreshold: number;
   ariaLive: "off" | "assertive" | "polite";
