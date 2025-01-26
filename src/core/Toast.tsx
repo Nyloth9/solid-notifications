@@ -146,9 +146,6 @@ class Toast {
   }
 
   update(args: Partial<Config>) {
-    /*** Delete the references to the store.toasterConfig and replace them with arguments from the update ***/
-    /*** Otherwise, we would be updating the store.toasterConfig itself. Deleting and re-creating the key also triggers reactivity. ***/
-
     Object.keys(args).forEach((key) => this.ownProperties.add(key));
 
     Object.assign(this.toastConfig, args);
