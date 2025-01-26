@@ -25,7 +25,6 @@
     },
     "./index.css": "./dist/index.css"
   },
-  "./dist/index.css": "./dist/index.css",
   "./index.css": "./dist/index.css",
   "peerDependencies": {
     "solid-js": "^1.9.4"
