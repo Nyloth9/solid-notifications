@@ -113,8 +113,8 @@ export default function Toaster(props: ToasterOptions) {
       class="sn-toaster"
       id={toasterId === "__default" ? "sn-toaster" : toasterId}
       style={{
-        ...store.toasterConfig.toasterStyle,
         "justify-content": getToasterStyle(store.toasterConfig.positionX),
+        ...store.toasterConfig.toasterStyle,
       }}
     >
       <For each={store.rendered}>{(toast) => toast.render()}</For>
