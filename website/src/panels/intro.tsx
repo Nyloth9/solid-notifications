@@ -303,6 +303,43 @@ function CoreFeatures(props: { feature: string }) {
     );
   }
 
+  if (props.feature === "interaction-showcase")
+    return (
+      <div class="-mt-2 mb-6 flex-wrap pl-3">
+        <button
+          onClick={() => {
+            resetToasters(["toaster-1"], dismiss);
+            notify(
+              <div>
+                <div class="mb-3 flex flex-col gap-2">
+                  <p>Click the toast body to dismiss it.</p>
+                  <p>
+                    If the click target is an interactive element, the toast
+                    will not be dismissed.
+                  </p>
+                </div>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  aria-label="Email"
+                  class="mb-2 block w-full rounded-sm bg-white px-3 py-1 text-sm text-slate-900 outline outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-[#182135] dark:text-white dark:outline-slate-600 dark:placeholder:text-slate-400 dark:focus:outline-indigo-700 sm:text-sm/6"
+                  placeholder="you@example.com"
+                />
+              </div>,
+              {
+                toasterId: "toaster-1",
+                dismissOnClick: true,
+              },
+            );
+          }}
+          class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
+        >
+          Try it out
+        </button>
+      </div>
+    );
+
   if (props.feature === "timer-showcase")
     return (
       <div class="-mt-2 mb-6 flex-wrap pl-3">
