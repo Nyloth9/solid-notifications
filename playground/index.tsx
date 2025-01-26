@@ -44,12 +44,17 @@ render(() => {
       />
       <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder />
       <App />
-      <button
-        class="mt-4 rounded bg-indigo-600 px-4 py-2 font-bold text-white hover:bg-indigo-700 active:bg-indigo-800"
-        onClick={() => setTheme(theme() === "light" ? "dark" : "light")}
-      >
-        Change theme
-      </button>
+      <div class="container mx-auto -mt-4 px-4">
+        <button
+          class="mt-4 rounded bg-slate-700 px-4 py-2 font-bold text-white hover:bg-slate-800 active:bg-slate-900"
+          onClick={() => setTheme(theme() === "light" ? "dark" : "light")}
+        >
+          Change theme
+        </button>
+        <span class="ml-2">
+          Current theme: <span class="font-medium uppercase">{theme()}</span>
+        </span>
+      </div>
     </ToastProvider>
   );
 }, root!);
