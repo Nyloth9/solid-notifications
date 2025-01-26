@@ -54,7 +54,7 @@ function CoreFeatures(props: { feature: string }) {
 
   if (props.feature === "queue-showcase")
     return (
-      <div class="-mt-2 mb-6 pl-3">
+      <div class="-mt-2 mb-6 pl-3 flex-wrap">
         <button
           onClick={() => {
             resetToasters(["toaster-2"], dismiss);
@@ -134,7 +134,7 @@ function CoreFeatures(props: { feature: string }) {
 
   if (props.feature === "multiple-toasters-showcase")
     return (
-      <div class="-mt-2 mb-6 flex gap-1.5 pl-3">
+      <div class="-mt-2 mb-6 flex gap-1.5 pl-3 flex-wrap">
         <button
           onClick={() => {
             resetToasters(["toaster-4", "toaster-5"], dismiss);
@@ -174,7 +174,7 @@ function CoreFeatures(props: { feature: string }) {
 
   if (props.feature === "customizability-showcase") {
     return (
-      <div class="-mt-2 mb-6 flex gap-1.5 pl-3">
+      <div class="-mt-2 mb-6 flex gap-1.5 pl-3 flex-wrap">
         <button
           onClick={() => {
             resetToasters(["toaster-6"], dismiss);

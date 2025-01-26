@@ -23,6 +23,26 @@ body {
   --sn-icon-stroke: #fff;
 }
 
+.sn-type-success {
+  --sn-progress-bar-color: var(--sn-color-success);
+  --sn-icon-fill: var(--sn-color-success);
+}
+
+.sn-type-error {
+  --sn-progress-bar-color: var(--sn-color-error);
+  --sn-icon-fill: var(--sn-color-error);
+}
+
+.sn-type-warning {
+  --sn-progress-bar-color: var(--sn-color-warning);
+  --sn-icon-fill: var(--sn-color-warning);
+}
+
+.sn-type-info {
+  --sn-progress-bar-color: var(--sn-color-info);
+  --sn-icon-fill: var(--sn-color-info);
+}
+
 /* Misc */
 
 .scrollbar-md::-webkit-scrollbar {
