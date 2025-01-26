@@ -182,37 +182,43 @@ function CoreFeatures(props: { feature: string }) {
             notify(
               (t) => (
                 <div
-                  class="border-3 w-full rounded-lg border-red-700 bg-gradient-to-r from-red-500 to-red-900 p-3 text-gray-500"
-                  style={{
-                    "box-shadow": "0px 5px 9px 0px rgba(45,8,255,0.26)",
-                  }}
+                  id="toast-message-cta"
+                  class="w-full rounded-lg bg-white p-3 text-gray-500 shadow-stripe dark:bg-gray-800 dark:text-gray-400 dark:shadow-dark"
                   role="alert"
                 >
-                  <div class="flex gap-3">
+                  <div class="flex w-full">
                     <img
-                      class="h-9 w-9 rounded-full object-cover"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrbjamcO9AR2y0SVWakds7_eAPUJZCKvgHDA&s"
-                      alt="Jese Leos image"
+                      class="h-9 w-9 shrink-0 rounded-full bg-cover"
+                      src="https://s3.eu-central-1.amazonaws.com/www.warsawjs.com/static/images/people/ryan-chenkie.jpg"
+                      alt="Ethan Cross image"
                     />
-                    <div class="text-sm font-normal">
-                      <span class="mb-1 text-xs font-bold text-white drop-shadow">
-                        Vampire Lord
+                    <div class="ms-3 text-sm font-normal">
+                      <span class="mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                        Ethan Cross
                       </span>
-                      <div class="mb-2 text-xs font-normal leading-5 text-white">
-                        The wisdom has been added to the eternal archives.
+                      <div class="mb-2 text-xs font-normal leading-5">
+                        Your post has been liked by{" "}
+                        <a
+                          href="#"
+                          class="text-blue-600 hover:underline dark:text-blue-500"
+                        >
+                          Ethan Cross
+                        </a>{" "}
                       </div>
-                      <div class="mb-3 w-full rounded-full bg-red-950">
+
+                      <div class="mb-3 w-full rounded-full dark:bg-gray-900 bg-gray-200">
                         <div
-                          class="h-1 w-full rounded-full bg-white"
+                          class="h-1 w-full rounded-full bg-blue-500 dark:bg-blue-600"
                           data-role="progress"
                           style={{
                             width: `${100 - t.progressManager.progress()}%`,
                           }}
                         />
                       </div>
+
                       <a
                         href="#"
-                        class="inline-flex rounded-lg bg-red-900 px-2.5 py-0.5 text-center text-xs font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-400"
+                        class="inline-flex rounded-lg bg-blue-600 px-2.5 py-0.5 text-center text-xs font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
                       >
                         Reply
                       </a>
@@ -220,7 +226,8 @@ function CoreFeatures(props: { feature: string }) {
                     <button
                       type="button"
                       onClick={() => t.dismiss()}
-                      class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg p-1.5 text-red-100 hover:bg-red-700 hover:text-white focus:ring-2 focus:ring-red-400"
+                      class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300 dark:bg-gray-800 dark:text-gray-500 dark:hover:bg-gray-700 dark:hover:text-white"
+                      data-dismiss-target="#toast-message-cta"
                       aria-label="Close"
                     >
                       <span class="sr-only">Close</span>
