@@ -34,7 +34,7 @@ export default function Layout(props: Props) {
                 </svg>
 
                 <span class="-mb-1 font-bold dark:text-white">
-                  Solid Notifications FIX THIS
+                  Solid Notifications
                 </span>
               </a>
             </div>
@@ -209,6 +209,36 @@ export default function Layout(props: Props) {
                   </a>
                 </li>
                 <li class="relative mt-6 md:mt-0">
+                  <h2 class="text-xs font-semibold text-slate-900 dark:text-white">
+                    Introduction
+                  </h2>
+                  <div class="relative mt-3 pl-2">
+                    <div
+                      class="absolute inset-x-0 top-0 bg-slate-800/2.5 will-change-transform dark:bg-white/2.5"
+                      style="height: 64px; top: 128px; border-radius: 8px; opacity: 1; transform: none; transform-origin: 50% 50% 0px;"
+                    />
+                    <div
+                      class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
+                      style="transform: none; transform-origin: 50% 50% 0px;"
+                    />
+                    <div
+                      class="absolute left-2 h-6 w-px bg-emerald-500"
+                      style="top: 132px; opacity: 1; transform: none; transform-origin: 50% 50% 0px;"
+                    />
+                    <ul role="list" class="border-l border-transparent">
+                      <li class="relative">
+                        <a
+                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                          href="/#core-features"
+                        >
+                          <span class="truncate">Core features</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="relative mt-6">
                   <h2 class="text-xs font-semibold text-slate-900 dark:text-white">
                     Guides
                   </h2>
