@@ -37,7 +37,7 @@ const addFrontmatter = () => (_tree: any, file: any) => {
   };
 };
 
-function collectLinks(options = {}) {
+function generateDataJson(options = {}) {
   // @ts-ignore
   const { outputFile = "page-data.json" } = options;
 
@@ -107,4 +107,4 @@ function collectLinks(options = {}) {
   };
 }
 
-export { addAnotations, addFrontmatter, collectLinks };
+export { addAnotations, addFrontmatter, generateDataJson };
