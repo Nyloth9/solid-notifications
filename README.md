@@ -1,34 +1,95 @@
-## Usage
+# Solid Notifications 🍞
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications. Perfect for displaying brief messages, alerts, or notifications to your users.
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+## Features
+
+- **Simple API**: Easily create and manage toast notifications with just a few lines of code.
+- **Customizable**: Fully customizable styles, positions, and animations.
+- **Lightweight**: Minimal footprint with zero unnecessary dependencies.
+- **Accessible**: Built with accessibility in mind, ensuring a great experience for all users.
+- **TypeScript Support**: Comes with built-in TypeScript types for a better developer experience.
+
+## Getting Started
+
+To get started with Solid Notifications, visit the official documentation website:
+
+📚 **[View Documentation](https://solid-notifications.vercel.app/)**
+
+The documentation includes installation instructions, usage examples, API reference, and customization guides.
+
+## Installation
+
+You can install Solid Notifications via npm:
 
 ```bash
-$ npm install # or pnpm install or yarn install
+    npm install solid-notifications
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+### Peer Dependencies
 
-## Available Scripts
+Solid Notifications requires `solid-js` as a peer dependency. Make sure you have it installed:
 
-In the project directory, you can run:
+```bash
+    npm install solid-js
+```
 
-### `npm run dev` or `npm start`
+## Quick Example
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Here's a quick example to show how easy it is to use:
 
-The page will reload if you make edits.<br>
+```tsx
+import { useToast } from "solid-notifications";
 
-### `npm run build`
+export default function App() {
+  const { notify } = useToast();
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+  return (
+    <div>
+      <button onClick={() => notify("🚀 New toast ready to serve!")}>
+        Create a Toast!
+      </button>
+    </div>
+  );
+}
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+For more examples and advanced usage, check out the [documentation](https://solid-notifications.vercel.app/).
 
-## Deployment
+## Development
 
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+If you'd like to contribute to Solid Notifications, follow these steps to set up the project locally:
+
+1. **Clone the repository**:
+   First, grab a copy of the project by cloning the repository:
+
+   ```bash
+   git clone https://github.com/Nyloth9/solid-notifications.git
+   cd solid-notifications
+   ```
+
+2. **Install dependencies:** Next, install all the necessary dependencies to get things up and running:
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the playground:** To test your changes or experiment with the library, start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+   This will launch the playground where you can see your changes in real-time.
+
+4. **Edit the website:** If you're working on the documentation or website, navigate to the website folder and start the development server:
+
+   ```bash
+   cd website
+   npm install
+   npm run dev
+   ```
+
+## License
+
+This project is licensed under the MIT License.

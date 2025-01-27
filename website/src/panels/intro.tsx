@@ -384,19 +384,19 @@ function CoreFeatures(props: { feature: string }) {
 
                 <div class="flex flex-wrap gap-2">
                   <button
-                    class="mt-2 rounded-sm bg-transparent text-xs text-slate-600 hover:text-slate-900 active:translate-y-px dark:text-slate-300 dark:hover:text-white"
+                    class="mt-2 rounded-sm bg-transparent text-xs text-slate-600 underline underline-offset-2 hover:text-slate-900 active:translate-y-px dark:text-slate-300 dark:hover:text-white"
                     onClick={() => progressControls.pause()}
                   >
                     Pause timer
                   </button>
                   <button
-                    class="mt-2 rounded-sm bg-transparent text-xs text-slate-600 hover:text-slate-900 active:translate-y-px dark:text-slate-300 dark:hover:text-white"
+                    class="mt-2 rounded-sm bg-transparent text-xs text-slate-600 underline underline-offset-2 hover:text-slate-900 active:translate-y-px dark:text-slate-300 dark:hover:text-white"
                     onClick={() => progressControls.play()}
                   >
                     Play timer
                   </button>
                   <button
-                    class="mt-2 rounded-sm bg-transparent text-xs text-slate-600 hover:text-slate-900 active:translate-y-px dark:text-slate-300 dark:hover:text-white"
+                    class="mt-2 rounded-sm bg-transparent text-xs text-slate-600 underline underline-offset-2 hover:text-slate-900 active:translate-y-px dark:text-slate-300 dark:hover:text-white"
                     onClick={() => progressControls.reset()}
                   >
                     Reset timer
