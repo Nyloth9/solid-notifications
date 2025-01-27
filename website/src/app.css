@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+html {
+  scroll-behavior: smooth !important;
+}
+
 body {
   font-family: Inter, ui-sans-serif, Roboto, Oxygen, Ubuntu, Cantarell,
     "Open Sans", "Helvetica Neue", sans-serif;
@@ -16,7 +21,6 @@ h4,
 h5,
 h6 {
   scroll-margin-top: 100px;
-  scroll-behavior: smooth;
 }
 
 .disable-transitions,
