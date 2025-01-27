@@ -1,4 +1,12 @@
-import { createEffect, createSignal, For, JSX, onMount, Show } from "solid-js";
+import {
+  createEffect,
+  createSignal,
+  For,
+  JSX,
+  onCleanup,
+  onMount,
+  Show,
+} from "solid-js";
 import { useTheme } from "../util/theme";
 import { ToastProvider } from "this-is-a-test-package-987";
 import { useLocation } from "@solidjs/router";
@@ -47,7 +55,23 @@ export default function Layout(props: Props) {
   const { setTheme, getTheme } = useTheme();
   const [path, setPath] = createSignal("/");
   const [fullPath, setFullPath] = createSignal("/");
+  const [sidebarOpen, setSidebarOpen] = createSignal(false);
   const location = useLocation();
+
+  const handleScreenWidthChange = (e: any) => {
+    // Close the sidebar whenever the screen crosses the 1024px threshold
+    setSidebarOpen(false);
+  };
+
+  const handleScrollToHash = (event: any) => {
+    const link = event.target.closest('a[href*="#"]');
+    if (!link) return;
+
+    const href = link.getAttribute("href");
+    const targetElement = document.getElementById(href.substring(1));
+
+    targetElement?.scrollIntoView();
+  };
 
   createEffect(() => {
     setPath(location.pathname);
@@ -57,15 +81,16 @@ export default function Layout(props: Props) {
   onMount(() => {
     if (typeof window === "undefined") return;
 
-    document.addEventListener("click", (event) => {
-      // @ts-ignore
-      const link = event.target.closest('a[href*="#"]');
-      if (!link) return;
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
 
-      const href = link.getAttribute("href");
-      const targetElement = document.getElementById(href.substring(1));
+    document.addEventListener("click", handleScrollToHash);
+    mediaQuery.addEventListener("change", handleScreenWidthChange);
 
-      targetElement?.scrollIntoView();
+    setSidebarOpen(false);
+
+    onCleanup(() => {
+      mediaQuery.removeEventListener("change", handleScreenWidthChange);
+      document.removeEventListener("click", handleScrollToHash);
     });
   });
 
@@ -126,6 +151,7 @@ export default function Layout(props: Props) {
               <div class="flex items-center gap-4 lg:hidden">
                 <button
                   type="button"
+                  onClick={() => setSidebarOpen(!sidebarOpen())}
                   class="flex h-6 w-6 items-center justify-center rounded-md transition hover:bg-slate-900/5 dark:hover:bg-white/5"
                   aria-label="Toggle navigation"
                 >
@@ -242,39 +268,63 @@ export default function Layout(props: Props) {
                 </div>
               </div>
             </div>
+            <div
+              class={`fixed bottom-0 left-0 top-14 z-50 w-full overflow-y-auto bg-white px-4 pb-4 pt-6 shadow-lg shadow-slate-900/10 ring-1 ring-slate-900/7.5 duration-500 ease-in-out dark:bg-slate-900 dark:ring-slate-800 min-[416px]:max-w-sm sm:px-6 sm:pb-10 ${sidebarOpen() ? "translate-x-0" : "-translate-x-full"}`}
+            >
+              <nav>
+                <ul role="list">
+                  <For each={sidebarItems}>
+                    {({ title, url, items }) => {
+                      return (
+                        <li class="relative mt-6">
+                          <h2
+                            class={`-mb-2 -ml-4 flex items-center rounded py-1 pl-4 text-xs font-semibold ${path() === url ? "text-emerald-500" : "text-slate-900 dark:text-white"}`}
+                          >
+                            {title}
+                          </h2>
+                          <div class="relative mt-3 pl-2">
+                            <div
+                              class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
+                              style="transform: none; transform-origin: 50% 50% 0px;"
+                            />
+                            <ul role="list" class="border-l border-transparent">
+                              <For each={items}>
+                                {({ title, hash }) => {
+                                  return (
+                                    <li
+                                      class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
+                                    >
+                                      <a
+                                        class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
+                                        href={hash}
+                                      >
+                                        <span class="truncate">{title}</span>
+                                      </a>
+                                      <Show when={fullPath() === url + hash}>
+                                        <div class="absolute top-0 h-8 w-px bg-emerald-400" />
+                                      </Show>
+                                    </li>
+                                  );
+                                }}
+                              </For>
+                            </ul>
+                          </div>
+                        </li>
+                      );
+                    }}
+                  </For>
+                </ul>
+              </nav>
+            </div>
+
             <nav class="hidden lg:mt-10 lg:block">
               <ul role="list">
-                <li class="md:hidden">
-                  <a
-                    class="block py-1 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                    href="/"
-                  >
-                    API
-                  </a>
-                </li>
-                <li class="md:hidden">
-                  <a
-                    class="block py-1 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                    href="#"
-                  >
-                    Documentation
-                  </a>
-                </li>
-                <li class="md:hidden">
-                  <a
-                    class="block py-1 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                    href="#"
-                  >
-                    Support
-                  </a>
-                </li>
-
                 <For each={sidebarItems}>
                   {({ title, url, items }) => {
                     return (
                       <li class="relative mt-6">
                         <h2
-                          class={`flex items-center text-xs py-1 pl-4 -ml-4 rounded -mb-2 font-semibold text-slate-900 dark:text-white ${path() === url ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
+                          class={`-mb-2 -ml-4 flex items-center rounded py-1 pl-4 text-xs font-semibold ${path() === url ? "text-emerald-500" : "text-slate-900 dark:text-white"}`}
                         >
                           {title}
                         </h2>
