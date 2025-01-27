@@ -91,4 +91,4 @@ If you'd like to contribute to Solid Notifications, follow these steps to set up
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
