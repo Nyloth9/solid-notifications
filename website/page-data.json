@@ -1,7 +1,7 @@
 [
   {
     "name": "Introduction",
-    "slug": "/",
+    "url": "/",
     "description": "A simple notification system for SolidJS",
     "tags": [
       "test",
@@ -10,16 +10,9 @@
     "items": [
       {
         "name": "Core Features:",
-        "slug": "#core-features",
+        "hash": "#core-features",
         "items": []
       }
     ]
-  },
-  {
-    "name": "Unknown",
-    "slug": "/",
-    "description": "",
-    "tags": [],
-    "items": []
   }
 ]

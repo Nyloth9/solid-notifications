@@ -1,9 +1,10 @@
 import { visit } from "unist-util-visit";
 import fs from "fs";
-import path from "path";
 import grayMatter from "gray-matter";
 
-const addAnotations = () => (tree: any) => {
+const processedFiles = new Set();
+
+const addAnotations = () => (tree: any, file: any) => {
   visit(tree, (node) => {
     if (node.properties && node.properties.annotation) {
       try {
@@ -36,14 +37,14 @@ const addFrontmatter = () => (_tree: any, file: any) => {
   };
 };
 
-const processedFiles = new Set();
-
 function collectLinks(options = {}) {
   // @ts-ignore
-  const { outputFile = "navigation.json" } = options;
+  const { outputFile = "page-data.json" } = options;
 
+  // @ts-ignore
   if (!globalThis.__navigationInitialized__) {
     fs.writeFileSync(outputFile, JSON.stringify([], null, 2), "utf-8");
+    // @ts-ignore
     globalThis.__navigationInitialized__ = true; // Prevent multiple resets during the build
   }
 
@@ -59,7 +60,7 @@ function collectLinks(options = {}) {
         file.data.frontmatter?.title === "Solid Notifications"
           ? "Introduction"
           : file.data.frontmatter?.title || "Unknown",
-      slug: file.data.frontmatter?.slug || "/",
+      url: file.data.frontmatter?.slug || "/",
       description: file.data.frontmatter?.description || "",
       tags: file.data.frontmatter?.tags || [],
       items: [],
@@ -74,7 +75,7 @@ function collectLinks(options = {}) {
             .filter((child: any) => child.type === "text")
             .map((child: any) => child.value)
             .join(" "),
-          slug: `#${node.properties.id}`,
+          hash: `#${node.properties.id}`,
           items: [],
         };
 
