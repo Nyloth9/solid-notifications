@@ -408,6 +408,7 @@ function CoreFeatures(props: { feature: string }) {
                 toasterId: "toaster-7",
                 pauseOnHover: false,
                 duration: 10000,
+                progressBarStyle: { "background-color": "#059669" },
                 icon: (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

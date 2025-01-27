@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Introduction",
+    "url": "/",
+    "description": "A simple notification system for SolidJS",
+    "tags": [
+      "test",
+      "page"
+    ],
+    "items": [
+      {
+        "name": "Core Features:",
+        "hash": "#core-features",
+        "items": []
+      }
+    ]
+  }
+]
