@@ -1,3 +1,5 @@
+![Solid Notifications Logo](./playground/assets/Solid%20Notificiations.png)
+
 # Solid Notifications 🍞
 
 A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
