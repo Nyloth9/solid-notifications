@@ -373,19 +373,17 @@ function renderProgressBar(toast: Toast) {
 }
 
 function renderIcon(toast: Toast) {
-  if (!toast.toastConfig.showIcon) return null;
-  if (toast.toastConfig.icon) {
-    if (typeof toast.toastConfig.icon === "function") {
-      return toast.toastConfig.icon({
-        theme: toast.toastConfig.theme,
-        type: toast.toastConfig.type,
-      });
-    }
+  const config = toast.toastConfig;
 
-    return toast.toastConfig.icon;
+  if (!config.showIcon) return null;
+  if (config.icon) {
+    if (typeof config.icon === "function")
+      return config.icon({ theme: config.theme, type: config.type });
+
+    return config.icon;
   }
 
-  switch (toast.toastConfig.type) {
+  switch (config.type) {
     case "success":
       return (
         <svg
