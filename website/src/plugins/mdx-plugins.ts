@@ -47,6 +47,8 @@ function generateJson(options = {}) {
     if (processedFiles.has(filePath)) return;
     processedFiles.add(filePath);
 
+    if (file.data.frontmatter?.title === "404") return;
+
     // Initialize the page object with frontmatter data
     const page = {
       name:

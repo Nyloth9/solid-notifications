@@ -11,7 +11,7 @@ import {
   addAnotations,
   addFrontmatter,
   generateJson,
-} from "./src/plugins/plugins";
+} from "./src/plugins/mdx-plugins";
 
 const { default: mdx } = pkg;
 export default defineConfig({

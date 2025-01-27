@@ -46,10 +46,12 @@ const sidebarItems = [
 export default function Layout(props: Props) {
   const { setTheme, getTheme } = useTheme();
   const [path, setPath] = createSignal("/");
+  const [fullPath, setFullPath] = createSignal("/");
   const location = useLocation();
 
   createEffect(() => {
-    setPath(location.pathname + location.hash);
+    setPath(location.pathname);
+    setFullPath(location.pathname + location.hash);
   });
 
   onMount(() => {
@@ -271,7 +273,9 @@ export default function Layout(props: Props) {
                   {({ title, url, items }) => {
                     return (
                       <li class="relative mt-6">
-                        <h2 class="text-xs font-semibold text-slate-900 dark:text-white">
+                        <h2
+                          class={`flex items-center text-xs py-1 pl-4 -ml-4 rounded -mb-2 font-semibold text-slate-900 dark:text-white ${path() === url ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
+                        >
                           {title}
                         </h2>
                         <div class="relative mt-3 pl-2">
@@ -284,7 +288,7 @@ export default function Layout(props: Props) {
                               {({ title, hash }) => {
                                 return (
                                   <li
-                                    class={`relative rounded-r-md ${path() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
+                                    class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
                                   >
                                     <a
                                       class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
@@ -292,7 +296,7 @@ export default function Layout(props: Props) {
                                     >
                                       <span class="truncate">{title}</span>
                                     </a>
-                                    <Show when={path() === url + hash}>
+                                    <Show when={fullPath() === url + hash}>
                                       <div class="absolute top-0 h-8 w-px bg-emerald-400" />
                                     </Show>
                                   </li>
