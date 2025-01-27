@@ -92,8 +92,17 @@ function generateJson(options = {}) {
       navigation = JSON.parse(fs.readFileSync(outputFile, "utf-8"));
     }
 
-    // Add the current page to the navigation array
-    navigation.push(page);
+    // Check if a page with the same name exists and replace it, otherwise push the new page
+    const existingIndex = navigation.findIndex(
+      (item: any) => item.name === page.name,
+    );
+    if (existingIndex !== -1) {
+      // Replace the existing page
+      navigation[existingIndex] = page;
+    } else {
+      // Push the new page
+      navigation.push(page);
+    }
 
     // Write the updated navigation array to the specified file
     fs.writeFileSync(outputFile, JSON.stringify(navigation, null, 2), "utf-8");
