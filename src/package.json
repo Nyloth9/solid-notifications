@@ -1,7 +1,7 @@
 {
   "name": "this-is-a-test-package-987",
   "type": "module",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A Solidjs toast notifications library",
   "author": {
     "name": "Nyloth9",
