@@ -264,10 +264,6 @@ export default function Layout(props: Props) {
                             class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
                             style="transform: none; transform-origin: 50% 50% 0px;"
                           />
-                          {/*  <div
-                            class="absolute left-2 h-6 w-px bg-emerald-500"
-                            style="top: 128px; opacity: 1; transform: none; transform-origin: 50% 50% 0px;"
-                          /> */}
                           <ul role="list" class="border-l border-transparent">
                             <For each={items}>
                               {({ title, hash }) => {
@@ -276,13 +272,13 @@ export default function Layout(props: Props) {
                                     class={`relative rounded-r-md ${path() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
                                   >
                                     <a
-                                      class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                                      class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
                                       href={url + hash}
                                     >
                                       <span class="truncate">{title}</span>
                                     </a>
                                     <Show when={path() === url + hash}>
-                                      <div class="absolute top-0 h-8 w-px bg-emerald-500" />
+                                      <div class="absolute top-0 h-8 w-px bg-emerald-400" />
                                     </Show>
                                   </li>
                                 );

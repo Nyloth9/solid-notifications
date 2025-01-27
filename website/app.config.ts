@@ -7,7 +7,11 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeShiki from "@shikijs/rehype";
 import remarkFrontmatter from "remark-frontmatter";
-import { addAnotations, addFrontmatter } from "./src/plugins/plugins";
+import {
+  addAnotations,
+  addFrontmatter,
+  collectLinks,
+} from "./src/plugins/plugins";
 
 const { default: mdx } = pkg;
 export default defineConfig({
@@ -26,6 +30,7 @@ export default defineConfig({
           addAnotations,
           rehypeSlug,
           rehypeAutolinkHeadings,
+          collectLinks,
           [rehypeShiki, { theme: "material-theme-darker" }],
         ],
         remarkPlugins: [

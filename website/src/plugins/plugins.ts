@@ -1,4 +1,6 @@
 import { visit } from "unist-util-visit";
+import fs from "fs";
+import path from "path";
 import grayMatter from "gray-matter";
 
 const addAnotations = () => (tree: any) => {
@@ -34,4 +36,74 @@ const addFrontmatter = () => (_tree: any, file: any) => {
   };
 };
 
-export { addAnotations, addFrontmatter };
+const processedFiles = new Set();
+
+function collectLinks(options = {}) {
+  // @ts-ignore
+  const { outputFile = "navigation.json" } = options;
+
+  if (!globalThis.__navigationInitialized__) {
+    fs.writeFileSync(outputFile, JSON.stringify([], null, 2), "utf-8");
+    globalThis.__navigationInitialized__ = true; // Prevent multiple resets during the build
+  }
+
+  // @ts-ignore
+  return (tree, file) => {
+    const filePath = file.history[0];
+    if (processedFiles.has(filePath)) return;
+    processedFiles.add(filePath);
+
+    // Initialize the page object with frontmatter data
+    const page = {
+      name:
+        file.data.frontmatter?.title === "Solid Notifications"
+          ? "Introduction"
+          : file.data.frontmatter?.title || "Unknown",
+      slug: file.data.frontmatter?.slug || "/",
+      description: file.data.frontmatter?.description || "",
+      tags: file.data.frontmatter?.tags || [],
+      items: [],
+    };
+
+    const itemsStack = [page.items];
+
+    visit(tree, "element", (node) => {
+      if (node.properties?.["data-nav"]) {
+        const item = {
+          name: node.children
+            .filter((child: any) => child.type === "text")
+            .map((child: any) => child.value)
+            .join(" "),
+          slug: `#${node.properties.id}`,
+          items: [],
+        };
+
+        if (node.properties["data-nav"] === "link") {
+          // Add to root-level items
+          // @ts-ignore
+          itemsStack[0].push(item);
+          // Push new item for sublinks
+          itemsStack.unshift(item.items);
+        } else if (node.properties["data-nav"] === "sublink") {
+          // Add to the current sublink stack
+          // @ts-ignore
+          itemsStack[0].push(item);
+        }
+      }
+    });
+
+    // Load existing navigation or initialize as an array
+    let navigation = [];
+    if (fs.existsSync(outputFile)) {
+      navigation = JSON.parse(fs.readFileSync(outputFile, "utf-8"));
+    }
+
+    // Add the current page to the navigation array
+    navigation.push(page);
+
+    // Write the updated navigation array to the specified file
+    fs.writeFileSync(outputFile, JSON.stringify(navigation, null, 2), "utf-8");
+  };
+}
+
+export { addAnotations, addFrontmatter, collectLinks };
