@@ -1,4 +1,6 @@
-![Solid Notifications Logo](./playground/assets/Solid%20Notificiations.png)
+<div style="margin-bottom: 30px">
+  <img src="./playground/assets/Solid%20Notificiations.png" alt="Solid Notifications Logo" width="50%">
+</div>
 
 # Solid Notifications 🍞
 
