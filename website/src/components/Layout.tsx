@@ -52,6 +52,31 @@ export default function Layout(props: Props) {
     setPath(location.pathname + location.hash);
   });
 
+  onMount(() => {
+    if (typeof window === "undefined") return;
+
+    document.addEventListener("click", (event) => {
+      // Check if the clicked element is a link with a hash
+
+      const link = (
+        (event.target as HTMLElement).tagName === "a"
+          ? event.target
+          : (event.target as HTMLAnchorElement).closest('a[href*="#"]')
+      ) as HTMLAnchorElement;
+
+      if (!link) return;
+      const href = link.getAttribute("href");
+      const hashIndex = href?.indexOf("#");
+      if (hashIndex === -1) return;
+      if (!hashIndex) return;
+
+      const targetId = href?.slice(hashIndex + 1);
+      const targetElement = document.getElementById(targetId!);
+
+      targetElement?.scrollIntoView();
+    });
+  });
+
   return (
     <ToastProvider theme={getTheme()} wrapperClass="sn-toast-wrapper not-prose">
       <div class="h-full lg:ml-72 xl:ml-80">
@@ -273,7 +298,7 @@ export default function Layout(props: Props) {
                                   >
                                     <a
                                       class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
-                                      href={url + hash}
+                                      href={hash}
                                     >
                                       <span class="truncate">{title}</span>
                                     </a>
