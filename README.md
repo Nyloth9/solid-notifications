@@ -1,6 +1,6 @@
 # Solid Notifications 🍞
 
-A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications. Perfect for displaying brief messages, alerts, or notifications to your users.
+A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
 
 ## Features
 
