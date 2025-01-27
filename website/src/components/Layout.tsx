@@ -61,7 +61,7 @@ export default function Layout(props: Props) {
       if (!link) return;
 
       const href = link.getAttribute("href");
-      const targetElement = document.getElementById(href);
+      const targetElement = document.getElementById(href.substring(1));
 
       targetElement?.scrollIntoView();
     });
