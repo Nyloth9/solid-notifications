@@ -102,7 +102,7 @@ export interface ToastActions {
   dismiss: (options?: {
     id?: string;
     toasterId?: string;
-    reason?: string | boolean;
+    reason?: string;
     keepQueued?: boolean;
   }) => void;
   remove: (options?: {
