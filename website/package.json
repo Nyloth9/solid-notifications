@@ -7,6 +7,9 @@
     "start": "vinxi start",
     "sn-publish": "cd ../src && npm publish"
   },
+  "optionalDependencies": {
+    "@esbuild/linux-x64": "0.24.0"
+  },
   "dependencies": {
     "@fontsource/inter": "^5.1.1",
     "@mdx-js/mdx": "^2.3.0",
