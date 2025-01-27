@@ -30,7 +30,7 @@ export default defineConfig({
           addAnotations,
           rehypeSlug,
           rehypeAutolinkHeadings,
-          generateJson,
+      //    generateJson,
           [rehypeShiki, { theme: "material-theme-darker" }],
         ],
         remarkPlugins: [
