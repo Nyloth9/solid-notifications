@@ -5,9 +5,8 @@ A lightweight, customizable, and easy-to-use toast notification library for **So
 ## Features
 
 - **Simple API**: Easily create and manage toast notifications with just a few lines of code.
-- **Customizable**: Fully customizable styles, positions, and animations.
+- **Customizable**: Fully customizable styles, positions, behaviors and much more.
 - **Lightweight**: Minimal footprint with zero unnecessary dependencies.
-- **Accessible**: Built with accessibility in mind, ensuring a great experience for all users.
 - **TypeScript Support**: Comes with built-in TypeScript types for a better developer experience.
 
 ## Getting Started
@@ -23,7 +22,7 @@ The documentation includes installation instructions, usage examples, API refere
 You can install Solid Notifications via npm:
 
 ```bash
-    npm install solid-notifications
+npm install solid-notifications
 ```
 
 ### Peer Dependencies
@@ -31,7 +30,7 @@ You can install Solid Notifications via npm:
 Solid Notifications requires `solid-js` as a peer dependency. Make sure you have it installed:
 
 ```bash
-    npm install solid-js
+npm install solid-js
 ```
 
 ## Quick Example
