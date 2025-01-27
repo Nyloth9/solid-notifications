@@ -56,22 +56,12 @@ export default function Layout(props: Props) {
     if (typeof window === "undefined") return;
 
     document.addEventListener("click", (event) => {
-      // Check if the clicked element is a link with a hash
-
-      const link = (
-        (event.target as HTMLElement).tagName === "a"
-          ? event.target
-          : (event.target as HTMLAnchorElement).closest('a[href*="#"]')
-      ) as HTMLAnchorElement;
-
+      // @ts-ignore
+      const link = event.target.closest('a[href*="#"]');
       if (!link) return;
-      const href = link.getAttribute("href");
-      const hashIndex = href?.indexOf("#");
-      if (hashIndex === -1) return;
-      if (!hashIndex) return;
 
-      const targetId = href?.slice(hashIndex + 1);
-      const targetElement = document.getElementById(targetId!);
+      const href = link.getAttribute("href");
+      const targetElement = document.getElementById(href);
 
       targetElement?.scrollIntoView();
     });
