@@ -10,7 +10,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import {
   addAnotations,
   addFrontmatter,
-  generateDataJson,
+  generateJson,
 } from "./src/plugins/plugins";
 
 const { default: mdx } = pkg;
@@ -30,7 +30,7 @@ export default defineConfig({
           addAnotations,
           rehypeSlug,
           rehypeAutolinkHeadings,
-          generateDataJson,
+          generateJson,
           [rehypeShiki, { theme: "material-theme-darker" }],
         ],
         remarkPlugins: [

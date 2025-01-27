@@ -37,13 +37,9 @@ const addFrontmatter = () => (_tree: any, file: any) => {
   };
 };
 
-function generateDataJson(options = {}) {
+function generateJson(options = {}) {
   // @ts-ignore
   const { outputFile = "page-data.json" } = options;
-
-  if (fs.existsSync(outputFile)) {
-    fs.unlinkSync(outputFile); // Delete the file if it exists
-  }
 
   // @ts-ignore
   return (tree, file) => {
@@ -104,4 +100,4 @@ function generateDataJson(options = {}) {
   };
 }
 
-export { addAnotations, addFrontmatter, generateDataJson };
+export { addAnotations, addFrontmatter, generateJson };
