@@ -41,11 +41,8 @@ function generateDataJson(options = {}) {
   // @ts-ignore
   const { outputFile = "page-data.json" } = options;
 
-  // @ts-ignore
-  if (!globalThis.__navigationInitialized__) {
-    fs.writeFileSync(outputFile, JSON.stringify([], null, 2), "utf-8");
-    // @ts-ignore
-    globalThis.__navigationInitialized__ = true; // Prevent multiple resets during the build
+  if (fs.existsSync(outputFile)) {
+    fs.unlinkSync(outputFile); // Delete the file if it exists
   }
 
   // @ts-ignore
