@@ -59,5 +59,29 @@
         "items": []
       }
     ]
+  },
+  {
+    "name": "Components",
+    "url": "/components",
+    "description": "Solid Notifications components guide",
+    "order": 2,
+    "tags": [],
+    "items": [
+      {
+        "name": "ToastProvider",
+        "hash": "#toastprovider",
+        "items": []
+      },
+      {
+        "name": "Toaster",
+        "hash": "#toaster",
+        "items": []
+      },
+      {
+        "name": "Toast",
+        "hash": "#toast",
+        "items": []
+      }
+    ]
   }
 ]

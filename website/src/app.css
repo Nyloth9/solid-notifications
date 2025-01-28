@@ -89,3 +89,8 @@ h6 {
     background-position: 0% 50%;
   }
 }
+
+.compact p {
+  margin: 0 !important;
+  padding: 0 !important;
+}

@@ -1,0 +1,128 @@
+---
+title: "Components"
+description: "Solid Notifications components guide"
+slug: "/components"
+order: 2
+tags: []
+---
+
+import Code from "~/components/Code";
+import Title from "~/components/Title";
+import HighlightBlock from "~/components/HighlightBlock";
+
+<Title>Components</Title>
+
+# Components
+
+Solid Notifications provides several key components to manage and display notifications. {{ "class": "lead" }}
+
+## ToastProvider {{"data-nav": "link", "class": "text-blue-500"}}
+
+The `ToastProvider` is a context provider component that manages the state and functionality of toasters within your application. It serves as the central hub for registering, retrieving, and unregistering toasters, as well as providing configuration options for toast notifications.
+
+Wrap your application (or a specific part of it) with the ToastProvider to enable toast functionality. This component should be placed at a high level in your component tree to ensure that all child components have access to the toast context.
+
+<Code lang="tsx">
+
+```tsx
+import { ToastProvider } from "solid-notifications";
+
+export default function App(props) {
+  return <ToastProvider>{props.children}</ToastProvider>;
+}
+```
+
+</Code>
+
+### Props
+
+The ToastProvider accepts the following props:
+
+- **children**: The child components that will have access to the toast context. {{ "class": "compact" }}
+
+- **props**: Any additional options will be merged with the default configuration `defaultConfig`. These options can include settings like toast duration, position, and styling. {{ "class": "compact" }}
+
+### Global Props and Propagation
+
+Props set on the `ToastProvider` are global and apply to all toasters and toasts within its context. These global settings propagate down to individual toasters and toasts, ensuring consistent behavior and styling across your application.
+
+<HighlightBlock type="info">
+  **Local Overrides**: Individual Toasters or Toasts can override global
+  settings. For example, if a specific toast needs a longer duration, you can
+  set a duration directly on that toast, and it will take precedence over the
+  global setting.
+</HighlightBlock>
+
+### Reactive Props
+
+The `ToastProvider` also accepts reactive props. This means you can pass SolidJS signals or derived values as props, and they will dynamically update the global configuration. For example, if you want to change the toast position or theme dynamically based on user preferences, you can pass a signal as the position prop.
+
+---
+
+## Toaster {{"data-nav": "link", "class": "text-blue-500"}}
+
+The `Toaster` component is responsible for rendering and managing a collection of toasts. It acts as a container for toasts, handling their lifecycle, positioning, and behavior based on global and local configuration settings. Each `Toaster` instance is registered with the `ToastProvider` and can be uniquely identified by its `toasterId`.
+
+<Code lang="tsx">
+
+```tsx
+import { Toaster } from "solid-notifications";
+
+export default function App(props) {
+  return (
+    <>
+      <Toaster toasterId="primary" />
+      <Toaster toasterId="secondary" />
+      {props.children}
+    </>
+  );
+}
+```
+
+</Code>
+
+### Key Features
+
+- **Toast Management**: Manages a queue of toasts and renders them based on configuration settings like limit and reverseToastOrder. {{ "class": "compact" }}
+
+- **Dynamic Positioning**: Automatically calculates and updates toast positions based on their height, gutter spacing, and offset. {{ "class": "compact" }}
+
+- **Window Visibility Handling**: Pauses toast progress when the window is inactive (blurred) and resumes when the window is active (focused), depending on configuration. {{ "class": "compact" }}
+
+- **Reactive Configuration**: Supports reactive updates to its configuration, which propagate to all toasts within the toaster. {{ "class": "compact" }}
+
+### Props
+
+The Toaster component accepts the following props:
+
+1.  **Required Props**
+
+        - `toasterId`: required if you have multiple toasters. It uniquely identifies the toaster instance and is used to register and retrieve the toaster from the ToastProvider.
+
+2.  **Toaster and ToastProvider only props**
+    These props can override the global settings provided by the ToastProvider:
+
+            - `limit` - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available.
+
+            - `reverseToastOrder` - If true, toasts are rendered in reverse order (newest at the top/bottom).
+
+            - `offsetX` - Horizontal offset for the toaster's position.
+
+            - `offsetY` - Vertical offset for the toaster's position.
+
+            - `gutter` - Spacing between toasts.
+
+            - `positionX` - Horizontal positioning of the toaster ("left", "center", "right").
+
+            - `positionY` - Vertical positioning of the toaster ("top", "bottom").
+
+            - `renderOnWindowInactive` - If true, toasts will render even when the window is inactive (blurred).
+
+            - `pauseOnWindowInactive` - If true, toast progress will pause when the window is inactive (blurred).
+
+            - `toasterStyle` - Custom styles for the toaster container.
+
+3.  **Shared props**
+    Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
+
+## Toast {{"data-nav": "link", "class": "text-blue-500"}}
