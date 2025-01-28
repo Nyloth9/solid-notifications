@@ -81,6 +81,12 @@ export default function App(props) {
 
 </Code>
 
+<HighlightBlock type="warning">
+  **Multiple Toasters**: If you use multiple toasters, each toaster must have a
+  unique `toasterId`. Any subsequest toast actions will have to be called with a
+  `toasterId` prop to target the correct toaster.
+</HighlightBlock>
+
 ### Key Features
 
 - **Toast Management**: Manages a queue of toasts and renders them based on configuration settings like limit and reverseToastOrder. {{ "class": "compact" }}
