@@ -36,19 +36,15 @@ export default function App(props) {
 
 ### Props
 
-The ToastProvider accepts the following props:
+The ToastProvider accepts [all the config props](/random) and `children`.
 
-- **children**: The child components that will have access to the toast context. {{ "class": "compact" }}
+- #### Global Props and Propagation
 
-- **props**: Any additional options will be merged with the default configuration `defaultConfig`. These options can include settings like toast duration, position, and styling. {{ "class": "compact" }}
+       Props set on the `ToastProvider` are global and apply to all toasters and toasts within its context. These global settings propagate down to individual toasters and toasts, ensuring consistent behavior and styling across your application.
 
-  #### Global Props and Propagation
+- #### Reactive Props
 
-  Props set on the `ToastProvider` are global and apply to all toasters and toasts within its context. These global settings propagate down to individual toasters and toasts, ensuring consistent behavior and styling across your application.
-
-  #### Reactive Props
-
-  The `ToastProvider` also accepts reactive props. This means you can pass SolidJS signals or derived values as props, and they will dynamically update the global configuration. For example, if you want to change the toast position or theme dynamically based on user preferences, you can pass a signal as the position prop.
+       The `ToastProvider` also accepts reactive props. This means you can pass SolidJS signals or derived values as props, and they will dynamically update the global configuration. For example, if you want to change the toast position or theme dynamically based on user preferences, you can pass a signal as the position prop.
 
 <HighlightBlock type="info">
   **Local Overrides**: Individual Toasters or Toasts can override global
@@ -81,8 +77,6 @@ export default function App(props) {
 
 </Code>
 
-### Key Features
-
 - **Multiple Toaster Support**: Allows you to create multiple toasters, each with its own configuration settings. {{ "class": "compact" }}
 
 - **Toast Management**: Manages a queue of toasts and renders them based on configuration settings like limit and reverseToastOrder. {{ "class": "compact" }}
@@ -93,14 +87,16 @@ export default function App(props) {
 
 - **Reactive Configuration**: Supports reactive updates to its configuration, which propagate to all toasts within the toaster. {{ "class": "compact" }}
 
-<HighlightBlock type="warning">
-  **Multiple Toasters**: If you use multiple toasters, each toaster mustbe provided with a
-  unique `toasterId` and toast functions must be called with a `toasterId` prop to target the correct toaster (exceptions apply to specific functions).
-</HighlightBlock>
-
 ### Props
 
-The Toaster component accepts the following props:
+The Toaster component accepts [all the config props](/random) and `toasterId`.
+
+<HighlightBlock type="warning">
+  **Multiple Toasters**: If you use multiple toasters, each toaster must be
+  provided with a unique `toasterId` and toast functions must be called with a
+  `toasterId` prop to target the correct toaster (exceptions apply to specific
+  functions).
+</HighlightBlock>
 
     1.  **Required Props**
 
