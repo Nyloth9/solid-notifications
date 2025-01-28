@@ -1,4 +1,3 @@
-
 # Solid Notifications 🍞
 
 A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
@@ -39,9 +38,22 @@ npm install solid-js
 Here's a quick example to show how easy it is to use:
 
 ```tsx
+import { ToastProvider, Toaster } from "solid-notifications";
+
+export default function App(props) {
+  return (
+    <ToastProvider>
+      <Toaster />
+      {props.children}
+    </ToastProvider>
+  );
+}
+```
+
+```tsx
 import { useToast } from "solid-notifications";
 
-export default function App() {
+export default function AppContent() {
   const { notify } = useToast();
 
   return (
