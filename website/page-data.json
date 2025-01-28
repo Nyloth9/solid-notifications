@@ -45,6 +45,18 @@
     "url": "/quickstart",
     "description": "Solid Notifications quick start guide",
     "tags": [],
-    "items": []
+    "items": [
+      {
+        "name": "Installation",
+        "hash": "#installation",
+        "items": [
+          {
+            "name": "Usage",
+            "hash": "#usage",
+            "items": []
+          }
+        ]
+      }
+    ]
   }
 ]
