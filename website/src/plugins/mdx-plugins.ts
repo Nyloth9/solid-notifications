@@ -48,6 +48,11 @@ function generateJson(options = {}) {
     processedFiles.add(filePath);
 
     if (file.data.frontmatter?.title === "404") return;
+    if (file.data.frontmatter?.order === undefined) {
+      throw new Error(
+        `Missing 'order' frontmatter in file: ${file.data.frontmatter?.title}`,
+      );
+    }
 
     // Initialize the page object with frontmatter data
     const page = {
