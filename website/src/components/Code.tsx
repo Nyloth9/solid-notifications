@@ -11,3 +11,11 @@ export default function Code({ children }: Props) {
     </div>
   );
 }
+
+export function InlineCode({ children }: Props) {
+  return (
+    <div class="child-bg-override rounded-md text-white inline-block -mt-4 mr-1">
+      {children}
+    </div>
+  );
+}

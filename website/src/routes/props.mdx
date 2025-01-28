@@ -6,98 +6,144 @@ order: 3
 tags: []
 ---
 
-import Code from "~/components/Code";
+import Code, { InlineCode } from "~/components/Code";
 import Title from "~/components/Title";
 
 <Title>Props</Title>
 
 # Props
 
+<div />
+
 ## Toaster and ToastProvider only props {{ "data-nav": "link", "id": "toaster-provider-props" }}
 
-These props can override the global settings provided by the ToastProvider:
+Can be applied to all components; `ToastProvider` and `Toaster`.
 
-- **limit** - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to `false` or `0`. \
-  Default value: `false` {{ "class": "mb-2 ", "data-nav": "sublink", "id": "limit" }}
+- **limit** - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to `false` or `0`. {{  "data-nav": "sublink", "id": "limit" }}
 
-     <Code lang="tsx">
+     <InlineCode lang="tsx">
 
   ```tsx
   limit: number | false;
   ```
 
-     </Code>
+     </InlineCode>
 
-- **reverseToastOrder** - If true, toasts are rendered in reverse order (newest at the top/bottom).
+  Default value: `8` {{ "class": "mt-2 text-xs inline" }}
 
-    <Code lang="tsx">
+- **reverseToastOrder** - If true, toasts are rendered in reverse order (newest at the top/bottom). {{ "data-nav": "sublink", "id": "reverse-toast-order" }}
 
-  ```tsx
-  reverseToastOrder: boolean;
-  ```
+    <InlineCode lang="tsx">
 
-    </Code>
+        ```tsx
+        reverseToastOrder: boolean;
+        ```
 
-- **offsetX** - Horizontal offset for the toaster's position.
+    </InlineCode>
 
-  ```tsx
-  offsetX: number;
-  ```
+  Default value: `false` {{ "class": "mt-2 text-xs inline" }}
 
-- **offsetY** - Vertical offset for the toaster's position.
+- **offsetX** - Horizontal offset for the toaster's position. {{ "data-nav": "sublink", "id": "offset-x" }}
 
-  ```tsx
-  offsetY: number;
-  ```
+        <InlineCode lang="tsx">
 
-- **gutter** - Spacing between toasts.
+            ```tsx
+            offsetX: number;
+            ```
 
-  ```tsx
-  gutter: number;
-  ```
+        </InlineCode>
 
-- **positionX** - Horizontal positioning of the toaster ("left", "center", "right").
+  Default value: `16` {{ "class": "mt-2 text-xs"}}
 
-  ```tsx
-  positionX: "left" | "center" | "right";
-  ```
+- **offsetY** - Vertical offset for the toaster's position. {{ "data-nav": "sublink", "id": "offset-y" }}
 
-- **positionY** - Vertical positioning of the toaster ("top", "bottom").
+        <InlineCode lang="tsx">
 
-  ```tsx
-  positionY: "top" | "bottom";
-  ```
+            ```tsx
+            offsetY: number;
+            ```
 
-- **renderOnWindowInactive** - If true, toasts will render even when the window is inactive (blurred).
+        </InlineCode>
 
-  ```tsx
-  renderOnWindowInactive: boolean;
-  ```
+        Default value: `16` {{ "class": "mt-2 text-xs inline" }}
 
-- **pauseOnWindowInactive** - If true, toast progress will pause when the window is inactive (blurred).
+- **gutter** - Spacing between toasts. {{ "data-nav": "sublink", "id": "gutter" }}
 
-  ```tsx
-  pauseOnWindowInactive: boolean;
-  ```
+        <InlineCode lang="tsx">
 
-- **toasterStyle** - Custom styles for the toaster container.
+            ```tsx
+            gutter: number;
+            ```
 
-  ```tsx
-  toasterStyle: Omit<JSX.CSSProperties, "top" | "bottom" | "left" | "right">;
-  ```
+        </InlineCode>
 
-**Shared props**
+          Default value: `16` {{ "class": "mt-2 text-xs inline" }}
+
+- **positionY** - Vertical positioning of the toaster ("top", "bottom"). {{ "data-nav": "sublink", "id": "position-y" }}
+
+        <InlineCode lang="tsx">
+
+            ```tsx
+            positionY: "top" | "bottom";
+            ```
+
+        </InlineCode>
+
+        Default value: `"top"` {{ "class": "mt-2 text-xs inline" }}
+
+- **positionX** - Horizontal positioning of the toaster ("left", "center", "right"). {{ "data-nav": "sublink", "id": "position-x" }}
+
+        <InlineCode lang="tsx">
+
+            ```tsx
+            positionX: "left" | "center" | "right";
+            ```
+
+        </InlineCode>
+
+          Default value: `"right"` {{ "class": "mt-2 text-xs inline" }}
+
+- **renderOnWindowInactive** - If true, toasts will render even when the window is inactive (blurred). {{ "data-nav": "sublink", "id": "render-on-window-inactive" }}
+
+        <InlineCode lang="tsx">
+
+            ```tsx
+            renderOnWindowInactive: boolean;
+            ```
+
+        </InlineCode>
+
+        Default value: `false` {{ "class": "mt-2 text-xs inline" }}
+
+- **pauseOnWindowInactive** - If true, toast progress will pause when the window is inactive (blurred). {{ "data-nav": "sublink", "id": "pause-on-window-inactive" }}
+
+        <InlineCode lang="tsx">
+
+            ```tsx
+            pauseOnWindowInactive: boolean;
+            ```
+
+        </InlineCode>
+
+           Default value: `true` {{ "class": "mt-2 text-xs inline" }}
+
+- **toasterStyle** - Custom styles for the toaster container. {{ "data-nav": "sublink", "id": "toaster-style" }}
+
+        <InlineCode lang="tsx">
+
+            ```tsx
+            toasterStyle: Omit<JSX.CSSProperties, "top" | "bottom" | "left" | "right">;
+            ```
+
+        </InlineCode>
+
+        Default value: `null` {{ "class": "mt-2 text-xs inline" }}
+
+## Shared props {{ "data-nav": "link", "id": "shared-props" }}
+
 Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
-id?: string
-Description: A unique identifier for the toast. If not provided, a unique ID will be automatically generated.
-
-Type: string
-
-Default: Automatically generated.
-
-content?: ToastContent
-Description: The content to be displayed in the toast. This can be a string, JSX element, or a function that returns JSX.
+special props: content {{ "class": "text-red-600" }}
 
 Type: ToastContent (string | JSX.Element | (() => JSX.Element))
 

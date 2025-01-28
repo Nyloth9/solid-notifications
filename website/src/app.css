@@ -94,3 +94,12 @@ h6 {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+.child-bg-override pre,
+.child-bg-override code {
+  @apply rounded-md !bg-slate-800 px-1 py-0 !shadow-none;
+}
+
+.child-bg-override * {
+  @apply !shadow-none;
+}

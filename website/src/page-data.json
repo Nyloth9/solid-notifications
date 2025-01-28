@@ -96,11 +96,61 @@
         "hash": "#toaster-provider-props",
         "items": [
           {
-            "name": " - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to   or  .  \n Default value:  ",
+            "name": " - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to   or  .",
             "hash": "#limit",
+            "items": []
+          },
+          {
+            "name": " - If true, toasts are rendered in reverse order (newest at the top/bottom).",
+            "hash": "#reverse-toast-order",
+            "items": []
+          },
+          {
+            "name": " - Horizontal offset for the toaster's position.",
+            "hash": "#offset-x",
+            "items": []
+          },
+          {
+            "name": " - Vertical offset for the toaster's position.",
+            "hash": "#offset-y",
+            "items": []
+          },
+          {
+            "name": " - Spacing between toasts.",
+            "hash": "#gutter",
+            "items": []
+          },
+          {
+            "name": " - Vertical positioning of the toaster (\"top\", \"bottom\").",
+            "hash": "#position-y",
+            "items": []
+          },
+          {
+            "name": " - Horizontal positioning of the toaster (\"left\", \"center\", \"right\").",
+            "hash": "#position-x",
+            "items": []
+          },
+          {
+            "name": " - If true, toasts will render even when the window is inactive (blurred).",
+            "hash": "#render-on-window-inactive",
+            "items": []
+          },
+          {
+            "name": " - If true, toast progress will pause when the window is inactive (blurred).",
+            "hash": "#pause-on-window-inactive",
+            "items": []
+          },
+          {
+            "name": " - Custom styles for the toaster container.",
+            "hash": "#toaster-style",
             "items": []
           }
         ]
+      },
+      {
+        "name": "Shared props",
+        "hash": "#shared-props",
+        "items": []
       }
     ]
   }
