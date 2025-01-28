@@ -52,7 +52,7 @@ Here's a quick example to show how easy it is to use:
     }
     ```
 
-2. Import the css file:
+2. Import the Solid Notifications css file into your main css file:
 
     ```css
     /* index.css */
