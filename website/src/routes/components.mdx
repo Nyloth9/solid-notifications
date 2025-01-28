@@ -16,9 +16,11 @@ import HighlightBlock from "~/components/HighlightBlock";
 
 Solid Notifications provides several key components to manage and display notifications. {{ "class": "lead" }}
 
-## ToastProvider {{"data-nav": "link", "class": "text-blue-500"}}
+## ToastProvider {{"data-nav": "link", "class": "text-blue-500", "id": "toastprovider"}}
 
-The `ToastProvider` is a context provider component that manages the state and functionality of toasters within your application. It serves as the central hub for registering, retrieving, and unregistering toasters, as well as providing configuration options for toast notifications.
+### `<ToastProvider />`
+
+The ToastProvider is a context provider component that manages the state and functionality of toasters within your application. It serves as the central hub for registering, retrieving, and unregistering toasters, as well as providing configuration options for toast notifications.
 
 Wrap your application (or a specific part of it) with the ToastProvider to enable toast functionality. This component should be placed at a high level in your component tree to ensure that all child components have access to the toast context.
 
@@ -55,9 +57,11 @@ The ToastProvider accepts [all the config props](/random) and `children`.
 
 ---
 
-## Toaster {{"data-nav": "link", "class": "text-blue-500"}}
+## Toaster {{"data-nav": "link", "class": "text-blue-500", "id": "toaster"}}
 
-The `Toaster` component is responsible for rendering and managing a collection of toasts. It acts as a container for toasts, handling their lifecycle, positioning, and behavior based on global and local configuration settings. Each `Toaster` instance is registered with the `ToastProvider` and can be uniquely identified by its `toasterId`.
+### `<Toaster />`
+
+The Toaster component is responsible for rendering and managing a collection of toasts. It acts as a container for toasts, handling their lifecycle, positioning, and behavior based on global and local configuration settings. Each `Toaster` instance is registered with the `ToastProvider` and can be uniquely identified by its `toasterId`.
 
 <Code lang="tsx">
 
@@ -128,4 +132,44 @@ The Toaster component accepts [all the config props](/random) and `toasterId`.
     3.  **Shared props**
         Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
-## Toast {{"data-nav": "link", "class": "text-blue-500"}}
+---
+
+## Toast {{"data-nav": "link", "class": "text-blue-500", "id": "toast"}}
+
+### `class Toast`
+
+The Toast class represents an individual notification message. They are invoked by the provided functions and rendered within a Toaster instance. Each toast can be customized with various options like content, duration, and appearance.
+
+<Code lang="tsx">
+
+```tsx
+import { useToast } from "solid-notifications";
+
+export default function App() {
+  const { notify } = useToast();
+
+  return (
+    <button
+      onClick={() =>
+        notify({
+          content: "Hello, World!",
+          duration: 5000,
+          type: "success",
+          exitCallback: (reason) =>
+            console.log(`Toast exited because: ${reason}`),
+        })
+      }
+    >
+      Show Toast
+    </button>
+  );
+}
+```
+
+</Code>
+
+- **Customizable Content**: Supports custom content, including text, HTML, or JSX elements. {{ "class": "compact" }}
+- **Appearance Options**: Supports various appearance options like type, icon, and theme. {{ "class": "compact" }}
+- **Lifecycle Callbacks**: Provides callbacks for toast lifecycle events like onEnter, onExit, and exitCallback. {{ "class": "compact" }}
+- **Reactive Configuration**: Supports reactive updates to its configuration. {{ "class": "compact" }}
+- **Global and Local Overrides**: Overrides global settings provided by the ToastProvider or Toaster. {{ "class": "compact" }}
