@@ -37,34 +37,46 @@ npm install solid-js
 
 Here's a quick example to show how easy it is to use:
 
-```tsx
-import { ToastProvider, Toaster } from "solid-notifications";
+1. Mount the ToastProvider and Toaster components:
 
-export default function App(props) {
-  return (
-    <ToastProvider>
-      <Toaster />
-      {props.children}
-    </ToastProvider>
-  );
-}
-```
+    ```tsx
+    import { ToastProvider, Toaster } from "solid-notifications";
 
-```tsx
-import { useToast } from "solid-notifications";
+    export default function App(props) {
+      return (
+        <ToastProvider>
+          <Toaster />
+          {props.children}
+        </ToastProvider>
+      );
+    }
+    ```
 
-export default function AppContent() {
-  const { notify } = useToast();
+2. Import the css file:
 
-  return (
-    <div>
-      <button onClick={() => notify("🚀 New toast ready to serve!")}>
-        Create a Toast!
-      </button>
-    </div>
-  );
-}
-```
+    ```css
+    /* index.css */
+
+    @import "solid-notifications/index.css";
+    ```
+
+3. Create toasts:
+
+    ```tsx
+    import { useToast } from "solid-notifications";
+
+    export default function AppContent() {
+      const { notify } = useToast();
+
+      return (
+        <div>
+          <button onClick={() => notify("🚀 New toast ready to serve!")}>
+            Create a Toast!
+          </button>
+        </div>
+      );
+    }
+    ```
 
 For more examples and advanced usage, check out the [documentation](https://solid-notifications.vercel.app/).
 
