@@ -297,7 +297,7 @@ export default function Layout(props: Props) {
                                       <a
                                         class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
                                         onClick={() => setSidebarOpen(false)}
-                                        href={hash}
+                                        href={url + hash}
                                       >
                                         <span class="truncate">{title}</span>
                                       </a>
@@ -343,7 +343,7 @@ export default function Layout(props: Props) {
                                   >
                                     <a
                                       class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
-                                      href={hash}
+                                      href={url + hash}
                                     >
                                       <span class="truncate">{title}</span>
                                     </a>
