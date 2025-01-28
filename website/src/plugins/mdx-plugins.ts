@@ -57,6 +57,7 @@ function generateJson(options = {}) {
           : file.data.frontmatter?.title || "Unknown",
       url: file.data.frontmatter?.slug || "/",
       description: file.data.frontmatter?.description || "",
+      order: file.data.frontmatter?.order ?? Infinity,
       tags: file.data.frontmatter?.tags || [],
       items: [],
     };
@@ -96,18 +97,15 @@ function generateJson(options = {}) {
       navigation = JSON.parse(fs.readFileSync(outputFile, "utf-8"));
     }
 
-    // Check if a page with the same name exists and replace it, otherwise push the new page
-    const existingIndex = navigation.findIndex(
-      // @ts-ignore
-      (item) => item.name === page.name,
-    );
-    if (existingIndex !== -1) {
-      // Replace the existing page
-      navigation[existingIndex] = page;
-    } else {
-      // Push the new page
-      navigation.push(page);
+    // Ensure the navigation array has enough space for the specified `order`
+    if (navigation.length <= page.order) {
+      // If the order index exceeds the length, simply extend the array
+      while (navigation.length <= page.order) {
+        navigation.push({}); // Adding empty objects instead of `null`
+      }
     }
+
+    navigation[page.order] = page;
 
     // Write the updated navigation array to the specified file
     fs.writeFileSync(outputFile, JSON.stringify(navigation, null, 2), "utf-8");

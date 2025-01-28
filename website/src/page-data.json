@@ -1,26 +1,9 @@
 [
   {
-    "name": "Quickstart",
-    "url": "/quickstart",
-    "description": "Solid Notifications quick start guide",
-    "tags": [],
-    "items": [
-      {
-        "name": "Installation",
-        "hash": "#installation",
-        "items": []
-      },
-      {
-        "name": "Usage",
-        "hash": "#usage",
-        "items": []
-      }
-    ]
-  },
-  {
     "name": "Introduction",
     "url": "/",
     "description": "A simple notification system for SolidJS",
+    "order": 0,
     "tags": [
       "test",
       "page",
@@ -54,6 +37,25 @@
       {
         "name": "Core Features:",
         "hash": "#core-features",
+        "items": []
+      }
+    ]
+  },
+  {
+    "name": "Quickstart",
+    "url": "/quickstart",
+    "description": "Solid Notifications quick start guide",
+    "order": 1,
+    "tags": [],
+    "items": [
+      {
+        "name": "Installation",
+        "hash": "#installation",
+        "items": []
+      },
+      {
+        "name": "Usage",
+        "hash": "#usage",
         "items": []
       }
     ]
