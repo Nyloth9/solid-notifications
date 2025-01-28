@@ -61,34 +61,26 @@ function generateJson(options = {}) {
       items: [],
     };
 
-    const itemsStack = [page.items];
+    let lastLink = null; // Tracks the most recent "link" item
 
     visit(tree, "element", (node) => {
       if (node.properties?.["data-nav"]) {
         const item = {
           name: node.children
-            .filter((child: any) => child.type === "text")
-            .map((child: any) => child.value)
+            .filter((child) => child.type === "text")
+            .map((child) => child.value)
             .join(" "),
-          hash: `/${node.properties.id}`, // Remove the `#` prefix
+          hash: `#${node.properties.id}`,
           items: [],
         };
 
         if (node.properties["data-nav"] === "link") {
-          // Add to root-level items
-          itemsStack[0].push(item);
-
-          // Reset the stack and set this item's `items` as the new level
-          while (itemsStack.length > 1) {
-            itemsStack.pop();
-          }
-          itemsStack.unshift(item.items);
-        } else if (node.properties["data-nav"] === "sublink") {
-          // Add to the current sublink stack (most recent link's items)
-          itemsStack[0].push(item);
-
-          // Push this item's `items` for potential nested sublinks
-          itemsStack.unshift(item.items);
+          // Add to the root-level items and set as the last link
+          page.items.push(item);
+          lastLink = item;
+        } else if (node.properties["data-nav"] === "sublink" && lastLink) {
+          // Add to the items of the most recent link
+          lastLink.items.push(item);
         }
       }
     });
@@ -101,7 +93,7 @@ function generateJson(options = {}) {
 
     // Check if a page with the same name exists and replace it, otherwise push the new page
     const existingIndex = navigation.findIndex(
-      (item: any) => item.name === page.name,
+      (item) => item.name === page.name,
     );
     if (existingIndex !== -1) {
       // Replace the existing page
