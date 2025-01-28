@@ -192,6 +192,14 @@ export default function typographyStyles({ theme }: PluginUtils) {
           marginTop: theme("spacing.10"),
           marginBottom: theme("spacing.2"),
         },
+        h4: {
+          color: "var(--tw-prose-headings)",
+          fontSize: theme("fontSize.sm")[0],
+          ...theme("fontSize.sm")[1],
+          fontWeight: "600",
+          marginTop: theme("spacing.10"),
+          marginBottom: theme("spacing.2"),
+        },
 
         // Media
         "img, video, figure": {
@@ -313,7 +321,7 @@ export default function typographyStyles({ theme }: PluginUtils) {
         },
 
         // Overrides
-        ":is(h1, h2, h3) + *": {
+        ":is(h1, h2, h3, h4) + *": {
           marginTop: "0",
         },
         "> :first-child": {

@@ -42,9 +42,13 @@ The ToastProvider accepts the following props:
 
 - **props**: Any additional options will be merged with the default configuration `defaultConfig`. These options can include settings like toast duration, position, and styling. {{ "class": "compact" }}
 
-### Global Props and Propagation
+  #### Global Props and Propagation
 
-Props set on the `ToastProvider` are global and apply to all toasters and toasts within its context. These global settings propagate down to individual toasters and toasts, ensuring consistent behavior and styling across your application.
+  Props set on the `ToastProvider` are global and apply to all toasters and toasts within its context. These global settings propagate down to individual toasters and toasts, ensuring consistent behavior and styling across your application.
+
+  #### Reactive Props
+
+  The `ToastProvider` also accepts reactive props. This means you can pass SolidJS signals or derived values as props, and they will dynamically update the global configuration. For example, if you want to change the toast position or theme dynamically based on user preferences, you can pass a signal as the position prop.
 
 <HighlightBlock type="info">
   **Local Overrides**: Individual Toasters or Toasts can override global
@@ -52,10 +56,6 @@ Props set on the `ToastProvider` are global and apply to all toasters and toasts
   set a duration directly on that toast, and it will take precedence over the
   global setting.
 </HighlightBlock>
-
-### Reactive Props
-
-The `ToastProvider` also accepts reactive props. This means you can pass SolidJS signals or derived values as props, and they will dynamically update the global configuration. For example, if you want to change the toast position or theme dynamically based on user preferences, you can pass a signal as the position prop.
 
 ---
 
@@ -81,13 +81,9 @@ export default function App(props) {
 
 </Code>
 
-<HighlightBlock type="warning">
-  **Multiple Toasters**: If you use multiple toasters, each toaster must have a
-  unique `toasterId`. Any subsequest toast actions will have to be called with a
-  `toasterId` prop to target the correct toaster.
-</HighlightBlock>
-
 ### Key Features
+
+- **Multiple Toaster Support**: Allows you to create multiple toasters, each with its own configuration settings. {{ "class": "compact" }}
 
 - **Toast Management**: Manages a queue of toasts and renders them based on configuration settings like limit and reverseToastOrder. {{ "class": "compact" }}
 
@@ -97,38 +93,43 @@ export default function App(props) {
 
 - **Reactive Configuration**: Supports reactive updates to its configuration, which propagate to all toasts within the toaster. {{ "class": "compact" }}
 
+<HighlightBlock type="warning">
+  **Multiple Toasters**: If you use multiple toasters, each toaster mustbe provided with a
+  unique `toasterId` and toast functions must be called with a `toasterId` prop to target the correct toaster (exceptions apply to specific functions).
+</HighlightBlock>
+
 ### Props
 
 The Toaster component accepts the following props:
 
-1.  **Required Props**
+    1.  **Required Props**
 
-        - `toasterId`: required if you have multiple toasters. It uniquely identifies the toaster instance and is used to register and retrieve the toaster from the ToastProvider.
+            - `toasterId`: required if you have multiple toasters. It uniquely identifies the toaster instance and is used to register and retrieve the toaster from the ToastProvider.
 
-2.  **Toaster and ToastProvider only props**
-    These props can override the global settings provided by the ToastProvider:
+    2.  **Toaster and ToastProvider only props**
+        These props can override the global settings provided by the ToastProvider:
 
-            - `limit` - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available.
+                - `limit` - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available.
 
-            - `reverseToastOrder` - If true, toasts are rendered in reverse order (newest at the top/bottom).
+                - `reverseToastOrder` - If true, toasts are rendered in reverse order (newest at the top/bottom).
 
-            - `offsetX` - Horizontal offset for the toaster's position.
+                - `offsetX` - Horizontal offset for the toaster's position.
 
-            - `offsetY` - Vertical offset for the toaster's position.
+                - `offsetY` - Vertical offset for the toaster's position.
 
-            - `gutter` - Spacing between toasts.
+                - `gutter` - Spacing between toasts.
 
-            - `positionX` - Horizontal positioning of the toaster ("left", "center", "right").
+                - `positionX` - Horizontal positioning of the toaster ("left", "center", "right").
 
-            - `positionY` - Vertical positioning of the toaster ("top", "bottom").
+                - `positionY` - Vertical positioning of the toaster ("top", "bottom").
 
-            - `renderOnWindowInactive` - If true, toasts will render even when the window is inactive (blurred).
+                - `renderOnWindowInactive` - If true, toasts will render even when the window is inactive (blurred).
 
-            - `pauseOnWindowInactive` - If true, toast progress will pause when the window is inactive (blurred).
+                - `pauseOnWindowInactive` - If true, toast progress will pause when the window is inactive (blurred).
 
-            - `toasterStyle` - Custom styles for the toaster container.
+                - `toasterStyle` - Custom styles for the toaster container.
 
-3.  **Shared props**
-    Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
+    3.  **Shared props**
+        Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
 ## Toast {{"data-nav": "link", "class": "text-blue-500"}}
