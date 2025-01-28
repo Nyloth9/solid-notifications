@@ -304,21 +304,50 @@ export default function Layout(props: Props) {
                                 class="mb-4 border-l border-transparent"
                               >
                                 <For each={items}>
-                                  {({ name, hash }) => {
+                                  {({ name, hash, items }) => {
                                     return (
-                                      <li
-                                        class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
-                                      >
-                                        <a
-                                          class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
-                                          href={url + hash}
+                                      <>
+                                        <li
+                                          class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
                                         >
-                                          <span>{name}</span>
-                                        </a>
-                                        <Show when={fullPath() === url + hash}>
-                                          <div class="absolute top-0 h-8 w-px bg-emerald-400" />
-                                        </Show>
-                                      </li>
+                                          <a
+                                            class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
+                                            href={url + hash}
+                                          >
+                                            <span>{name}</span>
+                                          </a>
+                                          <Show
+                                            when={fullPath() === url + hash}
+                                          >
+                                            <div class="absolute top-0 h-8 w-px bg-emerald-400" />
+                                          </Show>
+                                        </li>
+                                        <div>
+                                          <For each={items}>
+                                            {({ name, hash }) => {
+                                              return (
+                                                <li
+                                                  class={`relative rounded-r-md pl-2 ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
+                                                >
+                                                  <a
+                                                    class={`flex justify-between gap-2 py-0.5 pl-4 pr-3 text-xs transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
+                                                    href={url + hash}
+                                                  >
+                                                    <span>{name}</span>
+                                                  </a>
+                                                  <Show
+                                                    when={
+                                                      fullPath() === url + hash
+                                                    }
+                                                  >
+                                                    <div class="absolute left-0 top-0 h-8 w-px bg-emerald-400" />
+                                                  </Show>
+                                                </li>
+                                              );
+                                            }}
+                                          </For>
+                                        </div>
+                                      </>
                                     );
                                   }}
                                 </For>
@@ -390,7 +419,7 @@ export default function Layout(props: Props) {
                                                     fullPath() === url + hash
                                                   }
                                                 >
-                                                  <div class="absolute top-0 h-8 left-0 w-px bg-emerald-400" />
+                                                  <div class="absolute left-0 top-0 h-8 w-px bg-emerald-400" />
                                                 </Show>
                                               </li>
                                             );
