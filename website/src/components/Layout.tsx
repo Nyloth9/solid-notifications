@@ -280,7 +280,7 @@ export default function Layout(props: Props) {
                   <For each={sidebarItems}>
                     {({ title, url, items }) => {
                       return (
-                        <li class="relative mt-6">
+                        <li class="relative">
                           <a
                             href={url}
                             class={`-mb-2 -ml-4 flex items-center rounded py-1 pl-4 text-xs font-semibold ${path() === url ? "text-emerald-500" : "text-slate-900 dark:text-white"}`}
@@ -292,28 +292,33 @@ export default function Layout(props: Props) {
                               class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
                               style="transform: none; transform-origin: 50% 50% 0px;"
                             />
-                            <ul role="list" class="border-l border-transparent">
-                              <For each={items}>
-                                {({ title, hash }) => {
-                                  return (
-                                    <li
-                                      class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
-                                    >
-                                      <a
-                                        class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
-                                        onClick={() => setSidebarOpen(false)}
-                                        href={url + hash}
+                            <Show when={items?.length}>
+                              <ul
+                                role="list"
+                                class="mb-4 border-l border-transparent"
+                              >
+                                <For each={items}>
+                                  {({ title, hash }) => {
+                                    return (
+                                      <li
+                                        class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
                                       >
-                                        <span class="truncate">{title}</span>
-                                      </a>
-                                      <Show when={fullPath() === url + hash}>
-                                        <div class="absolute top-0 h-8 w-px bg-emerald-400" />
-                                      </Show>
-                                    </li>
-                                  );
-                                }}
-                              </For>
-                            </ul>
+                                        <a
+                                          class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
+                                          onClick={() => setSidebarOpen(false)}
+                                          href={url + hash}
+                                        >
+                                          <span class="truncate">{title}</span>
+                                        </a>
+                                        <Show when={fullPath() === url + hash}>
+                                          <div class="absolute top-0 h-8 w-px bg-emerald-400" />
+                                        </Show>
+                                      </li>
+                                    );
+                                  }}
+                                </For>
+                              </ul>
+                            </Show>
                           </div>
                         </li>
                       );
@@ -328,7 +333,7 @@ export default function Layout(props: Props) {
                 <For each={sidebarItems}>
                   {({ title, url, items }) => {
                     return (
-                      <li class="relative mt-6">
+                      <li class="relative">
                         <a
                           href={url}
                           class={`-mb-2 -ml-4 flex items-center rounded py-1 pl-4 text-xs font-semibold ${path() === url ? "text-emerald-500" : "text-slate-900 dark:text-white"}`}
@@ -340,27 +345,32 @@ export default function Layout(props: Props) {
                             class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
                             style="transform: none; transform-origin: 50% 50% 0px;"
                           />
-                          <ul role="list" class="border-l border-transparent">
-                            <For each={items}>
-                              {({ title, hash }) => {
-                                return (
-                                  <li
-                                    class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
-                                  >
-                                    <a
-                                      class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
-                                      href={url + hash}
+                          <Show when={items?.length}>
+                            <ul
+                              role="list"
+                              class="mb-4 border-l border-transparent"
+                            >
+                              <For each={items}>
+                                {({ title, hash }) => {
+                                  return (
+                                    <li
+                                      class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
                                     >
-                                      <span class="truncate">{title}</span>
-                                    </a>
-                                    <Show when={fullPath() === url + hash}>
-                                      <div class="absolute top-0 h-8 w-px bg-emerald-400" />
-                                    </Show>
-                                  </li>
-                                );
-                              }}
-                            </For>
-                          </ul>
+                                      <a
+                                        class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
+                                        href={url + hash}
+                                      >
+                                        <span class="truncate">{title}</span>
+                                      </a>
+                                      <Show when={fullPath() === url + hash}>
+                                        <div class="absolute top-0 h-8 w-px bg-emerald-400" />
+                                      </Show>
+                                    </li>
+                                  );
+                                }}
+                              </For>
+                            </ul>
+                          </Show>
                         </div>
                       </li>
                     );
