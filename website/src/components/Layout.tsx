@@ -22,6 +22,10 @@ const sidebarItems = [
     items: [{ title: "Core features", hash: "#core-features" }],
   },
   {
+    title: "Quickstart",
+    url: "/quickstart",
+  },
+  {
     title: "Guides",
     url: "/guides",
     items: [
@@ -277,11 +281,12 @@ export default function Layout(props: Props) {
                     {({ title, url, items }) => {
                       return (
                         <li class="relative mt-6">
-                          <h2
+                          <a
+                            href={url}
                             class={`-mb-2 -ml-4 flex items-center rounded py-1 pl-4 text-xs font-semibold ${path() === url ? "text-emerald-500" : "text-slate-900 dark:text-white"}`}
                           >
                             {title}
-                          </h2>
+                          </a>
                           <div class="relative mt-3 pl-2">
                             <div
                               class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
@@ -324,11 +329,12 @@ export default function Layout(props: Props) {
                   {({ title, url, items }) => {
                     return (
                       <li class="relative mt-6">
-                        <h2
+                        <a
+                          href={url}
                           class={`-mb-2 -ml-4 flex items-center rounded py-1 pl-4 text-xs font-semibold ${path() === url ? "text-emerald-500" : "text-slate-900 dark:text-white"}`}
                         >
                           {title}
-                        </h2>
+                        </a>
                         <div class="relative mt-3 pl-2">
                           <div
                             class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
@@ -360,186 +366,6 @@ export default function Layout(props: Props) {
                     );
                   }}
                 </For>
-
-                {/*    <li class="relative mt-6">
-                  <h2 class="text-xs font-semibold text-slate-900 dark:text-white">
-                    Guides
-                  </h2>
-                  <div class="relative mt-3 pl-2">
-                    <div
-                      class="absolute inset-x-0 top-0 bg-slate-800/2.5 will-change-transform dark:bg-white/2.5"
-                      style="height: 64px; top: 128px; border-radius: 8px; opacity: 1; transform: none; transform-origin: 50% 50% 0px;"
-                    />
-                    <div
-                      class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
-                      style="transform: none; transform-origin: 50% 50% 0px;"
-                    />
-                    <div
-                      class="absolute left-2 h-6 w-px bg-emerald-500"
-                      style="top: 132px; opacity: 1; transform: none; transform-origin: 50% 50% 0px;"
-                    />
-                    <ul role="list" class="border-l border-transparent">
-                      <li class="relative">
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/"
-                        >
-                          <span class="truncate">Introduction</span>
-                        </a>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/quickstart"
-                        >
-                          <span class="truncate">Quickstart</span>
-                        </a>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/sdks"
-                        >
-                          <span class="truncate">SDKs</span>
-                        </a>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/authentication"
-                        >
-                          <span class="truncate">Authentication</span>
-                        </a>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-900 transition dark:text-white"
-                          href="/pagination"
-                          aria-current="page"
-                        >
-                          <span class="truncate">Pagination</span>
-                        </a>
-                        <ul role="list" style="opacity: 1;">
-                          <li>
-                            <a
-                              class="flex justify-between gap-2 py-1 pl-7 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                              href="/pagination#example-using-cursors"
-                            >
-                              <span class="truncate">
-                                Example using cursors
-                              </span>
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/errors"
-                        >
-                          <span class="truncate">Errors</span>
-                        </a>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/webhooks"
-                        >
-                          <span class="truncate">Webhooks</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="relative mt-6">
-                  <h2
-                    class="text-xs font-semibold text-slate-900 dark:text-white"
-                    style="transform: none; transform-origin: 50% 50% 0px;"
-                  >
-                    Resources
-                  </h2>
-                  <div class="relative mt-3 pl-2">
-                    <div
-                      class="absolute inset-y-0 left-2 w-px bg-slate-900/10 dark:bg-white/5"
-                      style="transform: none; transform-origin: 50% 50% 0px;"
-                    />
-                    <ul role="list" class="border-l border-transparent">
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/contacts"
-                        >
-                          <span class="truncate">Contacts</span>
-                        </a>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/conversations"
-                        >
-                          <span class="truncate">Conversations</span>
-                        </a>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/messages"
-                        >
-                          <span class="truncate">Messages</span>
-                        </a>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/groups"
-                        >
-                          <span class="truncate">Groups</span>
-                        </a>
-                      </li>
-                      <li
-                        class="relative"
-                        style="transform: none; transform-origin: 50% 50% 0px;"
-                      >
-                        <a
-                          class="flex justify-between gap-2 py-1 pl-4 pr-3 text-sm text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                          href="/attachments"
-                        >
-                          <span class="truncate">Attachments</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li> */}
               </ul>
             </nav>
           </div>
