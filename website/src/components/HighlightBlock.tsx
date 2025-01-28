@@ -21,32 +21,27 @@ export default function HighlightBlock(props: Props) {
           aria-hidden="true"
           class="mt-1 h-4 w-4 flex-none fill-emerald-500 stroke-white dark:fill-emerald-200/20 dark:stroke-emerald-200"
         >
-          <circle cx="8" cy="8" r="8" stroke-width="0"></circle>
+          <circle cx="8" cy="8" r="8" stroke-width="0" />
           <path
             fill="none"
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="1.5"
             d="M6.75 7.75h1.5v3.5"
-          ></path>
-          <circle cx="8" cy="4" r=".5" fill="none"></circle>
+          />
+          <circle cx="8" cy="4" r=".5" fill="none" />
         </svg>
       </Show>
 
       <Show when={props.type === "warning"}>
         <svg
-          viewBox="0 0 52 52"
-          aria-hidden="true"
-          class="mt-1 h-4 w-4 flex-none fill-yellow-500 stroke-white dark:fill-yellow-200/10 dark:stroke-yellow-200"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+          class="mt-1 h-4 w-4 flex-none fill-yellow-500 stroke-white dark:fill-yellow-200/20 dark:stroke-yellow-200"
         >
-          <circle cx="26" cy="26" r="26" stroke-width="0" />
-          <path
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="3"
-            d="M26 9v8M26 22v22"
-          />
+          <circle cx="8" cy="8" r="8" stroke-width="0" />
+          <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0z" />
         </svg>
       </Show>
 
