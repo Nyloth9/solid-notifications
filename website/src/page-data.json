@@ -83,5 +83,25 @@
         "items": []
       }
     ]
+  },
+  {
+    "name": "Props",
+    "url": "/props",
+    "description": "Solid Notifications props guide",
+    "order": 3,
+    "tags": [],
+    "items": [
+      {
+        "name": "Toaster and ToastProvider only props",
+        "hash": "#toaster-provider-props",
+        "items": [
+          {
+            "name": " - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to   or  .  \n Default value:  ",
+            "hash": "#limit",
+            "items": []
+          }
+        ]
+      }
+    ]
   }
 ]

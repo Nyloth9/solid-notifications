@@ -102,36 +102,6 @@ The Toaster component accepts [all the config props](/random) and `toasterId`.
   functions).
 </HighlightBlock>
 
-    1.  **Required Props**
-
-            - `toasterId`: required if you have multiple toasters. It uniquely identifies the toaster instance and is used to register and retrieve the toaster from the ToastProvider.
-
-    2.  **Toaster and ToastProvider only props**
-        These props can override the global settings provided by the ToastProvider:
-
-                - `limit` - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available.
-
-                - `reverseToastOrder` - If true, toasts are rendered in reverse order (newest at the top/bottom).
-
-                - `offsetX` - Horizontal offset for the toaster's position.
-
-                - `offsetY` - Vertical offset for the toaster's position.
-
-                - `gutter` - Spacing between toasts.
-
-                - `positionX` - Horizontal positioning of the toaster ("left", "center", "right").
-
-                - `positionY` - Vertical positioning of the toaster ("top", "bottom").
-
-                - `renderOnWindowInactive` - If true, toasts will render even when the window is inactive (blurred).
-
-                - `pauseOnWindowInactive` - If true, toast progress will pause when the window is inactive (blurred).
-
-                - `toasterStyle` - Custom styles for the toaster container.
-
-    3.  **Shared props**
-        Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
-
 ---
 
 ## Toast {{"data-nav": "link", "class": "text-blue-500", "id": "toast"}}
@@ -151,8 +121,7 @@ export default function App() {
   return (
     <button
       onClick={() =>
-        notify({
-          content: "Hello, World!",
+        notify("Hello, World!", {
           duration: 5000,
           type: "success",
           exitCallback: (reason) =>

@@ -1,0 +1,148 @@
+---
+title: "Props"
+description: "Solid Notifications props guide"
+slug: "/props"
+order: 3
+tags: []
+---
+
+import Code from "~/components/Code";
+import Title from "~/components/Title";
+
+<Title>Props</Title>
+
+# Props
+
+## Toaster and ToastProvider only props {{ "data-nav": "link", "id": "toaster-provider-props" }}
+
+These props can override the global settings provided by the ToastProvider:
+
+- **limit** - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to `false` or `0`. \
+  Default value: `false` {{ "class": "mb-2 ", "data-nav": "sublink", "id": "limit" }}
+
+     <Code lang="tsx">
+
+  ```tsx
+  limit: number | false;
+  ```
+
+     </Code>
+
+- **reverseToastOrder** - If true, toasts are rendered in reverse order (newest at the top/bottom).
+
+    <Code lang="tsx">
+
+  ```tsx
+  reverseToastOrder: boolean;
+  ```
+
+    </Code>
+
+- **offsetX** - Horizontal offset for the toaster's position.
+
+  ```tsx
+  offsetX: number;
+  ```
+
+- **offsetY** - Vertical offset for the toaster's position.
+
+  ```tsx
+  offsetY: number;
+  ```
+
+- **gutter** - Spacing between toasts.
+
+  ```tsx
+  gutter: number;
+  ```
+
+- **positionX** - Horizontal positioning of the toaster ("left", "center", "right").
+
+  ```tsx
+  positionX: "left" | "center" | "right";
+  ```
+
+- **positionY** - Vertical positioning of the toaster ("top", "bottom").
+
+  ```tsx
+  positionY: "top" | "bottom";
+  ```
+
+- **renderOnWindowInactive** - If true, toasts will render even when the window is inactive (blurred).
+
+  ```tsx
+  renderOnWindowInactive: boolean;
+  ```
+
+- **pauseOnWindowInactive** - If true, toast progress will pause when the window is inactive (blurred).
+
+  ```tsx
+  pauseOnWindowInactive: boolean;
+  ```
+
+- **toasterStyle** - Custom styles for the toaster container.
+
+  ```tsx
+  toasterStyle: Omit<JSX.CSSProperties, "top" | "bottom" | "left" | "right">;
+  ```
+
+**Shared props**
+Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
+
+id?: string
+Description: A unique identifier for the toast. If not provided, a unique ID will be automatically generated.
+
+Type: string
+
+Default: Automatically generated.
+
+content?: ToastContent
+Description: The content to be displayed in the toast. This can be a string, JSX element, or a function that returns JSX.
+
+Type: ToastContent (string | JSX.Element | (() => JSX.Element))
+
+| **Property**             | **Type**                                                                        | **Description**                                                                                         | **Default**             |
+| ------------------------ | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `id`                     | `string`                                                                        | Unique identifier for the toast.                                                                        | Automatically generated |
+| `content`                | `ToastContent`                                                                  | The content to display inside the toast.                                                                | `undefined`             |
+| `contentType`            | `"static" \| "dynamic"`                                                         | Specifies whether the content is static or dynamically updated.                                         | `"static"`              |
+| `theme`                  | `string \| undefined \| null`                                                   | Theme to apply to the toast.                                                                            | `undefined`             |
+| `toasterId`              | `string`                                                                        | ID of the toaster instance the toast belongs to.                                                        | `undefined`             |
+| `type`                   | `ToastType`                                                                     | Type of toast (e.g., success, error, info, etc.).                                                       | `undefined`             |
+| `duration`               | `number \| false`                                                               | How long (in milliseconds) the toast should remain visible. Set `false` to disable automatic dismissal. | `5000`                  |
+| `onEnter`                | `string \| undefined`                                                           | Custom animation class for the toast enter transition.                                                  | `undefined`             |
+| `enterDuration`          | `number`                                                                        | Duration (in milliseconds) of the enter animation.                                                      | `300`                   |
+| `onExit`                 | `string \| undefined`                                                           | Custom animation class for the toast exit transition.                                                   | `undefined`             |
+| `exitDuration`           | `number`                                                                        | Duration (in milliseconds) of the exit animation.                                                       | `300`                   |
+| `onIdle`                 | `string \| undefined`                                                           | Custom animation class for the idle state.                                                              | `undefined`             |
+| `positionY`              | `"top" \| "bottom"`                                                             | Vertical position of the toast.                                                                         | `"top"`                 |
+| `positionX`              | `"left" \| "right" \| "center"`                                                 | Horizontal position of the toast.                                                                       | `"center"`              |
+| `offsetX`                | `number`                                                                        | Horizontal offset (in pixels) from the defined position.                                                | `0`                     |
+| `offsetY`                | `number`                                                                        | Vertical offset (in pixels) from the defined position.                                                  | `0`                     |
+| `gutter`                 | `number`                                                                        | Space (in pixels) between toasts in the stack.                                                          | `8`                     |
+| `limit`                  | `number \| false`                                                               | Maximum number of toasts to display simultaneously. Set `false` for no limit.                           | `false`                 |
+| `reverseToastOrder`      | `boolean`                                                                       | Whether to reverse the order of toasts in the stack.                                                    | `false`                 |
+| `pauseOnHover`           | `boolean`                                                                       | Pause the timer when the user hovers over the toast.                                                    | `true`                  |
+| `pauseOnWindowInactive`  | `boolean`                                                                       | Pause the timer when the browser window loses focus.                                                    | `true`                  |
+| `renderOnWindowInactive` | `boolean`                                                                       | Whether to render the toast when the browser window is inactive.                                        | `true`                  |
+| `class`                  | `string \| ((args: ToastContext) => string)`                                    | Custom CSS class for the toast. Accepts a string or a function returning a string.                      | `undefined`             |
+| `style`                  | `JSX.CSSProperties \| ((args: ToastContext) => JSX.CSSProperties) \| undefined` | Inline styles for the toast. Accepts a style object or a function returning a style object.             | `undefined`             |
+| `wrapperClass`           | `string \| ((args: ToastContext) => string)`                                    | Custom CSS class for the toast wrapper.                                                                 | `undefined`             |
+| `wrapperStyle`           | `JSX.CSSProperties \| ((args: ToastContext) => JSX.CSSProperties) \| undefined` | Inline styles for the toast wrapper.                                                                    | `undefined`             |
+| `enterCallback`          | `(() => void) \| null`                                                          | Callback function executed when the toast enters.                                                       | `null`                  |
+| `updateCallback`         | `(() => void) \| null`                                                          | Callback function executed when the toast updates.                                                      | `null`                  |
+| `exitCallback`           | `((reason?: boolean \| string) => void) \| null`                                | Callback function executed when the toast exits.                                                        | `null`                  |
+| `showDismissButton`      | `boolean`                                                                       | Whether to show a dismiss button on the toast.                                                          | `true`                  |
+| `dismissButtonClass`     | `string \| ((args: ToastContext) => string)`                                    | Custom CSS class for the dismiss button.                                                                | `undefined`             |
+| `dismissButtonStyle`     | `JSX.CSSProperties \| ((args: ToastContext) => JSX.CSSProperties) \| undefined` | Inline styles for the dismiss button.                                                                   | `undefined`             |
+| `dismissOnClick`         | `boolean`                                                                       | Whether clicking the toast dismisses it.                                                                | `true`                  |
+| `toasterStyle`           | `Omit<JSX.CSSProperties, "top", "bottom", "left", "right", ...>`                | Inline styles for the toaster. Excludes certain properties like position-related styles.                | `null`                  |
+| `showProgressBar`        | `boolean`                                                                       | Whether to show a progress bar on the toast.                                                            | `true`                  |
+| `progressBarClass`       | `string \| ((args: ToastContext) => string)`                                    | Custom CSS class for the progress bar.                                                                  | `undefined`             |
+| `progressBarStyle`       | `JSX.CSSProperties \| ((args: ToastContext) => JSX.CSSProperties) \| undefined` | Inline styles for the progress bar.                                                                     | `undefined`             |
+| `showIcon`               | `boolean`                                                                       | Whether to show an icon in the toast.                                                                   | `true`                  |
+| `icon`                   | `((args: ToastContext) => JSX.Element) \| JSX.Element \| null`                  | Custom icon for the toast. Accepts a JSX element or a function returning a JSX element.                 | `null`                  |
+| `dragToDismiss`          | `boolean`                                                                       | Whether dragging the toast dismisses it.                                                                | `true`                  |
+| `dragTreshold`           | `number`                                                                        | Distance (in pixels) required to dismiss the toast via dragging.                                        | `50`                    |
+| `ariaLive`               | `"off" \| "assertive" \| "polite"`                                              | ARIA `live` attribute for screen readers.                                                               | `"polite"`              |
+| `role`                   | `"status" \| "alert"`                                                           | ARIA `role` attribute for screen readers.                                                               | `"status"`              |
