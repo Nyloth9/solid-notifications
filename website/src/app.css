@@ -100,6 +100,10 @@ h6 {
   @apply rounded-md !bg-slate-800 px-1 py-0 !shadow-none;
 }
 
+.child-bg-override pre {
+  overflow-x: auto;
+}
+
 .child-bg-override * {
   @apply !shadow-none;
 }
