@@ -14,7 +14,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup && ncp index.css dist/index.css",
+    "build": "tsup --config ../tsup.config.ts && ncp index.css dist/index.css",
     "prepublishOnly": "npm run build"
   },
   "exports": {
