@@ -113,15 +113,12 @@ class Toast {
       this.store.toasterConfig.limit &&
       this.store.rendered.length >= this.store.toasterConfig.limit;
 
-    if (isLimitReached)
-      return this.setStore("queued", [...this.store.queued, this]);
-
     const shouldQueueDueToBlur =
       this.store.isWindowBlurred &&
       !this.store.toasterConfig.renderOnWindowInactive;
 
-    if (shouldQueueDueToBlur)
-      return this.setStore("queued", [this, ...this.store.queued]);
+    if (isLimitReached || shouldQueueDueToBlur)
+      return this.setStore("queued", [...this.store.queued, this]);
 
     this.setStore("rendered", [this, ...this.store.rendered]);
   }

@@ -39,7 +39,7 @@ render(() => {
   return (
     <ToastProvider theme={theme()}>
       <Toaster
-        toasterId="toaster-1"
+        toasterId="toaster-1" limit={3}
         /*         wrapperStyle={style()} */
       />
       <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder />

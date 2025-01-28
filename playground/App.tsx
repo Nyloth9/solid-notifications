@@ -159,6 +159,13 @@ const App: Component = () => {
           </button>
 
           <button
+            onClick={() => notify()}
+            class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
+          >
+            Create default toast
+          </button>
+
+          <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => clearQueue()}
           >
