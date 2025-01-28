@@ -78,7 +78,8 @@ function generateJson(options = {}) {
             .filter((child) => child.type === "text")
             // @ts-ignore
             .map((child) => child.value)
-            .join(" "),
+            .join(" ")
+            .replace(/:$/, ""),
           hash: `#${node.properties.id}`,
           items: [],
         };
