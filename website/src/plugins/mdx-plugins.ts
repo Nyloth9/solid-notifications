@@ -91,7 +91,9 @@ function generateJson(options = {}) {
           lastLink = item;
           // @ts-ignore
         } else if (node.properties["data-nav"] === "sublink" && lastLink) {
-          // Add to the items of the most recent link
+          // Add to the items of the most recent
+          item.name = node.properties.id;
+
           lastLink.items.push(item);
         }
       }

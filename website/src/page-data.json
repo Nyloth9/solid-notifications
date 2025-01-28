@@ -96,53 +96,53 @@
         "hash": "#toaster-provider-props",
         "items": [
           {
-            "name": " - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to   or  .",
+            "name": "limit",
             "hash": "#limit",
             "items": []
           },
           {
-            "name": " - If true, toasts are rendered in reverse order (newest at the top/bottom).",
-            "hash": "#reverse-toast-order",
+            "name": "reverseToastOrder",
+            "hash": "#reverseToastOrder",
             "items": []
           },
           {
-            "name": " - Horizontal offset for the toaster's position.",
-            "hash": "#offset-x",
+            "name": "offsetX",
+            "hash": "#offsetX",
             "items": []
           },
           {
-            "name": " - Vertical offset for the toaster's position.",
-            "hash": "#offset-y",
+            "name": "offsetY",
+            "hash": "#offsetY",
             "items": []
           },
           {
-            "name": " - Spacing between toasts.",
+            "name": "gutter",
             "hash": "#gutter",
             "items": []
           },
           {
-            "name": " - Vertical positioning of the toaster (\"top\", \"bottom\").",
-            "hash": "#position-y",
+            "name": "positionY",
+            "hash": "#positionY",
             "items": []
           },
           {
-            "name": " - Horizontal positioning of the toaster (\"left\", \"center\", \"right\").",
-            "hash": "#position-x",
+            "name": "positionX",
+            "hash": "#positionX",
             "items": []
           },
           {
-            "name": " - If true, toasts will render even when the window is inactive (blurred).",
-            "hash": "#render-on-window-inactive",
+            "name": "renderOnWindowInactive",
+            "hash": "#renderOnWindowInactive",
             "items": []
           },
           {
-            "name": " - If true, toast progress will pause when the window is inactive (blurred).",
-            "hash": "#pause-on-window-inactive",
+            "name": "pauseOnWindowInactive",
+            "hash": "#pauseOnWindowInactive",
             "items": []
           },
           {
-            "name": " - Custom styles for the toaster container.",
-            "hash": "#toaster-style",
+            "name": "toasterStyle",
+            "hash": "#toasterStyle",
             "items": []
           }
         ]
