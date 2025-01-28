@@ -1,0 +1,71 @@
+---
+title: "Quickstart"
+description: "Solid Notifications quick start guide"
+slug: "/quickstart"
+tags: []
+---
+
+import Code from "~/components/Code";
+
+# Quickstart
+
+Here's a quick example to show how easy it is to use: {{ "class": "lead" }}
+
+### 1. Mount the ToastProvider and Toaster components:
+
+Wrap your app with the `ToastProvider` component. Put the `Toaster` component anywhere in the component tree to display toasts.
+
+<Code lang="tsx">
+
+```tsx
+import { ToastProvider, Toaster } from "solid-notifications";
+
+export default function App(props) {
+  return (
+    <ToastProvider>
+      <Toaster />
+      {props.children}
+    </ToastProvider>
+  );
+}
+```
+
+</Code>
+
+### 2. Import the Solid Notifications css file into your main css file:
+
+It can also be imported directly into the main component file.
+
+<Code lang="css">
+
+```css
+/* index.css */
+
+@import "solid-notifications/index.css";
+```
+
+</Code>
+
+### 3. Create toasts:
+
+Use the `useToast` hook to access the `notify` function and other toast functionality.
+
+<Code lang="tsx">
+
+```tsx
+import { useToast } from "solid-notifications";
+
+export default function AppContent() {
+  const { notify } = useToast();
+
+  return (
+    <div>
+      <button onClick={() => notify("🚀 New toast ready to serve!")}>
+        Create a Toast!
+      </button>
+    </div>
+  );
+}
+```
+
+</Code>
