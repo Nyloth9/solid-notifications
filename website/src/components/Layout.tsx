@@ -69,10 +69,11 @@ export default function Layout(props: Props) {
 
   const handleScrollToHash = (event: any) => {
     const link = event.target.closest('a[href*="#"]');
+
     if (!link) return;
 
     const href = link.getAttribute("href");
-    const targetElement = document.getElementById(href.substring(1));
+    const targetElement = document.getElementById(href.substring(2));
 
     targetElement?.scrollIntoView();
   };
@@ -80,6 +81,7 @@ export default function Layout(props: Props) {
   createEffect(() => {
     setPath(location.pathname);
     setFullPath(location.pathname + location.hash);
+    setSidebarOpen(false);
   });
 
   onMount(() => {
@@ -305,7 +307,6 @@ export default function Layout(props: Props) {
                                       >
                                         <a
                                           class={`flex justify-between gap-2 py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"}`}
-                                          onClick={() => setSidebarOpen(false)}
                                           href={url + hash}
                                         >
                                           <span class="truncate">{title}</span>

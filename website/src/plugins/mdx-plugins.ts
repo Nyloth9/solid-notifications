@@ -39,7 +39,7 @@ const addFrontmatter = () => (_tree: any, file: any) => {
 
 function generateJson(options = {}) {
   // @ts-ignore
-  const { outputFile = "page-data.json" } = options;
+  const { outputFile = "./src/page-data.json" } = options;
 
   // @ts-ignore
   return (tree, file) => {
@@ -70,20 +70,25 @@ function generateJson(options = {}) {
             .filter((child: any) => child.type === "text")
             .map((child: any) => child.value)
             .join(" "),
-          hash: `#${node.properties.id}`,
+          hash: `/${node.properties.id}`, // Remove the `#` prefix
           items: [],
         };
 
         if (node.properties["data-nav"] === "link") {
           // Add to root-level items
-          // @ts-ignore
           itemsStack[0].push(item);
-          // Push new item for sublinks
+
+          // Reset the stack and set this item's `items` as the new level
+          while (itemsStack.length > 1) {
+            itemsStack.pop();
+          }
           itemsStack.unshift(item.items);
         } else if (node.properties["data-nav"] === "sublink") {
-          // Add to the current sublink stack
-          // @ts-ignore
+          // Add to the current sublink stack (most recent link's items)
           itemsStack[0].push(item);
+
+          // Push this item's `items` for potential nested sublinks
+          itemsStack.unshift(item.items);
         }
       }
     });
