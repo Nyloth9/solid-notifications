@@ -61,13 +61,16 @@ function generateJson(options = {}) {
       items: [],
     };
 
+    // @ts-ignore
     let lastLink = null; // Tracks the most recent "link" item
 
     visit(tree, "element", (node) => {
       if (node.properties?.["data-nav"]) {
         const item = {
           name: node.children
+            // @ts-ignore
             .filter((child) => child.type === "text")
+            // @ts-ignore
             .map((child) => child.value)
             .join(" "),
           hash: `#${node.properties.id}`,
@@ -76,8 +79,10 @@ function generateJson(options = {}) {
 
         if (node.properties["data-nav"] === "link") {
           // Add to the root-level items and set as the last link
+          // @ts-ignore
           page.items.push(item);
           lastLink = item;
+          // @ts-ignore
         } else if (node.properties["data-nav"] === "sublink" && lastLink) {
           // Add to the items of the most recent link
           lastLink.items.push(item);
@@ -93,6 +98,7 @@ function generateJson(options = {}) {
 
     // Check if a page with the same name exists and replace it, otherwise push the new page
     const existingIndex = navigation.findIndex(
+      // @ts-ignore
       (item) => item.name === page.name,
     );
     if (existingIndex !== -1) {
