@@ -155,12 +155,12 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
       Default value: `"light"` {{ "class": "mt-3 text-xs" }}
 
-- **type** - The type of the toast. Can be `default`, `success`, `error`, `info`, `warning` and `loading`. {{ "class": "mb-2", "data-nav": "sublink", "id": "type" }}
+- **type** - The type of the toast. Can be "default", "success", "error", "info", "warning" and "loading". {{ "class": "mb-2", "data-nav": "sublink", "id": "type" }}
 
     <InlineCode lang="tsx">
 
   ```tsx
-  type: ToastType;
+  type: "default" | "success" | "error" | "loading" | "warning" | "info";
   ```
 
     </InlineCode>
