@@ -140,10 +140,10 @@ export interface ToastContext {
 
 export interface Config {
   id?: string;
+  toasterId?: string;
   content?: ToastContent;
   contentType?: "static" | "dynamic";
   theme: string | undefined | null;
-  toasterId?: string;
   type: ToastType;
   duration: number | false;
   onEnter: string | undefined;
