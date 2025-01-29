@@ -312,7 +312,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
     <InlineCode lang="tsx">
 
       ```tsx
-        enterCallback: () => void;
+      enterCallback: () => void;
       ```
 
     </InlineCode>
@@ -324,7 +324,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
     <InlineCode lang="tsx">
 
       ```tsx
-        updateCallback: () => void;
+      updateCallback: () => void;
       ```
 
     </InlineCode>
@@ -336,7 +336,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
     <InlineCode lang="tsx">
 
       ```tsx
-        exitCallback: (reason?: boolean | string) => void;
+      exitCallback: (reason?: boolean | string) => void;
       ```
 
     </InlineCode>
@@ -444,7 +444,10 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
         <InlineCode lang="tsx">
 
       ```tsx
-      icon: ((args: ToastContext) => JSX.Element) | JSX.Element | null;
+      icon: ((args: args: {
+        theme: string | undefined | null;
+        type: "default" | "success" | "error" | "loading" | "warning" | "info";
+        }) => JSX.Element) | JSX.Element | null;
       ```
 
         </InlineCode>
