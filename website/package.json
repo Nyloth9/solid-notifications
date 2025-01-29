@@ -21,7 +21,7 @@
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.0.11",
     "solid-js": "^1.9.2",
-    "this-is-a-test-package-987": "^1.0.12",
+    "this-is-a-test-package-987": "^1.0.13",
     "vinxi": "^0.4.3"
   },
   "devDependencies": {

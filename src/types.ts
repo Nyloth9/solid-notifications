@@ -28,7 +28,8 @@ export type ToastType =
   | "warning"
   | "info";
 
-export interface ToastProviderOptions extends ToasterOptions {
+export interface ToastProviderOptions
+  extends Omit<ToasterOptions, "toasterId"> {
   children: JSX.Element;
 }
 

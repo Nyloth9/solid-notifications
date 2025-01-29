@@ -17,7 +17,7 @@ import Title from "~/components/Title";
 
 ## Toaster and ToastProvider only props {{ "data-nav": "link", "id": "toaster-provider-props" }}
 
-Can be applied to components `ToastProvider` and `Toaster`.
+Can be applied to `ToastProvider` and `Toaster`.
 
 - **limit** - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to `false` or `0`. {{ "class" : "mb-2",  "data-nav": "sublink", "id": "limit" }}
 
@@ -29,7 +29,7 @@ Can be applied to components `ToastProvider` and `Toaster`.
 
      </InlineCode>
 
-  Default value: `8` {{ "class": "mt-2 text-xs" }}
+  Default value: `8` {{ "class": "mt-3 text-xs" }}
 
 - **reverseToastOrder** - If true, toasts are rendered in reverse order (newest at the top/bottom). {{ "class" : "mb-2", "data-nav": "sublink", "id": "reverseToastOrder" }}
 
@@ -41,7 +41,7 @@ Can be applied to components `ToastProvider` and `Toaster`.
 
     </InlineCode>
 
-  Default value: `false` {{ "class": "mt-2 text-xs" }}
+  Default value: `false` {{ "class": "mt-3 text-xs" }}
 
 - **offsetX** - Horizontal offset for the toaster's position. {{ "class" : "mb-2", "data-nav": "sublink", "id": "offsetX" }}
 
@@ -65,7 +65,7 @@ Can be applied to components `ToastProvider` and `Toaster`.
 
         </InlineCode>
 
-        Default value: `16` {{ "class": "mt-2 text-xs" }}
+        Default value: `16` {{ "class": "mt-3 text-xs" }}
 
 - **gutter** - Spacing between toasts. {{ "class" : "mb-2", "data-nav": "sublink", "id": "gutter" }}
 
@@ -77,7 +77,7 @@ Can be applied to components `ToastProvider` and `Toaster`.
 
         </InlineCode>
 
-          Default value: `16` {{ "class": "mt-2 text-xs" }}
+          Default value: `16` {{ "class": "mt-3 text-xs" }}
 
 - **positionY** - Vertical positioning of the toaster. {{ "class" : "mb-2", "data-nav": "sublink", "id": "positionY" }}
 
@@ -89,7 +89,7 @@ Can be applied to components `ToastProvider` and `Toaster`.
 
         </InlineCode>
 
-        Default value: `"top"` {{ "class": "mt-2 text-xs" }}
+        Default value: `"top"` {{ "class": "mt-3 text-xs" }}
 
 - **positionX** - Horizontal positioning of the toaster. {{ "class" : "mb-2", "data-nav": "sublink", "id": "positionX" }}
 
@@ -101,7 +101,7 @@ Can be applied to components `ToastProvider` and `Toaster`.
 
         </InlineCode>
 
-          Default value: `"right"` {{ "class": "mt-2 text-xs" }}
+          Default value: `"right"` {{ "class": "mt-3 text-xs" }}
 
 - **renderOnWindowInactive** - If true, toasts will render even when the window is inactive (blurred). {{ "class" : "mb-2", "data-nav": "sublink", "id": "renderOnWindowInactive" }}
 
@@ -113,7 +113,7 @@ Can be applied to components `ToastProvider` and `Toaster`.
 
         </InlineCode>
 
-        Default value: `false` {{ "class": "mt-2 text-xs" }}
+        Default value: `false` {{ "class": "mt-3 text-xs" }}
 
 - **pauseOnWindowInactive** - If true, toast progress will pause when the window is inactive (blurred). {{ "class" : "mb-2", "data-nav": "sublink", "id": "pauseOnWindowInactive" }}
 
@@ -125,7 +125,7 @@ Can be applied to components `ToastProvider` and `Toaster`.
 
         </InlineCode>
 
-           Default value: `true` {{ "class": "mt-2 text-xs" }}
+           Default value: `true` {{ "class": "mt-3 text-xs" }}
 
 - **toasterStyle** - Custom styles for the toaster container. {{ "class" : "mb-2", "data-nav": "sublink", "id": "toasterStyle" }}
 
@@ -137,13 +137,163 @@ Can be applied to components `ToastProvider` and `Toaster`.
 
         </InlineCode>
 
-        Default value: `null` {{ "class": "mt-2 text-xs" }}
+        Default value: `null` {{ "class": "mt-3 text-xs" }}
 
 ## Shared props {{ "data-nav": "link", "id": "shared-props" }}
 
 Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
-special props: content {{ "class": "text-red-600" }}
+- **theme** - The theme of the toast (can be a string, `undefined`, or `null`). Two theme types are included; `light` and `dark`, but any string can be provided. {{ "class": "mb-2", "data-nav": "sublink", "id": "theme" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  theme?: string | undefined | null;
+  ```
+
+    </InlineCode>
+
+- **type** - The type of the toast (default, success, error, info, warning and loading). {{ "class": "mb-2", "data-nav": "sublink", "id": "type" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  type: ToastType;
+  ```
+
+    </InlineCode>
+
+- **duration** - Duration (in milliseconds) before the toast is dismissed. Set to `false` for persistent toasts. {{ "class": "mb-2", "data-nav": "sublink", "id": "duration" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  duration: number | false;
+  ```
+
+    </InlineCode>
+
+  Default value: `3000` {{ "class": "mt-3 text-xs" }}
+
+- **onEnter** - CSS animation name when the toast enters. {{ "class": "mb-2", "data-nav": "sublink", "id": "onEnter" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  onEnter?: string;
+  ```
+
+    </InlineCode>
+
+- **enterDuration** - Duration of the enter animation in milliseconds. {{ "class": "mb-2", "data-nav": "sublink", "id": "enterDuration" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  enterDuration: number;
+  ```
+
+    </InlineCode>
+
+  Default value: `300` {{ "class": "mt-3 text-xs" }}
+
+- **onExit** - CSS animation name when the toast exits. {{ "class": "mb-2", "data-nav": "sublink", "id": "onExit" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  onExit?: string;
+  ```
+
+    </InlineCode>
+
+- **exitDuration** - Duration of the exit animation in milliseconds. {{ "class": "mb-2", "data-nav": "sublink", "id": "exitDuration" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  exitDuration: number;
+  ```
+
+    </InlineCode>
+
+  Default value: `300` {{ "class": "mt-3 text-xs" }}
+
+- **onIdle** - CSS animation name when the toast is idle. {{ "class": "mb-2", "data-nav": "sublink", "id": "onIdle" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  onIdle?: string;
+  ```
+
+    </InlineCode>
+
+- **class** - CSS class applied to the toast. Can be a string or a function returning a string. {{ "class": "mb-2", "data-nav": "sublink", "id": "class" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  class: string | ((args: ToastContext) => string);
+  ```
+
+    </InlineCode>
+
+- **style** - Custom styles for the toast. Can be an object or a function returning an object. {{ "class": "mb-2", "data-nav": "sublink", "id": "style" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  style: JSX.CSSProperties | ((args: ToastContext) => JSX.CSSProperties);
+  ```
+
+    </InlineCode>
+
+More shared props will be documented in the next section...
+
+## Special props: {{ "data-nav": "link", "id": "special-props" }}
+
+- **id** - Unique identifier for the toast. If not provided, a random ID is generated. {{ "class": "mb-2", "data-nav": "sublink", "id": "id" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  id?: string;
+  ```
+
+    </InlineCode>
+
+- **content** - The main content of the toast. Can be a string, JSX element, or a function returning JSX. {{ "class": "mb-2", "data-nav": "sublink", "id": "content" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  content?: ToastContent;
+  ```
+
+    </InlineCode>
+
+- **contentType** - Determines whether the content is static or dynamic. {{ "class": "mb-2", "data-nav": "sublink", "id": "contentType" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  contentType?: "static" | "dynamic";
+  ```
+
+    </InlineCode>
+
+  Default value: `"static"` {{ "class": "mt-3 text-xs" }}
+
+- **toasterId** - Specifies the toaster instance where the toast should be displayed. {{ "class": "mb-2", "data-nav": "sublink", "id": "toasterId" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  toasterId?: string;
+  ```
+
+    </InlineCode>
 
 Type: ToastContent (string | JSX.Element | (() => JSX.Element))
 

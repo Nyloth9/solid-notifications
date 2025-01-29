@@ -78,6 +78,25 @@ h6 {
   @apply bg-slate-400 dark:bg-slate-600;
 }
 
+.scrollbar-sm::-webkit-scrollbar {
+  width: 4px;
+  height: 10px;
+}
+
+.scrollbar-sm::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-900;
+}
+
+.scrollbar-sm::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  border-width: 0px 1px;
+  @apply border border-slate-400 bg-slate-300 dark:border-slate-800 dark:bg-slate-700;
+}
+
+.scrollbar-sm::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-600;
+}
+
 @keyframes dark-gradient-animation {
   0% {
     background-position: 0% 50%;
@@ -108,6 +127,19 @@ h6 {
   @apply !shadow-none;
 }
 
-body[data-nav="sublink"] {
-  scroll-margin: 100px 0 0 0;
+[data-nav="sublink"] {
+  scroll-margin: 75px 0 0 0;
+}
+
+table td {
+  font-size: 12px;
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+}
+
+.prose
+  :where(:is(tbody, tfoot) td:first-child):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  ) {
+  padding-left: 0.175rem;
 }

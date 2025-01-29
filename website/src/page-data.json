@@ -150,7 +150,84 @@
       {
         "name": "Shared props",
         "hash": "#shared-props",
-        "items": []
+        "items": [
+          {
+            "name": "theme",
+            "hash": "#theme",
+            "items": []
+          },
+          {
+            "name": "type",
+            "hash": "#type",
+            "items": []
+          },
+          {
+            "name": "duration",
+            "hash": "#duration",
+            "items": []
+          },
+          {
+            "name": "onEnter",
+            "hash": "#onEnter",
+            "items": []
+          },
+          {
+            "name": "enterDuration",
+            "hash": "#enterDuration",
+            "items": []
+          },
+          {
+            "name": "onExit",
+            "hash": "#onExit",
+            "items": []
+          },
+          {
+            "name": "exitDuration",
+            "hash": "#exitDuration",
+            "items": []
+          },
+          {
+            "name": "onIdle",
+            "hash": "#onIdle",
+            "items": []
+          },
+          {
+            "name": "class",
+            "hash": "#class",
+            "items": []
+          },
+          {
+            "name": "style",
+            "hash": "#style",
+            "items": []
+          }
+        ]
+      },
+      {
+        "name": "Special props",
+        "hash": "#special-props",
+        "items": [
+          {
+            "name": "id",
+            "hash": "#id",
+            "items": []
+          },
+          {
+            "name": "content",
+            "hash": "#content",
+            "items": []
+          },
+          {
+            "name": "contentType",
+            "hash": "#contentType",
+            "items": []
+          },
+          {
+            "name": "toasterId",
+            "hash": "#toasterId",
+            "items": []
+          }
+        ]
       }
     ]
   }
