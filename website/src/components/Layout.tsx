@@ -16,48 +16,23 @@ interface Props {
   children: JSX.Element;
 }
 
-const sidebarItems = [
-  {
-    title: "Introduction",
-    url: "/",
-    items: [{ title: "Core features", hash: "#core-features" }],
-  },
-  {
-    title: "Quickstart",
-    url: "/quickstart",
-  },
-  {
-    title: "Guides",
-    url: "/guides",
-    items: [
-      { title: "Introduction", hash: "#introduction" },
-      { title: "Quickstart", hash: "#quickstart" },
-      { title: "SDKs", hash: "#sdks" },
-      { title: "Authentication", hash: "#authentication" },
-      { title: "Pagination", hash: "#pagination" },
-      {
-        title: "Example using cursors",
-        hash: "#example-using-cursors",
-      },
-      { title: "Errors", hash: "#errors" },
-      { title: "Webhooks", hash: "#webhooks" },
-    ],
-  },
-  {
-    title: "Resources",
-    url: "/resources",
-    items: [
-      { title: "Contacts", hash: "#contacts" },
-      { title: "Conversations", hash: "#conversations" },
-      { title: "Messages", hash: "#messages" },
-      { title: "Groups", hash: "#groups" },
-      { title: "Attachments", hash: "#attachments" },
-    ],
-  },
-];
+type Page = {
+  name: string;
+  url: string;
+  description: string;
+  order: number;
+  tags: string[];
+  items: {
+    name: string;
+    hash: string;
+    items: never[];
+  }[];
+};
 
 export default function Layout(props: Props) {
   const { setTheme, getTheme } = useTheme();
+  const [currentPage, setCurrentPage] = createSignal<Page | null>(null);
+  const [nextPage, setNextPage] = createSignal<Page | null>(null);
   const [path, setPath] = createSignal("/");
   const [fullPath, setFullPath] = createSignal("/");
   const [sidebarOpen, setSidebarOpen] = createSignal(false);
@@ -82,9 +57,28 @@ export default function Layout(props: Props) {
     targetElement?.scrollIntoView();
   };
 
+  const findPage = (url: string): Page | null => {
+    const page = pageData.find((page) => page.url === url);
+    if (!page) return null;
+
+    return page as Page;
+  };
+
+  const findNextPage = (currentPage: Page | null): Page | null => {
+    if (!currentPage) return null;
+
+    const nextPage = pageData.find(
+      (page) => page.order === currentPage.order + 1,
+    );
+
+    return nextPage as Page;
+  };
+
   createEffect(() => {
     setPath(location.pathname);
     setFullPath(location.pathname + location.hash);
+    setCurrentPage(findPage(location.pathname));
+    setNextPage(findNextPage(currentPage()));
     setSidebarOpen(false);
   });
 
@@ -498,36 +492,38 @@ export default function Layout(props: Props) {
           </main>
           <footer class="mx-auto w-full max-w-2xl space-y-10 pb-16 lg:max-w-5xl">
             <div class="flex">
-              <div class="ml-auto flex flex-col items-end gap-3">
-                <a
-                  class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-900 transition hover:bg-slate-200 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
-                  aria-label="Next: Quickstart"
-                  href="/quickstart"
-                >
-                  Next
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    aria-hidden="true"
-                    class="-mr-1 mt-0.5 h-5 w-5"
+              <Show when={nextPage()}>
+                <div class="ml-auto flex flex-col items-end gap-3">
+                  <a
+                    class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-900 transition hover:bg-slate-200 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+                    aria-label="Next: Quickstart"
+                    href={nextPage()?.url}
                   >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="m11.5 6.5 3 3.5m0 0-3 3.5m3-3.5h-9"
-                    ></path>
-                  </svg>
-                </a>
-                <a
-                  tabindex="-1"
-                  aria-hidden="true"
-                  class="text-base font-semibold text-slate-900 transition hover:text-slate-600 dark:text-white dark:hover:text-slate-300"
-                  href="/quickstart"
-                >
-                  Quickstart
-                </a>
-              </div>
+                    Next
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      aria-hidden="true"
+                      class="-mr-1 mt-0.5 h-5 w-5"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m11.5 6.5 3 3.5m0 0-3 3.5m3-3.5h-9"
+                      ></path>
+                    </svg>
+                  </a>
+                  <a
+                    tabindex="-1"
+                    aria-hidden="true"
+                    class="text-base font-semibold text-slate-900 transition hover:text-slate-600 dark:text-white dark:hover:text-slate-300"
+                    href="/quickstart"
+                  >
+                    {nextPage()?.name}
+                  </a>
+                </div>
+              </Show>
             </div>
             <div class="flex items-center justify-between gap-5 border-t border-slate-900/5 pt-8 dark:border-white/5">
               <p class="text-xs text-slate-600 dark:text-slate-400">
