@@ -336,7 +336,7 @@ export default function Layout(props: Props) {
                                               onClick={() =>
                                                 setIsOpen(!isOpen())
                                               }
-                                              class="mr-1 flex h-6 w-6 shrink-0 items-center justify-center rounded text-slate-400 hover:bg-slate-200 hover:text-slate-600 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+                                              class="mr-1 flex h-6 w-6 shrink-0 items-center justify-center rounded text-slate-400 hover:bg-slate-200 hover:text-slate-600 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
                                             >
                                               <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -438,7 +438,7 @@ export default function Layout(props: Props) {
                                         <Show when={items?.length}>
                                           <button
                                             onClick={() => setIsOpen(!isOpen())}
-                                            class="mr-1 flex h-6 w-6 shrink-0 items-center justify-center rounded text-slate-400 hover:bg-slate-200 hover:text-slate-600 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+                                            class="mr-1 flex h-6 w-6 shrink-0 items-center justify-center rounded text-slate-400 hover:bg-slate-200 hover:text-slate-600 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
                                           >
                                             <svg
                                               xmlns="http://www.w3.org/2000/svg"
