@@ -208,13 +208,13 @@ notify("Hello, world!", { duration: 5000, class: "bg-blue-500", type: "info" });
 
 The `notify` function returns an object with the following properties:
 
-    - `id` - The unique identifier of the toast.
-    - `ref` - A reference to the toast element.
-    - `progressControls` - A progress control object that allows you to manage the toast's duration and progress bar.
+  - `id` - The unique identifier of the toast. {{ "class": "compact" }}
+  - `ref` - A reference to the toast element. {{ "class": "compact" }}
+  - `progressControls` - A progress control object that allows you to manage the toast's duration and progress bar. {{ "class": "compact" }}
 
-      You can provide your own toast `id` or let the library generate one for you.
+  You can provide your own toast `id` or let the library generate one for you.
 
-      <Code>
+          <Code>
 
       ```tsx
       notify("Hello, world!", { id: "custom-id" });
@@ -224,11 +224,11 @@ The `notify` function returns an object with the following properties:
       const { id } = notify("Hello, world!");
       ```
 
-      </Code>
+          </Code>
 
       The `ref` is part of the object returned by the notify function and provides a reference to the toast element itself. This can be useful if you need to directly interact with the DOM element
 
-      <Code>
+          <Code>
 
       ```tsx
       const { ref } = notify("Hello, world!");
@@ -236,24 +236,23 @@ The `notify` function returns an object with the following properties:
       ref.style.backgroundColor = "green";
       ```
 
-      </Code>
+          </Code>
 
       The `progressControls` object contains the methods `play`, `pause` and `reset`, and the `progress` signal, allowing you to control the toast's duration and hook into the current progress.
 
-      <Code>
+          <Code>
 
-      ```tsx
-      const { progressControls } = notify(
-        <div>
-        <h1>Hello, world!</h1>
-        <p>Current progress: {progressControls.progress()}</p>
+          ```tsx
+          const { progressControls } = notify(
+            <div>
+              <h1>Hello, world!</h1>
+              <p>Current progress: {progressControls.progress()}</p>
 
-        <button onClick={progressControls.play}>Play</button>
-        <button onClick={progressControls.pause}>Pause</button>
-        <button onClick={progressControls.reset}>Reset</button>
-      </div>
-      );
+              <button onClick={progressControls.play}>Play</button>
+              <button onClick={progressControls.pause}>Pause</button>
+              <button onClick={progressControls.reset}>Reset</button>
+            </div>,
+          );
+          ```
 
-      ```
-
-      </Code>
+          </Code>
