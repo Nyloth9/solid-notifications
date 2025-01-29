@@ -119,6 +119,11 @@ h6 {
   @apply rounded-md !bg-slate-800 px-1 py-0 !shadow-none;
 }
 
+.child-bg-override pre {
+  padding-top: 3px;
+  padding-bottom: 2px;
+}
+
 .child-bg-override {
   overflow-x: auto;
   line-height: 1.175rem;
