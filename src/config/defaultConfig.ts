@@ -17,8 +17,8 @@ export const defaultConfig: Config = {
   limit: 8,
   reverseToastOrder: false,
   pauseOnHover: true,
-  pauseOnWindowInactive: true, // Will not run timer when window is inactive
-  renderOnWindowInactive: false, // Will not render toasts when window is inactive and will put them in the queue
+  pauseOnWindowInactive: true,
+  renderOnWindowInactive: false,
   class: "sn-toast",
   style: undefined,
   wrapperClass: "sn-toast-wrapper",
