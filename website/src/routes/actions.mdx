@@ -208,11 +208,11 @@ notify("Hello, world!", { duration: 5000, class: "bg-blue-500", type: "info" });
 
 The `notify` function returns an object with the following properties:
 
-  - `id` - The unique identifier of the toast. {{ "class": "compact" }}
-  - `ref` - A reference to the toast element. {{ "class": "compact" }}
-  - `progressControls` - A progress control object that allows you to manage the toast's duration and progress bar. {{ "class": "compact" }}
+- `id` - The unique identifier of the toast. {{ "class": "compact" }}
+- `ref` - A reference to the toast element. {{ "class": "compact" }}
+- `progressControls` - A progress control object that allows you to manage the toast's duration and progress bar. {{ "class": "compact" }}
 
-  You can provide your own toast `id` or let the library generate one for you.
+You can provide your own toast `id` or let the library generate one for you.
 
           <Code>
 
@@ -256,3 +256,12 @@ The `notify` function returns an object with the following properties:
           ```
 
           </Code>
+
+## update() {{"data-nav": "link", "class": "text-blue-500", "id": "update"}}
+
+The `update` function allows you to modify an existing toast's content or appearance. It takes one argument; an object containing the toast's ID and the new content or options.
+
+<HighlightBlock type="info">
+  The new body, i.e. `content` of the toast, should be passed as a property in
+  the `options` object.
+</HighlightBlock>
