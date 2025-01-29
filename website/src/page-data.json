@@ -92,8 +92,8 @@
     "tags": [],
     "items": [
       {
-        "name": "Toaster and ToastProvider only props",
-        "hash": "#toaster-provider-props",
+        "name": "Toaster config",
+        "hash": "#toaster-config",
         "items": [
           {
             "name": "limit",
@@ -148,8 +148,8 @@
         ]
       },
       {
-        "name": "Shared props",
-        "hash": "#shared-props",
+        "name": "Toast config",
+        "hash": "#toast-config",
         "items": [
           {
             "name": "theme",
@@ -299,8 +299,8 @@
         ]
       },
       {
-        "name": "Special props",
-        "hash": "#special-props",
+        "name": "Other config",
+        "hash": "#other-config",
         "items": [
           {
             "name": "id",
@@ -310,11 +310,6 @@
           {
             "name": "content",
             "hash": "#content",
-            "items": []
-          },
-          {
-            "name": "contentType",
-            "hash": "#contentType",
             "items": []
           },
           {

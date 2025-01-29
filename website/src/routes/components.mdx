@@ -38,7 +38,7 @@ export default function App(props) {
 
 ### Props
 
-The ToastProvider accepts [all the config props](/random) and `children`.
+The ToastProvider accepts [toaster config](/props#toaster-config) props, [toast config](/props#toast-config) props and `children`.
 
 - #### Global Props and Propagation
 
@@ -91,7 +91,7 @@ export default function App(props) {
 
 ### Props
 
-The Toaster component accepts [all the config props](/random) and `toasterId`.
+The Toaster component accepts [toaster config](/props#toaster-config), [toast config](/props#toast-config) props and `toasterId`.
 
 <HighlightBlock type="warning">
   **Multiple Toasters**: If you use multiple toasters, each toaster must be
@@ -138,3 +138,8 @@ export default function App() {
 - **Lifecycle Callbacks**: Provides callbacks for toast lifecycle events like onEnter, onExit, and exitCallback. {{ "class": "compact" }}
 - **Reactive Configuration**: Supports reactive updates to its configuration. {{ "class": "compact" }}
 - **Global and Local Overrides**: Overrides global settings provided by the ToastProvider or Toaster. {{ "class": "compact" }}
+
+### Props
+
+Accepts a [toast config](/props#toast-config) props as well as `id` and `toasterId` ([other config](/props#other-config)). Also accepts `content` props when updating a toast.
+Any props specified when creating or updating a toast will take precedence over global settings.
