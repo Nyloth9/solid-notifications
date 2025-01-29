@@ -153,7 +153,7 @@ The content is the first argument of the `notify` function. It can be a string, 
 
     - **JSX Element** {{"class": "mb-0"}}
 
-        You can pass a JSX element directly to notify, allowing you to display fully custom-styled toasts using SolidJS components. {{"class": "mt-0"}}
+        You can pass a JSX element directly to `notify`, allowing you to display fully custom-styled toasts using SolidJS components. {{"class": "mt-0"}}
 
         <Code>
 
@@ -184,6 +184,10 @@ The content is the first argument of the `notify` function. It can be a string, 
             Passing a function as the `content` is considered a `custom` toast and the
             produced toast will not have any of the default styling, dismiss button or the
             progress bar. Therefore you will need to provide the same yourself.
+          </HighlightBlock>
+
+          <HighlightBlock type="info">
+            All the toast configuration properties are available in the `toastConfig` property of the toast instance.
           </HighlightBlock>
 
 ### Options
