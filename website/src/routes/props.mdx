@@ -288,7 +288,11 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
     <InlineCode lang="tsx">
 
   ```tsx
-  wrapperClass: string;
+  wrapperClass: string |
+    ((args: {
+      theme: string | undefined | null;
+      type: "default" | "success" | "error" | "loading" | "warning" | "info";
+    }) => string);
   ```
 
     </InlineCode>
@@ -300,9 +304,12 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
     <InlineCode lang="tsx">
 
   ```tsx
-  wrapperStyle: JSX.CSSProperties;
+  wrapperStyle: JSX.CSSProperties |
+    ((args: {
+      theme: string | undefined | null;
+      type: "default" | "success" | "error" | "loading" | "warning" | "info";
+    }) => JSX.CSSProperties);
   ```
-
     </InlineCode>
 
   Default value: `undefined` {{ "class": "mt-3 text-xs" }}
@@ -359,9 +366,13 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
       <InlineCode lang="tsx">
 
-      ```tsx
-      dismissButtonClass: string;
-      ```
+  ```tsx
+  dismissButtonClass: string |
+    ((args: {
+      theme: string | undefined | null;
+      type: "default" | "success" | "error" | "loading" | "warning" | "info";
+    }) => string);
+  ```
 
       </InlineCode>
 
@@ -371,9 +382,13 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
       <InlineCode lang="tsx">
 
-      ```tsx
-      dismissButtonStyle: JSX.CSSProperties;
-      ```
+       ```tsx
+        dismissButtonStyle: JSX.CSSProperties |
+          ((args: {
+            theme: string | undefined | null;
+            type: "default" | "success" | "error" | "loading" | "warning" | "info";
+          }) => JSX.CSSProperties) | undefined;
+        ```
 
       </InlineCode>
 
@@ -407,9 +422,13 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
           <InlineCode lang="tsx">
 
-      ```tsx
-      progressBarClass: string;
-      ```
+       ```tsx
+        progressBarClass: string |
+          ((args: {
+            theme: string | undefined | null;
+            type: "default" | "success" | "error" | "loading" | "warning" | "info";
+          }) => string);
+        ```
 
           </InlineCode>
 
@@ -419,9 +438,13 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
       <InlineCode lang="tsx">
 
-      ```tsx
-      progressBarStyle: JSX.CSSProperties;
-      ```
+       ```tsx
+        progressBarStyle: JSX.CSSProperties |
+          ((args: {
+            theme: string | undefined | null;
+            type: "default" | "success" | "error" | "loading" | "warning" | "info";
+          }) => JSX.CSSProperties) | undefined;
+        ```
 
       </InlineCode>
 
