@@ -48,7 +48,7 @@ const { notify } = useToast("toaster-1");
 
 </Code>
 
-To target a different toaster in the same file, you can alias the function or call ...
+To target a different toaster in the same file, you can alias the methods:
 
 <Code>
 
@@ -78,7 +78,7 @@ toaster2.notify("Hello from toaster 2");
 
 <HightlightBlock type="warning">
   If you use multiple toasters and don't invoke `useToast` with a toasterId, the
-  toasterId will have to be provided in the actions options.
+  toasterId will have to be provided in the action's options.
 </HightlightBlock>
 
 ### Available Actions
@@ -90,6 +90,8 @@ The `useToast()` function returns an object containing various toast actions:
         - `dismiss` - Dismisses a specific toast by ID or all toasts if no ID is provided.
         - `remove` - Immediately removes a toast without animations.
         - `promise` - Displays a loading toast that updates based on promise resolution.
+        - `getQueue` - Returns the current queue of toasts.
+        - `clearQueue` - Clears all toasts in the queue.
 
 ## notify() {{"data-nav": "link", "class": "text-blue-500", "id": "notify"}}
 
