@@ -236,8 +236,8 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
   ```
 
     </InlineCode>
-  
-    Default value: `undefined` {{ "class": "mt-3 text-xs" }}
+
+  Default value: `undefined` {{ "class": "mt-3 text-xs" }}
 
 - **class** - CSS class applied to the toast body. Can be a string or a function returning a string. {{ "class": "mb-2", "data-nav": "sublink", "id": "class" }}
 
@@ -249,7 +249,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
     </InlineCode>
 
-      Default value: `sn-toast` {{ "class": "mt-3 text-xs" }}
+      Default value: `"sn-toast"` {{ "class": "mt-3 text-xs" }}
 
 - **style** - Custom styles for the toast body. Can be an object or a function returning an object. {{ "class": "mb-2", "data-nav": "sublink", "id": "style" }}
 
@@ -263,17 +263,243 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
        Default value: `undefined` {{ "class": "mt-3 text-xs" }}
 
-More shared props will be documented in the next section...
+- **pauseOnHover** - Whether the toast pauses when hovered. {{ "class": "mb-2", "data-nav": "sublink", "id": "pauseOnHover" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  pauseOnHover: boolean;
+  ```
+
+    </InlineCode>
+
+  Default value: `true` {{ "class": "mt-3 text-xs" }}
+
+- **wrapperClass** - CSS class for the toast wrapper. {{ "class": "mb-2", "data-nav": "sublink", "id": "wrapperClass" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  wrapperClass: string;
+  ```
+
+    </InlineCode>
+
+  Default value: `"sn-toast-wrapper"` {{ "class": "mt-3 text-xs" }}
+
+- **wrapperStyle** - Custom styles for the toast wrapper. {{ "class": "mb-2", "data-nav": "sublink", "id": "wrapperStyle" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  wrapperStyle: JSX.CSSProperties;
+  ```
+
+    </InlineCode>
+
+  Default value: `undefined` {{ "class": "mt-3 text-xs" }}
+
+- **enterCallback** - Callback function executed when the toast enters. {{ "class": "mb-2", "data-nav": "sublink", "id": "enterCallback" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+    enterCallback: () => void;
+  ```
+
+    </InlineCode>
+
+  Default value: `null` {{ "class": "mt-3 text-xs" }}
+
+- **updateCallback** - Callback function executed when the toast updates. {{ "class": "mb-2", "data-nav": "sublink", "id": "updateCallback" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+    updateCallback: () => void;
+  ```
+
+    </InlineCode>
+
+  Default value: `null` {{ "class": "mt-3 text-xs" }}
+
+- **exitCallback** - Callback function executed when the toast exits. {{ "class": "mb-2", "data-nav": "sublink", "id": "exitCallback" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+    exitCallback: (reason?: boolean | string) => void;
+  ```
+
+    </InlineCode>
+
+  Default value: `null` {{ "class": "mt-3 text-xs" }}
+
+- **showDismissButton** - Whether to show a dismiss button. {{ "class": "mb-2", "data-nav": "sublink", "id": "showDismissButton" }}
+
+    <InlineCode lang="tsx">
+
+  ```tsx
+  showDismissButton: boolean;
+  ```
+
+    </InlineCode>
+
+  Default value: `true` {{ "class": "mt-3 text-xs" }}
+
+- **dismissButtonClass** - CSS class for the dismiss button. {{ "class": "mb-2", "data-nav": "sublink", "id": "dismissButtonClass" }}
+
+      <InlineCode lang="tsx">
+
+  ```tsx
+  dismissButtonClass: string;
+  ```
+
+      </InlineCode>
+
+  Default value: `"sn-dismiss-button"` {{ "class": "mt-3 text-xs" }}
+
+- **dismissButtonStyle** - Custom styles for the dismiss button. {{ "class": "mb-2", "data-nav": "sublink", "id": "dismissButtonStyle" }}
+
+      <InlineCode lang="tsx">
+
+  ```tsx
+  dismissButtonStyle: JSX.CSSProperties;
+  ```
+
+      </InlineCode>
+
+  Default value: `undefined` {{ "class": "mt-3 text-xs" }}
+
+- **dismissOnClick** - Whether clicking the toast dismisses it. {{ "class": "mb-2", "data-nav": "sublink", "id": "dismissOnClick" }}
+
+      <InlineCode lang="tsx">
+
+  ```tsx
+  dismissOnClick: boolean;
+  ```
+
+      </InlineCode>
+
+  Default value: `false` {{ "class": "mt-3 text-xs" }}
+
+- **showProgressBar** - Whether to show a progress bar on the toast. {{ "class": "mb-2", "data-nav": "sublink", "id": "showProgressBar" }}
+
+      <InlineCode lang="tsx">
+
+  ```tsx
+  showProgressBar: boolean;
+  ```
+
+      </InlineCode>
+
+  Default value: `true` {{ "class": "mt-3 text-xs" }}
+
+- **progressBarClass** - CSS class for the progress bar. {{ "class": "mb-2", "data-nav": "sublink", "id": "progressBarClass" }}
+
+          <InlineCode lang="tsx">
+
+  ```tsx
+  progressBarClass: string;
+  ```
+
+          </InlineCode>
+
+  Default value: `"sn-progress-bar"` {{ "class": "mt-3 text-xs" }}
+
+- **progressBarStyle** - Custom styles for the progress bar. {{ "class": "mb-2", "data-nav": "sublink", "id": "progressBarStyle" }}
+
+      <InlineCode lang="tsx">
+
+  ```tsx
+  progressBarStyle: JSX.CSSProperties;
+  ```
+
+      </InlineCode>
+
+  Default value: `undefined` {{ "class": "mt-3 text-xs" }}
+
+- **showIcon** - Whether to show an icon in the toast. {{ "class": "mb-2", "data-nav": "sublink", "id": "showIcon" }}
+
+        <InlineCode lang="tsx">
+
+  ```tsx
+  showIcon: boolean;
+  ```
+
+        </InlineCode>
+
+  Default value: `true` {{ "class": "mt-3 text-xs" }}
+
+- **icon** - Custom icon for the toast. Can be a JSX element or a function returning a JSX element. {{ "class": "mb-2", "data-nav": "sublink", "id": "icon" }}
+
+        <InlineCode lang="tsx">
+
+  ```tsx
+  icon: ((args: ToastContext) => JSX.Element) | JSX.Element | null;
+  ```
+
+        </InlineCode>
+
+  Default value: `null` {{ "class": "mt-3 text-xs" }}
+
+- **dragToDismiss** - Whether dragging the toast dismisses it. {{ "class": "mb-2", "data-nav": "sublink", "id": "dragToDismiss" }}
+
+      <InlineCode lang="tsx">
+
+  ```tsx
+  dragToDismiss: boolean;
+  ```
+
+      </InlineCode>
+
+  Default value: `true` {{ "class": "mt-3 text-xs" }}
+
+- **dragTreshold** - Distance (in pixels) required to dismiss the toast via dragging. {{ "class": "mb-2", "data-nav": "sublink", "id": "dragTreshold" }}
+
+        <InlineCode lang="tsx">
+
+  ```tsx
+  dragTreshold: number;
+  ```
+
+        </InlineCode>
+
+  Default value: `100` {{ "class": "mt-3 text-xs" }}
+
+- **ariaLive** - ARIA live attribute for accessibility. {{ "class": "mb-2", "data-nav": "sublink", "id": "ariaLive" }}
+
+      <InlineCode lang="tsx">
+
+  ```tsx
+  ariaLive: "polite" | "assertive" | "off";
+  ```
+
+      </InlineCode>
+
+  Default value: `"polite"` {{ "class": "mt-3 text-xs" }}
+
+- **role** - ARIA role attribute. {{ "class": "mb-2", "data-nav": "sublink", "id": "role" }}
+
+      <InlineCode lang="tsx">
+
+  ```tsx
+  role: "status" | "alert" | "log";
+  ```
+
+      </InlineCode>
+
+  Default value: `"status"` {{ "class": "mt-3 text-xs" }}
 
 ## Special props: {{ "data-nav": "link", "id": "special-props" }}
 
 - **id** - Unique identifier for the toast. If not provided, a random ID is generated. {{ "class": "mb-2", "data-nav": "sublink", "id": "id" }}
 
-    <InlineCode lang="tsx">
+<InlineCode lang="tsx">
 
-  ```tsx
-  id: string;
-  ```
+```tsx
+id: string;
+```
 
     </InlineCode>
 

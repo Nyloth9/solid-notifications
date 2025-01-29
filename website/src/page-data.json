@@ -200,6 +200,101 @@
             "name": "style",
             "hash": "#style",
             "items": []
+          },
+          {
+            "name": "pauseOnHover",
+            "hash": "#pauseOnHover",
+            "items": []
+          },
+          {
+            "name": "wrapperClass",
+            "hash": "#wrapperClass",
+            "items": []
+          },
+          {
+            "name": "wrapperStyle",
+            "hash": "#wrapperStyle",
+            "items": []
+          },
+          {
+            "name": "enterCallback",
+            "hash": "#enterCallback",
+            "items": []
+          },
+          {
+            "name": "updateCallback",
+            "hash": "#updateCallback",
+            "items": []
+          },
+          {
+            "name": "exitCallback",
+            "hash": "#exitCallback",
+            "items": []
+          },
+          {
+            "name": "showDismissButton",
+            "hash": "#showDismissButton",
+            "items": []
+          },
+          {
+            "name": "dismissButtonClass",
+            "hash": "#dismissButtonClass",
+            "items": []
+          },
+          {
+            "name": "dismissButtonStyle",
+            "hash": "#dismissButtonStyle",
+            "items": []
+          },
+          {
+            "name": "dismissOnClick",
+            "hash": "#dismissOnClick",
+            "items": []
+          },
+          {
+            "name": "showProgressBar",
+            "hash": "#showProgressBar",
+            "items": []
+          },
+          {
+            "name": "progressBarClass",
+            "hash": "#progressBarClass",
+            "items": []
+          },
+          {
+            "name": "progressBarStyle",
+            "hash": "#progressBarStyle",
+            "items": []
+          },
+          {
+            "name": "showIcon",
+            "hash": "#showIcon",
+            "items": []
+          },
+          {
+            "name": "icon",
+            "hash": "#icon",
+            "items": []
+          },
+          {
+            "name": "dragToDismiss",
+            "hash": "#dragToDismiss",
+            "items": []
+          },
+          {
+            "name": "dragTreshold",
+            "hash": "#dragTreshold",
+            "items": []
+          },
+          {
+            "name": "ariaLive",
+            "hash": "#ariaLive",
+            "items": []
+          },
+          {
+            "name": "role",
+            "hash": "#role",
+            "items": []
           }
         ]
       },
