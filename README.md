@@ -7,6 +7,7 @@ A lightweight, customizable, and easy-to-use toast notification library for **So
 - **Simple API**: Easily create and manage toast notifications with just a few lines of code.
 - **Customizable**: Fully customizable styles, positions, behaviors and much more.
 - **Lightweight**: Minimal footprint with zero unnecessary dependencies.
+- **Multiple Toasters support**: Seamlessly manage multiple independent toasters in your app for diverse notification needs, all within a single setup.
 - **TypeScript Support**: Comes with built-in TypeScript types for a better developer experience.
 
 ## Getting Started
