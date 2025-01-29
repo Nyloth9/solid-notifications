@@ -245,10 +245,10 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
   ```tsx
   class: string |
-    ((args: {
-      theme: string | undefined | null;
-      type: "default" | "success" | "error" | "loading" | "warning" | "info";
-    }) => string);
+   ((args:{
+     theme: string | undefined | null;
+     type: "default" | "success" | "error" | "loading" | "warning" | "info";
+   }) => string);
   ```
 
      </InlineCode>
@@ -310,6 +310,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
       type: "default" | "success" | "error" | "loading" | "warning" | "info";
     }) => JSX.CSSProperties);
   ```
+
     </InlineCode>
 
   Default value: `undefined` {{ "class": "mt-3 text-xs" }}
@@ -383,11 +384,11 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
       <InlineCode lang="tsx">
 
        ```tsx
-        dismissButtonStyle: JSX.CSSProperties |
+        dismissButtonStyle: JSX.CSSProperties | undefined |
           ((args: {
             theme: string | undefined | null;
             type: "default" | "success" | "error" | "loading" | "warning" | "info";
-          }) => JSX.CSSProperties) | undefined;
+          }) => JSX.CSSProperties);
         ```
 
       </InlineCode>
@@ -439,11 +440,11 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
       <InlineCode lang="tsx">
 
        ```tsx
-        progressBarStyle: JSX.CSSProperties |
+        progressBarStyle: JSX.CSSProperties | undefined |
           ((args: {
             theme: string | undefined | null;
             type: "default" | "success" | "error" | "loading" | "warning" | "info";
-          }) => JSX.CSSProperties) | undefined;
+          }) => JSX.CSSProperties);
         ```
 
       </InlineCode>
@@ -467,10 +468,11 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
         <InlineCode lang="tsx">
 
       ```tsx
-      icon: ((args: args: {
-        theme: string | undefined | null;
-        type: "default" | "success" | "error" | "loading" | "warning" | "info";
-        }) => JSX.Element) | JSX.Element | null;
+      icon: JSX.Element | null |
+        ((args: args: {
+          theme: string | undefined | null;
+          type: "default" | "success" | "error" | "loading" | "warning" | "info";
+          }) => JSX.Element) ;
       ```
 
         </InlineCode>
@@ -527,7 +529,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
 ## Special props: {{ "data-nav": "link", "id": "special-props" }}
 
-- **id** - Unique identifier for the toast. If not provided, a random ID is generated. {{ "class": "mb-2", "data-nav": "sublink", "id": "id" }}
+- **id** - Unique identifier for the toast. If not provided, an ID is generated automatically. {{ "class": "mb-2", "data-nav": "sublink", "id": "id" }}
 
     <InlineCode lang="tsx">
 
@@ -542,7 +544,9 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
     <InlineCode lang="tsx">
 
       ```tsx
-      content: ToastContent;
+      content: | string
+               | JSX.Element
+               | ((toast: Toast) => JSX.Element | string);;
       ```
 
     </InlineCode>
