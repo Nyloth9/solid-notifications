@@ -143,17 +143,19 @@ Can be applied to `ToastProvider` and `Toaster`.
 
 Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
-- **theme** - The theme of the toast (can be a string, `undefined`, or `null`). Two theme types are included; `light` and `dark`, but any string can be provided. {{ "class": "mb-2", "data-nav": "sublink", "id": "theme" }}
+- **theme** - The theme of the toast. Two theme types are included; `light` and `dark`, but any string can be provided. {{ "class": "mb-2", "data-nav": "sublink", "id": "theme" }}
 
     <InlineCode lang="tsx">
 
   ```tsx
-  theme?: string | undefined | null;
+  theme: string | undefined | null;
   ```
 
     </InlineCode>
 
-- **type** - The type of the toast (default, success, error, info, warning and loading). {{ "class": "mb-2", "data-nav": "sublink", "id": "type" }}
+      Default value: `"light"` {{ "class": "mt-3 text-xs" }}
+
+- **type** - The type of the toast. Can be `default`, `success`, `error`, `info`, `warning` and `loading`. {{ "class": "mb-2", "data-nav": "sublink", "id": "type" }}
 
     <InlineCode lang="tsx">
 
@@ -163,7 +165,9 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
     </InlineCode>
 
-- **duration** - Duration (in milliseconds) before the toast is dismissed. Set to `false` for persistent toasts. {{ "class": "mb-2", "data-nav": "sublink", "id": "duration" }}
+  Default value: `"default"` {{ "class": "mt-3 text-xs" }}
+
+- **duration** - Duration (in milliseconds) before the toast is dismissed. Set to `false` or `0` for persistent toasts. {{ "class": "mb-2", "data-nav": "sublink", "id": "duration" }}
 
     <InlineCode lang="tsx">
 
@@ -173,17 +177,19 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
     </InlineCode>
 
-  Default value: `3000` {{ "class": "mt-3 text-xs" }}
+  Default value: `5000` {{ "class": "mt-3 text-xs" }}
 
 - **onEnter** - CSS animation name when the toast enters. {{ "class": "mb-2", "data-nav": "sublink", "id": "onEnter" }}
 
     <InlineCode lang="tsx">
 
   ```tsx
-  onEnter?: string;
+  onEnter: string;
   ```
 
     </InlineCode>
+
+  Default value: `undefined` {{ "class": "mt-3 text-xs" }}
 
 - **enterDuration** - Duration of the enter animation in milliseconds. {{ "class": "mb-2", "data-nav": "sublink", "id": "enterDuration" }}
 
@@ -202,10 +208,12 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
     <InlineCode lang="tsx">
 
   ```tsx
-  onExit?: string;
+  onExit: string;
   ```
 
     </InlineCode>
+
+  Default value: `undefined` {{ "class": "mt-3 text-xs" }}
 
 - **exitDuration** - Duration of the exit animation in milliseconds. {{ "class": "mb-2", "data-nav": "sublink", "id": "exitDuration" }}
 
@@ -219,17 +227,19 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
   Default value: `300` {{ "class": "mt-3 text-xs" }}
 
-- **onIdle** - CSS animation name when the toast is idle. {{ "class": "mb-2", "data-nav": "sublink", "id": "onIdle" }}
+- **onIdle** - CSS class which will be applied when the toast is idle. {{ "class": "mb-2", "data-nav": "sublink", "id": "onIdle" }}
 
     <InlineCode lang="tsx">
 
   ```tsx
-  onIdle?: string;
+  onIdle: string;
   ```
 
     </InlineCode>
+  
+Default value: `undefined` {{ "class": "mt-3 text-xs" }}
 
-- **class** - CSS class applied to the toast. Can be a string or a function returning a string. {{ "class": "mb-2", "data-nav": "sublink", "id": "class" }}
+- **class** - CSS class applied to the toast body. Can be a string or a function returning a string. {{ "class": "mb-2", "data-nav": "sublink", "id": "class" }}
 
     <InlineCode lang="tsx">
 
@@ -239,7 +249,9 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
     </InlineCode>
 
-- **style** - Custom styles for the toast. Can be an object or a function returning an object. {{ "class": "mb-2", "data-nav": "sublink", "id": "style" }}
+      Default value: `sn-toast` {{ "class": "mt-3 text-xs" }}
+
+- **style** - Custom styles for the toast body. Can be an object or a function returning an object. {{ "class": "mb-2", "data-nav": "sublink", "id": "style" }}
 
     <InlineCode lang="tsx">
 
@@ -248,6 +260,8 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
   ```
 
     </InlineCode>
+
+       Default value: `undefined` {{ "class": "mt-3 text-xs" }}
 
 More shared props will be documented in the next section...
 
@@ -258,7 +272,7 @@ More shared props will be documented in the next section...
     <InlineCode lang="tsx">
 
   ```tsx
-  id?: string;
+  id: string;
   ```
 
     </InlineCode>
@@ -268,7 +282,7 @@ More shared props will be documented in the next section...
     <InlineCode lang="tsx">
 
   ```tsx
-  content?: ToastContent;
+  content: ToastContent;
   ```
 
     </InlineCode>
@@ -278,7 +292,7 @@ More shared props will be documented in the next section...
     <InlineCode lang="tsx">
 
   ```tsx
-  contentType?: "static" | "dynamic";
+  contentType: "static" | "dynamic";
   ```
 
     </InlineCode>
@@ -290,7 +304,7 @@ More shared props will be documented in the next section...
     <InlineCode lang="tsx">
 
   ```tsx
-  toasterId?: string;
+  toasterId: string;
   ```
 
     </InlineCode>
