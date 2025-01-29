@@ -40,44 +40,44 @@ Here's a quick example to show how easy it is to use:
 
 1. Mount the ToastProvider and Toaster components:
 
-    ```tsx
-    import { ToastProvider, Toaster } from "solid-notifications";
+   ```tsx
+   import { ToastProvider, Toaster } from "solid-notifications";
 
-    export default function App(props) {
-      return (
-        <ToastProvider>
-          <Toaster />
-          {props.children}
-        </ToastProvider>
-      );
-    }
-    ```
+   export default function App(props) {
+     return (
+       <ToastProvider>
+         <Toaster />
+         {props.children}
+       </ToastProvider>
+     );
+   }
+   ```
 
 2. Import the Solid Notifications css file into your main css file:
 
-    ```css
-    /* index.css */
+   ```css
+   /* index.css */
 
-    @import "solid-notifications/index.css";
-    ```
+   @import "solid-notifications/index.css";
+   ```
 
 3. Create toasts:
 
-    ```tsx
-    import { useToast } from "solid-notifications";
+   ```tsx
+   import { useToast } from "solid-notifications";
 
-    export default function AppContent() {
-      const { notify } = useToast();
+   export default function AppContent() {
+     const { notify } = useToast();
 
-      return (
-        <div>
-          <button onClick={() => notify("🚀 New toast ready to serve!")}>
-            Create a Toast!
-          </button>
-        </div>
-      );
-    }
-    ```
+     return (
+       <div>
+         <button onClick={() => notify("🚀 New toast ready to serve!")}>
+           Create a Toast!
+         </button>
+       </div>
+     );
+   }
+   ```
 
 For more examples and advanced usage, check out the [documentation](https://solid-notifications.vercel.app/).
 
@@ -107,7 +107,7 @@ If you'd like to contribute to Solid Notifications, follow these steps to set up
 
    This will launch the playground where you can see your changes in real-time.
 
-4. **Edit the website:** If you're working on the documentation or website, navigate to the website folder and start the development server:
+4. **Edit the website:** To preview or test the documentation, navigate to the website folder and start the development server:
 
    ```bash
    cd website
