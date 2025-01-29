@@ -241,22 +241,30 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
 - **class** - CSS class applied to the toast body. Can be a string or a function returning a string. {{ "class": "mb-2", "data-nav": "sublink", "id": "class" }}
 
-    <InlineCode lang="tsx">
+     <InlineCode lang="tsx">
 
   ```tsx
-  class: string | ((args: ToastContext) => string);
+  class: string |
+    ((args: {
+      theme: string | undefined | null;
+      type: "default" | "success" | "error" | "loading" | "warning" | "info";
+    }) => string);
   ```
 
-    </InlineCode>
+     </InlineCode>
 
-      Default value: `"sn-toast"` {{ "class": "mt-3 text-xs" }}
+       Default value: `"sn-toast"` {{ "class": "mt-3 text-xs" }}
 
 - **style** - Custom styles for the toast body. Can be an object or a function returning an object. {{ "class": "mb-2", "data-nav": "sublink", "id": "style" }}
 
     <InlineCode lang="tsx">
 
   ```tsx
-  style: JSX.CSSProperties | ((args: ToastContext) => JSX.CSSProperties);
+  style: JSX.CSSProperties |
+    ((args: {
+      theme: string | undefined | null;
+      type: "default" | "success" | "error" | "loading" | "warning" | "info";
+    }) => JSX.CSSProperties);
   ```
 
     </InlineCode>

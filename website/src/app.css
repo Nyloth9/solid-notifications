@@ -80,7 +80,7 @@ h6 {
 
 .scrollbar-sm::-webkit-scrollbar {
   width: 4px;
-  height: 10px;
+  height: 4px;
 }
 
 .scrollbar-sm::-webkit-scrollbar-track {
@@ -119,8 +119,9 @@ h6 {
   @apply rounded-md !bg-slate-800 px-1 py-0 !shadow-none;
 }
 
-.child-bg-override pre {
+.child-bg-override {
   overflow-x: auto;
+  line-height: 1.175rem;
 }
 
 .child-bg-override * {

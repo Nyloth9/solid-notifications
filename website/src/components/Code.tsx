@@ -14,7 +14,7 @@ export default function Code({ children }: Props) {
 
 export function InlineCode({ children }: Props) {
   return (
-    <div class="child-bg-override rounded-md text-white flex mr-1">
+    <div class="child-bg-override scrollbar-sm rounded-md text-white flex mr-1">
       {children}
     </div>
   );
