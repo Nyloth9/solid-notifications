@@ -320,5 +320,24 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Actions",
+    "url": "/actions",
+    "description": "Solid Notifications actions guide",
+    "order": 4,
+    "tags": [],
+    "items": [
+      {
+        "name": "useToast()",
+        "hash": "#useToast",
+        "items": []
+      },
+      {
+        "name": "notify()",
+        "hash": "#notify",
+        "items": []
+      }
+    ]
   }
 ]

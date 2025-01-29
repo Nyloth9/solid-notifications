@@ -1,0 +1,241 @@
+---
+title: "Actions"
+description: "Solid Notifications actions guide"
+slug: "/actions"
+order: 4
+tags: []
+---
+
+import Code, { InlineCode } from "~/components/Code";
+import Title from "~/components/Title";
+import HighlightBlock from "~/components/HighlightBlock";
+import HightlightBlock from "~/components/HighlightBlock";
+
+<Title>Actions</Title>
+
+# Actions
+
+Control your notifications with ease using these built-in actions. {{ "class": "lead" }}
+
+## useToast() {{"data-nav": "link", "class": "text-blue-500", "id": "useToast"}}
+
+The `useToast` function is an entry point to managing the toasts. It returns functions for showing, updating, dismissing and removing toasts, as well as to access the queue.
+
+<Code>
+
+```tsx
+import { useToast } from "solid-notifications";
+
+function App() {
+  const { notify, update, dismiss, remove, promise, getQueue, clearQueue } =
+    useToast();
+
+  ...
+}
+```
+
+</Code>
+
+### Targeting a Specific Toaster
+
+If you have multiple toasters, you can invoke `useToast` with the toaster's id to target a specific toaster. Then, all the actions will called against that toaster.
+
+<Code>
+
+```tsx
+const { notify } = useToast("toaster-1");
+```
+
+</Code>
+
+To target a different toaster in the same file, you can alias the function or call ...
+
+<Code>
+
+```tsx
+const { notify } = useToast("toaster-1");
+const { notify: notify2 } = useToast("toaster-2");
+
+notify("Hello from toaster 1");
+notify2("Hello from toaster 2");
+```
+
+</Code>
+
+Alternatively, you can store the result of `useToast()` in variables and call them separately:
+
+<Code>
+
+```tsx
+const toaster1 = useToast("toaster-1");
+const toaster2 = useToast("toaster-2");
+
+toaster1.notify("Hello from toaster 1");
+toaster2.notify("Hello from toaster 2");
+```
+
+</Code>
+
+<HightlightBlock type="warning">
+  If you use multiple toasters and don't invoke `useToast` with a toasterId, the
+  toasterId will have to be provided in the actions options.
+</HightlightBlock>
+
+### Available Actions
+
+The `useToast()` function returns an object containing various toast actions:
+
+        - `notify` - Creates a new toast with an optional configuration.
+        - `update` - Updates an existing toast with new content or styling.
+        - `dismiss` - Dismisses a specific toast by ID or all toasts if no ID is provided.
+        - `remove` - Immediately removes a toast without animations.
+        - `promise` - Displays a loading toast that updates based on promise resolution.
+
+## notify() {{"data-nav": "link", "class": "text-blue-500", "id": "notify"}}
+
+The notify function is the primary way to trigger toasts in **SolidNotifications**. It allows you to display messages with optional configurations, such as assigning an ID, targeting a specific toaster, and customizing the toast appearance.
+
+It takes two arguments: `content` and `options` and returns an object with the toast's ID, a reference to the toast element, and a progress control object.
+
+<InlineCode>
+
+```tsx
+notify: (content?: ToastContent, options?: ToastOptions) => {
+  id: string;
+  ref: HTMLElement | null;
+  progressControls: ProgressControls;
+};
+```
+
+</InlineCode>
+
+### Basic usage
+
+The simplest way to use `notify` is by calling it with a message:
+
+<Code>
+
+```tsx
+notify("Hello, world!");
+```
+
+</Code>
+
+To target a specific toaster, you can pass the toasterId in the options object:
+
+<Code>
+
+```tsx
+notify("Hello, world!", { toasterId: "toaster-1" });
+```
+
+</Code>
+
+### Content
+
+The content is the first argument of the `notify` function. It can be a string, a JSX element, or a function that returns a string or JSX element.
+
+    - **String** {{"class": "mb-0"}}
+
+        When passing a string `signal`, for it to be reactive, it should be passed without invoking it: {{ "class": "mt-0" }}
+
+        <Code>
+
+        ```tsx
+        const signal = createSignal("Hello, world!");
+
+        notify(signal);
+        ```
+
+        </Code>
+
+    - **JSX Element** {{"class": "mb-0"}}
+
+        You can pass a JSX element directly to notify, allowing you to display fully custom-styled toasts using SolidJS components. {{"class": "mt-0"}}
+
+        <Code>
+
+        ```tsx
+        notify(<div>Hello, world!</div>);
+        ```
+
+        </Code>
+
+    - **Function** {{"class": "mb-0"}}
+
+        Passing a function as the content gives you access to the toast instance, allowing dynamic rendering based on its properties like id and progress. This is useful for more advanced toasts, such as loading indicators or interactive toasts. {{"class": "mt-0"}}
+
+        <Code>
+
+        ```tsx
+        notify((toast) => (
+          <div>
+            <h1>{toast.id}</h1>
+            <p>Current progress: {toast.progressManager.progress()}</p>
+          </div>
+        ));
+        ```
+
+        </Code>
+
+          <HighlightBlock type="warning">
+            Passing a function as the `content` is considered a `custom` toast and the
+            produced toast will not have any of the default styling, dismiss button or the
+            progress bar. Therefore you will need to provide the same yourself.
+          </HighlightBlock>
+
+### Options
+
+The second argument of notify is an options object that allows you to customize the behavior and appearance of the toast.
+
+The `options` object accepts all the [toastConfig](/props#toast-config) properties and the [other config](/props#other-config) properties except `content` (which is passed as the first argument).
+
+<Code>
+
+```tsx
+notify("Hello, world!", { duration: 5000, class: "bg-blue-500", type: "info" });
+```
+
+</Code>
+
+### Return value
+
+The `notify` function returns an object with the following properties:
+
+    - `id` - The unique identifier of the toast.
+    - `ref` - A reference to the toast element.
+    - `progressControls` - A progress control object that allows you to manage the toast's duration and progress bar.
+
+      You can provide your own toast `id` or let the library generate one for you.
+
+      <Code>
+
+      ```tsx
+      notify("Hello, world!", { id: "custom-id" });
+
+      // or
+
+      const { id } = notify("Hello, world!");
+      ```
+
+      </Code>
+
+      The progress control object contains the methods `play`, `pause`, `reset`, and `progress` to control the toast's duration and progress bar.
+
+      <Code>
+
+      ```tsx
+      const { progressControls } = notify(
+        <div>
+        <h1>Hello, world!</h1>
+        <p>Current progress: {progressControls.progress()}</p>
+
+        <button onClick={progressControls.play}>Play</button>
+        <button onClick={progressControls.pause}>Pause</button>
+        <button onClick={progressControls.reset}>Reset</button>
+      </div>
+      );
+
+      ```
+
+      </Code>
