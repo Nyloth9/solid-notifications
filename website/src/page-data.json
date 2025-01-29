@@ -337,6 +337,11 @@
         "name": "notify()",
         "hash": "#notify",
         "items": []
+      },
+      {
+        "name": "update()",
+        "hash": "#update",
+        "items": []
       }
     ]
   }
