@@ -9,7 +9,7 @@ import {
 } from "solid-js";
 import { useTheme } from "../util/theme";
 import { ToastProvider } from "this-is-a-test-package-987";
-import { useLocation } from "@solidjs/router";
+import { useLocation, useNavigate } from "@solidjs/router";
 import pageData from "../page-data.json";
 
 interface Props {
@@ -37,6 +37,7 @@ export default function Layout(props: Props) {
   const [fullPath, setFullPath] = createSignal("/");
   const [sidebarOpen, setSidebarOpen] = createSignal(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleScreenWidthChange = (e: any) => {
     // Close the sidebar whenever the screen crosses the 1024px threshold
@@ -494,10 +495,14 @@ export default function Layout(props: Props) {
             <div class="flex">
               <Show when={nextPage()}>
                 <div class="ml-auto flex flex-col items-end gap-3">
-                  <a
+                  <button
                     class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-900 transition hover:bg-slate-200 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
                     aria-label="Next: Quickstart"
-                    href={nextPage()?.url}
+                    onClick={() =>
+                      navigate(nextPage()?.url || "/", {
+                        scroll: true,
+                      })
+                    }
                   >
                     Next
                     <svg
@@ -513,15 +518,14 @@ export default function Layout(props: Props) {
                         d="m11.5 6.5 3 3.5m0 0-3 3.5m3-3.5h-9"
                       ></path>
                     </svg>
-                  </a>
-                  <a
+                  </button>
+                  <div
                     tabindex="-1"
                     aria-hidden="true"
-                    class="text-base font-semibold text-slate-900 transition hover:text-slate-600 dark:text-white dark:hover:text-slate-300"
-                    href="/quickstart"
+                    class="text-base font-semibold text-slate-900 transition dark:text-white"
                   >
                     {nextPage()?.name}
-                  </a>
+                  </div>
                 </div>
               </Show>
             </div>
