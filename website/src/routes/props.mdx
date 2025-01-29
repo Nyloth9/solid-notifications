@@ -191,7 +191,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
   Default value: `undefined` {{ "class": "mt-3 text-xs" }}
 
-- **enterDuration** - Duration of the enter animation in milliseconds. {{ "class": "mb-2", "data-nav": "sublink", "id": "enterDuration" }}
+- **enterDuration** - Duration of the enter animation in milliseconds. Should be set to the same duration as the animation. {{ "class": "mb-2", "data-nav": "sublink", "id": "enterDuration" }}
 
     <InlineCode lang="tsx">
 
@@ -215,7 +215,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
   Default value: `undefined` {{ "class": "mt-3 text-xs" }}
 
-- **exitDuration** - Duration of the exit animation in milliseconds. {{ "class": "mb-2", "data-nav": "sublink", "id": "exitDuration" }}
+- **exitDuration** - Duration of the exit animation in milliseconds. Should be set to the same duration as the animation. {{ "class": "mb-2", "data-nav": "sublink", "id": "exitDuration" }}
 
     <InlineCode lang="tsx">
 
@@ -239,7 +239,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
   Default value: `undefined` {{ "class": "mt-3 text-xs" }}
 
-- **class** - CSS class applied to the toast body. Can be a string or a function returning a string. {{ "class": "mb-2", "data-nav": "sublink", "id": "class" }}
+- **class** - CSS class applied to the toast body. Can be a string or a function returning a string. The function will be provided with `theme` and `type` as arguments. {{ "class": "mb-2", "data-nav": "sublink", "id": "class" }}
 
      <InlineCode lang="tsx">
 
@@ -255,7 +255,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
        Default value: `"sn-toast"` {{ "class": "mt-3 text-xs" }}
 
-- **style** - Custom styles for the toast body. Can be an object or a function returning an object. {{ "class": "mb-2", "data-nav": "sublink", "id": "style" }}
+- **style** - Custom styles for the toast body. Can be an object containing css properties or a function returning the object. The function will be provided with `theme` and `type` as arguments. {{ "class": "mb-2", "data-nav": "sublink", "id": "style" }}
 
     <InlineCode lang="tsx">
 
@@ -283,7 +283,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
   Default value: `true` {{ "class": "mt-3 text-xs" }}
 
-- **wrapperClass** - CSS class for the toast wrapper. {{ "class": "mb-2", "data-nav": "sublink", "id": "wrapperClass" }}
+- **wrapperClass** - CSS class for the toast wrapper. Can be a string or a function returning a string. The function will be provided with `theme` and `type` as arguments. {{ "class": "mb-2", "data-nav": "sublink", "id": "wrapperClass" }}
 
     <InlineCode lang="tsx">
 
@@ -299,7 +299,7 @@ Can be applied to all components; `ToastProvider`, `Toaster` and `Toast`.
 
   Default value: `"sn-toast-wrapper"` {{ "class": "mt-3 text-xs" }}
 
-- **wrapperStyle** - Custom styles for the toast wrapper. {{ "class": "mb-2", "data-nav": "sublink", "id": "wrapperStyle" }}
+- **wrapperStyle** - Custom styles for the toast wrapper. Can be an object containing css properties or a function returning the object. The function will be provided with `theme` and `type` as arguments. {{ "class": "mb-2", "data-nav": "sublink", "id": "wrapperStyle" }}
 
     <InlineCode lang="tsx">
 
