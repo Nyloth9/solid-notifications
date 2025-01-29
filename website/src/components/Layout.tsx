@@ -308,19 +308,54 @@ export default function Layout(props: Props) {
                               >
                                 <For each={items}>
                                   {({ name, hash, items }) => {
+                                    const [isOpen, setIsOpen] =
+                                      createSignal(false);
+
+                                    const isActive = () => {
+                                      const isExact = fullPath() === url + hash;
+                                      const childActive = items?.some(
+                                        ({ hash }) => fullPath() === url + hash,
+                                      );
+
+                                      return isExact || childActive;
+                                    };
+
                                     return (
                                       <>
                                         <li
-                                          class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
+                                          class={`relative flex items-center justify-between rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
                                         >
                                           <a
-                                            class={`flex justify-between gap-2 border-l py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"} ${fullPath() === url + hash ? "border-emerald-400" : "border-transparent"}`}
+                                            class={`flex items-center justify-between gap-2 border-l py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"} ${isActive() ? "border-emerald-400" : "border-transparent"}`}
                                             href={url + hash}
                                           >
                                             <span>{name}</span>
                                           </a>
+                                          <Show when={items?.length}>
+                                            <button
+                                              onClick={() =>
+                                                setIsOpen(!isOpen())
+                                              }
+                                              class="mr-1 flex h-6 w-6 shrink-0 items-center justify-center rounded text-slate-400 hover:bg-slate-200 hover:text-slate-600 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+                                            >
+                                              <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                class={`transition-transform ${isOpen() ? "rotate-180" : ""}`}
+                                              >
+                                                <path
+                                                  fill="currentColor"
+                                                  d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6z"
+                                                />
+                                              </svg>
+                                            </button>
+                                          </Show>
                                         </li>
-                                        <div>
+                                        <div
+                                          class={isOpen() ? "block" : "hidden"}
+                                        >
                                           <For each={items}>
                                             {({ name, hash }) => {
                                               return (
@@ -331,7 +366,7 @@ export default function Layout(props: Props) {
                                                     class={`flex justify-between gap-2 border-l py-0.5 pl-6 pr-3 text-xs transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"} ${fullPath() === url + hash ? "border-emerald-400" : "border-transparent"}`}
                                                     href={url + hash}
                                                   >
-                                                    <span>{name}</span>
+                                                    <span>- {name}</span>
                                                   </a>
                                                 </li>
                                               );
@@ -377,19 +412,52 @@ export default function Layout(props: Props) {
                             >
                               <For each={items}>
                                 {({ name, hash, items }) => {
+                                  const [isOpen, setIsOpen] =
+                                    createSignal(false);
+
+                                  const isActive = () => {
+                                    const isExact = fullPath() === url + hash;
+                                    const childActive = items?.some(
+                                      ({ hash }) => fullPath() === url + hash,
+                                    );
+
+                                    return isExact || childActive;
+                                  };
+
                                   return (
                                     <>
                                       <li
-                                        class={`relative rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
+                                        class={`relative flex items-center justify-between rounded-r-md ${fullPath() === url + hash ? "bg-slate-600/5 dark:bg-slate-200/5" : ""}`}
                                       >
                                         <a
-                                          class={`flex justify-between gap-2 border-l py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"} ${fullPath() === url + hash ? "border-emerald-400" : "border-transparent"}`}
+                                          class={`flex items-center justify-between gap-2 border-l py-1 pl-4 pr-3 text-sm transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"} ${isActive() ? "border-emerald-400" : "border-transparent"}`}
                                           href={url + hash}
                                         >
                                           <span>{name}</span>
                                         </a>
+                                        <Show when={items?.length}>
+                                          <button
+                                            onClick={() => setIsOpen(!isOpen())}
+                                            class="mr-1 flex h-6 w-6 shrink-0 items-center justify-center rounded text-slate-400 hover:bg-slate-200 hover:text-slate-600 dark:bg-slate-800/40 dark:text-slate-400 dark:ring-1 dark:ring-inset dark:ring-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+                                          >
+                                            <svg
+                                              xmlns="http://www.w3.org/2000/svg"
+                                              width="18"
+                                              height="18"
+                                              viewBox="0 0 24 24"
+                                              class={`transition-transform ${isOpen() ? "rotate-180" : ""}`}
+                                            >
+                                              <path
+                                                fill="currentColor"
+                                                d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6z"
+                                              />
+                                            </svg>
+                                          </button>
+                                        </Show>
                                       </li>
-                                      <div>
+                                      <div
+                                        class={isOpen() ? "block" : "hidden"}
+                                      >
                                         <For each={items}>
                                           {({ name, hash }) => {
                                             return (
@@ -400,7 +468,7 @@ export default function Layout(props: Props) {
                                                   class={`flex justify-between gap-2 border-l py-0.5 pl-6 pr-3 text-xs transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white ${path() === url + hash ? "text-slate-700" : "text-slate-600"} ${fullPath() === url + hash ? "border-emerald-400" : "border-transparent"}`}
                                                   href={url + hash}
                                                 >
-                                                  <span>{name}</span>
+                                                  <span>- {name}</span>
                                                 </a>
                                               </li>
                                             );
