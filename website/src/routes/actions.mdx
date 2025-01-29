@@ -226,7 +226,19 @@ The `notify` function returns an object with the following properties:
 
       </Code>
 
-      The progress control object contains the methods `play`, `pause`, `reset`, and `progress` to control the toast's duration and progress bar.
+      The `ref` is part of the object returned by the notify function and provides a reference to the toast element itself. This can be useful if you need to directly interact with the DOM element
+
+      <Code>
+
+      ```tsx
+      const { ref } = notify("Hello, world!");
+
+      ref.style.backgroundColor = "green";
+      ```
+
+      </Code>
+
+      The `progressControls` object contains the methods `play`, `pause` and `reset`, and the `progress` signal, allowing you to control the toast's duration and hook into the current progress.
 
       <Code>
 
