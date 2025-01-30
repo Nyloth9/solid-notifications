@@ -1,4 +1,4 @@
-<img src="./playground/assets/toast.png" alt="toast" border="0">
+<img src="./playground/assets/favicon.svg" alt="toast" height="52" width="52" />
 
 # Solid Notifications
 
