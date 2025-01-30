@@ -375,7 +375,7 @@ The `dismiss` function allows you to remove a specific toast by ID or all toasts
 
 </InlineCode>
 
-### Usage
+### Options
 
 The dismiss function accepts an optional options object with the following properties:
 
@@ -484,3 +484,151 @@ notify("Hello, world!", {
 ```
 
 </Code>
+
+## remove() {{"data-nav": "link", "class": "text-blue-500", "id": "remove"}}
+
+The `remove` function allows you to immediately remove a toast without triggering the exit animation and without running the `exitCallback`.
+
+<InlineCode>
+
+```tsx
+  remove: (options?: {
+    id?: string;
+    toasterId?: string;
+    keepQueued?: boolean;
+  }) => void;
+```
+
+</InlineCode>
+
+### Options
+
+The `remove` function accepts the same arguments as the [dismiss function](/actions#dismiss) except for the `reason` property.
+
+### How it Works
+
+The `remove` function can be called the same way as the `dismiss` function, such as;
+
+1. Remove all toasts across all toasters:
+
+   <Code>
+
+   ```tsx
+   remove();
+   ```
+
+   </Code>
+
+2. Remove all rendered toasts across all toasters, keeping queued toasts:
+
+   <Code>
+
+   ```tsx
+   remove({ keepQueued: true });
+   ```
+
+   </Code>
+
+3. Remove a specific toast in a specific toaster:
+
+   <Code>
+
+   ```tsx
+   remove({ id: "toastId", toasterId: "toaster-1" });
+   ```
+
+   </Code>
+
+4. Remove all toasts in a specific toaster:
+
+   <Code>
+
+   ```tsx
+   remove({ toasterId: "toaster-1" });
+   ```
+
+   </Code>
+
+5. Remove all rendered toasts in a specific toaster, keeping queued toasts:
+
+   <Code>
+
+   ```tsx
+   remove({ toasterId: "toaster-1", keepQueued: true });
+   ```
+
+   </Code>
+
+   <HighlightBlock type="warning">
+     Take note that if the `toasterId` was provided in the `useToast` function,
+     all remove calls will be made against that toaster.
+   </HighlightBlock>
+
+## promise() {{"data-nav": "link", "class": "text-blue-500", "id": "promise"}}
+
+The `promise` function is a utility that simplifies handling async operations by displaying different toast states for pending, success, and error outcomes.
+
+<InlineCode>
+
+```tsx
+interface promise: <T>(
+    promise: Promise<T>,
+    messages: ToastPromiseMessages,
+    options?: ToastOptions,
+  ) => Promise<T>;
+
+  interface ToastPromiseMessages {
+    pending: string | JSX.Element;
+    success: string | JSX.Element | ((data: any) => string | JSX.Element);
+    error: string | JSX.Element | ((error: any) => string | JSX.Element);
+  }
+```
+
+</InlineCode>
+
+### How it Works
+
+The `promise` function takes three arguments: - A **promise**. - An object containing **messages** for the pending, success, and error states. - An optional **options** object that allows you to customize the toast appearance and behavior.
+
+<Code>
+
+```tsx
+const fetchData = () =>
+  new Promise<string>((resolve, reject) => {
+    setTimeout(() => {
+      Math.random() > 0.5
+        ? resolve("Data loaded successfully!")
+        : reject("Failed to fetch data.");
+    }, 2000);
+  });
+
+try {
+  const data = await notify.promise(fetchData(), {
+    pending: "Fetching data...",
+    success: (data) => `✅ Success: ${data}`,
+    error: (error) => `❌ Error: ${error}`,
+  });
+
+  console.log("Resolved data:", data);
+} catch (error) {
+  console.error("Caught error:", error);
+}
+```
+
+</Code>
+
+### Messages
+
+The **messages** object contains three properties:
+
+- `pending` - The message to display while the promise is pending.
+- `success` - The message to display when the promise resolves successfully. This can be a string, JSX element, or a function that returns a string or JSX element. The function receives the resolved **data** as an argument.
+- `error` - The message to display when the promise is rejected. This can be a string, JSX element, or a function that returns a string or JSX element. The function receives the **error** as an argument.
+
+### Return value
+
+The `promise` function returns a promise that resolves to the data returned by the original promise. This allows you to chain additional actions after the toast is dismissed.
+
+## getQueue() {{"data-nav": "link", "class": "text-blue-500", "id": "getQueue"}}
+
+The `getQueue` function returns an array of all toasts currently in the queue.

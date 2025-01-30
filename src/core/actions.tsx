@@ -271,32 +271,36 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 
     toast.init();
 
-    promise.then(
-      (data) => {
-        toast.update({
-          type: "success",
-          content:
-            typeof messages.success === "function"
-              ? messages.success(data)
-              : messages.success,
-          contentType: "static",
-          duration: options?.duration || toaster.store.toasterConfig.duration,
-        });
-      },
-      (error) => {
-        toast.update({
-          type: "error",
-          content:
-            typeof messages.error === "function"
-              ? messages.error(error)
-              : messages.error,
-          contentType: "static",
-          duration: options?.duration || toaster.store.toasterConfig.duration,
-        });
-      },
-    );
+    return new Promise((resolve, reject) => {
+      promise.then(
+        (data) => {
+          toast.update({
+            type: "success",
+            content:
+              typeof messages.success === "function"
+                ? messages.success(data)
+                : messages.success,
+            contentType: "static",
+            duration: options?.duration || toaster.store.toasterConfig.duration,
+          });
 
-    return promise;
+          resolve(data);
+        },
+        (error) => {
+          toast.update({
+            type: "error",
+            content:
+              typeof messages.error === "function"
+                ? messages.error(error)
+                : messages.error,
+            contentType: "static",
+            duration: options?.duration || toaster.store.toasterConfig.duration,
+          });
+
+          reject(error);
+        },
+      );
+    });
   };
 
   const getQueue: ToastActions["getQueue"] = (toasterId = targetToaster) => {
