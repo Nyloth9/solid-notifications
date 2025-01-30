@@ -379,7 +379,57 @@
     "items": [
       {
         "name": "Styling",
-        "hash": "#useToast",
+        "hash": "#styling",
+        "items": []
+      },
+      {
+        "name": "Custom toast",
+        "hash": "#custom-toast",
+        "items": []
+      },
+      {
+        "name": "Custom progress bar",
+        "hash": "#custom-progress-bar",
+        "items": []
+      },
+      {
+        "name": "Show queue",
+        "hash": "#show-queue",
+        "items": []
+      },
+      {
+        "name": "Track Notification Dismissal Reasons",
+        "hash": "#show-a-reason-why-a-notification-was-dismissed",
+        "items": []
+      },
+      {
+        "name": "Promise API",
+        "hash": "#promise-api",
+        "items": []
+      },
+      {
+        "name": "Pause timer when the window loses focus",
+        "hash": "#pause-toast-timer-when-the-window-loses-focus",
+        "items": []
+      },
+      {
+        "name": "Don't render toasts when the window is not focused",
+        "hash": "#dont-render-toasts-when-the-window-is-not-focused",
+        "items": []
+      },
+      {
+        "name": "Drag to dismiss",
+        "hash": "#drag-to-dismiss",
+        "items": []
+      },
+      {
+        "name": "Custom dismiss button",
+        "hash": "#custom-dismiss-button",
+        "items": []
+      },
+      {
+        "name": "Play or pause the notification timer manually",
+        "hash": "#play-or-pause-the-notification-timer-manually",
         "items": []
       }
     ]

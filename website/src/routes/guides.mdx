@@ -323,3 +323,190 @@ notify("This is a notification", {
 ```
 
 </Code>
+
+## Custom toast {{"data-nav": "link", "class": "text-blue-500", "id": "custom-toast"}}
+
+You can create custom toasts by providing a function as the first argument to the `notify` function (or as the `content` prop of the `update` function). The function will receive the `toast` class instance as an argument.
+
+<InlineCode>
+
+```tsx
+class Toast {
+  store;
+  toastConfig: Config;
+  ref: HTMLElement | null = null;
+  state: "entering" | "idle" | "exiting" = "entering";
+  renderedAt: number | undefined;
+  progressManager: ReturnType<typeof createProgressManager>;
+  isPaused = true;
+  isPausedByUser = false;
+  offset = 0;
+
+...
+}
+```
+
+</InlineCode>
+
+The function should return a JSX element that represents the custom toast.
+
+<Code>
+
+```tsx
+notify(
+  (toast) => {
+    return (
+      <div className="sn-toast">
+        <div className="sn-icon">🚀</div>
+        <div className="sn-content">
+          <div className="sn-title">Custom Toast</div>
+          <div className="sn-message">This is a custom toast</div>
+        </div>
+        <button className="sn-dismiss-btn" onClick={() => toast.dismiss()}>
+          Dismiss
+        </button>
+      </div>
+    );
+  },
+  {
+    duration: 5000,
+    type: "success",
+  },
+);
+```
+
+</Code>
+
+<HighlightBlock type="warning">
+  Custom toast will not receive any of the default styling and the dismiss
+  button and progress bar will not be added automatically. You can add them
+  manually if you want.
+</HighlightBlock>
+
+## Custom progress bar {{"data-nav": "link", "class": "text-blue-500", "id": "custom-progress-bar"}}
+
+You can create custom progress bars by hooking into the progress signal returned by the `notify` or `update` function. The `showProgressBar` option should be set to `false` to prevent the default progress bar from being shown.
+
+<Code>
+
+```tsx
+const { notify } = useToast();
+
+const { progressControls } = notify(
+  <div>
+    <div>This is a toast with a custom progress bar</div>
+    <div
+      class="absolute left-0 top-0 h-full bg-blue-600/10"
+      style={{ width: `${100 - progressControls.progress()}%` }}
+    />
+  </div>,
+  {
+    showProgressBar: false,
+  },
+);
+```
+
+</Code>
+
+## Show queue {{"data-nav": "link", "class": "text-blue-500", "id": "show-queue"}}
+
+An example of how to show a queue of notifications can be found in the [getQueue guide](/actions/#how-it-works-4).
+
+## Track Notification Dismissal Reasons {{"data-nav": "link", "class": "text-blue-500", "id": "show-a-reason-why-a-notification-was-dismissed"}}
+
+An example of how to show a reason why a notification was dismissed can be found in the [dismiss guide](/actions/#providing-a-reason-for-dismissal).
+
+## Promise API {{"data-nav": "link", "class": "text-blue-500", "id": "promise-api"}}
+
+An example of how to use the promise API can be found in the [promise guide](/actions/#how-it-works-3).
+
+## Pause timer when the window loses focus {{"data-nav": "link", "class": "text-blue-500", "id": "pause-toast-timer-when-the-window-loses-focus"}}
+
+The toast timer will pause by default when the window loses focus. You can disable this behavior by setting the [pauseOnWindowInactive](/props#pauseOnWindowInactive) option to `false`.
+
+## Don't render toasts when the window is not focused {{"data-nav": "link", "class": "text-blue-500", "id": "dont-render-toasts-when-the-window-is-not-focused"}}
+
+Toasts will not be rendered when the window is not focused by default. You can disable this behavior by setting the [renderOnWindowFocus](/props#renderOnWindowInactive) option to `true`.
+
+## Drag to dismiss {{"data-nav": "link", "class": "text-blue-500", "id": "drag-to-dismiss"}}
+
+Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the [dragToDismiss](/props#dragToDismiss) option to `false`.
+Drag treshold can be adjusted by setting the [dragTreshold](/props#dragTreshold) option.
+
+## Custom dismiss button {{"data-nav": "link", "class": "text-blue-500", "id": "custom-dismiss-button"}}
+
+You can create a custom dismiss buttons by using the `id` provided by the `notify` function. You should also disable the default dismiss button by setting the `showDismissButton` option to `false`.
+
+<Code>
+
+```tsx
+const { notify, dismiss } = useToast();
+
+const id = notify(
+  <div>
+    <p>This is a notification</p>
+    <button onClick={() => notify.dismiss(id)}>Dismiss</button>
+  </div>,
+  {
+    duration: 5000,
+    showDismissButton: false,
+  },
+);
+```
+
+</Code>
+
+If using a custom toast, you can dismiss the toast by calling the `dismiss` method on the `toast` instance.
+
+<Code>
+
+```tsx
+notify(
+  (toast) => {
+    return (
+      <div className="sn-toast">
+        <div>This is a custom toast</div>
+        <button
+          className="sn-dismiss-button"
+          onClick={() => toast.dismiss("user dismissed")}
+        >
+          Dismiss
+        </button>
+      </div>
+    );
+  },
+  {
+    duration: 5000,
+    type: "success",
+  },
+);
+```
+
+</Code>
+
+## Play or pause the notification timer manually {{"data-nav": "link", "class": "text-blue-500", "id": "play-or-pause-the-notification-timer-manually"}}
+
+The guide on how to play or pause the notification timer manually can be found in the [play/pause guide](/actions/#return-value).
+
+If using a custom toast, you can pause the timer by calling the `pause` method on the `progressManager` of the `toast` instance.
+
+<Code>
+
+```tsx
+notify(
+  (toast) => {
+    return (
+      <div className="sn-toast">
+        <div>This is a custom toast</div>
+        <button onClick={() => toast.progressManager.pause()}>Pause</button>
+      </div>
+    );
+  },
+  {
+    duration: 5000,
+    type: "success",
+  },
+);
+```
+
+</Code>
