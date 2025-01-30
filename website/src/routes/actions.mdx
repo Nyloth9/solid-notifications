@@ -571,13 +571,13 @@ The `promise` function is a utility that simplifies handling async operations by
 <InlineCode>
 
 ```tsx
-interface promise: <T>(
+promise: <T>(
     promise: Promise<T>,
     messages: ToastPromiseMessages,
     options?: ToastOptions,
   ) => Promise<T>;
 
-  interface ToastPromiseMessages {
+interface ToastPromiseMessages {
     pending: string | JSX.Element;
     success: string | JSX.Element | ((data: any) => string | JSX.Element);
     error: string | JSX.Element | ((error: any) => string | JSX.Element);
@@ -603,7 +603,7 @@ const fetchData = () =>
   });
 
 try {
-  const data = await notify.promise(fetchData(), {
+  const data = await promise(fetchData(), {
     pending: "Fetching data...",
     success: (data) => `✅ Success: ${data}`,
     error: (error) => `❌ Error: ${error}`,
@@ -632,3 +632,63 @@ The `promise` function returns a promise that resolves to the data returned by t
 ## getQueue() {{"data-nav": "link", "class": "text-blue-500", "id": "getQueue"}}
 
 The `getQueue` function returns an array of all toasts currently in the queue.
+
+<InlineCode>
+
+```tsx
+getQueue: (toasterId?: string) => Toast[];
+```
+
+</InlineCode>
+
+### How it Works
+
+The `getQueue` function can be called with an optional `toasterId` argument to target a specific toaster. If no `toasterId` is provided, the function will return all queued toasts across all toasters.
+
+<Code>
+
+```tsx
+const queue = getQueue();
+// or
+const queue = getQueue("toaster-1");
+```
+
+</Code>
+
+To show a number of toasts currently in the queue, you can use the `length` property of the returned array:
+
+<Code>
+
+```tsx
+const { getQueue } = useToast();
+
+return <div>There are currently {getQueue().length} toasts in the queue </div>;
+```
+
+</Code>
+
+## clearQueue() {{"data-nav": "link", "class": "text-blue-500", "id": "clearQueue"}}
+
+The `clearQueue` function removes currently queued toasts.
+
+<InlineCode>
+
+```tsx
+clearQueue: (toasterId?: string) => void;
+```
+
+</InlineCode>
+
+### How it Works
+
+The `clearQueue` function can be called with an optional `toasterId` argument to target a specific toaster. If no `toasterId` is provided, the function will clear the queue for all toasters.
+
+<Code>
+
+```tsx
+clearQueue();
+// or
+clearQueue("toaster-1");
+```
+
+</Code>
