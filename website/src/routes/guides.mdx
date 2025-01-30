@@ -408,6 +408,32 @@ const { progressControls } = notify(
 
 </Code>
 
+If using a custom toast, the progress signal can be accessed via the `progressManager` property of the `toast` instance.
+
+<Code>
+
+```tsx
+notify(
+  (toast) => {
+    return (
+      <div className="sn-toast">
+        <div>This is a custom toast with a custom progress bar</div>
+        <div
+          class="absolute left-0 top-0 h-full bg-blue-600/10"
+          style={{ width: `${100 - toast.progressManager.progress()}%` }}
+        />
+      </div>
+    );
+  },
+  {
+    duration: 5000,
+    type: "success",
+  },
+);
+```
+
+</Code>
+
 ## Show queue {{"data-nav": "link", "class": "text-blue-500", "id": "show-queue"}}
 
 An example of how to show a queue of notifications can be found in the [getQueue guide](/actions/#how-it-works-4).
