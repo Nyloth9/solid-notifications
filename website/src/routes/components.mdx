@@ -6,7 +6,7 @@ order: 2
 tags: []
 ---
 
-import Code from "~/components/Code";
+import Code, { InlineCode } from "~/components/Code";
 import Title from "~/components/Title";
 import HighlightBlock from "~/components/HighlightBlock";
 
@@ -143,3 +143,39 @@ export default function App() {
 
 Accepts [toast config](/props#toast-config) props as well as `id` and `toasterId` ([other config](/props#other-config)). Also accepts `content` props when updating a toast.
 Any props specified when creating or updating a toast will take precedence over global settings.
+
+### Properties available on the `Toast` instance
+
+These properties can be accesed when using a custom toast.
+
+<InlineCode>
+
+```tsx
+class Toast {
+  store;
+  toastConfig: Config;
+  ref: HTMLElement | null = null;
+  state: "entering" | "idle" | "exiting" = "entering";
+  renderedAt: number | undefined;
+  progressManager: ReturnType<typeof createProgressManager>;
+  isPaused = true;
+  isPausedByUser = false;
+  offset = 0;
+
+...
+}
+```
+
+</InlineCode>
+
+Each toast instance has several properties that define its behavior and appearance.
+
+- **store**: A reference to the Toaster store that manages the toast.
+- **toastConfig**: The initial configuration of the toast when it was created. This includes options like duration, type, and styling.
+- **ref**: A reference to the toast's DOM element. This can be useful if you need direct access to modify or animate the toast manually.
+- **state**: Represents the lifecycle of the toast. It can be "entering" when the toast is animating into view, "idle" when fully visible, and "exiting" when it is dismissed.
+- **renderedAt**: A timestamp indicating when the toast was rendered. This is primarily useful for tracking how long the toast has been displayed.
+- **progressManager**: An object responsible for managing the toast's progress bar and duration. It provides methods like play(), pause(), and reset() to control the toast's progress.
+- **isPaused**: A flag that indicates whether the toast's timer is currently paused. This can be useful when you need to stop the countdown temporarily.
+- **isPausedByUser**: Similar to isPaused, but specifically tracks whether the user manually paused the toast, such as by hovering over it or switching browser tabs.
+- **offset**: Represents the vertical position of the toast relative to other active toasts. This helps maintain proper spacing between multiple notifications.
