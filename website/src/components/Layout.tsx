@@ -8,7 +8,7 @@ import {
   Show,
 } from "solid-js";
 import { useTheme } from "../util/theme";
-import { ToastProvider } from "this-is-a-test-package-987";
+import { ToastProvider } from "solid-notifications";
 import { useLocation, useNavigate } from "@solidjs/router";
 import pageData from "../page-data.json";
 

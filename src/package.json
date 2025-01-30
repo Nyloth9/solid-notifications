@@ -1,7 +1,7 @@
 {
-  "name": "this-is-a-test-package-987",
+  "name": "solid-notifications",
   "type": "module",
-  "version": "1.0.19",
+  "version": "1.0.1",
   "description": "A Solidjs toast notifications library",
   "author": {
     "name": "Nyloth9",
@@ -42,8 +42,5 @@
   ],
   "license": "MIT",
   "browser": {},
-  "typesVersions": {},
-  "dependencies": {
-    "this-is-a-test-package-987": "^1.0.8"
-  }
+  "typesVersions": {}
 }
