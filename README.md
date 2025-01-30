@@ -1,4 +1,7 @@
-<img src="./playground/assets/favicon.svg" alt="toast" height="52" width="52" />
+<picture>
+  <source srcset="./playground/assets/SNLogo.png" media="(prefers-color-scheme: dark)">
+  <img src="./playground/assets/SNLogo-light.png" alt="toast" height="52" width="auto">
+</picture>
 
 # Solid Notifications
 
