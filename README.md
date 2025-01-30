@@ -1,4 +1,4 @@
-<img src="https://i.ibb.co/mCy2Fxff/toast.png" alt="toast" border="0">
+<img src="./playground/assets/toast.png" alt="toast" border="0">
 
 # Solid Notifications
 
