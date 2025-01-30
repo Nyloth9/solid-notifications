@@ -296,3 +296,30 @@ You can also provide your own classes or styles as props to the `ToastProvider`,
 </Code>
 
 The dismiss button and progress bar can also be styled using the `dismissButtonClass`, `dismissButtonStyle`, `progressBarClass`, and `progressBarStyle` props.
+
+Class and style props can also be provided as a function. The function will receive the `theme` and the `type` as arguments.
+
+<Code>
+
+```tsx
+notify("This is a notification", {
+  progressBarStyle: ({ type }) => {
+    switch (type) {
+      case "success":
+        return { "background-color": "green" };
+      case "error":
+        return { "background-color": "red" };
+      case "warning":
+        return { "background-color": "orange" };
+      case "info":
+        return { "background-color": "blue" };
+      case "loading":
+        return { "background-color": "black" };
+      default:
+        return { "background-color": "gray" };
+    }
+  },
+});
+```
+
+</Code>
