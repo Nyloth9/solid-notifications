@@ -1,6 +1,4 @@
-<img src="./playground/assets/SNLogo-no-bg.png" alt="toast" width="auto" />
-
-
+<img src="./playground/assets/SNLogo-no-bg.png" alt="toast" height="60px" width="auto" />
 
 A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
 
