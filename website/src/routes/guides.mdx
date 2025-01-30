@@ -17,4 +17,282 @@ import HightlightBlock from "~/components/HighlightBlock";
 
 This section contains guides on how to use Solid Notifications. {{ "class": "lead" }}
 
-## Styling {{"data-nav": "link", "class": "text-blue-500", "id": "useToast"}}
+## Styling {{"data-nav": "link", "class": "text-blue-500", "id": "styling"}}
+
+Solid Notifications provides a flexible styling system that allows customization via CSS variables, dark mode support, toast types with predefined colors, and animations.
+
+### Copying the CSS file
+
+The easiest way to get started with Solid Notifications is to copy the CSS file which can be found in the `dist` folder and edit it to suit your needs.
+
+### Customization via CSS Variables
+
+You can customize the appearance of notifications using CSS variables. Below are the default variables used:
+
+<Code>
+
+```css
+:root {
+  /* General */
+  --sn-z-index: 9999;
+  --sn-color-default: #121826;
+  --sn-color-success: #34ab53;
+  --sn-color-error: #ea4335;
+  --sn-color-warning: #f59e0b;
+  --sn-color-info: #5493f7;
+
+  /* Toast Wrapper */
+  --sn-wrapper-max-width: 334px;
+  --sn-wrapper-min-width: 264px;
+  --sn-wrapper-transition-duration: 0.3s;
+
+  /* Toast */
+  --sn-toast-bg-color: white;
+  --sn-toast-gap: 16px;
+  --sn-toast-font-size: 0.875rem;
+  --sn-toast-line-height: 1.5;
+  --sn-toast-padding: 15px 16px 16px 16px;
+  --sn-toast-text-color: #334155;
+  --sn-toast-border-radius: 6px;
+  --sn-toast-box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+  /* Dismiss Button */
+  --sn-dismiss-btn-size: 1.175rem;
+  --sn-dismiss-btn-border-radius: 0.25rem;
+  --sn-dismiss-btn-transition: color 0.3s;
+  --sn-dismiss-btn-margin: 1px -4px 0px auto;
+  --sn-dismiss-btn-color: #9ca3af;
+  --sn-dismiss-btn-hover-color: #374151;
+
+  /* Progress Bar */
+  --sn-progress-bar-height: 2px;
+  --sn-progress-bar-color: #748aa8;
+
+  /* Icon */
+  --sn-icon-size: 1.125rem;
+  --sn-icon-margin: 1px 0 0 0;
+  --sn-icon-stroke: #fff;
+  --sn-icon-fill: #121826;
+}
+
+/* Dark Theme */
+.sn-theme-dark {
+  --sn-toast-bg-color: #1f2937;
+  --sn-toast-text-color: #f9fafb;
+  --sn-toast-box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),
+    0 0 0 1px hsla(0, 0%, 0%, 0.05), 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02),
+    0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
+  --sn-dismiss-btn-color: #bfc5cf;
+  --sn-dismiss-btn-hover-color: #f9fafb;
+  --sn-progress-bar-color: #9ca3af;
+  --sn-icon-stroke: #fff;
+}
+
+/* Toast Types */
+.sn-type-success {
+  --sn-progress-bar-color: var(--sn-color-success);
+  --sn-icon-fill: var(--sn-color-success);
+}
+
+.sn-type-error {
+  --sn-progress-bar-color: var(--sn-color-error);
+  --sn-icon-fill: var(--sn-color-error);
+}
+
+.sn-type-warning {
+  --sn-progress-bar-color: var(--sn-color-warning);
+  --sn-icon-fill: var(--sn-color-warning);
+}
+
+.sn-type-info {
+  --sn-progress-bar-color: var(--sn-color-info);
+  --sn-icon-fill: var(--sn-color-info);
+}
+```
+
+</Code>
+
+You can override these values in your global CSS file or within a specific component.
+
+### Themes and Types
+
+The toast tree consists of only three elements. A toaster, a toast wrapper, and a toast.
+
+<Code>
+
+```html
+<div class="sn-toaster">
+  <div class="sn-toast-wrapper">
+    <div class="sn-toast">This is a notification</div>
+  </div>
+</div>
+```
+
+</Code>
+
+The way theming and types work in Solid Notifications is that the wrapper element will be provided with classes based on the provided settings. For example, if you set the `theme` to `"dark"`, the wrapper will have the class `"sn-theme-dark"`, and if you set the toast `type` to `"success"`, the wrapper will have the class `sn-type-success`.
+
+For example:
+
+<Code>
+
+```tsx
+notify("This is a success notification", {
+  theme: "dark",
+  type: "success",
+});
+```
+
+</Code>
+
+will result in the following HTML:
+
+<Code>
+
+```html
+<div class="sn-toaster">
+  <div class="sn-toast-wrapper sn-theme-dark sn-type-success">
+    <div class="sn-toast">This is a success notification</div>
+  </div>
+</div>
+```
+
+</Code>
+
+You can use this to target these classes in your CSS to style the notifications.
+
+<Code>
+
+```css
+/* override the css variables */
+.sn-theme-dark {
+  --sn-color-default: #fff;
+  --sn-toast-bg-color: #121826;
+  --sn-toast-text-color: #fff;
+  --sn-dismiss-btn-color: #9ca3af;
+  --sn-dismiss-btn-hover-color: #fff;
+  --sn-progress-bar-color: #748aa8;
+  --sn-icon-fill: #fff;
+}
+
+.sn-type-success {
+  --sn-color-success: #34ab53;
+}
+
+/* or */
+
+/* provide the styles directly */
+.sn-toast-wrapper.sn-theme-dark {
+  background-color: #121826;
+}
+
+.sn-theme-dark {
+  color: #fff;
+}
+```
+
+</Code>
+
+You can provide any string as the `theme`, and it will be injected into the toast wrapper as a class. The types however are limited to `"default"`, `"loading"`, `"success"`, `"error"`, `"warning"`, and `"info"`.
+
+<Code>
+
+```tsx
+notify("This is a default notification", {
+  type: "default",
+  theme: "my-custom-theme",
+});
+```
+
+</Code>
+
+will result in the following HTML:
+
+<Code>
+
+```html
+<div class="sn-toaster">
+  <div class="sn-toast-wrapper sn-theme-my-custom-theme sn-type-default">
+    <div class="sn-toast">This is a default notification</div>
+  </div>
+</div>
+```
+
+</Code>
+
+### Animations
+
+The wrapper will also be provided with classes based on the state of the notification. The states are `"entering"`, `"idle"`, and `"exiting"`, and are combined with the `positionY` and `positionX` props.
+
+<Code>
+
+```html
+<div class="sn-toaster">
+  <div
+    class="sn-toast-wrapper sn-theme-dark sn-type-info sn-state-right-top-entering"
+  >
+    <div class="sn-toast">This is a notification</div>
+  </div>
+</div>
+```
+
+</Code>
+
+You can use these classes to animate the notifications.
+
+<Code>
+
+```css
+.sn-state-right-top-entering,
+.sn-state-right-bottom-entering {
+  -webkit-animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.sn-state-right-top-exiting,
+.sn-state-right-bottom-exiting {
+  -webkit-animation: SNSlideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: SNSlideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+```
+
+</Code>
+
+Alternatively, you can provide your own classes that you want to use with the `onEnter`, `onIdle`, and `onExit` props.
+
+<Code>
+
+```tsx
+<ToastProvider
+  onEnter="my-enter-class"
+  onIdle="my-idle-class"
+  onExit="my-exit-class"
+>
+  <App />
+</ToastProvider>
+```
+
+</Code>
+
+### Classes as props
+
+You can also provide your own classes or styles as props to the `ToastProvider`, `Toaster`, and when calling the `notify` or `update` function.
+
+<Code>
+
+```tsx
+<ToastProvider
+  wrapperClass="my-toast-wrapper"
+  wrapperStyle={{ backgroundColor: "red" }}
+  class="my-toast"
+  style={{ color: "white" }}
+  // etc
+>
+  <App />
+</ToastProvider>
+```
+
+</Code>
+
+The dismiss button and progress bar can also be styled using the `dismissButtonClass`, `dismissButtonStyle`, `progressBarClass`, and `progressBarStyle` props.
