@@ -17,69 +17,6 @@ import {
   resolveContent,
 } from "../utils/helpers";
 
-/***
- * TO DO
- * ✔ - will remove "infinite"
- * ✔ - will remove animation options
- * ✔ - will fix positionX = center
- * ✔ - add queue for toasts? (if there is not enough space for the toast, it will be added to the queue)
- * ✔ will remove unstyled?
- * ✔ will remove the floating dismiss button
- * - max toast duration? If the toast is rendered and stays for too long, it will be dismissed (should be duration + maxDuration -> so even if timer is isPausedByUser, it will be dismissed) - maybe
- * ✔ - remove overflow-control
- * ✔ - existing toast id should be checked and error should be thrown if the id already exists
- * ✔ - we are merging defaultConfig with the toast instead of config passed to the toaster <- this should be fixed
- * ✔ - add property for queue limit
- * ✔ - dont allow positionX, positionY, offsetX and offsetY to be changed per Toast as this should be handled by the Toaster
- * ✔ - add option to not have a toast limit
- * ✔ - allow users to read the queue
- * ✔ add pause on onMouseEnter etc.
- * ✔ add pause on tab switch
- * ✔ - added reverseToastOrder
- * ✔ - add return types
- * ✔ - exitCallback will be called with a reason (true, false or manually provided reason) which can then be used when declaring the callback as the first argument
- * ✔ - add callbacks
- * ✔ - put "toasterConfig" and "toastConfig" as separate objects in the Toast, no need to have positionX, positionY, offsetX and offsetY in the Toast
- * ✔ - add toast timer controls
- * ✔ - change dismiss, update and remove signatures
- * ✔ - enable false as duration
- * - add custom ordering support?
- * ✔ change library name to "solid-notifications"
- * ✔ - update all toasts in a toaster, update all toasts in all toasters
- * ✔ - fix a bug where timer controls dont work when toast is added to the queue
- * ✔ - add function as content argument in notify
- * ✔ - added visibility change event listener
- * ✔ - add option to not render toasts if the tab is blurred
- * ✔ - add clear only rendered toasts (keepQueued)
- * ✔ - handle a situation when window is blurred but an update happens to the toast and then the timer runs... (we dont want that)
- * ✔ - add styling
- * - add tests
- * ✔ add swipe to dismiss
- * - clean up comments
- * ✔ - add dismiss on click body
- * ✔ - add dismiss on click close button
- * ✔ add aria roles
- * ✔ add themes?
- * - write default config to docs
- * ✔ add promise support
- * - add theme to propValue arguments
- */
-
-/***
- * NEW FEATURES
- * - Now supports multiple progress bars at the same time
- * - For infinite duration, set the duration to 0
- * - Now supports queue for toasts (if there is not enough space for the toast, or there is a toast limit, it will be added to the queue)
- * - If a toast is not rendered and stays in the queue, it will not run the dismiss timer
- * - If a toast update happens while the toast is in the queue, it will update the toast without running the dismiss timer, and render it when there is enough space
- * - Now supports multiple toasters at the same time (if only one toaster is used, no arg for useToast is required)
- * - Now exposes a progress() method to get the progress of the timer, which is reactive and can be used in the UI
- * - per toaster window blur event listener
- * - option to not render toasts if the tab is blurred
- * - custom toast (function as content argument), will be unstyled
- * - all around reactivity, pass signals to ToastProvider, Toasters and Toasts and the changes will reflect in the UI
- */
-
 class Toast {
   private setStore;
   private dragManager = createDragManager(this);
