@@ -261,6 +261,21 @@ You can provide your own toast `id` or let the library generate one for you.
 
 The `update` function allows you to modify an existing toast's content or appearance. It takes one argument; an object containing [toastConfig](/props#toast-config) and [other config](/props#other-config) properties.
 
+<InlineCode>
+
+```tsx
+  update: (options: ToastOptionsUpdate) =>
+    | {
+        id: string | undefined;
+        ref: HTMLElement | null;
+        progressControls: ProgressControls;
+      }
+    | undefined;
+};
+```
+
+</InlineCode>
+
 <HighlightBlock type="info">
   As opposed to being the first argument when calling the `notify` function, the
   new body, i.e. `content` of the toast, should be passed as a property in the
@@ -276,3 +291,73 @@ update({ id, content: "Updated content", duration: 10000 });
 ```
 
 </Code>
+
+### How It Works
+
+The update function is designed to handle several scenarios, depending on the arguments provided:
+
+1. Update a specific toast:
+
+   <Code>
+
+   ```tsx
+   update({ id: "toastId", content: "Updated content", duration: 10000 });
+   ```
+
+   </Code>
+
+2. Update a specific toast in a specific toaster:
+
+   <Code>
+
+   ```tsx
+   update({
+     id: "toastId",
+     toasterId: "toasterId",
+     content: "Updated content",
+     duration: 10000,
+   });
+   ```
+
+   </Code>
+
+3. Update all toasts in a specific toaster:
+
+   <Code>
+
+   ```tsx
+   update({
+     toasterId: "toasterId",
+     content: "Updated content",
+     duration: 10000,
+   });
+   ```
+
+   </Code>
+
+4. Update all toasts in all toasters:
+
+   <Code>
+
+   ```tsx
+   update({ content: "Updated content", duration: 10000 });
+   ```
+
+   </Code>
+
+   <HighlightBlock type="warning">
+     Take note that if the `toasterId` was provided in the `useToast` function,
+     all update calls will be made against that toaster.
+   </HighlightBlock>
+
+### Options
+
+The `update` function takes an object containing [toastConfig](/props#toast-config) and [other config](/props#other-config) properties.
+
+### Return value
+
+The `update` function returns the same object as the [notify function](/actions#notify), with the same properties.
+
+## dismiss() {{"data-nav": "link", "class": "text-blue-500", "id": "dismiss"}}
+
+The `dismiss` function allows you to remove a specific toast by ID or all toasts if no ID is provided. The exit animation and exit callback will be triggered.
