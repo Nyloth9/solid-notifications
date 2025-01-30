@@ -299,7 +299,7 @@ export default function Layout(props: Props) {
                             <Show when={items?.length}>
                               <ul
                                 role="list"
-                                class="mb-4 border-l border-transparent"
+                                class="mb-2 border-l border-transparent"
                               >
                                 <For each={items}>
                                   {({ name, hash, items }) => {
@@ -403,7 +403,7 @@ export default function Layout(props: Props) {
                           <Show when={items?.length}>
                             <ul
                               role="list"
-                              class="mb-4 border-l border-transparent"
+                              class="mb-2 border-l border-transparent"
                             >
                               <For each={items}>
                                 {({ name, hash, items }) => {

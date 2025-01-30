@@ -364,5 +364,19 @@
         "items": []
       }
     ]
+  },
+  {
+    "name": "Guides",
+    "url": "/guides",
+    "description": "Solid Notifications guides",
+    "order": 5,
+    "tags": [],
+    "items": [
+      {
+        "name": "Styling",
+        "hash": "#useToast",
+        "items": []
+      }
+    ]
   }
 ]
