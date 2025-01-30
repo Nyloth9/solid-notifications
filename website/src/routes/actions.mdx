@@ -603,11 +603,15 @@ const fetchData = () =>
   });
 
 try {
-  const data = await promise(fetchData(), {
-    pending: "Fetching data...",
-    success: (data) => `✅ Success: ${data}`,
-    error: (error) => `❌ Error: ${error}`,
-  });
+  const data = await promise(
+    fetchData(),
+    {
+      pending: "Fetching data...",
+      success: (data) => `✅ Success: ${data}`,
+      error: (error) => `❌ Error: ${error}`,
+    },
+    { duration: 5000 },
+  );
 
   console.log("Resolved data:", data);
 } catch (error) {
