@@ -165,14 +165,14 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
       const toast = findToast(options.id, toaster.store);
 
       if (!toast) {
-        throw new Error(
+        console.warn(
           options.toasterId === "__default"
             ? `Failed to dismiss toast: No toast found with the provided ID (${options.id}).`
             : `Failed to dismiss toast: No toast found with the provided ID (${options.id}) in the toaster with the toasterId "${options.toasterId}".`,
         );
       }
 
-      toast.dismiss(options.reason);
+      toast?.dismiss(options.reason);
 
       return;
     }

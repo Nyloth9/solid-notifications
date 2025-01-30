@@ -342,6 +342,11 @@
         "name": "update()",
         "hash": "#update",
         "items": []
+      },
+      {
+        "name": "dismiss()",
+        "hash": "#dismiss",
+        "items": []
       }
     ]
   }
