@@ -1,9 +1,6 @@
-<picture>
-  <source srcset="./playground/assets/SNLogo.png" media="(prefers-color-scheme: dark)">
-  <img src="./playground/assets/SNLogo-light.png" alt="toast" height="52" width="auto">
-</picture>
+<img src="./playground/assets/SNLogo-light.png" alt="toast" width="auto" />
 
-# Solid Notifications
+
 
 A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
 
