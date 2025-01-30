@@ -144,9 +144,9 @@ The content is the first argument of the `notify` function. It can be a string, 
         <Code>
 
         ```tsx
-        const signal = createSignal("Hello, world!");
+        const [text, setText] = createSignal("Hello, world!");
 
-        notify(signal);
+        notify(text);
         ```
 
         </Code>
@@ -259,10 +259,20 @@ You can provide your own toast `id` or let the library generate one for you.
 
 ## update() {{"data-nav": "link", "class": "text-blue-500", "id": "update"}}
 
-The `update` function allows you to modify an existing toast's content or appearance. It takes one argument; an object containing the toast's ID and the new content or options.
+The `update` function allows you to modify an existing toast's content or appearance. It takes one argument; an object containing [toastConfig](/props#toast-config) and [other config](/props#other-config) properties.
 
 <HighlightBlock type="info">
   As opposed to being the first argument when calling the `notify` function, the
   new body, i.e. `content` of the toast, should be passed as a property in the
   `options` object when calling `update`.
 </HighlightBlock>
+
+<Code>
+
+```tsx
+const { id } = notify("Hello, world!");
+
+update({ id, content: "Updated content", duration: 10000 });
+```
+
+</Code>
