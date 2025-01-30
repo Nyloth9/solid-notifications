@@ -339,7 +339,7 @@ Toast props. Can be applied to all components; `ToastProvider`, `Toaster` and `T
 
   Default value: `null` {{ "class": "mt-3 text-xs" }}
 
-- **exitCallback** - Callback function executed when the toast exits. {{ "class": "mb-2", "data-nav": "sublink", "id": "exitCallback" }}
+- **exitCallback** - Callback function executed when the toast exits. It will provide a `reason` argument with which the `dismiss()` function was called, or if it wasn't provided, the reason will be `false` if the toast dismissed by timer expiration, or `true` if it was dismissed by the user. {{ "class": "mb-2", "data-nav": "sublink", "id": "exitCallback" }}
 
     <InlineCode lang="tsx">
 

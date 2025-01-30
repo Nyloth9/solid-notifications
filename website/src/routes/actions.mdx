@@ -361,3 +361,15 @@ The `update` function returns the same object as the [notify function](/actions#
 ## dismiss() {{"data-nav": "link", "class": "text-blue-500", "id": "dismiss"}}
 
 The `dismiss` function allows you to remove a specific toast by ID or all toasts if no ID is provided. The exit animation and exit callback will be triggered.
+
+### Usage
+The dismiss function accepts an optional options object with the following properties:
+
+    - **id**: The unique identifier of the toast to dismiss. If provided, only the specified toast will be dismissed.
+    - **toasterId**: The identifier of the toaster where the toast resides. If provided, the function will dismiss toasts only in the specified toaster.
+    - **keepQueued**: A boolean flag that determines whether queued toasts should be preserved. If true, only rendered toasts will be dismissed.
+    - **reason**: A string or custom value that can be used to track why a toast was dismissed (e.g., "user_action", "timeout").
+
+If no arguments are provided, the function will dismiss all toasts across all toasters.
+
+
