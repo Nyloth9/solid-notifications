@@ -1,3 +1,5 @@
+
+<img src="https://ibb.co/kgDw6dNN" width="32" height="32" />
 # Solid Notifications
 
 A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
