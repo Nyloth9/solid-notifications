@@ -347,6 +347,21 @@
         "name": "dismiss()",
         "hash": "#dismiss",
         "items": []
+      },
+      {
+        "name": "remove()",
+        "hash": "#remove",
+        "items": []
+      },
+      {
+        "name": "promise()",
+        "hash": "#promise",
+        "items": []
+      },
+      {
+        "name": "getQueue()",
+        "hash": "#getQueue",
+        "items": []
       }
     ]
   }

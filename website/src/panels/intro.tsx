@@ -281,7 +281,7 @@ function CoreFeatures(props: { feature: string }) {
           onClick={() => {
             resetToasters(["toaster-6"], dismiss);
             const { id } = notify(
-              "Supports success, error, warning and info types.",
+              "Supports default, loading, success, error, warning and info types.",
               {
                 toasterId: "toaster-6",
                 type: "success",
@@ -299,6 +299,10 @@ function CoreFeatures(props: { feature: string }) {
             setTimeout(() => {
               update({ id, type: "info", toasterId: "toaster-6" });
             }, 6000);
+
+            setTimeout(() => {
+              update({ id, type: "loading", toasterId: "toaster-6" });
+            }, 8000);
           }}
           class="inline-flex justify-center gap-0.5 overflow-hidden rounded-full px-3 py-0.5 text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-900/20 hover:bg-slate-900/2.5 hover:text-slate-900 active:bg-slate-900/5 dark:bg-white/5 dark:text-slate-50 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white"
         >
