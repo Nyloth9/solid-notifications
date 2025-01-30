@@ -29,7 +29,7 @@ The easiest way to get started with Solid Notifications is to copy the CSS file 
 
 You can customize the appearance of notifications using CSS variables. Below are the default variables used:
 
-<Code>
+<InlineCode>
 
 ```css
 :root {
@@ -111,7 +111,7 @@ You can customize the appearance of notifications using CSS variables. Below are
 }
 ```
 
-</Code>
+</InlineCode>
 
 You can override these values in your global CSS file or within a specific component.
 
@@ -162,7 +162,7 @@ will result in the following HTML:
 
 You can use this to target these classes in your CSS to style the notifications.
 
-<Code>
+<InlineCode>
 
 ```css
 /* override the css variables */
@@ -192,7 +192,7 @@ You can use this to target these classes in your CSS to style the notifications.
 }
 ```
 
-</Code>
+</InlineCode>
 
 You can provide any string as the `theme`, and it will be injected into the toast wrapper as a class. The types however are limited to `"default"`, `"loading"`, `"success"`, `"error"`, `"warning"`, and `"info"`.
 
@@ -241,7 +241,7 @@ The wrapper will also be provided with classes based on the state of the notific
 
 You can use these classes to animate the notifications.
 
-<Code>
+<InlineCode>
 
 ```css
 .sn-state-right-top-entering,
@@ -257,7 +257,7 @@ You can use these classes to animate the notifications.
 }
 ```
 
-</Code>
+</InlineCode>
 
 Alternatively, you can provide your own classes that you want to use with the `onEnter`, `onIdle`, and `onExit` props.
 
