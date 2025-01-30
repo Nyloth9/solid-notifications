@@ -362,6 +362,11 @@
         "name": "getQueue()",
         "hash": "#getQueue",
         "items": []
+      },
+      {
+        "name": "clearQueue()",
+        "hash": "#clearQueue",
+        "items": []
       }
     ]
   },
