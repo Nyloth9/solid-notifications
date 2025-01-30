@@ -1,7 +1,4 @@
-<div style="display: flex; gap: 15px; align-items: center; font-size: 28px">
-<img src="./playground/assets/toast.png" alt="toast" height="33px" width="auto" />
-Solid Notifications
-</div>
+<img src="./playground/assets/SNLogo-no-bg.png" alt="toast" height="60px" width="auto" />
 
 A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
 
