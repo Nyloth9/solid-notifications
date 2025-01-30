@@ -1,4 +1,4 @@
-<img src="./playground/assets/SNLogo-light.png" alt="toast" width="auto" />
+<img src="./playground/assets/SNLogo-no-bg.png" alt="toast" width="auto" />
 
 
 
