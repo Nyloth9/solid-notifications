@@ -1,4 +1,4 @@
-<img src="./playground/assets/SNLogo-shadow.png" alt="toast" height="80px" width="auto" />
+[<img src="./playground/assets/SNLogo-shadow.png" alt="toast" height="80px" width="auto" />](https://solid-notifications.vercel.app/)
 
 A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
 
