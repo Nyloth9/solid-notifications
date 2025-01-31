@@ -3,49 +3,376 @@
     "title": "Actions",
     "description": "Solid Notifications actions guide",
     "slug": "/actions",
-    "filePath": "actions.mdx",
-    "sections": []
+    "filePath": "src\\routes\\actions.mdx",
+    "extractedData": [
+      {
+        "heading": "Actions",
+        "content": "Control your notifications with ease using these built-in actions."
+      },
+      {
+        "heading": "useToast()",
+        "content": "The useToast function is an entry point to managing the toasts. It returns functions for showing, updating, dismissing and removing toasts, as well as to access the queue."
+      },
+      {
+        "heading": "Targeting a Specific Toaster",
+        "content": "If you have multiple toasters, you can invoke useToast with the toaster's id to target a specific toaster. Then, all the actions will called against that toaster. To target a different toaster in the same file, you can alias the methods: Alternatively, you can store the result of useToast() in variables and call them separately:"
+      },
+      {
+        "heading": "Available Actions",
+        "content": "The useToast() function returns an object containing various toast actions:"
+      },
+      {
+        "heading": "notify()",
+        "content": "The notify function is the primary way to trigger toasts in SolidNotifications. It allows you to display messages with optional configurations, such as assigning an ID, targeting a specific toaster, and customizing the toast appearance. It takes two arguments: content and options and returns an object with the toast's ID, a reference to the toast element, and a progress control object."
+      },
+      {
+        "heading": "Basic usage",
+        "content": "The simplest way to use notify is by calling it with a message: To target a specific toaster, you can pass the toasterId in the options object:"
+      },
+      {
+        "heading": "Content",
+        "content": "The content is the first argument of the notify function. It can be a string, a JSX element, or a function that returns a string or JSX element."
+      },
+      {
+        "heading": "Options",
+        "content": "The second argument of notify is an options object that allows you to customize the behavior and appearance of the toast. The options object accepts all the toastConfig properties and the other config properties except content (which is passed as the first argument)."
+      },
+      {
+        "heading": "Return value",
+        "content": "The notify function returns an object with the following properties: id - The unique identifier of the toast.  ref - A reference to the toast element.  progressControls - A progress control object that allows you to manage the toast's duration and progress bar.  You can provide your own toast id or let the library generate one for you."
+      },
+      {
+        "heading": "update()",
+        "content": "The update function allows you to modify an existing toast's content or appearance. It takes one argument; an object containing toastConfig and other config properties."
+      },
+      {
+        "heading": "How It Works",
+        "content": "The update function is designed to handle several scenarios, depending on the arguments provided: Update a specific toast: Update a specific toast in a specific toaster: Update all toasts in a specific toaster: Update all toasts in all toasters:"
+      },
+      {
+        "heading": "Options",
+        "content": "The update function takes an object containing toastConfig and other config properties."
+      },
+      {
+        "heading": "Return value",
+        "content": "The update function returns the same object as the notify function, with the same properties."
+      },
+      {
+        "heading": "dismiss()",
+        "content": "The dismiss function allows you to remove a specific toast by ID or all toasts if no ID is provided. The exit animation and exit callback will be triggered."
+      },
+      {
+        "heading": "Options",
+        "content": "The dismiss function accepts an optional options object with the following properties: If no arguments are provided, the function will dismiss all toasts across all toasters."
+      },
+      {
+        "heading": "How it Works",
+        "content": "Here’s an example of how you might use the dismiss function in practice: Dismiss all toasts across all toasters: Dismiss all rendered toasts across all toasters, keeping queued toasts: Dismiss a specific toast in a specific toaster: Dismiss all toasts in a specific toaster: Dismiss all rendered toasts in a specific toaster, keeping queued toasts:"
+      },
+      {
+        "heading": "Providing a reason for dismissal",
+        "content": "You can provide a reason for dismissing a toast by passing a reason property in the options object. This can be useful for tracking why a toast was dismissed, such as when a user manually closes a toast. And then in the toast's exitCallback callback: If no reason was provided, the reason argument will be generated by the library. If the toast was dismissed by the user, the reason will be true, otherwise it will be false."
+      },
+      {
+        "heading": "remove()",
+        "content": "The remove function allows you to immediately remove a toast without triggering the exit animation and without running the exitCallback."
+      },
+      {
+        "heading": "Options",
+        "content": "The remove function accepts the same arguments as the dismiss function except for the reason property."
+      },
+      {
+        "heading": "How it Works",
+        "content": "The remove function can be called the same way as the dismiss function, such as; Remove all toasts across all toasters: Remove all rendered toasts across all toasters, keeping queued toasts: Remove a specific toast in a specific toaster: Remove all toasts in a specific toaster: Remove all rendered toasts in a specific toaster, keeping queued toasts:"
+      },
+      {
+        "heading": "promise()",
+        "content": "The promise function is a utility that simplifies handling async operations by displaying different toast states for pending, success, and error outcomes."
+      },
+      {
+        "heading": "How it Works",
+        "content": "The promise function takes three arguments: - A promise. - An object containing messages for the pending, success, and error states. - An optional options object that allows you to customize the toast appearance and behavior."
+      },
+      {
+        "heading": "Messages",
+        "content": "The messages object contains three properties: pending - The message to display while the promise is pending. success - The message to display when the promise resolves successfully. This can be a string, JSX element, or a function that returns a string or JSX element. The function receives the resolved data as an argument. error - The message to display when the promise is rejected. This can be a string, JSX element, or a function that returns a string or JSX element. The function receives the error as an argument."
+      },
+      {
+        "heading": "Return value",
+        "content": "The promise function returns a promise that resolves to the data returned by the original promise. This allows you to chain additional actions after the toast is dismissed."
+      },
+      {
+        "heading": "getQueue()",
+        "content": "The getQueue function returns an array of all toasts currently in the queue."
+      },
+      {
+        "heading": "How it Works",
+        "content": "The getQueue function can be called with an optional toasterId argument to target a specific toaster. If no toasterId is provided, the function will return all queued toasts across all toasters. To show a number of toasts currently in the queue, you can use the length property of the returned array:"
+      },
+      {
+        "heading": "clearQueue()",
+        "content": "The clearQueue function removes currently queued toasts."
+      },
+      {
+        "heading": "How it Works",
+        "content": "The clearQueue function can be called with an optional toasterId argument to target a specific toaster. If no toasterId is provided, the function will clear the queue for all toasters."
+      }
+    ]
   },
   {
     "title": "Components",
     "description": "Solid Notifications components guide",
     "slug": "/components",
-    "filePath": "components.mdx",
-    "sections": []
+    "filePath": "src\\routes\\components.mdx",
+    "extractedData": [
+      {
+        "heading": "Components",
+        "content": "Solid Notifications provides several key components to manage and display notifications."
+      },
+      {
+        "heading": "ToastProvider",
+        "content": ""
+      },
+      {
+        "heading": "<ToastProvider />",
+        "content": "The ToastProvider is a context provider component that manages the state and functionality of toasters within your application. It serves as the central hub for registering, retrieving, and unregistering toasters, as well as providing configuration options for toast notifications. Wrap your application (or a specific part of it) with the ToastProvider to enable toast functionality. This component should be placed at a high level in your component tree to ensure that all child components have access to the toast context."
+      },
+      {
+        "heading": "Props",
+        "content": "The ToastProvider accepts toaster config props, toast config props and children."
+      },
+      {
+        "heading": "Global Props and Propagation",
+        "content": ""
+      },
+      {
+        "heading": "Reactive Props",
+        "content": ""
+      },
+      {
+        "heading": "Toaster",
+        "content": ""
+      },
+      {
+        "heading": "<Toaster />",
+        "content": "The Toaster component is responsible for rendering and managing a collection of toasts. It acts as a container for toasts, handling their lifecycle, positioning, and behavior based on global and local configuration settings. Each Toaster instance is registered with the ToastProvider and can be uniquely identified by its toasterId. Multiple Toaster Support: Allows you to create multiple toasters, each with its own configuration settings.  Toast Management: Manages a queue of toasts and renders them based on configuration settings like limit and reverseToastOrder.  Dynamic Positioning: Automatically calculates and updates toast positions based on their height, gutter spacing, and offset.  Window Visibility Handling: Pauses toast progress when the window is inactive (blurred) and resumes when the window is active (focused), depending on configuration.  Reactive Configuration: Supports reactive updates to its configuration, which propagate to all toasts within the toaster."
+      },
+      {
+        "heading": "Props",
+        "content": "The Toaster component accepts toaster config, toast config props and toasterId."
+      },
+      {
+        "heading": "Toast",
+        "content": ""
+      },
+      {
+        "heading": "class Toast",
+        "content": "The Toast class represents an individual notification message. They are invoked by the provided functions and rendered within a Toaster instance. Each toast can be customized with various options like content, duration, and appearance. Customizable Content: Supports custom content, including text, HTML, or JSX elements.  Appearance Options: Supports various appearance options like type, icon, and theme.  Lifecycle Callbacks: Provides callbacks for toast lifecycle events like onEnter, onExit, and exitCallback.  Reactive Configuration: Supports reactive updates to its configuration.  Global and Local Overrides: Overrides global settings provided by the ToastProvider or Toaster."
+      },
+      {
+        "heading": "Props",
+        "content": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\r\nAny props specified when creating or updating a toast will take precedence over global settings."
+      },
+      {
+        "heading": "Properties available on the Toast instance",
+        "content": "These properties can be accesed when using a custom toast. Each toast instance has several properties that define its behavior and appearance. store: A reference to the Toaster store that manages the toast. toastConfig: The configuration properties of the toast. ref: A reference to the toast's DOM element. state: Represents the lifecycle of the toast. It can be \"entering\" when the toast is animating into view, \"idle\" when fully visible, and \"exiting\" when it is dismissed. renderedAt: A timestamp indicating when the toast was rendered. Useful as a flag to determine if the toast is visible. progressManager: An object responsible for managing the toast's progress bar and duration. isPaused: A flag that indicates whether the toast's timer is currently paused. isPausedByUser: Similar to isPaused, but specifically tracks whether the user manually paused the toast, such as by hovering over it or pressing a button. offset: Represents the vertical position of the toast relative to other active toasts."
+      }
+    ]
   },
   {
     "title": "Guides",
     "description": "Solid Notifications guides",
     "slug": "/guides",
-    "filePath": "guides.mdx",
-    "sections": []
+    "filePath": "src\\routes\\guides.mdx",
+    "extractedData": [
+      {
+        "heading": "Guides",
+        "content": "This section contains guides on how to use Solid Notifications."
+      },
+      {
+        "heading": "Styling",
+        "content": "Solid Notifications provides a flexible styling system that allows customization via CSS variables, dark mode support, toast types with predefined colors, and animations."
+      },
+      {
+        "heading": "Copying the CSS file",
+        "content": "The easiest way to get started with Solid Notifications is to copy the CSS file which can be found in the dist folder and edit it to suit your needs."
+      },
+      {
+        "heading": "Customization via CSS Variables",
+        "content": "You can customize the appearance of notifications using CSS variables. Below are the default variables used: You can override these values in your global CSS file or within a specific component."
+      },
+      {
+        "heading": "Themes and Types",
+        "content": "The toast tree consists of only three elements. A toaster, a toast wrapper, and a toast. The way theming and types work in Solid Notifications is that the wrapper element will be provided with classes based on the provided settings. For example, if you set the theme to \"dark\", the wrapper will have the class \"sn-theme-dark\", and if you set the toast type to \"success\", the wrapper will have the class sn-type-success. For example: will result in the following HTML: You can use this to target these classes in your CSS to style the notifications. You can provide any string as the theme, and it will be injected into the toast wrapper as a class. The types however are limited to \"default\", \"loading\", \"success\", \"error\", \"warning\", and \"info\". will result in the following HTML:"
+      },
+      {
+        "heading": "Animations",
+        "content": "The wrapper will also be provided with classes based on the state of the notification. The states are \"entering\", \"idle\", and \"exiting\", and are combined with the positionY and positionX props. You can use these classes to animate the notifications. Alternatively, you can provide your own classes that you want to use with the onEnter, onIdle, and onExit props."
+      },
+      {
+        "heading": "Classes as props",
+        "content": "You can also provide your own classes or styles as props to the ToastProvider, Toaster, and when calling the notify or update function. The dismiss button and progress bar can also be styled using the dismissButtonClass, dismissButtonStyle, progressBarClass, and progressBarStyle props. Class and style props can also be provided as a function. The function will receive the theme and the type as arguments."
+      },
+      {
+        "heading": "Custom toast",
+        "content": "You can create custom toasts by providing a function as the first argument to the notify function (or as the content prop of the update function). The function will receive the toast class instance as an argument. The function should return a JSX element that represents the custom toast."
+      },
+      {
+        "heading": "Custom progress bar",
+        "content": "You can create custom progress bars by hooking into the progress signal returned by the notify or update function. The showProgressBar option should be set to false to prevent the default progress bar from being shown. If using a custom toast, the progress signal can be accessed via the progressManager property of the toast instance."
+      },
+      {
+        "heading": "Show queue",
+        "content": "An example of how to show a queue of notifications can be found in the getQueue guide."
+      },
+      {
+        "heading": "Track Notification Dismissal Reasons",
+        "content": "An example of how to show a reason why a notification was dismissed can be found in the dismiss guide."
+      },
+      {
+        "heading": "Promise API",
+        "content": "An example of how to use the promise API can be found in the promise guide."
+      },
+      {
+        "heading": "Pause timer when the window loses focus",
+        "content": "The toast timer will pause by default when the window loses focus. You can disable this behavior by setting the pauseOnWindowInactive option to false."
+      },
+      {
+        "heading": "Don't render toasts when the window is not focused",
+        "content": "Toasts will not be rendered when the window is not focused by default. You can disable this behavior by setting the renderOnWindowFocus option to true."
+      },
+      {
+        "heading": "Drag to dismiss",
+        "content": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\r\nDrag treshold can be adjusted by setting the dragTreshold option."
+      },
+      {
+        "heading": "Custom dismiss button",
+        "content": "You can create a custom dismiss buttons by using the id provided by the notify function. You should also disable the default dismiss button by setting the showDismissButton option to false. If using a custom toast, you can dismiss the toast by calling the dismiss method on the toast instance."
+      },
+      {
+        "heading": "Play or pause the notification timer manually",
+        "content": "The guide on how to play or pause the notification timer manually can be found in the play/pause guide. If using a custom toast, you can pause the timer by calling the pause method on the progressManager of the toast instance."
+      }
+    ]
   },
   {
     "title": "Solid Notifications",
     "description": "A simple notification system for SolidJS",
     "slug": "/",
-    "filePath": "index.mdx",
-    "sections": []
+    "filePath": "src\\routes\\index.mdx",
+    "extractedData": [
+      {
+        "heading": "A SolidJS Toast Library",
+        "content": "Reactive, customizable toast notifications for SolidJS.  It’s simple to use, highly customizable, and fits projects of any size."
+      },
+      {
+        "heading": "Core Features:",
+        "content": ""
+      },
+      {
+        "heading": "1. Queue Management:",
+        "content": "Toasts can be queued if there isn’t enough space or if a toast limit is reached. Signal to read the length of the queue and manage it accordingly. Clear queue or clear rendered toasts with a single function call."
+      },
+      {
+        "heading": "2. Reactivity:",
+        "content": "Progress tracking by hooking into the progress signal, usable in the UI for custom progress bars. Changes to signals in ToastProvider, Toasters, and Toasts reflect in the UI dynamically. Toasts can be updated dynamically with new content or configurations, with all toasts reacting to updated heights."
+      },
+      {
+        "heading": "3. Multiple Toaster Support:",
+        "content": "Supports multiple toasters simultaneously, each with its own state and configuration."
+      },
+      {
+        "heading": "4. Customizability:",
+        "content": "Reverse toast order support. Separate configurations for ToastProvder, Toaster and Toast. Theme support and styling options. Custom entrance, idle and exit animations. Different toast types (default, info, success, warning, error and loading). Support for promise based toasts. Full control using custom toasts."
+      },
+      {
+        "heading": "5. User Interaction Features:",
+        "content": "Pause timer on onMouseEnter, tab switch, window blur or by user action.  Swipe-to-dismiss functionality.  Dismiss toasts on clicking the body or the close button."
+      },
+      {
+        "heading": "6. Timer Control:",
+        "content": "Full control over toast timers, including pausing and resetting.  Support for infinite duration."
+      },
+      {
+        "heading": "7. Visibility and Tab Management:",
+        "content": "Option to prevent rendering of toasts if the tab is blurred.  Visibility change event listeners per toaster to manage timers accordingly."
+      },
+      {
+        "heading": "8. Accessibility:",
+        "content": "Built-in ARIA roles for accessibility."
+      },
+      {
+        "heading": "9. Callbacks and Events:",
+        "content": "Custom callbacks for toast exit with detailed reasons (true, false, or custom provided). {{ \"class\": \"m-0\" }} Lifecycle hooks to handle specific events like dismissal or updates. {{ \"class\": \"m-0\" }}"
+      }
+    ]
   },
   {
     "title": "Props",
     "description": "Solid Notifications props guide",
     "slug": "/props",
-    "filePath": "props.mdx",
-    "sections": []
+    "filePath": "src\\routes\\props.mdx",
+    "extractedData": [
+      {
+        "heading": "Props",
+        "content": "Customize the behavior of SolidNotifications with these configurable props."
+      },
+      {
+        "heading": "Toaster config",
+        "content": "Global props. Can be applied to ToastProvider and Toaster. limit - The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to false or 0.  Default value: 8  reverseToastOrder - If true, toasts are rendered in reverse order (newest at the top/bottom).  Default value: false  offsetX - Horizontal offset for the toaster's position.  Default value: 16  offsetY - Vertical offset for the toaster's position.  gutter - Spacing between toasts.  positionY - Vertical positioning of the toaster.  positionX - Horizontal positioning of the toaster.  renderOnWindowInactive - If true, toasts will render even when the window is inactive (blurred).  pauseOnWindowInactive - If true, toast progress will pause when the window is inactive (blurred).  toasterStyle - Custom styles for the toaster container."
+      },
+      {
+        "heading": "Toast config",
+        "content": "Toast props. Can be applied to all components; ToastProvider, Toaster and Toast. theme - The theme of the toast. Two theme types are included; light and dark, but any string can be provided.  type - The type of the toast. Can be \"default\", \"success\", \"error\", \"info\", \"warning\" and \"loading\".  Default value: \"default\"  duration - Duration (in milliseconds) before the toast is dismissed. Set to false or 0 for persistent toasts.  Default value: 5000  onEnter - CSS animation name when the toast enters.  Default value: undefined  enterDuration - Duration of the enter animation in milliseconds. Should be set to the same duration as the animation.  Default value: 300  onExit - CSS animation name when the toast exits.  Default value: undefined  exitDuration - Duration of the exit animation in milliseconds. Should be set to the same duration as the animation.  Default value: 300  onIdle - CSS class which will be applied when the toast is idle.  Default value: undefined  class - CSS class applied to the toast body. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.  style - Custom styles for the toast body. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.  pauseOnHover - Whether the toast pauses when hovered.  Default value: true  wrapperClass - CSS class for the toast wrapper. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.  Default value: \"sn-toast-wrapper\"  wrapperStyle - Custom styles for the toast wrapper. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.  Default value: undefined  enterCallback - Callback function executed when the toast enters.  Default value: null  updateCallback - Callback function executed when the toast updates.  Default value: null  exitCallback - Callback function executed when the toast exits. It will provide a reason argument with which the dismiss() function was called, or if it wasn't provided, the reason will be false if the toast dismissed by timer expiration, or true if it was dismissed by the user.  Default value: null  showDismissButton - Whether to show a dismiss button.  Default value: true  dismissButtonClass - CSS class for the dismiss button. Can be a string or a function returning a string. The function will be provided with theme and type as arguments. dismissButtonStyle - Custom styles for the dismiss button. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.  Default value: undefined  dismissOnClick - Whether clicking the toast dismisses it.  Default value: false  showProgressBar - Whether to show a progress bar on the toast.  Default value: true  progressBarClass - CSS class for the progress bar. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.  Default value: \"sn-progress-bar\"  progressBarStyle - Custom styles for the progress bar. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.  Default value: undefined  showIcon - Whether to show an icon in the toast.  Default value: true  icon - Custom icon for the toast. Can be a JSX element or a function returning a JSX element. The function will be provided with theme and type as arguments.  Default value: null  dragToDismiss - Whether dragging the toast dismisses it.  Default value: true  dragTreshold - Distance (in pixels) required to dismiss the toast via dragging.  Default value: 100  ariaLive - ARIA live attribute for accessibility.  Default value: \"polite\"  role - ARIA role attribute.  Default value: \"status\""
+      },
+      {
+        "heading": "Other config:",
+        "content": "Props that are used depending on where they are applied. id - Unique identifier for the toast. If not provided, an ID is generated automatically. {{ \"class\": \"mb-2\", \"data-nav\": \"sublink\", \"id\": \"id\" }} content - The main content of the toast. Can be a string, JSX element, or a function returning JSX. If function, receives Toast as argument. {{ \"class\": \"mb-2\", \"data-nav\": \"sublink\", \"id\": \"content\" }} toasterId - Specifies the toaster instance where the toast should be displayed. Required when using multiple toasters. {{ \"class\": \"mb-2\", \"data-nav\": \"sublink\", \"id\": \"toasterId\" }}"
+      }
+    ]
   },
   {
     "title": "Quickstart",
     "description": "Solid Notifications quick start guide",
     "slug": "/quickstart",
-    "filePath": "quickstart.mdx",
-    "sections": []
+    "filePath": "src\\routes\\quickstart.mdx",
+    "extractedData": [
+      {
+        "heading": "Quickstart",
+        "content": "Get up and running with SolidNotifications in just a few simple steps."
+      },
+      {
+        "heading": "Installation",
+        "content": "Install the package from npm:"
+      },
+      {
+        "heading": "Usage",
+        "content": "Here's a quick example to show how easy it is to use:"
+      },
+      {
+        "heading": "1. Mount the ToastProvider and Toaster components:",
+        "content": "Wrap your app with the ToastProvider component. Put the Toaster component anywhere in the component tree to display toasts."
+      },
+      {
+        "heading": "2. Import the Solid Notifications css file into your main css file:",
+        "content": "It can also be imported directly into the main component file."
+      },
+      {
+        "heading": "3. Create toasts:",
+        "content": "Use the useToast hook to access the notify function and other toast functionality."
+      }
+    ]
   },
   {
     "title": "404",
     "description": "Page not found",
     "slug": "/",
-    "filePath": "[...404].mdx",
-    "sections": []
+    "filePath": "src\\routes\\[...404].mdx",
+    "extractedData": [
+      {
+        "heading": "Page Not Found",
+        "content": "We could not find what you were looking for.\nPlease contact the owner of the site that linked you to the original URL and let them know their link is broken."
+      }
+    ]
   }
 ]

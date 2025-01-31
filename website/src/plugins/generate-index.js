@@ -1,56 +1,96 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { compile } from "@mdx-js/mdx";
-import { remark } from "remark";
-import remarkStringify from "remark-stringify";
-import strip from "strip-markdown";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkFrontmatter from "remark-frontmatter";
+import { visit } from "unist-util-visit";
+import { toString } from "mdast-util-to-string";
+import { promisify } from "util";
 
-// Function to extract plain text from MDX content
-async function extractPlainText(mdxContent) {
-  const result = await remark().use(remarkStringify).process(mdxContent);
-  return result.toString();
+const routesDir = "./src/routes";
+const outputFile = "./src/search-index.json";
+
+// Recursively get all Markdown/MDX files
+async function getFiles(dir) {
+  const entries = await promisify(fs.readdir)(dir, { withFileTypes: true });
+  const files = await Promise.all(
+    entries.map((entry) => {
+      const fullPath = path.join(dir, entry.name);
+      return entry.isDirectory() ? getFiles(fullPath) : fullPath;
+    })
+  );
+  return files.flat().filter((file) => file.endsWith(".mdx") || file.endsWith(".md"));
 }
 
-// Function to extract content from an MDX file
+// Function to clean headings (remove {{ ... }})
+function cleanString(text) {
+  return text.replace(/\{\{.*?\}\}/g, "").trim();
+}
+
+// Extract headings and their content
+async function extractHeadingsAndContent(markdown) {
+  const tree = unified().use(remarkParse).use(remarkFrontmatter).parse(markdown);
+
+  const result = [];
+  let currentHeading = null;
+  let currentContent = [];
+
+  visit(tree, (node) => {
+    if (node.type === "heading") {
+      // If we already have a heading, save it before moving to a new one
+      if (currentHeading !== null) {
+        result.push({
+          heading: cleanString(currentHeading),
+          content: cleanString(currentContent.join(" ").trim()),
+        });
+      }
+
+      // Set new heading
+      currentHeading = toString(node);
+      currentContent = []; // Reset content
+    } else if (currentHeading && (node.type === "paragraph")) {
+      // Only collect content if there's an active heading
+      console.log(node);
+      currentContent.push(toString(node));
+    }
+  });
+
+  // Push last heading's content
+  if (currentHeading !== null) {
+    result.push({
+      heading: cleanString(currentHeading),
+      content: currentContent.join(" ").trim(),
+    });
+  }
+
+  return result;
+}
+
+// Extract content from a single file
 async function extractContent(filePath) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data: frontmatter, content } = matter(fileContent);
 
-  // Extract plain text from MDX content
-  const plainText = await extractPlainText(content);
+  const extractedData = await extractHeadingsAndContent(content);
 
   return {
-    title: frontmatter.title,
-    description: frontmatter.description,
-    slug: frontmatter.slug,
-    content: plainText, // Plain text content for search
+    title: frontmatter.title || "",
+    description: frontmatter.description || "",
+    slug: frontmatter.slug || path.basename(filePath, path.extname(filePath)),
+    filePath,
+    extractedData,
   };
 }
 
-// Example: Extract content from all MDX files in a directory
-async function processMdxFiles() {
-  const mdxDir = path.join(process.cwd(), "./src/routes/");
-  const files = fs.readdirSync(mdxDir);
+// Process all files and generate search index
+async function processFiles() {
+  const files = await getFiles(routesDir);
+  const results = await Promise.all(files.map(extractContent));
 
-  // Extract content from all MDX files
-  const allContent = await Promise.all(
-    files.map(async (file) => {
-      const filePath = path.join(mdxDir, file);
-      return extractContent(filePath);
-    }),
-  );
-
-  // Save the extracted content to a JSON file
-  const outputPath = path.join(process.cwd(), "./src/search-index.json");
-  fs.writeFileSync(outputPath, JSON.stringify(allContent, null, 2));
-
-  console.log(`Search index saved to ${outputPath}`);
+  fs.writeFileSync(outputFile, JSON.stringify(results, null, 2), "utf-8");
+  console.log(`Search index written to ${outputFile}`);
 }
 
-// Run the function
-processMdxFiles().catch((error) => {
-  console.error("Error processing MDX files:", error);
-});
-
-export default processMdxFiles;
+// Run the process
+processFiles();
