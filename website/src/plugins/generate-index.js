@@ -28,67 +28,93 @@ function cleanString(text) {
   return text.replace(/\{\{.*?\}\}/g, "").trim();
 }
 
+
+function generateSlug(text) {
+  const clean = cleanString(text);
+
+  return clean
+    .toLowerCase() // Convert to lowercase
+    .trim() // Remove leading/trailing spaces
+    .replace(/[^\w\s-]/g, "") // Remove non-alphanumeric characters (except spaces and hyphens)
+    .replace(/\s+/g, "-"); // Replace spaces with hyphens
+}
+
 // Extract headings and their content
-async function extractHeadingsAndContent(markdown) {
-  const tree = unified().use(remarkParse).use(remarkFrontmatter).parse(markdown);
+async function extractHeadingsAndContent(markdown, pageUrl, pageName) {
+
+  const tree = unified()
+    .use(remarkParse)
+    .use(remarkFrontmatter)
+    .parse(markdown);
+
 
   const result = [];
   let currentHeading = null;
   let currentContent = [];
+  let url = ""; // Track the id of the heading
 
   visit(tree, (node) => {
     if (node.type === "heading") {
+      const headingText = toString(node); // Get the heading text as string
+      const headingUrl = `${pageUrl}#${generateSlug(headingText)}`;
+
       // If we already have a heading, save it before moving to a new one
+
+      if (pageName === headingText) return;
+
       if (currentHeading !== null) {
         result.push({
+          page: pageName,
           heading: cleanString(currentHeading),
           content: cleanString(currentContent.join(" ").trim()),
+          url: url,
         });
       }
 
       // Set new heading
       currentHeading = toString(node);
       currentContent = []; // Reset content
-    } else if (currentHeading && (node.type === "paragraph")) {
+      url = headingUrl; // Set the id of the heading
+    }
+
+    if (currentHeading && (node.type === "paragraph")) {
       // Only collect content if there's an active heading
-      console.log(node);
       currentContent.push(toString(node));
     }
   });
 
+
   // Push last heading's content
   if (currentHeading !== null) {
     result.push({
+      page: pageName,
       heading: cleanString(currentHeading),
       content: currentContent.join(" ").trim(),
+      url: url,
     });
   }
 
   return result;
 }
 
+
 // Extract content from a single file
 async function extractContent(filePath) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data: frontmatter, content } = matter(fileContent);
 
-  const extractedData = await extractHeadingsAndContent(content);
+  const extractedData = await extractHeadingsAndContent(content, frontmatter.slug || "", frontmatter.title || "");
 
-  return {
-    title: frontmatter.title || "",
-    description: frontmatter.description || "",
-    slug: frontmatter.slug || path.basename(filePath, path.extname(filePath)),
-    filePath,
-    extractedData,
-  };
+  return extractedData
 }
 
 // Process all files and generate search index
 async function processFiles() {
   const files = await getFiles(routesDir);
   const results = await Promise.all(files.map(extractContent));
+  const flattenedResults = results.flat();
 
-  fs.writeFileSync(outputFile, JSON.stringify(results, null, 2), "utf-8");
+  fs.writeFileSync(outputFile, JSON.stringify(flattenedResults, null, 2), "utf-8");
   console.log(`Search index written to ${outputFile}`);
 }
 
