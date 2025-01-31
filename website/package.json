@@ -5,7 +5,8 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "sn-publish": "cd ../src && npm publish"
+    "sn-publish": "cd ../src && npm publish",
+    "sn-generate-index": "node ./src/plugins/generate-index.js"
   },
   "overrides": {
     "vite": "5.4.10"
@@ -36,6 +37,7 @@
     "prettier-plugin-tailwindcss": "^0.6.10",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
+    "remark": "^15.0.1",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^3.0.1",
     "solid-mdx": "^0.0.7",
