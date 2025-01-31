@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { compile } from "@mdx-js/mdx";
 import { remark } from "remark";
 import remarkStringify from "remark-stringify";
+import strip from "strip-markdown";
 
 // Function to extract plain text from MDX content
 async function extractPlainText(mdxContent) {
