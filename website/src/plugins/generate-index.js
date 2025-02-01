@@ -83,7 +83,6 @@ async function extractHeadingsAndContent(markdown, pageUrl, pageName) {
       // Only collect content if there's an active heading
       if (pageName === "Props") {
         if (currentContent.length > 0) return;
-
       }
       currentContent.push(toString(node));
     }
@@ -127,7 +126,6 @@ async function extractHeadingsAndContent(markdown, pageUrl, pageName) {
           });
         }
       }
-
     }
   });
 
