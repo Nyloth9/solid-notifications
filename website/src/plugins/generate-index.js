@@ -81,6 +81,10 @@ async function extractHeadingsAndContent(markdown, pageUrl, pageName) {
 
     if (currentHeading && (node.type === "paragraph")) {
       // Only collect content if there's an active heading
+      if (pageName === "Props") {
+        if (currentContent.length > 0) return;
+
+      }
       currentContent.push(toString(node));
     }
 
