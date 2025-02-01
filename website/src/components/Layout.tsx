@@ -11,6 +11,7 @@ import { useTheme } from "../util/theme";
 import { ToastProvider } from "solid-notifications";
 import { useLocation, useNavigate } from "@solidjs/router";
 import pageData from "../page-data.json";
+import SearchBar from "./SearchBar";
 
 interface Props {
   children: JSX.Element;
@@ -486,6 +487,7 @@ export default function Layout(props: Props) {
           </div>
         </header>
         <div class="scrollbar-md relative flex h-full max-h-screen flex-col overflow-y-auto px-4 pt-14 sm:px-6 lg:px-8">
+         {/*  <SearchBar /> */}
           <main class="w-full flex-auto text-left">
             <div class="prose dark:prose-invert [html_:where(&>*)]:mx-auto [html_:where(&>*)]:max-w-2xl [html_:where(&>*)]:lg:mx-[calc(50%-min(50%,theme(maxWidth.lg)))] [html_:where(&>*)]:lg:max-w-3xl">
               <article class="pb-10 pt-14">{props.children}</article>

@@ -41,6 +41,8 @@ function generateSlug(text) {
 
 // Extract headings and their content
 async function extractHeadingsAndContent(markdown, pageUrl, pageName) {
+  if (pageName === "404") return []; // Skip 404 page
+
 
   const tree = unified()
     .use(remarkParse)
@@ -81,6 +83,48 @@ async function extractHeadingsAndContent(markdown, pageUrl, pageName) {
       // Only collect content if there's an active heading
       currentContent.push(toString(node));
     }
+
+    if (node.type === "listItem") {
+      if (pageName === "Props") {
+        let heading = null;
+        let content = null;
+        let extractedId = null;
+
+
+        for (const child of node.children) {
+          if (child.type === "paragraph") {
+            const strongTag = child.children.find(c => c.type === "strong");
+
+            if (strongTag) {
+              heading = toString(strongTag); // Use <strong> as heading
+
+              // Extract the text immediately following <strong>
+              const strongIndex = child.children.indexOf(strongTag);
+              if (strongIndex !== -1 && child.children[strongIndex + 1]) {
+                content = toString(child.children.slice(strongIndex + 1));
+              }
+            }
+
+
+            const match = toString(child).match(/"id"\s*:\s*"([^"]+)"/);
+            if (match) {
+              extractedId = match[1];
+            }
+
+          }
+        }
+
+        if (heading && content) {
+          result.push({
+            page: pageName,
+            heading: cleanString(heading),
+            content: cleanString(content).trim(),
+            url: `${pageUrl}#${extractedId}`,
+          });
+        }
+      }
+
+    }
   });
 
 
@@ -89,7 +133,7 @@ async function extractHeadingsAndContent(markdown, pageUrl, pageName) {
     result.push({
       page: pageName,
       heading: cleanString(currentHeading),
-      content: currentContent.join(" ").trim(),
+      content: cleanString(currentContent.join(" ").trim()),
       url: url,
     });
   }

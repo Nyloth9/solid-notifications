@@ -392,8 +392,68 @@
   {
     "page": "Solid Notifications",
     "heading": "9. Callbacks and Events:",
-    "content": "Custom callbacks for toast exit with detailed reasons (true, false, or custom provided). {{ \"class\": \"m-0\" }} Lifecycle hooks to handle specific events like dismissal or updates. {{ \"class\": \"m-0\" }}",
+    "content": "Custom callbacks for toast exit with detailed reasons (true, false, or custom provided).  Lifecycle hooks to handle specific events like dismissal or updates.",
     "url": "/#9-callbacks-and-events"
+  },
+  {
+    "page": "Props",
+    "heading": "limit",
+    "content": "- The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to false or 0.",
+    "url": "/props#limit"
+  },
+  {
+    "page": "Props",
+    "heading": "reverseToastOrder",
+    "content": "- If true, toasts are rendered in reverse order (newest at the top/bottom).",
+    "url": "/props#reverseToastOrder"
+  },
+  {
+    "page": "Props",
+    "heading": "offsetX",
+    "content": "- Horizontal offset for the toaster's position.",
+    "url": "/props#offsetX"
+  },
+  {
+    "page": "Props",
+    "heading": "offsetY",
+    "content": "- Vertical offset for the toaster's position.",
+    "url": "/props#offsetY"
+  },
+  {
+    "page": "Props",
+    "heading": "gutter",
+    "content": "- Spacing between toasts.",
+    "url": "/props#gutter"
+  },
+  {
+    "page": "Props",
+    "heading": "positionY",
+    "content": "- Vertical positioning of the toaster.",
+    "url": "/props#positionY"
+  },
+  {
+    "page": "Props",
+    "heading": "positionX",
+    "content": "- Horizontal positioning of the toaster.",
+    "url": "/props#positionX"
+  },
+  {
+    "page": "Props",
+    "heading": "renderOnWindowInactive",
+    "content": "- If true, toasts will render even when the window is inactive (blurred).",
+    "url": "/props#renderOnWindowInactive"
+  },
+  {
+    "page": "Props",
+    "heading": "pauseOnWindowInactive",
+    "content": "- If true, toast progress will pause when the window is inactive (blurred).",
+    "url": "/props#pauseOnWindowInactive"
+  },
+  {
+    "page": "Props",
+    "heading": "toasterStyle",
+    "content": "- Custom styles for the toaster container.",
+    "url": "/props#toasterStyle"
   },
   {
     "page": "Props",
@@ -403,14 +463,206 @@
   },
   {
     "page": "Props",
+    "heading": "theme",
+    "content": "- The theme of the toast. Two theme types are included; light and dark, but any string can be provided.",
+    "url": "/props#theme"
+  },
+  {
+    "page": "Props",
+    "heading": "type",
+    "content": "- The type of the toast. Can be \"default\", \"success\", \"error\", \"info\", \"warning\" and \"loading\".",
+    "url": "/props#type"
+  },
+  {
+    "page": "Props",
+    "heading": "duration",
+    "content": "- Duration (in milliseconds) before the toast is dismissed. Set to false or 0 for persistent toasts.",
+    "url": "/props#duration"
+  },
+  {
+    "page": "Props",
+    "heading": "onEnter",
+    "content": "- CSS animation name when the toast enters.",
+    "url": "/props#onEnter"
+  },
+  {
+    "page": "Props",
+    "heading": "enterDuration",
+    "content": "- Duration of the enter animation in milliseconds. Should be set to the same duration as the animation.",
+    "url": "/props#enterDuration"
+  },
+  {
+    "page": "Props",
+    "heading": "onExit",
+    "content": "- CSS animation name when the toast exits.",
+    "url": "/props#onExit"
+  },
+  {
+    "page": "Props",
+    "heading": "exitDuration",
+    "content": "- Duration of the exit animation in milliseconds. Should be set to the same duration as the animation.",
+    "url": "/props#exitDuration"
+  },
+  {
+    "page": "Props",
+    "heading": "onIdle",
+    "content": "- CSS class which will be applied when the toast is idle.",
+    "url": "/props#onIdle"
+  },
+  {
+    "page": "Props",
+    "heading": "class",
+    "content": "- CSS class applied to the toast body. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.",
+    "url": "/props#class"
+  },
+  {
+    "page": "Props",
+    "heading": "style",
+    "content": "- Custom styles for the toast body. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.",
+    "url": "/props#style"
+  },
+  {
+    "page": "Props",
+    "heading": "pauseOnHover",
+    "content": "- Whether the toast pauses when hovered.",
+    "url": "/props#pauseOnHover"
+  },
+  {
+    "page": "Props",
+    "heading": "wrapperClass",
+    "content": "- CSS class for the toast wrapper. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.",
+    "url": "/props#wrapperClass"
+  },
+  {
+    "page": "Props",
+    "heading": "wrapperStyle",
+    "content": "- Custom styles for the toast wrapper. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.",
+    "url": "/props#wrapperStyle"
+  },
+  {
+    "page": "Props",
+    "heading": "enterCallback",
+    "content": "- Callback function executed when the toast enters.",
+    "url": "/props#enterCallback"
+  },
+  {
+    "page": "Props",
+    "heading": "updateCallback",
+    "content": "- Callback function executed when the toast updates.",
+    "url": "/props#updateCallback"
+  },
+  {
+    "page": "Props",
+    "heading": "exitCallback",
+    "content": "- Callback function executed when the toast exits. It will provide a reason argument with which the dismiss() function was called, or if it wasn't provided, the reason will be false if the toast dismissed by timer expiration, or true if it was dismissed by the user.",
+    "url": "/props#exitCallback"
+  },
+  {
+    "page": "Props",
+    "heading": "showDismissButton",
+    "content": "- Whether to show a dismiss button.",
+    "url": "/props#showDismissButton"
+  },
+  {
+    "page": "Props",
+    "heading": "dismissButtonClass",
+    "content": "- CSS class for the dismiss button. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.",
+    "url": "/props#dismissButtonClass"
+  },
+  {
+    "page": "Props",
+    "heading": "dismissButtonStyle",
+    "content": "- Custom styles for the dismiss button. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.",
+    "url": "/props#dismissButtonStyle"
+  },
+  {
+    "page": "Props",
+    "heading": "dismissOnClick",
+    "content": "- Whether clicking the toast dismisses it.",
+    "url": "/props#dismissOnClick"
+  },
+  {
+    "page": "Props",
+    "heading": "showProgressBar",
+    "content": "- Whether to show a progress bar on the toast.",
+    "url": "/props#showProgressBar"
+  },
+  {
+    "page": "Props",
+    "heading": "progressBarClass",
+    "content": "- CSS class for the progress bar. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.",
+    "url": "/props#progressBarClass"
+  },
+  {
+    "page": "Props",
+    "heading": "progressBarStyle",
+    "content": "- Custom styles for the progress bar. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.",
+    "url": "/props#progressBarStyle"
+  },
+  {
+    "page": "Props",
+    "heading": "showIcon",
+    "content": "- Whether to show an icon in the toast.",
+    "url": "/props#showIcon"
+  },
+  {
+    "page": "Props",
+    "heading": "icon",
+    "content": "- Custom icon for the toast. Can be a JSX element or a function returning a JSX element. The function will be provided with theme and type as arguments.",
+    "url": "/props#icon"
+  },
+  {
+    "page": "Props",
+    "heading": "dragToDismiss",
+    "content": "- Whether dragging the toast dismisses it.",
+    "url": "/props#dragToDismiss"
+  },
+  {
+    "page": "Props",
+    "heading": "dragTreshold",
+    "content": "- Distance (in pixels) required to dismiss the toast via dragging.",
+    "url": "/props#dragTreshold"
+  },
+  {
+    "page": "Props",
+    "heading": "ariaLive",
+    "content": "- ARIA live attribute for accessibility.",
+    "url": "/props#ariaLive"
+  },
+  {
+    "page": "Props",
+    "heading": "role",
+    "content": "- ARIA role attribute.",
+    "url": "/props#role"
+  },
+  {
+    "page": "Props",
     "heading": "Toast config",
     "content": "Toast props. Can be applied to all components; ToastProvider, Toaster and Toast. theme - The theme of the toast. Two theme types are included; light and dark, but any string can be provided.  type - The type of the toast. Can be \"default\", \"success\", \"error\", \"info\", \"warning\" and \"loading\".  Default value: \"default\"  duration - Duration (in milliseconds) before the toast is dismissed. Set to false or 0 for persistent toasts.  Default value: 5000  onEnter - CSS animation name when the toast enters.  Default value: undefined  enterDuration - Duration of the enter animation in milliseconds. Should be set to the same duration as the animation.  Default value: 300  onExit - CSS animation name when the toast exits.  Default value: undefined  exitDuration - Duration of the exit animation in milliseconds. Should be set to the same duration as the animation.  Default value: 300  onIdle - CSS class which will be applied when the toast is idle.  Default value: undefined  class - CSS class applied to the toast body. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.  style - Custom styles for the toast body. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.  pauseOnHover - Whether the toast pauses when hovered.  Default value: true  wrapperClass - CSS class for the toast wrapper. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.  Default value: \"sn-toast-wrapper\"  wrapperStyle - Custom styles for the toast wrapper. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.  Default value: undefined  enterCallback - Callback function executed when the toast enters.  Default value: null  updateCallback - Callback function executed when the toast updates.  Default value: null  exitCallback - Callback function executed when the toast exits. It will provide a reason argument with which the dismiss() function was called, or if it wasn't provided, the reason will be false if the toast dismissed by timer expiration, or true if it was dismissed by the user.  Default value: null  showDismissButton - Whether to show a dismiss button.  Default value: true  dismissButtonClass - CSS class for the dismiss button. Can be a string or a function returning a string. The function will be provided with theme and type as arguments. dismissButtonStyle - Custom styles for the dismiss button. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.  Default value: undefined  dismissOnClick - Whether clicking the toast dismisses it.  Default value: false  showProgressBar - Whether to show a progress bar on the toast.  Default value: true  progressBarClass - CSS class for the progress bar. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.  Default value: \"sn-progress-bar\"  progressBarStyle - Custom styles for the progress bar. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.  Default value: undefined  showIcon - Whether to show an icon in the toast.  Default value: true  icon - Custom icon for the toast. Can be a JSX element or a function returning a JSX element. The function will be provided with theme and type as arguments.  Default value: null  dragToDismiss - Whether dragging the toast dismisses it.  Default value: true  dragTreshold - Distance (in pixels) required to dismiss the toast via dragging.  Default value: 100  ariaLive - ARIA live attribute for accessibility.  Default value: \"polite\"  role - ARIA role attribute.  Default value: \"status\"",
     "url": "/props#toast-config"
   },
   {
     "page": "Props",
+    "heading": "id",
+    "content": "- Unique identifier for the toast. If not provided, an ID is generated automatically.",
+    "url": "/props#id"
+  },
+  {
+    "page": "Props",
+    "heading": "content",
+    "content": "- The main content of the toast. Can be a string, JSX element, or a function returning JSX. If function, receives Toast as argument.",
+    "url": "/props#content"
+  },
+  {
+    "page": "Props",
+    "heading": "toasterId",
+    "content": "- Specifies the toaster instance where the toast should be displayed. Required when using multiple toasters.",
+    "url": "/props#toasterId"
+  },
+  {
+    "page": "Props",
     "heading": "Other config:",
-    "content": "Props that are used depending on where they are applied. id - Unique identifier for the toast. If not provided, an ID is generated automatically. {{ \"class\": \"mb-2\", \"data-nav\": \"sublink\", \"id\": \"id\" }} content - The main content of the toast. Can be a string, JSX element, or a function returning JSX. If function, receives Toast as argument. {{ \"class\": \"mb-2\", \"data-nav\": \"sublink\", \"id\": \"content\" }} toasterId - Specifies the toaster instance where the toast should be displayed. Required when using multiple toasters. {{ \"class\": \"mb-2\", \"data-nav\": \"sublink\", \"id\": \"toasterId\" }}",
+    "content": "Props that are used depending on where they are applied. id - Unique identifier for the toast. If not provided, an ID is generated automatically.  content - The main content of the toast. Can be a string, JSX element, or a function returning JSX. If function, receives Toast as argument.  toasterId - Specifies the toaster instance where the toast should be displayed. Required when using multiple toasters.",
     "url": "/props#other-config"
   },
   {
@@ -442,11 +694,5 @@
     "heading": "3. Create toasts:",
     "content": "Use the useToast hook to access the notify function and other toast functionality.",
     "url": "/quickstart#3-create-toasts"
-  },
-  {
-    "page": "404",
-    "heading": "Page Not Found",
-    "content": "We could not find what you were looking for.\nPlease contact the owner of the site that linked you to the original URL and let them know their link is broken.",
-    "url": "/#page-not-found"
   }
 ]
