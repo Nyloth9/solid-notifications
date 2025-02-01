@@ -41,25 +41,7 @@
       }
     ]
   },
-  {
-    "name": "Quickstart",
-    "url": "/quickstart",
-    "description": "Solid Notifications quick start guide",
-    "order": 1,
-    "tags": [],
-    "items": [
-      {
-        "name": "Installation",
-        "hash": "#installation",
-        "items": []
-      },
-      {
-        "name": "Usage",
-        "hash": "#usage",
-        "items": []
-      }
-    ]
-  },
+  {},
   {
     "name": "Components",
     "url": "/components",
@@ -330,7 +312,7 @@
     "items": [
       {
         "name": "useToast()",
-        "hash": "#usetoast",
+        "hash": "#useToast",
         "items": []
       },
       {

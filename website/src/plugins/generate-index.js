@@ -7,9 +7,11 @@ import remarkFrontmatter from "remark-frontmatter";
 import { visit } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
 import { promisify } from "util";
+import Fuse from "fuse.js"
 
 const routesDir = "./src/routes";
-const outputFile = "./src/search-index.json";
+const fuseIndexFile = "./src/search/fuse-index.json";
+const outputFile = "./src/search/search-data.json";
 
 // Recursively get all Markdown/MDX files
 async function getFiles(dir) {
@@ -160,8 +162,15 @@ async function processFiles() {
   const results = await Promise.all(files.map(extractContent));
   const flattenedResults = results.flat();
 
+  const options = { keys: ["heading", "content", "page"] };
+
+  const index = Fuse.createIndex(options.keys, flattenedResults);
+
   fs.writeFileSync(outputFile, JSON.stringify(flattenedResults, null, 2), "utf-8");
   console.log(`Search index written to ${outputFile}`);
+
+  fs.writeFileSync(fuseIndexFile, JSON.stringify(index, null, 2), "utf-8");
+  console.log(`Fuse index written to ${fuseIndexFile}`);
 }
 
 // Run the process

@@ -1,12 +1,63 @@
-import { createSignal, onMount, Show } from "solid-js";
+import { createEffect, createSignal, on, onCleanup, onMount } from "solid-js";
+import Fuse from "fuse.js";
+import fuseIndex from "../search/fuse-index.json";
+import searchData from "../search/search-data.json";
+
+function initializeSearch() {
+  const fuseOptions = {
+    keys: ["heading", "content", "page"],
+    includeScore: true,
+    threshold: 0.4,
+  };
+
+  const index = Fuse.parseIndex(fuseIndex);
+  const fuse = new Fuse(searchData, fuseOptions, index);
+
+  return fuse;
+}
 
 export default function SearchBar() {
+  const fuse = initializeSearch();
   const [isOpen, setIsOpen] = createSignal(false);
+  const [query, setQuery] = createSignal("");
+  const [debouncedQuery, setDebouncedQuery] = createSignal("");
+  const [results, setResults] = createSignal<any[]>([]);
+
+  /*  const result = fuse.search("simple");
+
+  console.log(result); */
 
   onMount(() => {
     setTimeout(() => {
       setIsOpen(true);
     }, 1000);
+  });
+
+  createEffect(
+    on(
+      () => query(),
+      () => {
+        const timer = setTimeout(() => {
+          setDebouncedQuery(query());
+        }, 300); // 300ms debounce delay
+
+        onCleanup(() => clearTimeout(timer)); // Cleanup timer on re-run
+      },
+    ),
+  );
+
+  // Perform search when debounced query changes
+  createEffect(() => {
+    const searchTerm = debouncedQuery().trim();
+
+    if (!fuse || searchTerm === "") {
+      setResults([]); // Clear results if no query or Fuse.js not initialized
+      return;
+    }
+
+    const searchResults = fuse.search(searchTerm);
+    console.log("search results: ", searchResults);
+    setResults(searchResults);
   });
 
   return (
@@ -71,7 +122,8 @@ export default function SearchBar() {
                   placeholder="Find something..."
                   maxlength="512"
                   type="search"
-                  value=""
+                  value={query()}
+                  onInput={(e) => setQuery(e.target.value)}
                 />
               </div>
               <div class="border-t border-slate-200 bg-white empty:hidden dark:border-slate-100/5 dark:bg-white/2.5"></div>

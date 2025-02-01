@@ -1,0 +1,1981 @@
+{
+  "keys": [
+    {
+      "path": [
+        "heading"
+      ],
+      "id": "heading",
+      "weight": 1,
+      "src": "heading",
+      "getFn": null
+    },
+    {
+      "path": [
+        "content"
+      ],
+      "id": "content",
+      "weight": 1,
+      "src": "content",
+      "getFn": null
+    },
+    {
+      "path": [
+        "page"
+      ],
+      "id": "page",
+      "weight": 1,
+      "src": "page",
+      "getFn": null
+    }
+  ],
+  "records": [
+    {
+      "i": 0,
+      "$": {
+        "0": {
+          "v": "useToast()",
+          "n": 1
+        },
+        "1": {
+          "v": "The useToast function is an entry point to managing the toasts. It returns functions for showing, updating, dismissing and removing toasts, as well as to access the queue.",
+          "n": 0.189
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 1,
+      "$": {
+        "0": {
+          "v": "Targeting a Specific Toaster",
+          "n": 0.5
+        },
+        "1": {
+          "v": "If you have multiple toasters, you can invoke useToast with the toaster's id to target a specific toaster. Then, all the actions will called against that toaster. To target a different toaster in the same file, you can alias the methods: Alternatively, you can store the result of useToast() in variables and call them separately:",
+          "n": 0.135
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 2,
+      "$": {
+        "0": {
+          "v": "Available Actions",
+          "n": 0.707
+        },
+        "1": {
+          "v": "The useToast() function returns an object containing various toast actions:",
+          "n": 0.316
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 3,
+      "$": {
+        "0": {
+          "v": "notify()",
+          "n": 1
+        },
+        "1": {
+          "v": "The notify function is the primary way to trigger toasts in SolidNotifications. It allows you to display messages with optional configurations, such as assigning an ID, targeting a specific toaster, and customizing the toast appearance. It takes two arguments: content and options and returns an object with the toast's ID, a reference to the toast element, and a progress control object.",
+          "n": 0.128
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 4,
+      "$": {
+        "0": {
+          "v": "Basic usage",
+          "n": 0.707
+        },
+        "1": {
+          "v": "The simplest way to use notify is by calling it with a message: To target a specific toaster, you can pass the toasterId in the options object:",
+          "n": 0.192
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 5,
+      "$": {
+        "0": {
+          "v": "Content",
+          "n": 1
+        },
+        "1": {
+          "v": "The content is the first argument of the notify function. It can be a string, a JSX element, or a function that returns a string or JSX element.",
+          "n": 0.189
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 6,
+      "$": {
+        "0": {
+          "v": "Options",
+          "n": 1
+        },
+        "1": {
+          "v": "The second argument of notify is an options object that allows you to customize the behavior and appearance of the toast. The options object accepts all the toastConfig properties and the other config properties except content (which is passed as the first argument).",
+          "n": 0.152
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 7,
+      "$": {
+        "0": {
+          "v": "Return value",
+          "n": 0.707
+        },
+        "1": {
+          "v": "The notify function returns an object with the following properties: id - The unique identifier of the toast.  ref - A reference to the toast element.  progressControls - A progress control object that allows you to manage the toast's duration and progress bar.  You can provide your own toast id or let the library generate one for you.",
+          "n": 0.131
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 8,
+      "$": {
+        "0": {
+          "v": "update()",
+          "n": 1
+        },
+        "1": {
+          "v": "The update function allows you to modify an existing toast's content or appearance. It takes one argument; an object containing toastConfig and other config properties.",
+          "n": 0.2
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 9,
+      "$": {
+        "0": {
+          "v": "How It Works",
+          "n": 0.577
+        },
+        "1": {
+          "v": "The update function is designed to handle several scenarios, depending on the arguments provided: Update a specific toast: Update a specific toast in a specific toaster: Update all toasts in a specific toaster: Update all toasts in all toasters:",
+          "n": 0.16
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 10,
+      "$": {
+        "0": {
+          "v": "Options",
+          "n": 1
+        },
+        "1": {
+          "v": "The update function takes an object containing toastConfig and other config properties.",
+          "n": 0.289
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 11,
+      "$": {
+        "0": {
+          "v": "Return value",
+          "n": 0.707
+        },
+        "1": {
+          "v": "The update function returns the same object as the notify function, with the same properties.",
+          "n": 0.258
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 12,
+      "$": {
+        "0": {
+          "v": "dismiss()",
+          "n": 1
+        },
+        "1": {
+          "v": "The dismiss function allows you to remove a specific toast by ID or all toasts if no ID is provided. The exit animation and exit callback will be triggered.",
+          "n": 0.186
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 13,
+      "$": {
+        "0": {
+          "v": "Options",
+          "n": 1
+        },
+        "1": {
+          "v": "The dismiss function accepts an optional options object with the following properties: If no arguments are provided, the function will dismiss all toasts across all toasters.",
+          "n": 0.196
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 14,
+      "$": {
+        "0": {
+          "v": "How it Works",
+          "n": 0.577
+        },
+        "1": {
+          "v": "Here’s an example of how you might use the dismiss function in practice: Dismiss all toasts across all toasters: Dismiss all rendered toasts across all toasters, keeping queued toasts: Dismiss a specific toast in a specific toaster: Dismiss all toasts in a specific toaster: Dismiss all rendered toasts in a specific toaster, keeping queued toasts:",
+          "n": 0.135
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 15,
+      "$": {
+        "0": {
+          "v": "Providing a reason for dismissal",
+          "n": 0.447
+        },
+        "1": {
+          "v": "You can provide a reason for dismissing a toast by passing a reason property in the options object. This can be useful for tracking why a toast was dismissed, such as when a user manually closes a toast. And then in the toast's exitCallback callback: If no reason was provided, the reason argument will be generated by the library. If the toast was dismissed by the user, the reason will be true, otherwise it will be false.",
+          "n": 0.114
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 16,
+      "$": {
+        "0": {
+          "v": "remove()",
+          "n": 1
+        },
+        "1": {
+          "v": "The remove function allows you to immediately remove a toast without triggering the exit animation and without running the exitCallback.",
+          "n": 0.224
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 17,
+      "$": {
+        "0": {
+          "v": "Options",
+          "n": 1
+        },
+        "1": {
+          "v": "The remove function accepts the same arguments as the dismiss function except for the reason property.",
+          "n": 0.25
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 18,
+      "$": {
+        "0": {
+          "v": "How it Works",
+          "n": 0.577
+        },
+        "1": {
+          "v": "The remove function can be called the same way as the dismiss function, such as; Remove all toasts across all toasters: Remove all rendered toasts across all toasters, keeping queued toasts: Remove a specific toast in a specific toaster: Remove all toasts in a specific toaster: Remove all rendered toasts in a specific toaster, keeping queued toasts:",
+          "n": 0.132
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 19,
+      "$": {
+        "0": {
+          "v": "promise()",
+          "n": 1
+        },
+        "1": {
+          "v": "The promise function is a utility that simplifies handling async operations by displaying different toast states for pending, success, and error outcomes.",
+          "n": 0.213
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 20,
+      "$": {
+        "0": {
+          "v": "How it Works",
+          "n": 0.577
+        },
+        "1": {
+          "v": "The promise function takes three arguments: - A promise. - An object containing messages for the pending, success, and error states. - An optional options object that allows you to customize the toast appearance and behavior.",
+          "n": 0.167
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 21,
+      "$": {
+        "0": {
+          "v": "Messages",
+          "n": 1
+        },
+        "1": {
+          "v": "The messages object contains three properties: pending - The message to display while the promise is pending. success - The message to display when the promise resolves successfully. This can be a string, JSX element, or a function that returns a string or JSX element. The function receives the resolved data as an argument. error - The message to display when the promise is rejected. This can be a string, JSX element, or a function that returns a string or JSX element. The function receives the error as an argument.",
+          "n": 0.105
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 22,
+      "$": {
+        "0": {
+          "v": "Return value",
+          "n": 0.707
+        },
+        "1": {
+          "v": "The promise function returns a promise that resolves to the data returned by the original promise. This allows you to chain additional actions after the toast is dismissed.",
+          "n": 0.189
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 23,
+      "$": {
+        "0": {
+          "v": "getQueue()",
+          "n": 1
+        },
+        "1": {
+          "v": "The getQueue function returns an array of all toasts currently in the queue.",
+          "n": 0.277
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 24,
+      "$": {
+        "0": {
+          "v": "How it Works",
+          "n": 0.577
+        },
+        "1": {
+          "v": "The getQueue function can be called with an optional toasterId argument to target a specific toaster. If no toasterId is provided, the function will return all queued toasts across all toasters. To show a number of toasts currently in the queue, you can use the length property of the returned array:",
+          "n": 0.14
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 25,
+      "$": {
+        "0": {
+          "v": "clearQueue()",
+          "n": 1
+        },
+        "1": {
+          "v": "The clearQueue function removes currently queued toasts.",
+          "n": 0.378
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 26,
+      "$": {
+        "0": {
+          "v": "How it Works",
+          "n": 0.577
+        },
+        "1": {
+          "v": "The clearQueue function can be called with an optional toasterId argument to target a specific toaster. If no toasterId is provided, the function will clear the queue for all toasters.",
+          "n": 0.183
+        },
+        "2": {
+          "v": "Actions",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 27,
+      "$": {
+        "0": {
+          "v": "ToastProvider",
+          "n": 1
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 28,
+      "$": {
+        "0": {
+          "v": "<ToastProvider />",
+          "n": 0.707
+        },
+        "1": {
+          "v": "The ToastProvider is a context provider component that manages the state and functionality of toasters within your application. It serves as the central hub for registering, retrieving, and unregistering toasters, as well as providing configuration options for toast notifications. Wrap your application (or a specific part of it) with the ToastProvider to enable toast functionality. This component should be placed at a high level in your component tree to ensure that all child components have access to the toast context.",
+          "n": 0.112
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 29,
+      "$": {
+        "0": {
+          "v": "Props",
+          "n": 1
+        },
+        "1": {
+          "v": "The ToastProvider accepts toaster config props, toast config props and children.",
+          "n": 0.302
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 30,
+      "$": {
+        "0": {
+          "v": "Global Props and Propagation",
+          "n": 0.5
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 31,
+      "$": {
+        "0": {
+          "v": "Reactive Props",
+          "n": 0.707
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 32,
+      "$": {
+        "0": {
+          "v": "Toaster",
+          "n": 1
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 33,
+      "$": {
+        "0": {
+          "v": "<Toaster />",
+          "n": 0.707
+        },
+        "1": {
+          "v": "The Toaster component is responsible for rendering and managing a collection of toasts. It acts as a container for toasts, handling their lifecycle, positioning, and behavior based on global and local configuration settings. Each Toaster instance is registered with the ToastProvider and can be uniquely identified by its toasterId. Multiple Toaster Support: Allows you to create multiple toasters, each with its own configuration settings.  Toast Management: Manages a queue of toasts and renders them based on configuration settings like limit and reverseToastOrder.  Dynamic Positioning: Automatically calculates and updates toast positions based on their height, gutter spacing, and offset.  Window Visibility Handling: Pauses toast progress when the window is inactive (blurred) and resumes when the window is active (focused), depending on configuration.  Reactive Configuration: Supports reactive updates to its configuration, which propagate to all toasts within the toaster.",
+          "n": 0.085
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 34,
+      "$": {
+        "0": {
+          "v": "Props",
+          "n": 1
+        },
+        "1": {
+          "v": "The Toaster component accepts toaster config, toast config props and toasterId.",
+          "n": 0.302
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 35,
+      "$": {
+        "0": {
+          "v": "Toast",
+          "n": 1
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 36,
+      "$": {
+        "0": {
+          "v": "class Toast",
+          "n": 0.707
+        },
+        "1": {
+          "v": "The Toast class represents an individual notification message. They are invoked by the provided functions and rendered within a Toaster instance. Each toast can be customized with various options like content, duration, and appearance. Customizable Content: Supports custom content, including text, HTML, or JSX elements.  Appearance Options: Supports various appearance options like type, icon, and theme.  Lifecycle Callbacks: Provides callbacks for toast lifecycle events like onEnter, onExit, and exitCallback.  Reactive Configuration: Supports reactive updates to its configuration.  Global and Local Overrides: Overrides global settings provided by the ToastProvider or Toaster.",
+          "n": 0.105
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 37,
+      "$": {
+        "0": {
+          "v": "Props",
+          "n": 1
+        },
+        "1": {
+          "v": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\r\nAny props specified when creating or updating a toast will take precedence over global settings.",
+          "n": 0.171
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 38,
+      "$": {
+        "0": {
+          "v": "Properties available on the Toast instance",
+          "n": 0.408
+        },
+        "1": {
+          "v": "These properties can be accesed when using a custom toast. Each toast instance has several properties that define its behavior and appearance. store: A reference to the Toaster store that manages the toast. toastConfig: The configuration properties of the toast. ref: A reference to the toast's DOM element. state: Represents the lifecycle of the toast. It can be \"entering\" when the toast is animating into view, \"idle\" when fully visible, and \"exiting\" when it is dismissed. renderedAt: A timestamp indicating when the toast was rendered. Useful as a flag to determine if the toast is visible. progressManager: An object responsible for managing the toast's progress bar and duration. isPaused: A flag that indicates whether the toast's timer is currently paused. isPausedByUser: Similar to isPaused, but specifically tracks whether the user manually paused the toast, such as by hovering over it or pressing a button. offset: Represents the vertical position of the toast relative to other active toasts.",
+          "n": 0.08
+        },
+        "2": {
+          "v": "Components",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 39,
+      "$": {
+        "0": {
+          "v": "Styling",
+          "n": 1
+        },
+        "1": {
+          "v": "Solid Notifications provides a flexible styling system that allows customization via CSS variables, dark mode support, toast types with predefined colors, and animations.",
+          "n": 0.209
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 40,
+      "$": {
+        "0": {
+          "v": "Copying the CSS file",
+          "n": 0.5
+        },
+        "1": {
+          "v": "The easiest way to get started with Solid Notifications is to copy the CSS file which can be found in the dist folder and edit it to suit your needs.",
+          "n": 0.183
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 41,
+      "$": {
+        "0": {
+          "v": "Customization via CSS Variables",
+          "n": 0.5
+        },
+        "1": {
+          "v": "You can customize the appearance of notifications using CSS variables. Below are the default variables used: You can override these values in your global CSS file or within a specific component.",
+          "n": 0.18
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 42,
+      "$": {
+        "0": {
+          "v": "Themes and Types",
+          "n": 0.577
+        },
+        "1": {
+          "v": "The toast tree consists of only three elements. A toaster, a toast wrapper, and a toast. The way theming and types work in Solid Notifications is that the wrapper element will be provided with classes based on the provided settings. For example, if you set the theme to \"dark\", the wrapper will have the class \"sn-theme-dark\", and if you set the toast type to \"success\", the wrapper will have the class sn-type-success. For example: will result in the following HTML: You can use this to target these classes in your CSS to style the notifications. You can provide any string as the theme, and it will be injected into the toast wrapper as a class. The types however are limited to \"default\", \"loading\", \"success\", \"error\", \"warning\", and \"info\". will result in the following HTML:",
+          "n": 0.086
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 43,
+      "$": {
+        "0": {
+          "v": "Animations",
+          "n": 1
+        },
+        "1": {
+          "v": "The wrapper will also be provided with classes based on the state of the notification. The states are \"entering\", \"idle\", and \"exiting\", and are combined with the positionY and positionX props. You can use these classes to animate the notifications. Alternatively, you can provide your own classes that you want to use with the onEnter, onIdle, and onExit props.",
+          "n": 0.13
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 44,
+      "$": {
+        "0": {
+          "v": "Classes as props",
+          "n": 0.577
+        },
+        "1": {
+          "v": "You can also provide your own classes or styles as props to the ToastProvider, Toaster, and when calling the notify or update function. The dismiss button and progress bar can also be styled using the dismissButtonClass, dismissButtonStyle, progressBarClass, and progressBarStyle props. Class and style props can also be provided as a function. The function will receive the theme and the type as arguments.",
+          "n": 0.126
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 45,
+      "$": {
+        "0": {
+          "v": "Custom toast",
+          "n": 0.707
+        },
+        "1": {
+          "v": "You can create custom toasts by providing a function as the first argument to the notify function (or as the content prop of the update function). The function will receive the toast class instance as an argument. The function should return a JSX element that represents the custom toast.",
+          "n": 0.143
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 46,
+      "$": {
+        "0": {
+          "v": "Custom progress bar",
+          "n": 0.577
+        },
+        "1": {
+          "v": "You can create custom progress bars by hooking into the progress signal returned by the notify or update function. The showProgressBar option should be set to false to prevent the default progress bar from being shown. If using a custom toast, the progress signal can be accessed via the progressManager property of the toast instance.",
+          "n": 0.135
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 47,
+      "$": {
+        "0": {
+          "v": "Show queue",
+          "n": 0.707
+        },
+        "1": {
+          "v": "An example of how to show a queue of notifications can be found in the getQueue guide.",
+          "n": 0.243
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 48,
+      "$": {
+        "0": {
+          "v": "Track Notification Dismissal Reasons",
+          "n": 0.5
+        },
+        "1": {
+          "v": "An example of how to show a reason why a notification was dismissed can be found in the dismiss guide.",
+          "n": 0.224
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 49,
+      "$": {
+        "0": {
+          "v": "Promise API",
+          "n": 0.707
+        },
+        "1": {
+          "v": "An example of how to use the promise API can be found in the promise guide.",
+          "n": 0.25
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 50,
+      "$": {
+        "0": {
+          "v": "Pause timer when the window loses focus",
+          "n": 0.378
+        },
+        "1": {
+          "v": "The toast timer will pause by default when the window loses focus. You can disable this behavior by setting the pauseOnWindowInactive option to false.",
+          "n": 0.204
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 51,
+      "$": {
+        "0": {
+          "v": "Don't render toasts when the window is not focused",
+          "n": 0.333
+        },
+        "1": {
+          "v": "Toasts will not be rendered when the window is not focused by default. You can disable this behavior by setting the renderOnWindowFocus option to true.",
+          "n": 0.2
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 52,
+      "$": {
+        "0": {
+          "v": "Drag to dismiss",
+          "n": 0.577
+        },
+        "1": {
+          "v": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\r\nDrag treshold can be adjusted by setting the dragTreshold option.",
+          "n": 0.164
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 53,
+      "$": {
+        "0": {
+          "v": "Custom dismiss button",
+          "n": 0.577
+        },
+        "1": {
+          "v": "You can create a custom dismiss buttons by using the id provided by the notify function. You should also disable the default dismiss button by setting the showDismissButton option to false. If using a custom toast, you can dismiss the toast by calling the dismiss method on the toast instance.",
+          "n": 0.141
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 54,
+      "$": {
+        "0": {
+          "v": "Play or pause the notification timer manually",
+          "n": 0.378
+        },
+        "1": {
+          "v": "The guide on how to play or pause the notification timer manually can be found in the play/pause guide. If using a custom toast, you can pause the timer by calling the pause method on the progressManager of the toast instance.",
+          "n": 0.156
+        },
+        "2": {
+          "v": "Guides",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 55,
+      "$": {
+        "0": {
+          "v": "A SolidJS Toast Library",
+          "n": 0.5
+        },
+        "1": {
+          "v": "Reactive, customizable toast notifications for SolidJS.  It’s simple to use, highly customizable, and fits projects of any size.",
+          "n": 0.236
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 56,
+      "$": {
+        "0": {
+          "v": "Core Features:",
+          "n": 0.707
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 57,
+      "$": {
+        "0": {
+          "v": "1. Queue Management:",
+          "n": 0.577
+        },
+        "1": {
+          "v": "Toasts can be queued if there isn’t enough space or if a toast limit is reached. Signal to read the length of the queue and manage it accordingly. Clear queue or clear rendered toasts with a single function call.",
+          "n": 0.16
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 58,
+      "$": {
+        "0": {
+          "v": "2. Reactivity:",
+          "n": 0.707
+        },
+        "1": {
+          "v": "Progress tracking by hooking into the progress signal, usable in the UI for custom progress bars. Changes to signals in ToastProvider, Toasters, and Toasts reflect in the UI dynamically. Toasts can be updated dynamically with new content or configurations, with all toasts reacting to updated heights.",
+          "n": 0.147
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 59,
+      "$": {
+        "0": {
+          "v": "3. Multiple Toaster Support:",
+          "n": 0.5
+        },
+        "1": {
+          "v": "Supports multiple toasters simultaneously, each with its own state and configuration.",
+          "n": 0.302
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 60,
+      "$": {
+        "0": {
+          "v": "4. Customizability:",
+          "n": 0.707
+        },
+        "1": {
+          "v": "Reverse toast order support. Separate configurations for ToastProvder, Toaster and Toast. Theme support and styling options. Custom entrance, idle and exit animations. Different toast types (default, info, success, warning, error and loading). Support for promise based toasts. Full control using custom toasts.",
+          "n": 0.154
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 61,
+      "$": {
+        "0": {
+          "v": "5. User Interaction Features:",
+          "n": 0.5
+        },
+        "1": {
+          "v": "Pause timer on onMouseEnter, tab switch, window blur or by user action.  Swipe-to-dismiss functionality.  Dismiss toasts on clicking the body or the close button.",
+          "n": 0.204
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 62,
+      "$": {
+        "0": {
+          "v": "6. Timer Control:",
+          "n": 0.577
+        },
+        "1": {
+          "v": "Full control over toast timers, including pausing and resetting.  Support for infinite duration.",
+          "n": 0.277
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 63,
+      "$": {
+        "0": {
+          "v": "7. Visibility and Tab Management:",
+          "n": 0.447
+        },
+        "1": {
+          "v": "Option to prevent rendering of toasts if the tab is blurred.  Visibility change event listeners per toaster to manage timers accordingly.",
+          "n": 0.218
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 64,
+      "$": {
+        "0": {
+          "v": "8. Accessibility:",
+          "n": 0.707
+        },
+        "1": {
+          "v": "Built-in ARIA roles for accessibility.",
+          "n": 0.447
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 65,
+      "$": {
+        "0": {
+          "v": "9. Callbacks and Events:",
+          "n": 0.5
+        },
+        "1": {
+          "v": "Custom callbacks for toast exit with detailed reasons (true, false, or custom provided).  Lifecycle hooks to handle specific events like dismissal or updates.",
+          "n": 0.209
+        },
+        "2": {
+          "v": "Solid Notifications",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 66,
+      "$": {
+        "0": {
+          "v": "limit",
+          "n": 1
+        },
+        "1": {
+          "v": "- The maximum number of toasts to display at once. Excess toasts are queued and rendered when space becomes available. For no limit, set limit to false or 0.",
+          "n": 0.186
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 67,
+      "$": {
+        "0": {
+          "v": "reverseToastOrder",
+          "n": 1
+        },
+        "1": {
+          "v": "- If true, toasts are rendered in reverse order (newest at the top/bottom).",
+          "n": 0.277
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 68,
+      "$": {
+        "0": {
+          "v": "offsetX",
+          "n": 1
+        },
+        "1": {
+          "v": "- Horizontal offset for the toaster's position.",
+          "n": 0.378
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 69,
+      "$": {
+        "0": {
+          "v": "offsetY",
+          "n": 1
+        },
+        "1": {
+          "v": "- Vertical offset for the toaster's position.",
+          "n": 0.378
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 70,
+      "$": {
+        "0": {
+          "v": "gutter",
+          "n": 1
+        },
+        "1": {
+          "v": "- Spacing between toasts.",
+          "n": 0.5
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 71,
+      "$": {
+        "0": {
+          "v": "positionY",
+          "n": 1
+        },
+        "1": {
+          "v": "- Vertical positioning of the toaster.",
+          "n": 0.408
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 72,
+      "$": {
+        "0": {
+          "v": "positionX",
+          "n": 1
+        },
+        "1": {
+          "v": "- Horizontal positioning of the toaster.",
+          "n": 0.408
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 73,
+      "$": {
+        "0": {
+          "v": "renderOnWindowInactive",
+          "n": 1
+        },
+        "1": {
+          "v": "- If true, toasts will render even when the window is inactive (blurred).",
+          "n": 0.277
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 74,
+      "$": {
+        "0": {
+          "v": "pauseOnWindowInactive",
+          "n": 1
+        },
+        "1": {
+          "v": "- If true, toast progress will pause when the window is inactive (blurred).",
+          "n": 0.277
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 75,
+      "$": {
+        "0": {
+          "v": "toasterStyle",
+          "n": 1
+        },
+        "1": {
+          "v": "- Custom styles for the toaster container.",
+          "n": 0.378
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 76,
+      "$": {
+        "0": {
+          "v": "Toaster config",
+          "n": 0.707
+        },
+        "1": {
+          "v": "Global props. Can be applied to ToastProvider and Toaster.",
+          "n": 0.333
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 77,
+      "$": {
+        "0": {
+          "v": "theme",
+          "n": 1
+        },
+        "1": {
+          "v": "- The theme of the toast. Two theme types are included; light and dark, but any string can be provided.",
+          "n": 0.224
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 78,
+      "$": {
+        "0": {
+          "v": "type",
+          "n": 1
+        },
+        "1": {
+          "v": "- The type of the toast. Can be \"default\", \"success\", \"error\", \"info\", \"warning\" and \"loading\".",
+          "n": 0.258
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 79,
+      "$": {
+        "0": {
+          "v": "duration",
+          "n": 1
+        },
+        "1": {
+          "v": "- Duration (in milliseconds) before the toast is dismissed. Set to false or 0 for persistent toasts.",
+          "n": 0.243
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 80,
+      "$": {
+        "0": {
+          "v": "onEnter",
+          "n": 1
+        },
+        "1": {
+          "v": "- CSS animation name when the toast enters.",
+          "n": 0.354
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 81,
+      "$": {
+        "0": {
+          "v": "enterDuration",
+          "n": 1
+        },
+        "1": {
+          "v": "- Duration of the enter animation in milliseconds. Should be set to the same duration as the animation.",
+          "n": 0.236
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 82,
+      "$": {
+        "0": {
+          "v": "onExit",
+          "n": 1
+        },
+        "1": {
+          "v": "- CSS animation name when the toast exits.",
+          "n": 0.354
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 83,
+      "$": {
+        "0": {
+          "v": "exitDuration",
+          "n": 1
+        },
+        "1": {
+          "v": "- Duration of the exit animation in milliseconds. Should be set to the same duration as the animation.",
+          "n": 0.236
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 84,
+      "$": {
+        "0": {
+          "v": "onIdle",
+          "n": 1
+        },
+        "1": {
+          "v": "- CSS class which will be applied when the toast is idle.",
+          "n": 0.289
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 85,
+      "$": {
+        "0": {
+          "v": "class",
+          "n": 1
+        },
+        "1": {
+          "v": "- CSS class applied to the toast body. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.",
+          "n": 0.186
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 86,
+      "$": {
+        "0": {
+          "v": "style",
+          "n": 1
+        },
+        "1": {
+          "v": "- Custom styles for the toast body. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.",
+          "n": 0.18
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 87,
+      "$": {
+        "0": {
+          "v": "pauseOnHover",
+          "n": 1
+        },
+        "1": {
+          "v": "- Whether the toast pauses when hovered.",
+          "n": 0.378
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 88,
+      "$": {
+        "0": {
+          "v": "wrapperClass",
+          "n": 1
+        },
+        "1": {
+          "v": "- CSS class for the toast wrapper. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.",
+          "n": 0.189
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 89,
+      "$": {
+        "0": {
+          "v": "wrapperStyle",
+          "n": 1
+        },
+        "1": {
+          "v": "- Custom styles for the toast wrapper. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.",
+          "n": 0.18
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 90,
+      "$": {
+        "0": {
+          "v": "enterCallback",
+          "n": 1
+        },
+        "1": {
+          "v": "- Callback function executed when the toast enters.",
+          "n": 0.354
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 91,
+      "$": {
+        "0": {
+          "v": "updateCallback",
+          "n": 1
+        },
+        "1": {
+          "v": "- Callback function executed when the toast updates.",
+          "n": 0.354
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 92,
+      "$": {
+        "0": {
+          "v": "exitCallback",
+          "n": 1
+        },
+        "1": {
+          "v": "- Callback function executed when the toast exits. It will provide a reason argument with which the dismiss() function was called, or if it wasn't provided, the reason will be false if the toast dismissed by timer expiration, or true if it was dismissed by the user.",
+          "n": 0.146
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 93,
+      "$": {
+        "0": {
+          "v": "showDismissButton",
+          "n": 1
+        },
+        "1": {
+          "v": "- Whether to show a dismiss button.",
+          "n": 0.378
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 94,
+      "$": {
+        "0": {
+          "v": "dismissButtonClass",
+          "n": 1
+        },
+        "1": {
+          "v": "- CSS class for the dismiss button. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.",
+          "n": 0.189
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 95,
+      "$": {
+        "0": {
+          "v": "dismissButtonStyle",
+          "n": 1
+        },
+        "1": {
+          "v": "- Custom styles for the dismiss button. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.",
+          "n": 0.18
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 96,
+      "$": {
+        "0": {
+          "v": "dismissOnClick",
+          "n": 1
+        },
+        "1": {
+          "v": "- Whether clicking the toast dismisses it.",
+          "n": 0.378
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 97,
+      "$": {
+        "0": {
+          "v": "showProgressBar",
+          "n": 1
+        },
+        "1": {
+          "v": "- Whether to show a progress bar on the toast.",
+          "n": 0.316
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 98,
+      "$": {
+        "0": {
+          "v": "progressBarClass",
+          "n": 1
+        },
+        "1": {
+          "v": "- CSS class for the progress bar. Can be a string or a function returning a string. The function will be provided with theme and type as arguments.",
+          "n": 0.189
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 99,
+      "$": {
+        "0": {
+          "v": "progressBarStyle",
+          "n": 1
+        },
+        "1": {
+          "v": "- Custom styles for the progress bar. Can be an object containing css properties or a function returning the object. The function will be provided with theme and type as arguments.",
+          "n": 0.18
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 100,
+      "$": {
+        "0": {
+          "v": "showIcon",
+          "n": 1
+        },
+        "1": {
+          "v": "- Whether to show an icon in the toast.",
+          "n": 0.333
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 101,
+      "$": {
+        "0": {
+          "v": "icon",
+          "n": 1
+        },
+        "1": {
+          "v": "- Custom icon for the toast. Can be a JSX element or a function returning a JSX element. The function will be provided with theme and type as arguments.",
+          "n": 0.186
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 102,
+      "$": {
+        "0": {
+          "v": "dragToDismiss",
+          "n": 1
+        },
+        "1": {
+          "v": "- Whether dragging the toast dismisses it.",
+          "n": 0.378
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 103,
+      "$": {
+        "0": {
+          "v": "dragTreshold",
+          "n": 1
+        },
+        "1": {
+          "v": "- Distance (in pixels) required to dismiss the toast via dragging.",
+          "n": 0.302
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 104,
+      "$": {
+        "0": {
+          "v": "ariaLive",
+          "n": 1
+        },
+        "1": {
+          "v": "- ARIA live attribute for accessibility.",
+          "n": 0.408
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 105,
+      "$": {
+        "0": {
+          "v": "role",
+          "n": 1
+        },
+        "1": {
+          "v": "- ARIA role attribute.",
+          "n": 0.5
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 106,
+      "$": {
+        "0": {
+          "v": "Toast config",
+          "n": 0.707
+        },
+        "1": {
+          "v": "Toast props. Can be applied to all components; ToastProvider, Toaster and Toast.",
+          "n": 0.289
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 107,
+      "$": {
+        "0": {
+          "v": "id",
+          "n": 1
+        },
+        "1": {
+          "v": "- Unique identifier for the toast. If not provided, an ID is generated automatically.",
+          "n": 0.267
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 108,
+      "$": {
+        "0": {
+          "v": "content",
+          "n": 1
+        },
+        "1": {
+          "v": "- The main content of the toast. Can be a string, JSX element, or a function returning JSX. If function, receives Toast as argument.",
+          "n": 0.204
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 109,
+      "$": {
+        "0": {
+          "v": "toasterId",
+          "n": 1
+        },
+        "1": {
+          "v": "- Specifies the toaster instance where the toast should be displayed. Required when using multiple toasters.",
+          "n": 0.25
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 110,
+      "$": {
+        "0": {
+          "v": "Other config",
+          "n": 0.707
+        },
+        "1": {
+          "v": "Props that are used depending on where they are applied.",
+          "n": 0.316
+        },
+        "2": {
+          "v": "Props",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 111,
+      "$": {
+        "0": {
+          "v": "Installation",
+          "n": 1
+        },
+        "1": {
+          "v": "Install the package from npm:",
+          "n": 0.447
+        },
+        "2": {
+          "v": "Quickstart",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 112,
+      "$": {
+        "0": {
+          "v": "Usage",
+          "n": 1
+        },
+        "1": {
+          "v": "Here's a quick example to show how easy it is to use:",
+          "n": 0.289
+        },
+        "2": {
+          "v": "Quickstart",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 113,
+      "$": {
+        "0": {
+          "v": "1. Mount the ToastProvider and Toaster components:",
+          "n": 0.378
+        },
+        "1": {
+          "v": "Wrap your app with the ToastProvider component. Put the Toaster component anywhere in the component tree to display toasts.",
+          "n": 0.229
+        },
+        "2": {
+          "v": "Quickstart",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 114,
+      "$": {
+        "0": {
+          "v": "2. Import the Solid Notifications css file into your main css file:",
+          "n": 0.289
+        },
+        "1": {
+          "v": "It can also be imported directly into the main component file.",
+          "n": 0.302
+        },
+        "2": {
+          "v": "Quickstart",
+          "n": 1
+        }
+      }
+    },
+    {
+      "i": 115,
+      "$": {
+        "0": {
+          "v": "3. Create toasts:",
+          "n": 0.577
+        },
+        "1": {
+          "v": "Use the useToast hook to access the notify function and other toast functionality.",
+          "n": 0.277
+        },
+        "2": {
+          "v": "Quickstart",
+          "n": 1
+        }
+      }
+    }
+  ]
+}
