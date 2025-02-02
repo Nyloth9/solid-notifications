@@ -178,7 +178,7 @@ const App: Component = () => {
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => {
               const { id, progressControls } = notify(
-                <>
+                <div>
                   <div>{`🍞 Moon Toast, Toast Notification! 🌟`}</div>
                   <div class="flex gap-1">
                     <button
@@ -200,7 +200,7 @@ const App: Component = () => {
                       Reset timer
                     </button>
                   </div>
-                </>,
+                </div>,
                 { toasterId: "toaster-2" },
               );
 
