@@ -35,12 +35,6 @@ export default function SearchBar(props: SearchBarProps) {
   const [debouncedQuery, setDebouncedQuery] = createSignal("");
   const [results, setResults] = createSignal<any[]>([]);
 
-  /*   onMount(() => {
-    setTimeout(() => {
-      state.openSearchbar();
-    }, 1000);
-  }); */
-
   createEffect(
     on(
       () => query(),
@@ -108,6 +102,11 @@ export default function SearchBar(props: SearchBarProps) {
                     ></path>
                   </svg>
                   <input
+                    ref={(el) => {
+                      setTimeout(() => {
+                        el?.focus();
+                      }, 100);
+                    }}
                     data-autofocus="true"
                     class={`[&amp;::-webkit-search-cancel-button]:hidden [&amp;::-webkit-search-decoration]:hidden [&amp;::-webkit-search-results-button]:hidden [&amp;::-webkit-search-results-decoration]:hidden flex-auto appearance-none bg-transparent pl-10 pr-4 text-slate-900 outline-none placeholder:text-slate-500 focus:w-full focus:flex-none dark:text-white sm:text-sm ${props.state.opacity()} `}
                     aria-autocomplete="both"
