@@ -124,7 +124,7 @@ export default function SearchBar(props: SearchBarProps) {
                     onInput={(e) => setQuery(e.target.value)}
                   />
                 </div>
-                <div class="scrollbar-sm lg:scrollbar-md max-h-96 overflow-y-auto border-t border-slate-200 bg-white empty:hidden dark:border-slate-100/5 dark:bg-white/2.5">
+                <div class="scrollbar-sm max-h-96 overflow-y-auto border-t border-slate-200 bg-white empty:hidden dark:border-slate-100/5 dark:bg-white/2.5">
                   <ul role="listbox">
                     <For each={results()}>
                       {(result) => (

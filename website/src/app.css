@@ -90,7 +90,7 @@ h6 {
 .scrollbar-sm::-webkit-scrollbar-thumb {
   border-radius: 3px;
   border-width: 0px 1px;
-  @apply border border-slate-400 bg-slate-300 dark:border-slate-800 dark:bg-slate-700;
+  @apply border border-slate-300 bg-slate-300 dark:border-slate-800 dark:bg-slate-700;
 }
 
 .scrollbar-sm::-webkit-scrollbar-thumb:hover {
