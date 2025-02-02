@@ -54,8 +54,8 @@
           "n": 0.5
         },
         "1": {
-          "v": "If you have multiple toasters, you can invoke useToast with the toaster's id to target a specific toaster. Then, all the actions will called against that toaster. To target a different toaster in the same file, you can alias the methods: Alternatively, you can store the result of useToast() in variables and call them separately:",
-          "n": 0.135
+          "v": "If you have multiple toasters, you can invoke useToast with the toaster's id to target a specific toaster. Then, all the actions will called against that toaster. To target a different toaster in the same file, you can alias the methods: Alternatively, you can store the result of useToast() in variables and call them separately: If you don't want to target a specific toaster by calling useToast with a toasterId, you can provide the toasterId in the action's options.",
+          "n": 0.113
         },
         "2": {
           "v": "Actions",
@@ -88,8 +88,8 @@
           "n": 1
         },
         "1": {
-          "v": "The notify function is the primary way to trigger toasts in SolidNotifications. It allows you to display messages with optional configurations, such as assigning an ID, targeting a specific toaster, and customizing the toast appearance. It takes two arguments: content and options and returns an object with the toast's ID, a reference to the toast element, and a progress control object.",
-          "n": 0.128
+          "v": "The notify function is the primary way to trigger toasts in Solid Notifications. It allows you to display messages with optional configurations, such as assigning an ID, targeting a specific toaster, and customizing the toast appearance. It takes two arguments: content and options and returns an object with the toast's ID, a reference to the toast element, and a progress control object.",
+          "n": 0.127
         },
         "2": {
           "v": "Actions",
@@ -1033,7 +1033,7 @@
           "n": 0.707
         },
         "1": {
-          "v": "Reverse toast order support. Separate configurations for ToastProvder, Toaster and Toast. Theme support and styling options. Custom entrance, idle and exit animations. Different toast types (default, info, success, warning, error and loading). Support for promise based toasts. Full control using custom toasts.",
+          "v": "Reverse toast order support. Separate configurations for ToastProvider, Toaster and Toast. Theme support and styling options. Custom entrance, idle and exit animations. Different toast types (default, info, success, warning, error and loading). Support for promise based toasts. Full control using custom toasts.",
           "n": 0.154
         },
         "2": {
