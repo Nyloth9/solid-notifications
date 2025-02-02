@@ -632,6 +632,37 @@ try {
 
 </Code>
 
+Or you can directly manage the returned data and error in the toast messages:
+
+<Code>
+
+```tsx
+const [data, setData] = createSignal(null);
+
+const fetchData = () =>
+  new Promise<string>((resolve, reject) => {
+    setTimeout(() => {
+      Math.random() > 0.5
+        ? resolve("Data loaded successfully!")
+        : reject("Failed to fetch data.");
+    }, 2000);
+  });
+
+promise(fetchData(), {
+  pending: "Fetching data...",
+  success: (data) => {
+    setData(data); // Manage how you want to use the resolved data here
+    return `✅ Promise resolved with data: ${data}`;
+  },
+  error: (error) => {
+    setError(error); // Manage the error here
+    return `❌ Promise rejected with error: ${error}`;
+  },
+});
+```
+
+</Code>
+
 ### Messages
 
 The **messages** object contains three properties:

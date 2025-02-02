@@ -377,8 +377,8 @@
           "n": 0.577
         },
         "1": {
-          "v": "The promise function takes three arguments: - A promise. - An object containing messages for the pending, success, and error states. - An optional options object that allows you to customize the toast appearance and behavior.",
-          "n": 0.167
+          "v": "The promise function takes three arguments: - A promise. - An object containing messages for the pending, success, and error states. - An optional options object that allows you to customize the toast appearance and behavior. Or you can directly manage the returned data and error in the toast messages:",
+          "n": 0.141
         },
         "2": {
           "v": "Actions",

@@ -122,7 +122,7 @@
   {
     "page": "Actions",
     "heading": "How it Works",
-    "content": "The promise function takes three arguments: - A promise. - An object containing messages for the pending, success, and error states. - An optional options object that allows you to customize the toast appearance and behavior.",
+    "content": "The promise function takes three arguments: - A promise. - An object containing messages for the pending, success, and error states. - An optional options object that allows you to customize the toast appearance and behavior. Or you can directly manage the returned data and error in the toast messages:",
     "url": "/actions#how-it-works"
   },
   {
