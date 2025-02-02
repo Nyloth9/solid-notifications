@@ -308,7 +308,6 @@ function handleMouseEnter(toast: Toast) {
   if (toast.isPausedByUser) return;
 
   toast.progressManager.pause();
-  toast.isPausedByUser = true;
 }
 
 function handleMouseLeave(toast: Toast) {
@@ -321,7 +320,6 @@ function handleMouseLeave(toast: Toast) {
   if (toast.isPausedByUser) return;
 
   toast.progressManager.play();
-  toast.isPausedByUser = false;
 }
 
 function renderDismissButton(toast: Toast) {
