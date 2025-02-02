@@ -23,7 +23,7 @@
     "@solidjs/start": "^1.0.11",
     "fuse.js": "^7.0.0",
     "solid-js": "^1.9.2",
-    "solid-notifications": "^1.0.5",
+    "solid-notifications": "^1.0.6",
     "vinxi": "^0.4.3"
   },
   "devDependencies": {
