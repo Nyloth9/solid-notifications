@@ -468,7 +468,7 @@ You can create a custom dismiss buttons by using the `id` provided by the `notif
 ```tsx
 const { notify, dismiss } = useToast();
 
-const id = notify(
+const { id } = notify(
   <div>
     <p>This is a notification</p>
     <button onClick={() => notify.dismiss(id)}>Dismiss</button>

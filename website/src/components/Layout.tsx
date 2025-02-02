@@ -12,6 +12,7 @@ import { ToastProvider } from "solid-notifications";
 import { useLocation, useNavigate } from "@solidjs/router";
 import pageData from "../page-data.json";
 import SearchBar from "./SearchBar";
+import useSearchbarState from "~/store/app-store";
 
 interface Props {
   children: JSX.Element;
@@ -39,6 +40,7 @@ export default function Layout(props: Props) {
   const [sidebarOpen, setSidebarOpen] = createSignal(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const searchbarStore = useSearchbarState();
 
   const handleScreenWidthChange = (e: any) => {
     // Close the sidebar whenever the screen crosses the 1024px threshold
@@ -140,6 +142,9 @@ export default function Layout(props: Props) {
               <div class="hidden lg:block lg:max-w-xs lg:flex-auto">
                 <button
                   type="button"
+                  onClick={() => {
+                    searchbarStore.openSearchbar();
+                  }}
                   class="ui-not-focus-visible:outline-none hidden h-9 w-full items-center gap-2 rounded-full bg-white pl-2 pr-3 text-sm text-slate-500 ring-1 ring-slate-900/10 transition hover:ring-slate-900/20 dark:bg-white/5 dark:text-slate-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20 lg:flex"
                 >
                   <svg
@@ -229,6 +234,7 @@ export default function Layout(props: Props) {
                       type="button"
                       class="ui-not-focus-visible:outline-none flex h-6 w-6 items-center justify-center rounded-md transition hover:bg-slate-900/5 dark:hover:bg-white/5 lg:hidden"
                       aria-label="Find something..."
+                      onClick={() => searchbarStore.openSearchbar()}
                     >
                       <svg
                         viewBox="0 0 20 20"
@@ -487,7 +493,7 @@ export default function Layout(props: Props) {
           </div>
         </header>
         <div class="scrollbar-md relative flex h-full max-h-screen flex-col overflow-y-auto px-4 pt-14 sm:px-6 lg:px-8">
-          {/* <SearchBar /> */}
+          <SearchBar state={searchbarStore} />
           <main class="w-full flex-auto text-left">
             <div class="prose dark:prose-invert [html_:where(&>*)]:mx-auto [html_:where(&>*)]:max-w-2xl [html_:where(&>*)]:lg:mx-[calc(50%-min(50%,theme(maxWidth.lg)))] [html_:where(&>*)]:lg:max-w-3xl">
               <article class="pb-10 pt-14">{props.children}</article>

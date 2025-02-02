@@ -76,6 +76,17 @@ toaster2.notify("Hello from toaster 2");
 
 </Code>
 
+If you don't want to target a specific toaster by calling `useToast` with a toasterId, you can provide the toasterId in the action's options.
+
+<Code>
+
+```tsx
+notify("Hello, world!", { toasterId: "toaster-1" });
+update({ toasterId: "toaster-1", id: "toastId", content: "Updated content" });
+```
+
+</Code>
+
 <HightlightBlock type="warning">
   If you use multiple toasters and don't invoke `useToast` with a toasterId, the
   toasterId will have to be provided in the action's options.
@@ -95,7 +106,7 @@ The `useToast()` function returns an object containing various toast actions:
 
 ## notify() {{"data-nav": "link", "class": "text-blue-500", "id": "notify"}}
 
-The notify function is the primary way to trigger toasts in **SolidNotifications**. It allows you to display messages with optional configurations, such as assigning an ID, targeting a specific toaster, and customizing the toast appearance.
+The notify function is the primary way to trigger toasts in Solid Notifications. It allows you to display messages with optional configurations, such as assigning an ID, targeting a specific toaster, and customizing the toast appearance.
 
 It takes two arguments: `content` and `options` and returns an object with the toast's ID, a reference to the toast element, and a progress control object.
 

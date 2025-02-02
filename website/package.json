@@ -2,7 +2,7 @@
   "name": "example-with-mdx",
   "type": "module",
   "scripts": {
-    "dev": "vinxi dev",
+    "dev": "node ./src/plugins/generate-index.js && vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
     "sn-publish": "cd ../src && npm publish",
