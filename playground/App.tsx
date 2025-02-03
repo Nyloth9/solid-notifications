@@ -191,7 +191,7 @@ const App: Component<Props> = (props: Props) => {
             onClick={() => {
               const { id, progressControls } = notify(
                 <div>
-                  <div>{`🍞 Moon Toast, Toast Notification! 🌟`}</div>
+                  <div>{`🍞 New toast ready to serve! 🌟`}</div>
                   <div class="flex gap-1">
                     <button
                       class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
@@ -231,7 +231,7 @@ const App: Component<Props> = (props: Props) => {
                 (t) => {
                   return createRoot(() => (
                     <div class={t.isPaused ? "bg-red-200" : "bg-green-200"}>
-                      <div>🍞 Moon Toast, Toast Regret! 🌟</div>
+                      <div>🍞 New toast ready to serve! 🌟</div>
                       <p>ID: {t.toastConfig.id}</p>
                       <p>Offset: {t.offset}</p>
                       <p>Progress: {t.progressManager.progress()} %</p>
