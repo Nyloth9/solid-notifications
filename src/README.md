@@ -1,4 +1,4 @@
-<img src="./assets/SNShowcase.gif" style="margin-bottom: 30px" />
+<img src="https://s13.gifyu.com/images/b2TOe.gif" style="margin-bottom: 30px" />
 
 # Solid Notifications
 
