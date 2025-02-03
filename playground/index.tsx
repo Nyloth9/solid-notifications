@@ -25,12 +25,26 @@ render(() => {
     <ToastProvider theme={theme()}>
       <Toaster toasterId="toaster-1" limit={3} />
       <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder />
+      <Toaster
+        toasterId="toaster-3"
+        limit={false}
+        duration={10000}
+        reverseToastOrder
+      />
+      <Toaster
+        toasterId="toaster-4"
+        limit={false}
+        positionX="left"
+        reverseToastOrder
+        duration={10000}
+      />
+
       <Router>
         <Route
           path="/"
           component={() => <App theme={theme} setTheme={setTheme} />}
         />
-        <Route path="/showcase" component={Showcase} />
+        <Route path="/showcase" component={() => <Showcase />} />
       </Router>
     </ToastProvider>
   );
