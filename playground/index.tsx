@@ -2,11 +2,13 @@
 import { render } from "solid-js/web";
 
 import "./index.css";
+import { Route, Router } from "@solidjs/router";
+import { createSignal } from "solid-js";
 import "../src/index.css";
 import App from "./App";
-import ToastProvider from "../src/core/Context";
 import Toaster from "../src/core/Toaster";
-import { createSignal, onMount } from "solid-js";
+import ToastProvider from "../src/core/Context";
+import Showcase from "./pages/Showcase";
 
 const root = document.getElementById("root");
 
@@ -16,45 +18,20 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
-const [className, setClassName] = createSignal("bg-red-200");
 const [theme, setTheme] = createSignal("light");
-const [style, setStyle] = createSignal({
-  "margin-top": "0px",
-});
-
-onMount(() => {
-  setTimeout(() => {
-    setClassName("bg-green-200");
-    //setTheme("dark");
-  }, 4000);
-
-  /*   setInterval(() => {
-    setStyle({
-      "margin-top": `${Math.floor(Math.random() * 100)}px`,
-    });
-  }, 1000); */
-});
 
 render(() => {
   return (
     <ToastProvider theme={theme()}>
-      <Toaster
-        toasterId="toaster-1" limit={3}
-        /*         wrapperStyle={style()} */
-      />
+      <Toaster toasterId="toaster-1" limit={3} />
       <Toaster toasterId="toaster-2" positionY="bottom" reverseToastOrder />
-      <App />
-      <div class="container mx-auto -mt-4 px-4">
-        <button
-          class="mt-4 rounded bg-slate-700 px-4 py-2 font-bold text-white hover:bg-slate-800 active:bg-slate-900"
-          onClick={() => setTheme(theme() === "light" ? "dark" : "light")}
-        >
-          Change theme
-        </button>
-        <span class="ml-2">
-          Current theme: <span class="font-medium uppercase">{theme()}</span>
-        </span>
-      </div>
+      <Router>
+        <Route
+          path="/"
+          component={() => <App theme={theme} setTheme={setTheme} />}
+        />
+        <Route path="/showcase" component={Showcase} />
+      </Router>
     </ToastProvider>
   );
 }, root!);

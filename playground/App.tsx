@@ -1,7 +1,19 @@
-import { createRoot, createSignal, onMount, type Component } from "solid-js";
+import {
+  Accessor,
+  createRoot,
+  createSignal,
+  onMount,
+  Setter,
+  type Component,
+} from "solid-js";
 import { useToast } from "../src/core/Context";
 
-const App: Component = () => {
+interface Props {
+  theme: Accessor<string>;
+  setTheme: Setter<string>;
+}
+
+const App: Component<Props> = (props: Props) => {
   const [randomText, setRandomText] = createSignal("Hello World!");
   const { notify, update, dismiss, remove, promise, getQueue, clearQueue } =
     useToast("toaster-1");
@@ -273,6 +285,21 @@ const App: Component = () => {
         >
           Promise
         </button>
+      </div>
+
+      <div class="container mx-auto -mt-4 px-4">
+        <button
+          class="mt-4 rounded bg-slate-700 px-4 py-2 font-bold text-white hover:bg-slate-800 active:bg-slate-900"
+          onClick={() =>
+            props.setTheme(props.theme() === "light" ? "dark" : "light")
+          }
+        >
+          Change theme
+        </button>
+        <span class="ml-2">
+          Current theme:{" "}
+          <span class="font-medium uppercase">{props.theme()}</span>
+        </span>
       </div>
     </div>
   );
