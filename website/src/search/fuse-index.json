@@ -377,7 +377,7 @@
           "n": 0.577
         },
         "1": {
-          "v": "The promise function takes three arguments: - A promise. - An object containing messages for the pending, success, and error states. - An optional options object that allows you to customize the toast appearance and behavior. Or you can directly manage the returned data and error in the toast messages:",
+          "v": "The promise function takes three arguments: - A promise. - An object containing messages for the pending, success, and error states. - An optional options object that allows you to customize the toast appearance and behavior. Or you can directly manage the returned data and error in the promise messages:",
           "n": 0.141
         },
         "2": {
@@ -663,8 +663,8 @@
           "n": 0.408
         },
         "1": {
-          "v": "These properties can be accesed when using a custom toast. Each toast instance has several properties that define its behavior and appearance. store: A reference to the Toaster store that manages the toast. toastConfig: The configuration properties of the toast. ref: A reference to the toast's DOM element. state: Represents the lifecycle of the toast. It can be \"entering\" when the toast is animating into view, \"idle\" when fully visible, and \"exiting\" when it is dismissed. renderedAt: A timestamp indicating when the toast was rendered. Useful as a flag to determine if the toast is visible. progressManager: An object responsible for managing the toast's progress bar and duration. isPaused: A flag that indicates whether the toast's timer is currently paused. isPausedByUser: Similar to isPaused, but specifically tracks whether the user manually paused the toast, such as by hovering over it or pressing a button. offset: Represents the vertical position of the toast relative to other active toasts.",
-          "n": 0.08
+          "v": "These properties can be accesed when using a custom toast. Each toast instance has several properties that define its behavior and appearance. store: A reference to the Toaster store that manages the toast. toastConfig: The configuration properties of the toast. ref: A reference to the toast's DOM element. state: Represents the lifecycle of the toast. It can be \"entering\" when the toast is animating into view, \"idle\" when fully visible, and \"exiting\" when it is dismissed. renderedAt: A timestamp indicating when the toast was rendered. Useful as a flag to determine if the toast is visible. progressManager: An object responsible for managing the toast's progress bar and duration. isPaused: A flag that indicates whether the toast's timer is currently paused. isPausedByUser: Similar to isPaused, but specifically tracks whether the user manually paused the toast, for example by pressing a button. offset: Represents the vertical position of the toast relative to other active toasts.",
+          "n": 0.081
         },
         "2": {
           "v": "Components",
