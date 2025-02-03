@@ -1,3 +1,5 @@
+<img src="./assets/SNShowcase.gif" style="margin-bottom: 30px" />
+
 # Solid Notifications
 
 A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
