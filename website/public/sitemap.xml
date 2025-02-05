@@ -6,11 +6,7 @@
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/introduction</loc>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://solid-notifications.vercel.app/core-features</loc>
+        <loc>https://solid-notifications.vercel.app/#core-features</loc>
         <priority>0.8</priority>
     </url>
     <url>
@@ -18,15 +14,15 @@
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/installation</loc>
+        <loc>https://solid-notifications.vercel.app/quickstart#installation</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/usage</loc>
+        <loc>https://solid-notifications.vercel.app/quickstart#usage</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/components/toast-provider</loc>
+        <loc>https://solid-notifications.vercel.app/components/toastprovider</loc>
         <priority>0.8</priority>
     </url>
     <url>
@@ -38,67 +34,95 @@
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/components/props</loc>
+        <loc>https://solid-notifications.vercel.app/props</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/components/toaster-config</loc>
+        <loc>https://solid-notifications.vercel.app/props#toaster-config</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/components/toast-config</loc>
+        <loc>https://solid-notifications.vercel.app/props#toast-config</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/components/other-config</loc>
+        <loc>https://solid-notifications.vercel.app/props#other-config</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/actions/use-toast</loc>
+        <loc>https://solid-notifications.vercel.app/actions#useToast</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/actions/notify</loc>
+        <loc>https://solid-notifications.vercel.app/actions#notify</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/actions/update</loc>
+        <loc>https://solid-notifications.vercel.app/actions#update</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/actions/dismiss</loc>
+        <loc>https://solid-notifications.vercel.app/actions#dismiss</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/actions/remove</loc>
+        <loc>https://solid-notifications.vercel.app/actions#remove</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/actions/promise</loc>
+        <loc>https://solid-notifications.vercel.app/actions#promise</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/actions/get-queue</loc>
+        <loc>https://solid-notifications.vercel.app/actions#getQueue</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/actions/clear-queue</loc>
+        <loc>https://solid-notifications.vercel.app/actions#clearQueue</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/guides/styling</loc>
+        <loc>https://solid-notifications.vercel.app/guides#styling</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/guides/custom-toast</loc>
+        <loc>https://solid-notifications.vercel.app/guides#custom-toast</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/guides/custom-progress-bar</loc>
+        <loc>https://solid-notifications.vercel.app/guides#custom-progress-bar</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://solid-notifications.vercel.app/guides/show-queue</loc>
+        <loc>https://solid-notifications.vercel.app/guides#show-queue</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://solid-notifications.vercel.app/guides#show-a-reason-why-a-notification-was-dismissed</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://solid-notifications.vercel.app/guides#promise-api</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://solid-notifications.vercel.app/guides#pause-toast-timer-when-the-window-loses-focus</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://solid-notifications.vercel.app/guides#dont-render-toasts-when-the-window-is-not-focused</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://solid-notifications.vercel.app/guides#drag-to-dismiss</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://solid-notifications.vercel.app/guides#custom-dismiss-button</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://solid-notifications.vercel.app/guides#play-or-pause-the-notification-timer-manually</loc>
         <priority>0.8</priority>
     </url>
 </urlset>
