@@ -1,5 +1,3 @@
-<img src="./website/public/SNHero.png" style="margin-bottom: 30px" />
-
 <img src="./playground/assets/SNShowcase.gif" style="margin-bottom: 30px" />
 
 [<img src="./playground/assets/Solid Notificiations - bold.png" alt="toast" height="40px" width="auto" />](https://solid-notifications.vercel.app/)
