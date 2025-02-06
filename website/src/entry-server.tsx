@@ -8,6 +8,7 @@ export default createHandler(() => (
         <html lang="en">
           <head>
             <meta charset="utf-8" />
+            <meta name="description" content="Reactive, customizable toast notifications for SolidJS." />
             <meta
               name="viewport"
               content="width=device-width, initial-scale=1"
