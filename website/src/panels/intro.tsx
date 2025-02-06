@@ -91,7 +91,7 @@ function CoreFeatures(props: { feature: string }) {
                         {Math.round(t.progressManager.progress())}
                       </p>
                       <div
-                        class="absolute left-0 top-0 h-full bg-blue-600/10"
+                        class="absolute left-0 top-0 h-full bg-blue-600/10 pointer-events-none"
                         style={{
                           width: `${t.progressManager.progress()}%`,
                         }}
