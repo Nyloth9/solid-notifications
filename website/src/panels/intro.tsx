@@ -183,7 +183,7 @@ function CoreFeatures(props: { feature: string }) {
               (t) => (
                 <div
                   id="toast-notification"
-                  class="w-[334px] rounded-lg bg-white p-4 pt-2 text-slate-900 shadow-stripe dark:bg-slate-800 dark:text-slate-300"
+                  class="w-[334px] rounded-lg bg-white p-4 pt-2 text-slate-900 shadow-stripe dark:bg-slate-800 dark:text-slate-300 dark:shadow-dark"
                   role="alert"
                 >
                   <div class="mb-2 flex items-center">
