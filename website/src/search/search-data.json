@@ -331,12 +331,6 @@
   },
   {
     "page": "Solid Notifications",
-    "heading": "A SolidJS Toast Library",
-    "content": "Reactive, customizable toast notifications for SolidJS.  It’s simple to use, highly customizable, and fits projects of any size.",
-    "url": "/#a-solidjs-toast-library"
-  },
-  {
-    "page": "Solid Notifications",
     "heading": "Core Features:",
     "content": "",
     "url": "/#core-features"
