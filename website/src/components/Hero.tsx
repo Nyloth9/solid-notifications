@@ -11,7 +11,7 @@ export default function Hero() {
             toast Notification Library
           </h2>
         </div>
-        <img src="/Tiny.png" alt="Hero" class="mx-auto h-72 w-auto" />
+        <img src="/Tiny.png" alt="Hero" class="ml-auto mr-0 h-72 w-auto" />
       </div>
 
       <div class="flex w-full max-w-4xl flex-col-reverse pb-14 md:hidden">
