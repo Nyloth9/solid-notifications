@@ -28,8 +28,8 @@ export default function Hero() {
           </h1>
 
           <h2 class="block text-lg font-medium text-slate-800 dark:text-slate-300">
-            A <span class="font-bold text-emerald-600">SolidJS</span> toast
-            Notification Library
+            A <span class="font-bold text-emerald-600">SolidJS</span> Toast
+            Notifications Library
           </h2>
         </div>
       </div>
