@@ -3,9 +3,9 @@ export default function Hero() {
     <div class="-mt-[88px] sm:-mt-8">
       <div class="w-full max-w-4xl items-center pb-6">
         <div class="-mx-4 sm:mx-0">
-          <img src="/Hero.jpg" alt="Hero" class="w-fučč ml-auto" />
+          <img src="/Hero.jpg" alt="Hero" class="ml-auto w-full" />
         </div>
-        <div class="lg:py-6">
+        <div class="py-2 lg:py-6">
           <h1 class="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
