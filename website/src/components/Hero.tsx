@@ -1,9 +1,11 @@
 export default function Hero() {
   return (
-    <div class="-mt-8">
+    <div class="-mt-[88px] sm:-mt-8">
       <div class="w-full max-w-4xl items-center pb-6">
-        <img src="/2.jpg" alt="Hero" class="w-fučč ml-auto" />
-        <div class="py-8">
+        <div class="-mx-4 sm:mx-0">
+          <img src="/2.jpg" alt="Hero" class="w-fučč ml-auto" />
+        </div>
+        <div class="lg:py-6">
           <h1 class="flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
