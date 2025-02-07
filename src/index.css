@@ -272,56 +272,62 @@
 /* Presence Animations */
 .sn-state-right-top-entering,
 .sn-state-right-bottom-entering {
-  -webkit-animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideInRight 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+  animation: SNSlideInRight 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
 }
 
 .sn-state-right-top-exiting,
 .sn-state-right-bottom-exiting {
-  -webkit-animation: SNSlideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideOutRight 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+  animation: SNSlideOutRight 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
 }
 
 .sn-state-left-top-entering,
 .sn-state-left-bottom-entering {
-  -webkit-animation: SNSlideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideInLeft 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+  animation: SNSlideInLeft 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
 }
 
 .sn-state-left-top-exiting,
 .sn-state-left-bottom-exiting {
-  -webkit-animation: SNSlideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideOutLeft 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+  animation: SNSlideOutLeft 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
 }
 
 .sn-state-center-top-entering {
-  -webkit-animation: SNSlideInTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideInTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideInTop 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+  animation: SNSlideInTop 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
 }
 
 .sn-state-center-top-exiting {
-  -webkit-animation: SNSlideOutTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideOutTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideOutTop 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+  animation: SNSlideOutTop 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
 }
 
 .sn-state-center-bottom-entering {
-  -webkit-animation: SNSlideInBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideInBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideInBottom 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+  animation: SNSlideInBottom 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
 }
 
 .sn-state-center-bottom-exiting {
-  -webkit-animation: SNSlideOutBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation: SNSlideOutBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  -webkit-animation: SNSlideOutBottom 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+  animation: SNSlideOutBottom 0.3s cubic-bezier(0.3, 0, 0.2, 1) forwards;
 }
 
 @keyframes SNSlideInRight {
   0% {
     opacity: 0;
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(120%, 0, 0) skewX(-10deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(-5px, 0, 0) skewX(3deg);
+  }
+  80% {
+    transform: translate3d(5px, 0, 0) skewX(-2deg);
   }
   100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) skewX(0deg);
   }
 }
 
