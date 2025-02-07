@@ -3,7 +3,7 @@ export default function Hero() {
     <div class="-mt-[88px] sm:-mt-8">
       <div class="w-full max-w-4xl items-center pb-6">
         <div class="-mx-4 sm:mx-0">
-          <img src="/2.jpg" alt="Hero" class="w-fučč ml-auto" />
+          <img src="/Hero.jpg" alt="Hero" class="w-fučč ml-auto" />
         </div>
         <div class="lg:py-6">
           <h1 class="flex items-center gap-2">
