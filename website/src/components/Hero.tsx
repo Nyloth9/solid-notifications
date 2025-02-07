@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <div class="-mb-8 -mt-8 lg:-mb-12">
+    <div class="-mb-8 -mt-8 lg:-mb-14">
       <div class="hidden w-full max-w-4xl items-center pb-6 md:flex">
         <div>
           <h1 class="block pb-1 text-5xl font-bold text-emerald-600 dark:text-emerald-500">
