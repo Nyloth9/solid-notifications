@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <div class="-my-8">
+    <div class="-mb-8 -mt-8 lg:-mb-12">
       <div class="hidden w-full max-w-4xl items-center pb-6 md:flex">
         <div>
           <h1 class="block pb-1 text-5xl font-bold text-emerald-600 dark:text-emerald-500">
@@ -11,7 +11,7 @@ export default function Hero() {
             toast Notification Library
           </h2>
         </div>
-        <img src="/Tiny.png" alt="Hero" class="ml-auto mr-0 h-72 w-auto" />
+        <img src="/Tiny.png" alt="Hero" class="-mr-6 ml-auto h-80 w-auto" />
       </div>
 
       <div class="flex w-full max-w-4xl flex-col-reverse pb-14 md:hidden">
