@@ -179,7 +179,7 @@ export default function Layout(props: Props) {
                     <path d="M.5 1h9M.5 8h9M.5 4.5h9" />
                   </svg>
                 </button>
-                <a aria-label="Home" href="/" class="flex items-center gap-3 max-w-40">
+                <a aria-label="Home" href="/" class="flex items-center gap-2 max-w-40">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="22"
