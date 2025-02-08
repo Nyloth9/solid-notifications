@@ -145,7 +145,7 @@ export default function Layout(props: Props) {
                   onClick={() => {
                     searchbarStore.openSearchbar();
                   }}
-                  class="ui-not-focus-visible:outline-none hidden h-9 w-full items-center gap-2 rounded-full bg-white pl-2 pr-3 text-sm text-slate-500 ring-1 ring-slate-900/10 transition hover:ring-slate-900/20 dark:bg-white/5 dark:text-slate-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20 lg:flex"
+                  class="hidden h-9 w-full items-center gap-2 rounded-full bg-white pl-2 pr-3 text-sm text-slate-500 ring-1 ring-slate-900/10 transition hover:ring-slate-900/20 dark:bg-white/5 dark:text-slate-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20 lg:flex"
                 >
                   <svg
                     viewBox="0 0 20 20"
@@ -179,7 +179,11 @@ export default function Layout(props: Props) {
                     <path d="M.5 1h9M.5 8h9M.5 4.5h9" />
                   </svg>
                 </button>
-                <a aria-label="Home" href="/" class="flex items-center gap-2 max-w-40">
+                <a
+                  aria-label="Home"
+                  href="/"
+                  class="flex max-w-40 items-center gap-2"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="22"
@@ -197,7 +201,7 @@ export default function Layout(props: Props) {
                     </g>
                   </svg>
 
-                  <span class="text-sm font-bold dark:text-white truncate">
+                  <span class="truncate text-sm font-bold dark:text-white">
                     Solid Notifications
                   </span>
                 </a>
@@ -232,7 +236,7 @@ export default function Layout(props: Props) {
                   <div class="contents lg:hidden">
                     <button
                       type="button"
-                      class="ui-not-focus-visible:outline-none flex h-6 w-6 items-center justify-center rounded-md transition hover:bg-slate-900/5 dark:hover:bg-white/5 lg:hidden"
+                      class="flex h-6 w-6 items-center justify-center rounded-md transition hover:bg-slate-900/5 dark:hover:bg-white/5 lg:hidden"
                       aria-label="Find something..."
                       onClick={() => searchbarStore.openSearchbar()}
                     >
@@ -252,20 +256,49 @@ export default function Layout(props: Props) {
                   </div>
 
                   <a
-                    class="flex items-center gap-1 text-sm leading-5 text-slate-600 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                    class="flex h-6 w-6 text-slate-500 dark:text-slate-300 items-center justify-center rounded-md hover:bg-slate-900/5 dark:hover:bg-white/5 lg:hidden"
                     href="https://github.com/Nyloth9/solid-notifications"
                     target="_blank"
                   >
                     <svg
-                      height="20"
-                      width="20"
                       xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
                       viewBox="0 0 24 24"
                     >
-                      <path
-                        fill="currentColor"
-                        d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                      />
+                      <g
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-dasharray="32"
+                          stroke-dashoffset="32"
+                          d="M12 4c1.67 0 2.61 0.4 3 0.5c0.53 -0.43 1.94 -1.5 3.5 -1.5c0.34 1 0.29 2.22 0 3c0.75 1 1 2 1 3.5c0 2.19 -0.48 3.58 -1.5 4.5c-1.02 0.92 -2.11 1.37 -3.5 1.5c0.65 0.54 0.5 1.87 0.5 2.5c0 0.73 0 3 0 3M12 4c-1.67 0 -2.61 0.4 -3 0.5c-0.53 -0.43 -1.94 -1.5 -3.5 -1.5c-0.34 1 -0.29 2.22 0 3c-0.75 1 -1 2 -1 3.5c0 2.19 0.48 3.58 1.5 4.5c1.02 0.92 2.11 1.37 3.5 1.5c-0.65 0.54 -0.5 1.87 -0.5 2.5c0 0.73 0 3 0 3"
+                        >
+                          <animate
+                            fill="freeze"
+                            attributeName="stroke-dashoffset"
+                            dur="0.7s"
+                            values="32;0"
+                          />
+                        </path>
+                        <path
+                          stroke-dasharray="10"
+                          stroke-dashoffset="10"
+                          d="M9 19c-1.41 0 -2.84 -0.56 -3.69 -1.19c-0.84 -0.63 -1.09 -1.66 -2.31 -2.31"
+                        >
+                          <animate
+                            fill="freeze"
+                            attributeName="stroke-dashoffset"
+                            begin="0.8s"
+                            dur="0.2s"
+                            values="10;0"
+                          />
+                        </path>
+                      </g>
                     </svg>
                   </a>
 
