@@ -197,7 +197,7 @@ export default function Layout(props: Props) {
                     </g>
                   </svg>
 
-                  <span class="text-sm font-bolddark:text-white truncate">
+                  <span class="text-sm font-bold dark:text-white truncate">
                     Solid Notifications
                   </span>
                 </a>
@@ -252,7 +252,7 @@ export default function Layout(props: Props) {
                   </div>
 
                   <a
-                    class="flex items-center gap-1 text-sm leading-5 text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                    class="flex items-center gap-1 text-sm leading-5 text-slate-600 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
                     href="https://github.com/Nyloth9/solid-notifications"
                     target="_blank"
                   >
