@@ -345,11 +345,17 @@
 @keyframes SNSlideInLeft {
   0% {
     opacity: 0;
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-120%, 0, 0) skewX(-10deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(5px, 0, 0) skewX(3deg);
+  }
+  80% {
+    transform: translate3d(-5px, 0, 0) skewX(-2deg);
   }
   100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) skewX(0deg);
   }
 }
 

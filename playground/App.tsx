@@ -227,6 +227,44 @@ const App: Component<Props> = (props: Props) => {
           <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => {
+              const { id, progressControls } = notify(
+                <div>
+                  <div>{`🍞 New toast ready to serve! 🌟`}</div>
+                  <div class="flex gap-1">
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.pause()}
+                    >
+                      Pause timer
+                    </button>
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.play()}
+                    >
+                      Play timer
+                    </button>
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.reset()}
+                    >
+                      Reset timer
+                    </button>
+                  </div>
+                </div>,
+                { toasterId: "toaster-4" },
+              );
+
+              /*        setTimeout(() => {
+                globalDismiss({ id, toasterId: "toaster-2" });
+              }, 2000); */
+            }}
+          >
+            Create Toast Top Left
+          </button>
+
+          <button
+            class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
+            onClick={() => {
               notify(
                 (t) => {
                   return createRoot(() => (
