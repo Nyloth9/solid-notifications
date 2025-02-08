@@ -51,7 +51,7 @@ const App: Component<Props> = (props: Props) => {
           <span class="mr-2 font-bold text-red-600">{getQueue().length}</span>
           Toasts in the queue
         </h2>
-        <div class="flex gap-4">
+        <div class="flex gap-4 flex-wrap">
           <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => {
@@ -59,29 +59,6 @@ const App: Component<Props> = (props: Props) => {
                 createRoot(() => (
                   <div>
                     <div>{`Solid Notifications, new toast created!`}</div>
-                    {/*    <div>{randomText()}</div> */}
-                    {/*     <div class="-mx-2 flex gap-1">
-                      <button
-                        class={
-                          "mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                        }
-                        onClick={() => progressControls.pause()}
-                      >
-                        Pause timer
-                      </button>
-                      <button
-                        class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                        onClick={() => progressControls.play()}
-                      >
-                        Play timer
-                      </button>
-                      <button
-                        class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                        onClick={() => progressControls.reset()}
-                      >
-                        Reset timer
-                      </button>
-                    </div> */}
                   </div>
                 )),
                 {
@@ -133,38 +110,6 @@ const App: Component<Props> = (props: Props) => {
                   wrapperClass: "sn-toast-wrapper",
                 });
               }, 8000);
-
-              /*    setTimeout(() => {
-                update({
-                  content: (
-                    <>
-                      Updated body text
-                      <div class="flex gap-1">
-                        <button
-                          class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                          onClick={() => progressControls.pause()}
-                        >
-                          Pause timer
-                        </button>
-                        <button
-                          class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                          onClick={() => progressControls.play()}
-                        >
-                          Play timer
-                        </button>
-                        <button
-                          class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
-                          onClick={() => progressControls.reset()}
-                        >
-                          Reset timer
-                        </button>
-                      </div>
-                    </>
-                  ),
-                  duration: 3000,
-                  id,
-                });
-              }, 2000); */
             }}
           >
             Create Toast Top Right
@@ -185,7 +130,7 @@ const App: Component<Props> = (props: Props) => {
           </button>
         </div>
 
-        <div class="flex gap-4">
+        <div class="flex gap-4 flex-wrap">
           <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => {
@@ -253,13 +198,77 @@ const App: Component<Props> = (props: Props) => {
                 </div>,
                 { toasterId: "toaster-4" },
               );
-
-              /*        setTimeout(() => {
-                globalDismiss({ id, toasterId: "toaster-2" });
-              }, 2000); */
             }}
           >
             Create Toast Top Left
+          </button>
+
+          <button
+            class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
+            onClick={() => {
+              const { id, progressControls } = notify(
+                <div>
+                  <div>{`🍞 New toast ready to serve! 🌟`}</div>
+                  <div class="flex gap-1">
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.pause()}
+                    >
+                      Pause timer
+                    </button>
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.play()}
+                    >
+                      Play timer
+                    </button>
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.reset()}
+                    >
+                      Reset timer
+                    </button>
+                  </div>
+                </div>,
+                { toasterId: "toaster-5" },
+              );
+            }}
+          >
+            Create Toast Top Center
+          </button>
+
+          <button
+            class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
+            onClick={() => {
+              const { id, progressControls } = notify(
+                <div>
+                  <div>{`🍞 New toast ready to serve! 🌟`}</div>
+                  <div class="flex gap-1">
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.pause()}
+                    >
+                      Pause timer
+                    </button>
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.play()}
+                    >
+                      Play timer
+                    </button>
+                    <button
+                      class="mt-2 rounded-sm bg-white px-2 py-1 text-xs text-gray-800 hover:bg-gray-100 active:bg-gray-200"
+                      onClick={() => progressControls.reset()}
+                    >
+                      Reset timer
+                    </button>
+                  </div>
+                </div>,
+                { toasterId: "toaster-6" },
+              );
+            }}
+          >
+            Create Toast Bottom Center
           </button>
 
           <button

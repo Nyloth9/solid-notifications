@@ -38,6 +38,18 @@ render(() => {
         reverseToastOrder
         duration={10000}
       />
+      <Toaster
+        toasterId="toaster-5"
+        limit={8}
+        positionX="center"
+        positionY="top"
+      />
+      <Toaster
+        toasterId="toaster-6"
+        limit={8}
+        positionX="center"
+        positionY="bottom"
+      />
 
       <Router>
         <Route
