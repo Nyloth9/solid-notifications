@@ -1,25 +1,5 @@
 import { Toaster, useToast } from "solid-notifications";
 
-function Toasters() {
-  return (
-    <div>
-      <Toaster toasterId="toaster-1" />
-      <Toaster toasterId="toaster-2" limit={3} />
-      <Toaster
-        toasterId="toaster-3"
-        positionY="bottom"
-        offsetX={24}
-        offsetY={24}
-        gutter={16}
-      />
-      <Toaster toasterId="toaster-4" positionY="bottom" positionX="center" />
-      <Toaster toasterId="toaster-5" positionY="top" positionX="left" />
-      <Toaster toasterId="toaster-6" reverseToastOrder />
-      <Toaster toasterId="toaster-7" positionX="center" />
-    </div>
-  );
-}
-
 function CoreFeatures(props: { feature: string }) {
   const { notify, update, promise, getQueue, dismiss } = useToast();
 
@@ -91,7 +71,7 @@ function CoreFeatures(props: { feature: string }) {
                         {Math.round(t.progressManager.progress())}
                       </p>
                       <div
-                        class="absolute left-0 top-0 h-full bg-blue-600/10 pointer-events-none"
+                        class="pointer-events-none absolute left-0 top-0 h-full bg-blue-600/10"
                         style={{
                           width: `${t.progressManager.progress()}%`,
                         }}
@@ -440,7 +420,7 @@ function CoreFeatures(props: { feature: string }) {
   return <div class="text-red-600">Feature not found</div>;
 }
 
-export { Toasters, CoreFeatures };
+export { CoreFeatures };
 
 const resetToasters = (excludeToasterIds: string[], dismiss: any) => {
   if (typeof document === "undefined") return;

@@ -8,7 +8,7 @@ import {
   Show,
 } from "solid-js";
 import { useTheme } from "../util/theme";
-import { ToastProvider } from "solid-notifications";
+import { Toaster, ToastProvider } from "solid-notifications";
 import { useLocation, useNavigate } from "@solidjs/router";
 import pageData from "../page-data.json";
 import SearchBar from "./SearchBar";
@@ -104,6 +104,20 @@ export default function Layout(props: Props) {
 
   return (
     <ToastProvider theme={getTheme()} wrapperClass="sn-toast-wrapper not-prose">
+      <Toaster toasterId="toaster-1" />
+      <Toaster toasterId="toaster-2" limit={3} />
+      <Toaster
+        toasterId="toaster-3"
+        positionY="bottom"
+        offsetX={24}
+        offsetY={24}
+        gutter={16}
+      />
+      <Toaster toasterId="toaster-4" positionY="bottom" positionX="center" />
+      <Toaster toasterId="toaster-5" positionY="top" positionX="left" />
+      <Toaster toasterId="toaster-6" reverseToastOrder />
+      <Toaster toasterId="toaster-7" positionX="center" />
+
       <div class="h-full lg:ml-72 xl:ml-80">
         <header class="contents lg:pointer-events-none lg:fixed lg:inset-0 lg:z-40 lg:flex">
           <div
@@ -256,7 +270,7 @@ export default function Layout(props: Props) {
                   </div>
 
                   <a
-                    class="flex h-6 w-6 text-slate-500 dark:text-slate-300 items-center justify-center rounded-md hover:bg-slate-900/5 dark:hover:bg-white/5 lg:hidden"
+                    class="flex h-6 w-6 items-center justify-center rounded-md text-slate-500 hover:bg-slate-900/5 dark:text-slate-300 dark:hover:bg-white/5 lg:hidden"
                     href="https://github.com/Nyloth9/solid-notifications"
                     target="_blank"
                   >
