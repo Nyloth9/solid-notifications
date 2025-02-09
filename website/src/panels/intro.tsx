@@ -332,13 +332,20 @@ function CoreFeatures(props: { feature: string }) {
                   </p>
                 </div>
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  aria-label="Email"
+                  type="text"
+                  name="username"
+                  autocomplete="off"
+                  id="username"
+                  aria-label="Username"
                   class="mb-2 block w-full rounded bg-slate-50 px-3 py-1 text-sm text-slate-900 outline outline-1 -outline-offset-1 outline-slate-400 placeholder:text-slate-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-[#182135] dark:text-white dark:outline-slate-500 dark:placeholder:text-slate-400 dark:focus:outline-indigo-700 sm:text-sm/6"
-                  placeholder="you@example.com"
+                  placeholder="Username"
                 />
+                <button
+                  type="button"
+                  class="block rounded bg-blue-500 px-3 py-0.5 text-sm text-white hover:bg-blue-600 active:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:active:bg-blue-800"
+                >
+                  Submit
+                </button>
               </div>,
               {
                 toasterId: "toaster-1",

@@ -313,6 +313,9 @@ function handleMouseEnter(toast: Toast) {
 function handleMouseLeave(toast: Toast) {
   if (!toast.toastConfig.pauseOnHover) return;
 
+  const isFocusWithinToast = toast.ref?.contains(document.activeElement);
+  if (isFocusWithinToast) return;
+
   const shouldIgnoreHoverWhileBlurred =
     toast.store.isWindowBlurred && toast.toastConfig.pauseOnWindowInactive;
 

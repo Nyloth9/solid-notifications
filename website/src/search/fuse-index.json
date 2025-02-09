@@ -1492,8 +1492,8 @@
           "n": 1
         },
         "1": {
-          "v": "- Whether the toast pauses when hovered.",
-          "n": 0.378
+          "v": "- Whether the toast pauses when hovered. If the toast or element inside the toast has focus, the timer will not play when mouse leaves the toast.",
+          "n": 0.192
         },
         "2": {
           "v": "Props",
