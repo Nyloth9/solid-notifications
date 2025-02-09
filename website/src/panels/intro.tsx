@@ -79,7 +79,7 @@ function CoreFeatures(props: { feature: string }) {
                     </div>
                     <button
                       onClick={() => t.dismiss()}
-                      class="absolute -right-1 -top-1 h-4 w-4 rounded-full border border-slate-200 bg-white hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
+                      class="absolute -right-1 -top-1 h-4 w-4 rounded-full border border-slate-200 bg-white hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
                     >
                       <svg
                         aria-hidden="true"
