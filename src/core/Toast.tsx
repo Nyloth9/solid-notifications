@@ -15,6 +15,7 @@ import {
   merge,
   resolvePropValue,
   resolveContent,
+  handleFocusOut,
 } from "../utils/helpers";
 
 class Toast {
@@ -166,9 +167,9 @@ class Toast {
         onTouchStart={this.dragManager.handleDragStart}
         onTouchMove={this.dragManager.handleDragMove}
         onTouchEnd={this.dragManager.handleDragEnd}
-        onKeyDown={(e) => {
-          if (e.key === "Escape") this.dismiss();
-        }}
+        onFocusIn={this.progressManager.pause}
+        onFocusOut={(e) => handleFocusOut(this, e)}
+        onKeyDown={(e) => e.key === "Escape" && this.dismiss()}
         class={`${resolvePropValue("wrapperClass", this)} sn-theme-${this.toastConfig.theme} sn-type-${this.toastConfig.type} ${applyState(this)}`.trim()}
         style={{
           ...(resolvePropValue("wrapperStyle", this) as JSX.CSSProperties),

@@ -116,7 +116,7 @@
 
 .sn-toast-wrapper:focus-visible,
 .sn-toast-wrapper[data-keyboard-focused] {
-  outline: solid 2px;
+  outline: solid 2px black;
 }
 
 .sn-toast-wrapper.sn-theme-dark:focus-visible,

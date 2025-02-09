@@ -57,7 +57,6 @@ export default function SearchBar(props: SearchBarProps) {
     }
 
     const searchResults = fuse.search(searchTerm);
-    console.log("search results: ", searchResults);
     setResults(searchResults);
   });
 

@@ -345,6 +345,15 @@ function handleKeyboardFocus(e: KeyboardEvent) {
   }
 }
 
+function handleFocusOut(t: Toast, e: FocusEvent) {
+  if (!t.ref) return;
+  if (t.ref.contains(e.relatedTarget as Node)) return;
+  t.ref!.removeAttribute("data-keyboard-focused");
+
+  if (t.isPausedByUser) return;
+  t.progressManager.play();
+}
+
 function renderDismissButton(toast: Toast) {
   if (toast.toastConfig.dismissOnClick || !toast.toastConfig.showDismissButton)
     return null;
@@ -479,6 +488,7 @@ export {
   handleMouseEnter,
   handleMouseLeave,
   handleKeyboardFocus,
+  handleFocusOut,
   renderDismissButton,
   renderProgressBar,
   renderIcon,
