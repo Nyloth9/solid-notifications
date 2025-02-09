@@ -10,6 +10,7 @@ import Code, { InlineCode } from "~/components/Code";
 import Title from "~/components/Title";
 import HighlightBlock from "~/components/HighlightBlock";
 import HightlightBlock from "~/components/HighlightBlock";
+import { KeyboardShortcutExample } from "~/panels/guides";
 
 <Title>Guides</Title>
 
@@ -536,3 +537,15 @@ notify(
 ```
 
 </Code>
+
+## Keyboard shortcuts {{"data-nav": "link", "class": "text-blue-500", "id": "keyboard-shortcuts"}}
+
+You can use the `Alt + T` combination to focus a toast. Pressing `Alt + T` again will focus the next toast, and so on.
+
+The toast that is currently focused can be dismissed by pressing `Escape`.
+
+When a toast is focused, the progress timer will be paused. The timer will resume when the toast loses focus. If, however, the toast was paused by using the [progressControls.pause()](/actions#return-value) function, the timer will not resume on focus out. In that case, the timer can be resumed by `progressControls.play()`.
+
+You can try this out by pressing the button below and then pressing `Alt + T`.
+
+<KeyboardShortcutExample />

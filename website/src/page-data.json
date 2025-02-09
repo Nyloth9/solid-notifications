@@ -408,6 +408,11 @@
         "name": "Play or pause the notification timer manually",
         "hash": "#play-or-pause-the-notification-timer-manually",
         "items": []
+      },
+      {
+        "name": "Keyboard shortcuts",
+        "hash": "#keyboard-shortcuts",
+        "items": []
       }
     ]
   }
