@@ -51,7 +51,7 @@ const App: Component<Props> = (props: Props) => {
           <span class="mr-2 font-bold text-red-600">{getQueue().length}</span>
           Toasts in the queue
         </h2>
-        <div class="flex gap-4 flex-wrap">
+        <div class="flex flex-wrap gap-4">
           <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => {
@@ -130,7 +130,7 @@ const App: Component<Props> = (props: Props) => {
           </button>
         </div>
 
-        <div class="flex gap-4 flex-wrap">
+        <div class="flex flex-wrap gap-4">
           <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => {
@@ -264,7 +264,7 @@ const App: Component<Props> = (props: Props) => {
                     </button>
                   </div>
                 </div>,
-                { toasterId: "toaster-6" },
+                { toasterId: "toaster-6", duration: false },
               );
             }}
           >

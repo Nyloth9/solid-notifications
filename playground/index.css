@@ -6,7 +6,6 @@ body {
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
-  background-color: #e5e7eb;
   font-family:
     "Roboto",
     -apple-system,
@@ -21,6 +20,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @apply bg-gray-100 dark:bg-gray-900;
 }
 
 code {

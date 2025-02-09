@@ -322,6 +322,29 @@ function handleMouseLeave(toast: Toast) {
   toast.progressManager.play();
 }
 
+function handleKeyboardFocus(e: KeyboardEvent) {
+  if (typeof document === "undefined") return;
+
+  if (e.altKey && e.key.toLowerCase() === "t") {
+    e.preventDefault();
+
+    const toasts = Array.from(
+      document.querySelectorAll('[data-role="toast"]'),
+    ) as HTMLElement[];
+    if (toasts.length === 0) return;
+
+    toasts.forEach((toast) => toast.removeAttribute("data-keyboard-focused"));
+
+    const focusedIndex = toasts.findIndex(
+      (toast) => document.activeElement === toast,
+    );
+    const nextIndex = (focusedIndex + 1) % toasts.length;
+
+    toasts[nextIndex].focus();
+    toasts[nextIndex].setAttribute("data-keyboard-focused", "true");
+  }
+}
+
 function renderDismissButton(toast: Toast) {
   if (toast.toastConfig.dismissOnClick || !toast.toastConfig.showDismissButton)
     return null;
@@ -455,6 +478,7 @@ export {
   handleClick,
   handleMouseEnter,
   handleMouseLeave,
+  handleKeyboardFocus,
   renderDismissButton,
   renderProgressBar,
   renderIcon,

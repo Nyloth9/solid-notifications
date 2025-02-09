@@ -3,7 +3,7 @@ import { render } from "solid-js/web";
 
 import "./index.css";
 import { Route, Router } from "@solidjs/router";
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import "../src/index.css";
 import App from "./App";
 import Toaster from "../src/core/Toaster";
@@ -19,6 +19,18 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 }
 
 const [theme, setTheme] = createSignal("light");
+
+createEffect(() => {
+  if (typeof window === "undefined") return;
+  const html = document.querySelector("html");
+  if (!html) return;
+
+  if (theme() === "light") {
+    html.classList.remove("dark");
+  } else {
+    html.classList.add("dark");
+  }
+});
 
 render(() => {
   return (

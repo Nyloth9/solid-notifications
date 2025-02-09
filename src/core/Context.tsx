@@ -1,8 +1,16 @@
-import { createContext, mergeProps, splitProps, useContext } from "solid-js";
+import {
+  createContext,
+  mergeProps,
+  onCleanup,
+  onMount,
+  splitProps,
+  useContext,
+} from "solid-js";
 import { Toaster, ToasterContextType, ToastProviderOptions } from "../types";
 import { toasterService } from "./services";
 import toastActions from "./actions";
 import { defaultConfig } from "../config/defaultConfig";
+import { handleKeyboardFocus } from "../utils/helpers";
 
 const ToasterContext = createContext<ToasterContextType>();
 
@@ -24,6 +32,16 @@ export default function ToastProvider(props: ToastProviderOptions) {
   function unregisterToaster(toasterId: string) {
     return toasterService.unregisterToaster(toasters, toasterId);
   }
+
+  onMount(() => {
+    if (typeof window === "undefined") return;
+    document.addEventListener("keydown", handleKeyboardFocus);
+  });
+
+  onCleanup(() => {
+    if (typeof window === "undefined") return;
+    document.removeEventListener("keydown", handleKeyboardFocus);
+  });
 
   return (
     <ToasterContext.Provider

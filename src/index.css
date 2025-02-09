@@ -114,6 +114,16 @@
   transition-duration: var(--sn-wrapper-transition-duration);
 }
 
+.sn-toast-wrapper:focus-visible,
+.sn-toast-wrapper[data-keyboard-focused] {
+  outline: solid 2px;
+}
+
+.sn-toast-wrapper.sn-theme-dark:focus-visible,
+.sn-toast-wrapper.sn-theme-dark[data-keyboard-focused] {
+  outline: solid 2px white;
+}
+
 .sn-toast {
   display: flex;
   overflow: hidden;
