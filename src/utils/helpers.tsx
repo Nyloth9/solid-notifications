@@ -336,8 +336,6 @@ function handleKeyboardFocus(e: KeyboardEvent) {
     ) as HTMLElement[];
     if (toasts.length === 0) return;
 
-    toasts.forEach((toast) => toast.removeAttribute("data-keyboard-focused"));
-
     const focusedIndex = toasts.findIndex(
       (toast) => document.activeElement === toast,
     );
