@@ -70,7 +70,7 @@ function CoreFeatures(props: { feature: string }) {
               (t) => {
                 return (
                   <>
-                    <div class="relative overflow-hidden rounded-md bg-white px-4 py-2 text-sm shadow-stripe dark:bg-slate-800 dark:text-slate-200 dark:shadow-dark">
+                    <div class="relative overflow-hidden rounded-md bg-white px-4 py-2 text-sm font-normal text-slate-800 shadow-stripe dark:bg-slate-800 dark:text-slate-200 dark:shadow-dark">
                       Hook into the progress() signal to update the progress bar
                       width or other properties.
                       <p class="text-xs font-medium text-emerald-600 dark:text-emerald-200">
@@ -118,7 +118,7 @@ function CoreFeatures(props: { feature: string }) {
           Custom progress bar
         </button>
         <a
-          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L56"
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L63"
           target="_blank"
           class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
         >
@@ -166,7 +166,7 @@ function CoreFeatures(props: { feature: string }) {
         </button>
 
         <a
-          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L116"
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L130"
           target="_blank"
           class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
         >
@@ -336,7 +336,7 @@ function CoreFeatures(props: { feature: string }) {
         </button>
 
         <a
-          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L156"
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L178"
           target="_blank"
           class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
         >
@@ -389,7 +389,7 @@ function CoreFeatures(props: { feature: string }) {
         </button>
 
         <a
-          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L319"
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L349"
           target="_blank"
           class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
         >
@@ -461,7 +461,7 @@ function CoreFeatures(props: { feature: string }) {
         </button>
 
         <a
-          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L363"
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L401"
           target="_blank"
           class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
         >
