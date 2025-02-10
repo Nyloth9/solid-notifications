@@ -1,12 +1,17 @@
 {
   "name": "solid-notifications",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Solidjs toast notifications library",
   "author": {
     "name": "Nyloth9",
     "url": "https://github.com/Nyloth9"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nyloth9/solid-notifications"
+  },
+  "homepage": "https://solid-notifications.vercel.app/",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
