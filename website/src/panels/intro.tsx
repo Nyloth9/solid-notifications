@@ -50,6 +50,13 @@ function CoreFeatures(props: { feature: string }) {
         <p class="ml-3 inline text-emerald-500">
           Queued Toasts: {getQueue("toaster-2").length}
         </p>
+        <a
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L36"
+          target="_blank"
+          class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
+        >
+          View code
+        </a>
       </div>
     );
 
@@ -110,6 +117,13 @@ function CoreFeatures(props: { feature: string }) {
         >
           Custom progress bar
         </button>
+        <a
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L56"
+          target="_blank"
+          class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
+        >
+          View code
+        </a>
       </div>
     );
 
@@ -150,6 +164,14 @@ function CoreFeatures(props: { feature: string }) {
         >
           Create top left
         </button>
+
+        <a
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L116"
+          target="_blank"
+          class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
+        >
+          View code
+        </a>
       </div>
     );
 
@@ -312,6 +334,14 @@ function CoreFeatures(props: { feature: string }) {
         >
           Toast promise
         </button>
+
+        <a
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L156"
+          target="_blank"
+          class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
+        >
+          View code
+        </a>
       </div>
     );
   }
@@ -357,6 +387,14 @@ function CoreFeatures(props: { feature: string }) {
         >
           Try it out
         </button>
+
+        <a
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L319"
+          target="_blank"
+          class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
+        >
+          View code
+        </a>
       </div>
     );
 
@@ -421,6 +459,14 @@ function CoreFeatures(props: { feature: string }) {
         >
           Timer management
         </button>
+
+        <a
+          href="https://github.com/Nyloth9/solid-notifications/blob/main/website/src/panels/intro.tsx#L363"
+          target="_blank"
+          class="ml-3 text-xs text-gray-500 dark:text-gray-400 dark:hover:text-blue-500"
+        >
+          View code
+        </a>
       </div>
     );
 
