@@ -46,8 +46,10 @@ const App: Component<Props> = (props: Props) => {
   return (
     <div>
       <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold">SolidJS Toast Notification</h1>
-        <h2 class="mt-2 text-lg font-medium">
+        <h1 class="text-2xl font-bold text-black dark:text-white">
+          SolidJS Toast Notification
+        </h1>
+        <h2 class="mt-2 text-lg font-medium text-gray-700 dark:text-gray-300">
           <span class="mr-2 font-bold text-red-600">{getQueue().length}</span>
           Toasts in the queue
         </h2>
@@ -343,7 +345,7 @@ const App: Component<Props> = (props: Props) => {
         >
           Change theme
         </button>
-        <span class="ml-2">
+        <span class="ml-2 text-gray-700 dark:text-gray-300">
           Current theme:{" "}
           <span class="font-medium uppercase">{props.theme()}</span>
         </span>

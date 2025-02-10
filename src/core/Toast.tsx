@@ -77,6 +77,9 @@ class Toast {
     if (this.store.isWindowBlurred && this.toastConfig.pauseOnWindowInactive)
       return;
 
+    const isFocusWithinToast = this.ref?.contains(document.activeElement);
+    if (isFocusWithinToast) return;
+
     this.progressManager.play(); // This is where we first start the timer in the toast lifecycle
   }
 
