@@ -1,4 +1,5 @@
-<img src="https://s13.gifyu.com/images/b2TOe.gif" style="margin-bottom: 30px" />
+<img src="https://i.ibb.co/bMs3V1zs/Hero.jpg" alt="Hero" border="0" style="max-width: 750px;" />
+
 
 # Solid Notifications
 
