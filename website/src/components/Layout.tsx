@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import {
   createEffect,
   createSignal,
@@ -44,35 +42,7 @@ export default function Layout(props: Props) {
   const navigate = useNavigate();
   const searchbarStore = useSearchbarState();
 
-  onMount(() => {
-    if (!window.smartlook) {
-      (function (d) {
-        var o = (window.smartlook = function () {
-          o.api.push(arguments);
-        });
-        o.api = [];
-        var h = d.getElementsByTagName("head")[0];
-        var c = d.createElement("script");
-        c.async = true;
-        c.type = "text/javascript";
-        c.charset = "utf-8";
-        c.src = "https://web-sdk.smartlook.com/recorder.js";
-        c.onload = () => {
-          if (window.smartlook) {
-            window.smartlook("init", "58a7c44670661f0025ff332f0de01cb37d3634a8", {
-              region: "eu",
-            });
-          }
-        };
-        h.appendChild(c);
-      })(document);
-    } else {
-      window.smartlook("init", "58a7c44670661f0025ff332f0de01cb37d3634a8", {
-        region: "eu",
-      });
-    }
-  });
-  
+
 
   const handleScreenWidthChange = (e: any) => {
     // Close the sidebar whenever the screen crosses the 1024px threshold
