@@ -646,7 +646,7 @@
           "n": 1
         },
         "1": {
-          "v": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\r\nAny props specified when creating or updating a toast will take precedence over global settings.",
+          "v": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\nAny props specified when creating or updating a toast will take precedence over global settings.",
           "n": 0.171
         },
         "2": {
@@ -901,7 +901,7 @@
           "n": 0.577
         },
         "1": {
-          "v": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\r\nDrag treshold can be adjusted by setting the dragTreshold option.",
+          "v": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\nDrag treshold can be adjusted by setting the dragTreshold option.",
           "n": 0.164
         },
         "2": {

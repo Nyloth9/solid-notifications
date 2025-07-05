@@ -224,7 +224,7 @@
   {
     "page": "Components",
     "heading": "Props",
-    "content": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\r\nAny props specified when creating or updating a toast will take precedence over global settings.",
+    "content": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\nAny props specified when creating or updating a toast will take precedence over global settings.",
     "url": "/components#props"
   },
   {
@@ -314,7 +314,7 @@
   {
     "page": "Guides",
     "heading": "Drag to dismiss",
-    "content": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\r\nDrag treshold can be adjusted by setting the dragTreshold option.",
+    "content": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\nDrag treshold can be adjusted by setting the dragTreshold option.",
     "url": "/guides#drag-to-dismiss"
   },
   {
