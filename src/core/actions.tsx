@@ -10,7 +10,6 @@ import Toast from "./Toast";
 import { getToasters } from "./Context";
 import { defaultConfig } from "../config/defaultConfig";
 import { toasterService } from "./services";
-import { get } from "http";
 
 function toastActions(context: ToasterContextType, targetToaster?: string) {
   /** Because we allow useToast to be called with a toasterId, we need to handle the following cases:
