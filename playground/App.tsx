@@ -6,7 +6,7 @@ import {
   Setter,
   type Component,
 } from "solid-js";
-import { useToast } from "../src";
+import { useToast } from "../src/core/Context";
 
 interface Props {
   theme: Accessor<string>;
@@ -54,7 +54,7 @@ const App: Component<Props> = (props: Props) => {
           Toasts in the queue
         </h2>
         <div class="flex flex-wrap gap-4">
-      {/*     <button
+          {/*     <button
             onClick={() => {}}
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
           >
