@@ -6,7 +6,9 @@ import {
   Setter,
   type Component,
 } from "solid-js";
-import { useToast } from "../src/core/Context";
+import { useToast } from "../src";
+import { showToast } from "../src/core/Context";
+import { testToast } from "./pages/test";
 
 interface Props {
   theme: Accessor<string>;
@@ -50,10 +52,19 @@ const App: Component<Props> = (props: Props) => {
           SolidJS Toast Notification
         </h1>
         <h2 class="mt-2 text-lg font-medium text-gray-700 dark:text-gray-300">
-          <span class="mr-2 font-bold text-red-600">{getQueue().length}</span>
+          {/*   <span class="mr-2 font-bold text-red-600">{getQueue().length}</span> */}
           Toasts in the queue
         </h2>
         <div class="flex flex-wrap gap-4">
+          <button
+            onClick={() => {
+              testToast();
+            }}
+            class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
+          >
+            Headless
+          </button>
+
           <button
             class="mt-4 rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 active:bg-blue-800"
             onClick={() => {
