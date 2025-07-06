@@ -328,7 +328,7 @@ function handleMouseLeave(toast: Toast) {
 function handleKeyboardFocus(e: KeyboardEvent) {
   if (typeof document === "undefined") return;
 
-  if (e.altKey && e.key.toLowerCase() === "t") {
+  if (e.altKey && e.code === "KeyT") {
     e.preventDefault();
 
     const toasts = Array.from(

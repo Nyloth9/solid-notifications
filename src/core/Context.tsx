@@ -6,31 +6,39 @@ import {
   splitProps,
   useContext,
 } from "solid-js";
-import { Toaster, ToasterContextType, ToastProviderOptions } from "../types";
+import {
+  ToastContent,
+  Toaster,
+  ToasterContextType,
+  ToastOptions,
+  ToastProviderOptions,
+} from "../types";
 import { toasterService } from "./services";
 import toastActions from "./actions";
 import { defaultConfig } from "../config/defaultConfig";
 import { handleKeyboardFocus } from "../utils/helpers";
 
 const ToasterContext = createContext<ToasterContextType>();
+let toasters: Map<string, Toaster> | null = null;
 
 export default function ToastProvider(props: ToastProviderOptions) {
-  const toasters = new Map<string, Toaster>();
+  const initializedToasters = getToasters();
+
   const providerProps = mergeProps(
     defaultConfig,
     splitProps(props, ["children"])[1],
   );
 
   function registerToaster(toaster: Toaster) {
-    return toasterService.registerToaster(toasters, toaster);
+    return toasterService.registerToaster(initializedToasters, toaster);
   }
 
   function getToaster(toasterId?: string) {
-    return toasterService.getToaster(toasters, toasterId);
+    return toasterService.getToaster(initializedToasters, toasterId);
   }
 
   function unregisterToaster(toasterId: string) {
-    return toasterService.unregisterToaster(toasters, toasterId);
+    return toasterService.unregisterToaster(initializedToasters, toasterId);
   }
 
   onMount(() => {
@@ -47,7 +55,7 @@ export default function ToastProvider(props: ToastProviderOptions) {
     <ToasterContext.Provider
       value={{
         providerProps,
-        toasters,
+        toasters: initializedToasters,
         registerToaster,
         getToaster,
         unregisterToaster,
@@ -86,4 +94,16 @@ export function useToast(targetToaster?: string) {
   }
 
   return toastActions(context, targetToaster);
+}
+
+export function getToasters() {
+  if (typeof window === "undefined") {
+    return new Map();
+  }
+
+  if (!toasters) {
+    toasters = new Map();
+  }
+
+  return toasters;
 }

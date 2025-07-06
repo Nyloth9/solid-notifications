@@ -1,5 +1,5 @@
 import { batch } from "solid-js";
-import { Config, ToastActions, ToasterContextType } from "../types";
+import { Config, ToastActions, Toaster, ToasterContextType } from "../types";
 import {
   createToastId,
   filterOptions,
@@ -7,6 +7,9 @@ import {
   setProgressControls,
 } from "../utils/helpers";
 import Toast from "./Toast";
+import { getToasters } from "./Context";
+import { defaultConfig } from "../config/defaultConfig";
+import { toasterService } from "./services";
 
 function toastActions(context: ToasterContextType, targetToaster?: string) {
   /** Because we allow useToast to be called with a toasterId, we need to handle the following cases:
@@ -349,3 +352,60 @@ function toastActions(context: ToasterContextType, targetToaster?: string) {
 }
 
 export default toastActions;
+
+function getActions() {
+  const toasters = getToasters();
+
+  const actions = toastActions({
+    providerProps: defaultConfig,
+    toasters,
+    registerToaster: (toaster: Toaster) => {
+      return toasterService.registerToaster(toasters, toaster);
+    },
+    getToaster: (id?: string): Toaster => {
+      return toasterService.getToaster(toasters, id);
+    },
+    unregisterToaster: () => {},
+  });
+
+  return actions;
+}
+
+export const showToast: ToastActions["notify"] = (content, options) => {
+  const actions = getActions();
+  return actions.notify(content, options);
+};
+
+export const updateToast: ToastActions["update"] = (options) => {
+  const actions = getActions();
+  return actions.update(options);
+};
+
+export const dismissToast: ToastActions["dismiss"] = (options) => {
+  const actions = getActions();
+  return actions.dismiss(options);
+};
+
+export const removeToast: ToastActions["remove"] = (options) => {
+  const actions = getActions();
+  return actions.remove(options);
+};
+
+export const promiseToast: ToastActions["promise"] = (
+  promise,
+  messages,
+  options,
+) => {
+  const actions = getActions();
+  return actions.promise(promise, messages, options);
+};
+
+export const getToastQueue: ToastActions["getQueue"] = (toasterId) => {
+  const actions = getActions();
+  return actions.getQueue(toasterId);
+};
+
+export const clearToastQueue: ToastActions["clearQueue"] = (toasterId) => {
+  const actions = getActions();
+  return actions.clearQueue(toasterId);
+};

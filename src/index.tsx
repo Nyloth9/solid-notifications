@@ -2,6 +2,15 @@ export { default as Toast } from "./core/Toast";
 export { default as Toaster } from "./core/Toaster";
 export { default as ToastProvider } from "./core/Context";
 export { useToast } from "./core/Context";
+export {
+  showToast,
+  updateToast,
+  dismissToast,
+  removeToast,
+  promiseToast,
+  getToastQueue,
+  clearToastQueue,
+} from "./core/actions";
 export type {
   ToasterStore,
   ToastProviderOptions,
