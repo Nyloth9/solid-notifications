@@ -59,11 +59,9 @@ export interface ToastOptions
   toasterId?: string;
 }
 
-export type ToastOptionsUpdate = RequireAtLeastOne<
-  ToastOptions & {
-    content?: ToastContent;
-  }
->;
+export type ToastOptionsUpdate = ToastOptions & {
+  content?: ToastContent;
+};
 
 export type ToastContent =
   | string
@@ -204,11 +202,3 @@ export interface Config {
   ariaLive: "off" | "assertive" | "polite";
   role: "status" | "alert";
 }
-
-type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
-  T,
-  Exclude<keyof T, Keys>
-> &
-  {
-    [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>;
-  }[Keys];

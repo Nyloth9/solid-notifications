@@ -4,12 +4,7 @@
     "url": "/",
     "description": "A simple notification system for SolidJS",
     "order": 0,
-    "tags": [
-      "page",
-      "SolidJS",
-      "Toast library",
-      "Solid notifications"
-    ],
+    "tags": ["page", "SolidJS", "Toast library", "Solid notifications"],
     "items": [
       {
         "name": "Core Features",
@@ -348,10 +343,54 @@
     ]
   },
   {
+    "name": "Global API",
+    "url": "/global-api",
+    "description": "Solid Notifications global API reference",
+    "order": 5,
+    "tags": [],
+    "items": [
+      {
+        "name": "showToast()",
+        "hash": "#showToast",
+        "items": []
+      },
+      {
+        "name": "updateToast()",
+        "hash": "#updateToast",
+        "items": []
+      },
+      {
+        "name": "dismissToast()",
+        "hash": "#dismissToast",
+        "items": []
+      },
+      {
+        "name": "removeToast()",
+        "hash": "#removeToast",
+        "items": []
+      },
+      {
+        "name": "promiseToast()",
+        "hash": "#promiseToast",
+        "items": []
+      },
+      {
+        "name": "getToastQueue()",
+        "hash": "#getToastQueue",
+        "items": []
+      },
+      {
+        "name": "clearToastQueue()",
+        "hash": "#clearToastQueue",
+        "items": []
+      }
+    ]
+  },
+  {
     "name": "Guides",
     "url": "/guides",
     "description": "Solid Notifications guides",
-    "order": 5,
+    "order": 6,
     "tags": [],
     "items": [
       {

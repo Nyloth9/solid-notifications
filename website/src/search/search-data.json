@@ -224,7 +224,7 @@
   {
     "page": "Components",
     "heading": "Props",
-    "content": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\nAny props specified when creating or updating a toast will take precedence over global settings.",
+    "content": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\r\nAny props specified when creating or updating a toast will take precedence over global settings.",
     "url": "/components#props"
   },
   {
@@ -232,6 +232,54 @@
     "heading": "Properties available on the Toast instance",
     "content": "These properties can be accesed when using a custom toast. Each toast instance has several properties that define its behavior and appearance. store: A reference to the Toaster store that manages the toast. toastConfig: The configuration properties of the toast. ref: A reference to the toast's DOM element. state: Represents the lifecycle of the toast. It can be \"entering\" when the toast is animating into view, \"idle\" when fully visible, and \"exiting\" when it is dismissed. renderedAt: A timestamp indicating when the toast was rendered. Useful as a flag to determine if the toast is visible. progressManager: An object responsible for managing the toast's progress bar and duration. isPaused: A flag that indicates whether the toast's timer is currently paused. isPausedByUser: Similar to isPaused, but specifically tracks whether the user manually paused the toast, for example by pressing a button. offset: Represents the vertical position of the toast relative to other active toasts.",
     "url": "/components#properties-available-on-the-toast-instance"
+  },
+  {
+    "page": "Global API",
+    "heading": "Global Actions",
+    "content": "Unlike actions, these functions work globally and don’t require useToast(). The Global API provides headless toast functions that can be called from anywhere in your application — inside or outside components.  To use the Global API, you must still render a <ToastProvider> and at least one <Toaster> somewhere in your app. Once these are set up, you can import and call the following functions directly: Minimal example of using the Global API:",
+    "url": "/global-api#global-actions"
+  },
+  {
+    "page": "Global API",
+    "heading": "showToast()",
+    "content": "The showToast function is used to display a toast notification. It takes a message and an optional configuration object. Please refer to the notify function for more details on how to use it.",
+    "url": "/global-api#showtoast"
+  },
+  {
+    "page": "Global API",
+    "heading": "updateToast()",
+    "content": "The updateToast function allows you to update an existing toast notification. Please refer to the update function for more details on how to use it.",
+    "url": "/global-api#updatetoast"
+  },
+  {
+    "page": "Global API",
+    "heading": "dismissToast()",
+    "content": "The dismissToast function is used to dismiss toasts. Please refer to the dismiss function for more details on how to use it.",
+    "url": "/global-api#dismisstoast"
+  },
+  {
+    "page": "Global API",
+    "heading": "removeToast()",
+    "content": "The removeToast function is used to remove a toast. Please refer to the remove function for more details on how to use it.",
+    "url": "/global-api#removetoast"
+  },
+  {
+    "page": "Global API",
+    "heading": "promiseToast()",
+    "content": "The promiseToast function is used to create a toast that resolves or rejects based on a promise. Please refer to the promise function for more details on how to use it.",
+    "url": "/global-api#promisetoast"
+  },
+  {
+    "page": "Global API",
+    "heading": "getToastQueue()",
+    "content": "The getToastQueue function retrieves the current toast queue. Please refer to the getQueue function for more details on how to use it.",
+    "url": "/global-api#gettoastqueue"
+  },
+  {
+    "page": "Global API",
+    "heading": "clearToastQueue()",
+    "content": "The clearToastQueue function clears the current toast queue. Please refer to the clearQueue function for more details on how to use it.",
+    "url": "/global-api#cleartoastqueue"
   },
   {
     "page": "Guides",
@@ -314,7 +362,7 @@
   {
     "page": "Guides",
     "heading": "Drag to dismiss",
-    "content": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\nDrag treshold can be adjusted by setting the dragTreshold option.",
+    "content": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\r\nDrag treshold can be adjusted by setting the dragTreshold option.",
     "url": "/guides#drag-to-dismiss"
   },
   {

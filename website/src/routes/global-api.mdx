@@ -1,0 +1,192 @@
+---
+title: "Global API"
+description: "Solid Notifications global API reference"
+slug: "/global-api"
+order: 5
+tags: []
+---
+
+import Code, { InlineCode } from "~/components/Code";
+import Title from "~/components/Title";
+import HighlightBlock from "~/components/HighlightBlock";
+
+<Title>Global API</Title>
+
+# Global Actions
+
+Unlike [actions](/actions), these functions work globally and don’t require `useToast()`. The Global API provides headless toast functions that can be called from anywhere in your application — inside or outside components. {{ "class": "lead" }}
+
+To use the Global API, you must still render a `<ToastProvider>` and at least one `<Toaster>` somewhere in your app. Once these are set up, you can import and call the following functions directly:
+
+<Code>
+
+```tsx
+import {
+  showToast,
+  updateToast,
+  dismissToast,
+  removeToast,
+  promiseToast,
+  getToastQueue,
+  clearToastQueue,
+} from "solid-notifications";
+```
+
+</Code>
+
+Minimal example of using the Global API:
+
+<Code>
+
+```tsx
+import { showToast, ToastProvider, Toaster } from "solid-notifications";
+
+export default function App() {
+  return (
+    <ToastProvider>
+      <Toaster />
+
+      <button
+        onClick={() => {
+          showToast("Hello world!", {
+            duration: 14000,
+          });
+        }}
+      >
+        Show Toast
+      </button>
+    </ToastProvider>
+  );
+}
+```
+
+</Code>
+
+## showToast() {{"data-nav": "link", "class": "text-blue-500", "id": "showToast"}}
+
+The `showToast` function is used to display a toast notification. It takes a message and an optional configuration object.
+
+<Code>
+
+```tsx
+import { showToast } from "solid-notifications";
+
+showToast("Hello world!", {
+  duration: 14000,
+});
+```
+
+</Code>
+
+Please refer to the [notify function](/actions#notify) for more details on how to use it.
+
+## updateToast() {{"data-nav": "link", "class": "text-blue-500", "id": "updateToast"}}
+
+The `updateToast` function allows you to update an existing toast notification.
+
+<Code>
+
+```tsx
+import { updateToast } from "solid-notifications";
+
+updateToast({
+  id: "toast-id",
+  message: "Updated message",
+  duration: 5000,
+});
+```
+
+</Code>
+
+Please refer to the [update function](/actions#update) for more details on how to use it.
+
+## dismissToast() {{"data-nav": "link", "class": "text-blue-500", "id": "dismissToast"}}
+
+The `dismissToast` function is used to dismiss toasts.
+
+<Code>
+
+```tsx
+import { dismissToast } from "solid-notifications";
+
+dismissToast({ id: "toast-id" });
+```
+
+</Code>
+
+Please refer to the [dismiss function](/actions#dismiss) for more details on how to use it.
+
+## removeToast() {{"data-nav": "link", "class": "text-blue-500", "id": "removeToast"}}
+
+The `removeToast` function is used to remove a toast.
+
+<Code>
+
+```tsx
+import { removeToast } from "solid-notifications";
+
+removeToast({ id: "toast-id" });
+```
+
+</Code>
+
+Please refer to the [remove function](/actions#remove) for more details on how to use it.
+
+## promiseToast() {{"data-nav": "link", "class": "text-blue-500", "id": "promiseToast"}}
+
+The `promiseToast` function is used to create a toast that resolves or rejects based on a promise.
+
+<Code>
+
+```tsx
+import { promiseToast } from "solid-notifications";
+
+promiseToast(
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Promise resolved!");
+    }, 2000);
+  }),
+  {
+    pending: "Fetching data...",
+    success: (data) => `✅ Success: ${data}`,
+    error: (error) => `❌ Error: ${error}`,
+  },
+);
+```
+
+</Code>
+
+Please refer to the [promise function](/actions#promise) for more details on how to use it.
+
+## getToastQueue() {{"data-nav": "link", "class": "text-blue-500", "id": "getToastQueue"}}
+
+The `getToastQueue` function retrieves the current toast queue.
+
+<Code>
+
+```tsx
+import { getToastQueue } from "solid-notifications";
+
+const queue = getToastQueue();
+console.log(queue);
+```
+
+</Code>
+
+Please refer to the [getQueue function](/actions#queue) for more details on how to use it.
+
+## clearToastQueue() {{"data-nav": "link", "class": "text-blue-500", "id": "clearToastQueue"}}
+
+The `clearToastQueue` function clears the current toast queue.
+
+<Code>
+
+```tsx
+import { clearToastQueue } from "solid-notifications";
+clearToastQueue();
+```
+
+</Code>
+
+Please refer to the [clearQueue function](/actions#clear) for more details on how to use it.

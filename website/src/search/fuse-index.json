@@ -646,7 +646,7 @@
           "n": 1
         },
         "1": {
-          "v": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\nAny props specified when creating or updating a toast will take precedence over global settings.",
+          "v": "Accepts toast config props as well as id and toasterId (other config). Also accepts content props when updating a toast.\r\nAny props specified when creating or updating a toast will take precedence over global settings.",
           "n": 0.171
         },
         "2": {
@@ -676,6 +676,142 @@
       "i": 39,
       "$": {
         "0": {
+          "v": "Global Actions",
+          "n": 0.707
+        },
+        "1": {
+          "v": "Unlike actions, these functions work globally and don’t require useToast(). The Global API provides headless toast functions that can be called from anywhere in your application — inside or outside components.  To use the Global API, you must still render a <ToastProvider> and at least one <Toaster> somewhere in your app. Once these are set up, you can import and call the following functions directly: Minimal example of using the Global API:",
+          "n": 0.118
+        },
+        "2": {
+          "v": "Global API",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 40,
+      "$": {
+        "0": {
+          "v": "showToast()",
+          "n": 1
+        },
+        "1": {
+          "v": "The showToast function is used to display a toast notification. It takes a message and an optional configuration object. Please refer to the notify function for more details on how to use it.",
+          "n": 0.174
+        },
+        "2": {
+          "v": "Global API",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 41,
+      "$": {
+        "0": {
+          "v": "updateToast()",
+          "n": 1
+        },
+        "1": {
+          "v": "The updateToast function allows you to update an existing toast notification. Please refer to the update function for more details on how to use it.",
+          "n": 0.2
+        },
+        "2": {
+          "v": "Global API",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 42,
+      "$": {
+        "0": {
+          "v": "dismissToast()",
+          "n": 1
+        },
+        "1": {
+          "v": "The dismissToast function is used to dismiss toasts. Please refer to the dismiss function for more details on how to use it.",
+          "n": 0.213
+        },
+        "2": {
+          "v": "Global API",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 43,
+      "$": {
+        "0": {
+          "v": "removeToast()",
+          "n": 1
+        },
+        "1": {
+          "v": "The removeToast function is used to remove a toast. Please refer to the remove function for more details on how to use it.",
+          "n": 0.209
+        },
+        "2": {
+          "v": "Global API",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 44,
+      "$": {
+        "0": {
+          "v": "promiseToast()",
+          "n": 1
+        },
+        "1": {
+          "v": "The promiseToast function is used to create a toast that resolves or rejects based on a promise. Please refer to the promise function for more details on how to use it.",
+          "n": 0.18
+        },
+        "2": {
+          "v": "Global API",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 45,
+      "$": {
+        "0": {
+          "v": "getToastQueue()",
+          "n": 1
+        },
+        "1": {
+          "v": "The getToastQueue function retrieves the current toast queue. Please refer to the getQueue function for more details on how to use it.",
+          "n": 0.213
+        },
+        "2": {
+          "v": "Global API",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 46,
+      "$": {
+        "0": {
+          "v": "clearToastQueue()",
+          "n": 1
+        },
+        "1": {
+          "v": "The clearToastQueue function clears the current toast queue. Please refer to the clearQueue function for more details on how to use it.",
+          "n": 0.213
+        },
+        "2": {
+          "v": "Global API",
+          "n": 0.707
+        }
+      }
+    },
+    {
+      "i": 47,
+      "$": {
+        "0": {
           "v": "Styling",
           "n": 1
         },
@@ -690,7 +826,7 @@
       }
     },
     {
-      "i": 40,
+      "i": 48,
       "$": {
         "0": {
           "v": "Copying the CSS file",
@@ -707,7 +843,7 @@
       }
     },
     {
-      "i": 41,
+      "i": 49,
       "$": {
         "0": {
           "v": "Customization via CSS Variables",
@@ -724,7 +860,7 @@
       }
     },
     {
-      "i": 42,
+      "i": 50,
       "$": {
         "0": {
           "v": "Themes and Types",
@@ -741,7 +877,7 @@
       }
     },
     {
-      "i": 43,
+      "i": 51,
       "$": {
         "0": {
           "v": "Animations",
@@ -758,7 +894,7 @@
       }
     },
     {
-      "i": 44,
+      "i": 52,
       "$": {
         "0": {
           "v": "Classes as props",
@@ -775,7 +911,7 @@
       }
     },
     {
-      "i": 45,
+      "i": 53,
       "$": {
         "0": {
           "v": "Custom toast",
@@ -792,7 +928,7 @@
       }
     },
     {
-      "i": 46,
+      "i": 54,
       "$": {
         "0": {
           "v": "Custom progress bar",
@@ -809,7 +945,7 @@
       }
     },
     {
-      "i": 47,
+      "i": 55,
       "$": {
         "0": {
           "v": "Show queue",
@@ -826,7 +962,7 @@
       }
     },
     {
-      "i": 48,
+      "i": 56,
       "$": {
         "0": {
           "v": "Track Notification Dismissal Reasons",
@@ -843,7 +979,7 @@
       }
     },
     {
-      "i": 49,
+      "i": 57,
       "$": {
         "0": {
           "v": "Promise API",
@@ -860,7 +996,7 @@
       }
     },
     {
-      "i": 50,
+      "i": 58,
       "$": {
         "0": {
           "v": "Pause timer when the window loses focus",
@@ -877,7 +1013,7 @@
       }
     },
     {
-      "i": 51,
+      "i": 59,
       "$": {
         "0": {
           "v": "Don't render toasts when the window is not focused",
@@ -894,14 +1030,14 @@
       }
     },
     {
-      "i": 52,
+      "i": 60,
       "$": {
         "0": {
           "v": "Drag to dismiss",
           "n": 0.577
         },
         "1": {
-          "v": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\nDrag treshold can be adjusted by setting the dragTreshold option.",
+          "v": "Toast will be dismissed when dragged to the left or right of the screen by default. You can disable this behavior by setting the dragToDismiss option to false.\r\nDrag treshold can be adjusted by setting the dragTreshold option.",
           "n": 0.164
         },
         "2": {
@@ -911,7 +1047,7 @@
       }
     },
     {
-      "i": 53,
+      "i": 61,
       "$": {
         "0": {
           "v": "Custom dismiss button",
@@ -928,7 +1064,7 @@
       }
     },
     {
-      "i": 54,
+      "i": 62,
       "$": {
         "0": {
           "v": "Play or pause the notification timer manually",
@@ -945,7 +1081,7 @@
       }
     },
     {
-      "i": 55,
+      "i": 63,
       "$": {
         "0": {
           "v": "Keyboard shortcuts",
@@ -962,7 +1098,7 @@
       }
     },
     {
-      "i": 56,
+      "i": 64,
       "$": {
         "0": {
           "v": "Core Features:",
@@ -975,7 +1111,7 @@
       }
     },
     {
-      "i": 57,
+      "i": 65,
       "$": {
         "0": {
           "v": "1. Queue Management:",
@@ -992,7 +1128,7 @@
       }
     },
     {
-      "i": 58,
+      "i": 66,
       "$": {
         "0": {
           "v": "2. Reactivity:",
@@ -1009,7 +1145,7 @@
       }
     },
     {
-      "i": 59,
+      "i": 67,
       "$": {
         "0": {
           "v": "3. Multiple Toaster Support:",
@@ -1026,7 +1162,7 @@
       }
     },
     {
-      "i": 60,
+      "i": 68,
       "$": {
         "0": {
           "v": "4. Customizability:",
@@ -1043,7 +1179,7 @@
       }
     },
     {
-      "i": 61,
+      "i": 69,
       "$": {
         "0": {
           "v": "5. User Interaction Features:",
@@ -1060,7 +1196,7 @@
       }
     },
     {
-      "i": 62,
+      "i": 70,
       "$": {
         "0": {
           "v": "6. Timer Control:",
@@ -1077,7 +1213,7 @@
       }
     },
     {
-      "i": 63,
+      "i": 71,
       "$": {
         "0": {
           "v": "7. Visibility and Tab Management:",
@@ -1094,7 +1230,7 @@
       }
     },
     {
-      "i": 64,
+      "i": 72,
       "$": {
         "0": {
           "v": "8. Accessibility:",
@@ -1111,7 +1247,7 @@
       }
     },
     {
-      "i": 65,
+      "i": 73,
       "$": {
         "0": {
           "v": "9. Callbacks and Events:",
@@ -1128,7 +1264,7 @@
       }
     },
     {
-      "i": 66,
+      "i": 74,
       "$": {
         "0": {
           "v": "limit",
@@ -1145,7 +1281,7 @@
       }
     },
     {
-      "i": 67,
+      "i": 75,
       "$": {
         "0": {
           "v": "reverseToastOrder",
@@ -1162,7 +1298,7 @@
       }
     },
     {
-      "i": 68,
+      "i": 76,
       "$": {
         "0": {
           "v": "offsetX",
@@ -1179,7 +1315,7 @@
       }
     },
     {
-      "i": 69,
+      "i": 77,
       "$": {
         "0": {
           "v": "offsetY",
@@ -1196,7 +1332,7 @@
       }
     },
     {
-      "i": 70,
+      "i": 78,
       "$": {
         "0": {
           "v": "gutter",
@@ -1213,7 +1349,7 @@
       }
     },
     {
-      "i": 71,
+      "i": 79,
       "$": {
         "0": {
           "v": "positionY",
@@ -1230,7 +1366,7 @@
       }
     },
     {
-      "i": 72,
+      "i": 80,
       "$": {
         "0": {
           "v": "positionX",
@@ -1247,7 +1383,7 @@
       }
     },
     {
-      "i": 73,
+      "i": 81,
       "$": {
         "0": {
           "v": "renderOnWindowInactive",
@@ -1264,7 +1400,7 @@
       }
     },
     {
-      "i": 74,
+      "i": 82,
       "$": {
         "0": {
           "v": "pauseOnWindowInactive",
@@ -1281,7 +1417,7 @@
       }
     },
     {
-      "i": 75,
+      "i": 83,
       "$": {
         "0": {
           "v": "toasterStyle",
@@ -1298,7 +1434,7 @@
       }
     },
     {
-      "i": 76,
+      "i": 84,
       "$": {
         "0": {
           "v": "Toaster config",
@@ -1315,7 +1451,7 @@
       }
     },
     {
-      "i": 77,
+      "i": 85,
       "$": {
         "0": {
           "v": "theme",
@@ -1332,7 +1468,7 @@
       }
     },
     {
-      "i": 78,
+      "i": 86,
       "$": {
         "0": {
           "v": "type",
@@ -1349,7 +1485,7 @@
       }
     },
     {
-      "i": 79,
+      "i": 87,
       "$": {
         "0": {
           "v": "duration",
@@ -1366,7 +1502,7 @@
       }
     },
     {
-      "i": 80,
+      "i": 88,
       "$": {
         "0": {
           "v": "onEnter",
@@ -1383,7 +1519,7 @@
       }
     },
     {
-      "i": 81,
+      "i": 89,
       "$": {
         "0": {
           "v": "enterDuration",
@@ -1400,7 +1536,7 @@
       }
     },
     {
-      "i": 82,
+      "i": 90,
       "$": {
         "0": {
           "v": "onExit",
@@ -1417,7 +1553,7 @@
       }
     },
     {
-      "i": 83,
+      "i": 91,
       "$": {
         "0": {
           "v": "exitDuration",
@@ -1434,7 +1570,7 @@
       }
     },
     {
-      "i": 84,
+      "i": 92,
       "$": {
         "0": {
           "v": "onIdle",
@@ -1451,7 +1587,7 @@
       }
     },
     {
-      "i": 85,
+      "i": 93,
       "$": {
         "0": {
           "v": "class",
@@ -1468,7 +1604,7 @@
       }
     },
     {
-      "i": 86,
+      "i": 94,
       "$": {
         "0": {
           "v": "style",
@@ -1485,7 +1621,7 @@
       }
     },
     {
-      "i": 87,
+      "i": 95,
       "$": {
         "0": {
           "v": "pauseOnHover",
@@ -1502,7 +1638,7 @@
       }
     },
     {
-      "i": 88,
+      "i": 96,
       "$": {
         "0": {
           "v": "wrapperClass",
@@ -1519,7 +1655,7 @@
       }
     },
     {
-      "i": 89,
+      "i": 97,
       "$": {
         "0": {
           "v": "wrapperStyle",
@@ -1536,7 +1672,7 @@
       }
     },
     {
-      "i": 90,
+      "i": 98,
       "$": {
         "0": {
           "v": "enterCallback",
@@ -1553,7 +1689,7 @@
       }
     },
     {
-      "i": 91,
+      "i": 99,
       "$": {
         "0": {
           "v": "updateCallback",
@@ -1570,7 +1706,7 @@
       }
     },
     {
-      "i": 92,
+      "i": 100,
       "$": {
         "0": {
           "v": "exitCallback",
@@ -1587,7 +1723,7 @@
       }
     },
     {
-      "i": 93,
+      "i": 101,
       "$": {
         "0": {
           "v": "showDismissButton",
@@ -1604,7 +1740,7 @@
       }
     },
     {
-      "i": 94,
+      "i": 102,
       "$": {
         "0": {
           "v": "dismissButtonClass",
@@ -1621,7 +1757,7 @@
       }
     },
     {
-      "i": 95,
+      "i": 103,
       "$": {
         "0": {
           "v": "dismissButtonStyle",
@@ -1638,7 +1774,7 @@
       }
     },
     {
-      "i": 96,
+      "i": 104,
       "$": {
         "0": {
           "v": "dismissOnClick",
@@ -1655,7 +1791,7 @@
       }
     },
     {
-      "i": 97,
+      "i": 105,
       "$": {
         "0": {
           "v": "showProgressBar",
@@ -1672,7 +1808,7 @@
       }
     },
     {
-      "i": 98,
+      "i": 106,
       "$": {
         "0": {
           "v": "progressBarClass",
@@ -1689,7 +1825,7 @@
       }
     },
     {
-      "i": 99,
+      "i": 107,
       "$": {
         "0": {
           "v": "progressBarStyle",
@@ -1706,7 +1842,7 @@
       }
     },
     {
-      "i": 100,
+      "i": 108,
       "$": {
         "0": {
           "v": "showIcon",
@@ -1723,7 +1859,7 @@
       }
     },
     {
-      "i": 101,
+      "i": 109,
       "$": {
         "0": {
           "v": "icon",
@@ -1740,7 +1876,7 @@
       }
     },
     {
-      "i": 102,
+      "i": 110,
       "$": {
         "0": {
           "v": "dragToDismiss",
@@ -1757,7 +1893,7 @@
       }
     },
     {
-      "i": 103,
+      "i": 111,
       "$": {
         "0": {
           "v": "dragTreshold",
@@ -1774,7 +1910,7 @@
       }
     },
     {
-      "i": 104,
+      "i": 112,
       "$": {
         "0": {
           "v": "ariaLive",
@@ -1791,7 +1927,7 @@
       }
     },
     {
-      "i": 105,
+      "i": 113,
       "$": {
         "0": {
           "v": "role",
@@ -1808,7 +1944,7 @@
       }
     },
     {
-      "i": 106,
+      "i": 114,
       "$": {
         "0": {
           "v": "Toast config",
@@ -1825,7 +1961,7 @@
       }
     },
     {
-      "i": 107,
+      "i": 115,
       "$": {
         "0": {
           "v": "id",
@@ -1842,7 +1978,7 @@
       }
     },
     {
-      "i": 108,
+      "i": 116,
       "$": {
         "0": {
           "v": "content",
@@ -1859,7 +1995,7 @@
       }
     },
     {
-      "i": 109,
+      "i": 117,
       "$": {
         "0": {
           "v": "toasterId",
@@ -1876,7 +2012,7 @@
       }
     },
     {
-      "i": 110,
+      "i": 118,
       "$": {
         "0": {
           "v": "Other config",
@@ -1893,7 +2029,7 @@
       }
     },
     {
-      "i": 111,
+      "i": 119,
       "$": {
         "0": {
           "v": "Installation",
@@ -1910,7 +2046,7 @@
       }
     },
     {
-      "i": 112,
+      "i": 120,
       "$": {
         "0": {
           "v": "Usage",
@@ -1927,7 +2063,7 @@
       }
     },
     {
-      "i": 113,
+      "i": 121,
       "$": {
         "0": {
           "v": "1. Mount the ToastProvider and Toaster components:",
@@ -1944,7 +2080,7 @@
       }
     },
     {
-      "i": 114,
+      "i": 122,
       "$": {
         "0": {
           "v": "2. Import the Solid Notifications css file into your main css file:",
@@ -1961,7 +2097,7 @@
       }
     },
     {
-      "i": 115,
+      "i": 123,
       "$": {
         "0": {
           "v": "3. Create toasts:",
