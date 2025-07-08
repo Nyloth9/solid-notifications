@@ -85,14 +85,18 @@ Here's a quick example to show how easy it is to use:
    }
    ```
     or 
-    
-      ```tsx
+
+    ```tsx
         import { showToast } from "solid-notifications";
 
-        function handleSave() {
-          // Handle a save operation
-
-          showToast("✅ Your changes have been saved successfully!");
+        export default function App() {
+          return (
+          <div>
+            <button onClick={() => showToast("🚀 New toast ready to serve!")}>
+              Create a Toast!
+            </button>
+          </div>
+          );
         }
       ```
 
