@@ -1,6 +1,5 @@
 <img src="https://i.ibb.co/bMs3V1zs/Hero.jpg" alt="Hero" border="0" style="max-width: 750px;" />
 
-
 # Solid Notifications
 
 A lightweight, customizable, and easy-to-use toast notification library for **SolidJS** applications.
@@ -79,6 +78,18 @@ Here's a quick example to show how easy it is to use:
          </button>
        </div>
      );
+   }
+   ```
+
+   or
+
+   ```tsx
+   import { showToast } from "solid-notifications";
+
+   function handleSave() {
+     // Handle a save operation
+
+     showToast("✅ Your changes have been saved successfully!");
    }
    ```
 

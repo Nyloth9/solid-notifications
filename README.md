@@ -84,6 +84,17 @@ Here's a quick example to show how easy it is to use:
      );
    }
    ```
+    or 
+    
+      ```tsx
+        import { showToast } from "solid-notifications";
+
+        function handleSave() {
+          // Handle a save operation
+
+          showToast("✅ Your changes have been saved successfully!");
+        }
+      ```
 
 For more examples and advanced usage, check out the [documentation](https://solid-notifications.vercel.app/).
 
