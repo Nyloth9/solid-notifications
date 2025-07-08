@@ -40,6 +40,26 @@ export default function App() {
 
 </Code>
 
+Or call the `showToast` function directly:{{ "class": "lead" }}
+
+<Code lang="tsx">
+
+```tsx
+import { showToast } from "solid-notifications";
+
+export default function App() {
+    return (
+    <div>
+      <button onClick={() => showToast("🚀 New toast ready to serve!")}>
+        Create a Toast!
+      </button>
+    </div>
+  );
+}
+```
+
+</Code>
+
 ## Core Features: {{"data-nav": "link"}}
 
 ### 1. Queue Management: {{"class": "mt-0"}}

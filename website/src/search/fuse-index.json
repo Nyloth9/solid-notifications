@@ -2104,8 +2104,8 @@
           "n": 0.577
         },
         "1": {
-          "v": "Use the useToast hook to access the notify function and other toast functionality.",
-          "n": 0.277
+          "v": "Use the useToast hook to access the notify function and other toast functionality. Or call the showToast function directly (more info in the Global API section):",
+          "n": 0.196
         },
         "2": {
           "v": "Quickstart",

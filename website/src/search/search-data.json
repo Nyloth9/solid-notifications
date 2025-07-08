@@ -740,7 +740,7 @@
   {
     "page": "Quickstart",
     "heading": "3. Create toasts:",
-    "content": "Use the useToast hook to access the notify function and other toast functionality.",
+    "content": "Use the useToast hook to access the notify function and other toast functionality. Or call the showToast function directly (more info in the Global API section):",
     "url": "/quickstart#3-create-toasts"
   }
 ]

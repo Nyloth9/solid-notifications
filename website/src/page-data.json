@@ -4,7 +4,12 @@
     "url": "/",
     "description": "A simple notification system for SolidJS",
     "order": 0,
-    "tags": ["page", "SolidJS", "Toast library", "Solid notifications"],
+    "tags": [
+      "page",
+      "SolidJS",
+      "Toast library",
+      "Solid notifications"
+    ],
     "items": [
       {
         "name": "Core Features",

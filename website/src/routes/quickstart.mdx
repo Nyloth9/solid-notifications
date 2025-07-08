@@ -93,3 +93,19 @@ export default function AppContent() {
 ```
 
 </Code>
+
+Or call the `showToast` function directly (more info in the [Global API section](/global-api)):{{ "class": "lead" }}
+
+<Code lang="tsx">
+
+```tsx
+import { showToast } from "solid-notifications";
+
+function handleSave() {
+  // Handle a save operation
+
+  showToast("✅ Your changes have been saved successfully!");
+}
+```
+
+</Code>
