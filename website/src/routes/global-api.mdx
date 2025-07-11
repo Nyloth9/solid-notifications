@@ -64,7 +64,7 @@ export default function App() {
 
 ## showToast() {{"data-nav": "link", "class": "text-blue-500", "id": "showToast"}}
 
-The `showToast` function is used to display a toast notification. It takes a message and an optional configuration object.
+The `showToast` function is used to display a toast notification. It takes a `content` argument and an optional configuration object.
 
 <Code>
 
@@ -91,7 +91,7 @@ import { updateToast } from "solid-notifications";
 
 updateToast({
   id: "toast-id",
-  message: "Updated message",
+  content: "Updated message",
   duration: 5000,
 });
 ```

@@ -689,12 +689,12 @@ getQueue: (toasterId?: string) => Toast[];
 
 ### How it Works
 
-The `getQueue` function can be called with an optional `toasterId` argument to target a specific toaster. If no `toasterId` is provided, the function will return all queued toasts across all toasters.
+The `getQueue` function can be called with an optional `toasterId` argument to target a specific toaster. The `toasterId` is required if there are multiple toasters.
 
 <Code>
 
 ```tsx
-const queue = getQueue();
+const queue = getQueue(); // if there is only one toaster
 // or
 const queue = getQueue("toaster-1");
 ```
